@@ -20,8 +20,8 @@ In terms of featureset, described very briefly: cQASM 1.0 allows only specificat
 The only two tools that are expected to support the full featureset of cQASM 2.0 are the parser and printer (libQASM) and the simulator (QX). Any compiler step, implementation, tool, etc. is allowed to reject any fraction of valid cQASM 2.0 input. However, it is not allowed to add language features not part of cQASM 2.0 (when it's using libQASM, this is not possible to begin with).
 
 
-Syntax
-------
+Syntax (extended in 2.0)
+------------------------
 
 Instructions are newline-separated. Breaking to the next line is permissible by "escaping" the newline with a backslash;
 
@@ -35,19 +35,19 @@ This turns the newline into whitespace though, so
 
 `\n` (Linux), `\r\n` (Windows), and `\r` (Mac) are all valid newlines.
 
-> JvS: Same as 1.0, except for the addition of the \ syntax for breaking lines. So if lines DO become long, for instance with annotations, that syntax can be used.
+> JvS: Same as 1.0, except for the addition of the \ syntax for breaking lines. So if lines DO become long, for instance with annotations, that syntax can be used. Note that this syntax follows what for instance the C preprocessor and bash use.
 
 A semicolon is functionaly equivalent to a newline, except that it cannot be used to break a comment. This implies that semicolons at the end of a line can optionally be used.
 
 > JvS: this allows you to put more than one thing on a single line if this works out for readability.
 
-Whitespace is legal between all tokens and is never interpreted.
+Whitespace is legal between all tokens and is never parsed.
 
 > JvS: This contrasts with 1.0's lexer definition, which does not throw whitespace out. This only expands the set of valid cQASM programs, and simplifies the grammar significantly.
 
-cQASM supports single-line comments using the # symbol.
+cQASM supports single-line comments using the `#` symbol. cQASM 2.0 adds C-like `/* ... */` multiline comments.
 
-> JvS: Same as 1.0.
+> JvS: Same as 1.0 with the addition of comment blocks. Comments are no longer parsed in 2.0, and thus behave as optional whitespace.
 
 Everything in cQASM is case-insensitive.
 
@@ -56,6 +56,14 @@ Everything in cQASM is case-insensitive.
 Identifiers follow the regex pattern `/[a-zA-Z_][a-zA-Z0-9_]*/`. That is, a combination of underscores, letters, and numbers, where the first character is not allowed to be a number. Identifier matching is case-insensitive.
 
 > JvS: Same as 1.0.
+
+The following identifiers are illegal, because they are either used as keywords already or are reserved for future versions. They are case-insensitive.
+
+    boolean   complex   const   def   double   extern   false   fixed   float
+    include   int   map   matrix   pragma   qubit   qubits   struct   true
+    type   ufixed   uint   vector   volatile   weak
+
+> JvS: The introduction of new keywords is the only thing that isn't lexically compatible to 1.0. At the same time though, 2.0 greatly reduces the number of keywords, as instructions are now represented as identifiers instead of keywords. All remaining single-letter keywords were also removed to prevent confusion (`q`, `b`, `x`, `y`, and `z`).
 
 Integer literals can be described using C-like decimal, hexadecimal, or binary notation. That is:
 
@@ -84,24 +92,24 @@ Boolean literals use the keywords `true` and `false`. These are case-insensitive
 
 String literals are used on occasion, although cQASM 2.0 does not support string types. Their syntax is `/"([^"]|\\["n])*"/`. That is, text surrounded by `"` symbols, with `\"` as escape sequence for including a `"` in the string and `\n` for including a newline. The newline should be converted to the newline specific to the host platform where applicable.
 
-Finally, annotations (pragma-like information of which the function is to be defined by the target) carry JSON-like data. The toplevel must be an object (= a dict in Python lingo), the string format is limited to the description above, and `null` is not allowed; otherwise the JSON specification is followed. Newlines are allowed within JSON context.
+Finally, annotations (pragma-like information of which the function is to be defined by the target) carry JSON-like data. The toplevel must be an object (= a dict in Python lingo), the string format is limited to the description above, and `null` is not allowed; otherwise the JSON specification is followed. Newlines and comments are allowed within JSON context.
 
 
-Version header
---------------
+Version header (same as 1.0)
+----------------------------
 
 cQASM files should start with a version identifier, which is (obviously) 2.0 for cQASM 2.0:
 
     version 2.0
 
-> JvS: Same as 1.0 (aside from the version number).
+> JvS: Same as 1.0 (aside from the version number). Lexically though, the entire version string will be represented as a single token, compared to making `version` a keyword and using (yuck) the floating point token for the version number.
 
 Major versions greater than libQASM's version shall be discarded with an error message. If only the minor version is greater, a warning message will be generated instead.
 
 > JvS: I don't think libQASM currently does anything with the version number, but this seems like a good idea.
 
-Resource types
---------------
+Resource types (new in 2.0)
+---------------------------
 
 cQASM 2.0 recognizes the following data types:
 
@@ -110,6 +118,7 @@ cQASM 2.0 recognizes the following data types:
  - `fixed<x,y>`/`ufixed<x,y>`: signed/unsigned fixed-point scalars or arrays of bit-width x+y, where x is the number of bits before the decimal point and y is the number of bits after. x and y may be negative or zero, as long as their sum is a positive integer less than or equal to 64; negative x implies that the range is less than 1, while negative y implies that the resolution is greater than 1. y=0 is synonymous with int/uint.
  - `float`, `double`: floating point scalars or arrays.
  - `boolean`: boolean register or array.
+
 Note that strings do not exist.
 
 > JvS: I'm allowing any size integer (<=64bit) to be defined to let people specify exactly what they need, and let implementation-specific subsets of cQASM define exactly what they have. The compiler/assembler can then figure out the best conversion between the two (or reject input they don't yet understand). Fixed-point types were added due to popular request, but I'd still like to add floats as well (even if real implementations are unlikely to support it), because they're so much easier to make an initial algorithm design with.
@@ -118,13 +127,13 @@ Any non-simulator implementation is allowed to internally represent integral typ
 
 > JvS: This allows compilation steps to round range/resolution up to the nearest thing supported by the target without violating constraints.
 
-The simulator shall terminate with an error if any over- or underflow is detected at runtime, and shall correctly simulate arithmetic with the specified (i.e. worst-case) number representations.
+Simulators should terminate with an error if any over- or underflow is detected at runtime, and should correctly simulate arithmetic with the specified (i.e. worst-case) number representations.
 
 > JvS: Useful when trying to determine what number representations are necessary for a particular algorithm.
 
 
-Resource declarations
----------------------
+Resource declarations (completely overhauled in 2.0)
+----------------------------------------------------
 
 Like 1.0, cQASM 2.0 does not define any computational resources implicitly. Therefore, any useful cQASM program should start with one or more resource definitions. Note that all resources in cQASM are global, and must be defined before the first real instruction.
 
@@ -139,7 +148,7 @@ And arrays are defined like this:
     int<8> memory[4096]
     qubit data[7]
 
-> JvS: note that classical arrays basically represent memory. They can also be used to model register files of course, though an implementation is unlikely to support non-static indexation of registers (x[y] vs. x[0]).
+> JvS: note that classical arrays basically represent memory. They can also be used to model register files of course, though an implementation is unlikely to support non-static indexation of registers (`x[y]` vs. `x[0]`).
 
 Arrays always start at zero, and end at the specified length minus one. Simulators should exit with an error if an out-of-range access is performed, but behavior is left as undefined for real implementations.
 
@@ -153,14 +162,6 @@ The measurement register associated with a qubit has the same semantics as a boo
 
 > JvS: The `not` exception can be modelled in hardware by having a second bit register in hardware for each qubit that is cleared when a measurement is queued and toggled when the `not` instruction is executed. When the measurement result is subsequently used, the exclusive-or of the two registers is returned. This allows the classical hardware to delay a stall waiting for the measurement to complete beyond the first `not` operation, and it prevents the need for the classical processor to physically be able to write to the measurement register (this is important), while maintaining cQASM 1.0 compatibility (which defined this nasty `not` operation in the first place).
 
-For backward compatibility with 1.0, a qubit register of name "q" can also be defined as follows:
-
-    qubits 15
-
-In this case, "b" is used to refer to the associated measurement register, i.e. `b[1]` is the measurement register for `q[1]`. You can think of this as the suffix notation described before, but without a name or the dot.
-
-> JvS: This is pretty much the ugliest backward compatibility hack in here...
-
 Classical values can also be initialized. The syntax and semantics are borrowed from C, although the array length must always be defined between the square brackets (conversely, C allows the array length to be implicit in the initializer item count).
 
     int<64> r[16] = {3, 2, 1} # Initializes r to (3,2,1,0,0,0,...,0)
@@ -173,27 +174,9 @@ Classical values can also be initialized. The syntax and semantics are borrowed 
 
 Simulators should keep track of uninitialized resources and throw an error if they are used. For real implementations, resources are allowed to be in any state before they are initialized.
 
-The following statement marks two scalar resources as being mutually exclusive:
 
-    exclusive scalar_value, x
-
-In a simulator tracking uninitialized values, this declaration means that writing to scalar_value invalidates x and vice versa. This will basically never be useful for handwritten cQASM, but is very useful in the following cases:
-
- - Recording the results of liveness analysis amidst compilation steps.
- - Specifying that two values (usually of different types) occupy the same physical storage location in an implementation. For instance, a processor may have a 32x32bit register file that can also be viewed as a 16x64bit register file, as shown below. By having this specification, architectures with these characteristics can be accurately simulated before a microarchitecture-specific simulator is complete.
-
-```
-int<64> reg64[16]
-int<32> reg32[32]
-exclusive reg32[0] reg64[0]
-exclusive reg32[1] reg64[0]
-exclusive reg32[2] reg64[1]
-exclusive reg32[3] reg64[1]
-...
-```
-
-Resource mappings
------------------
+Resource mappings (extended in 2.0)
+-----------------------------------
 
 The map statement can be used to specify an alias for a resource:
 
@@ -202,15 +185,15 @@ The map statement can be used to specify an alias for a resource:
 
 These mappings state that `data` and `qubit_reg[0]` can be used in place of `q[0]`. Mappings can be specified anywhere in the code, and go into effect from their declaration onwards. Mappings can also be overridden at any time to refer to a different resource. Note that while the examples are purely qubits, this works for quantum and classical resources alike.
 
-> JvS: this is for compatibility with 1.0.
+> JvS: mappings are here for compatibility with 1.0. I have extended them to allow arrays to be mapped as a whole for symmetry reasons though.
 
 Mappings do not have any semantical meaning; use of a mapping and use of the actual resource it maps to is completely equivalent. The AST from libQASM abstracts mappings away, though the actual identifier that was used to specify a resource will be made available as a string should an implementation wish to use this metadata.
 
 
-Subcircuits
------------
+Subcircuits (almost exactly 1.0)
+--------------------------------
 
-Code can optionally be organized into subcircuits as in 1.0, although it should be noted that classical logic supersedes this, so they are considered deprecated. In any case, they are defined like this:
+Code can optionally be organized into subcircuits as in 1.0. They are defined like this:
 
     .subcircuit_one
         x q[0]
@@ -234,9 +217,11 @@ If the default subcircuit does not contain code, it will not appear in the AST.
 
 > JvS: This currently does NOT appear to be the case; you just end up with an empty subcircuit. Which seems unintuitive.
 
+It should be noted that classical flow control fully superseded the subcircuit syntax. Therefore, programs that require classical flow control should probably avoid using subcircuits. However, while technically superseded, subcircuits still allow repitition to be specified very easily. For this reason they are not deprecated.
 
-Qubit gates
------------
+
+Qubit gates (almost exactly 1.0)
+--------------------------------
 
 The following single-qubit gates are defined:
 
@@ -256,7 +241,7 @@ The following single-qubit gates are defined:
     sdag    qubit                   # Phase dagger
     t       qubit                   # T
     tdag    qubit                   # T dagger
-    u       qubit,[a,b,c,d,e,f,g,h] # Custom unitary gate
+    u       qubit,[a,b,c,d,e,f,g,h] # NEW IN 2.0: custom unitary gate
 
 > JvS: the syntax for the custom unitary gate is taken from an undocument feature in 1.0's grammar. Actually, any single-qubit gate allows such a matrix to be specified... but since that doesn't to my knowledge make any sense I'm considering it a bug and won't enforce full backwards-compatibility for that.
 
@@ -267,6 +252,8 @@ The parameters for the unitary gate are:
     |                    |
     | e + i·f    g + i·h |
     '--                --'
+
+> JvS/AS: specifying the matrix using 8 reals is inefficient, so this syntax may change in the next few days.
 
 Two following two-qubit gates are defined:
 
@@ -280,23 +267,18 @@ The following three-qubit gates are defined:
 
     toffoli ctrl, ctrl, target      # Toffoli
 
-All gates can optionally be controlled by prefixing `c-` to the gate name, and adding a boolean argument to the front of the argument list. When a qubit is used in the boolean argument, its measurement result is used instead (`qubit.b` may be used to make this explicit; refer to the definition of the qubit type for more information). Examples:
-
-    c-x     bool, qubit             # Perform X gate if bool is true
-    c-swap  bool, qubit, qubit      # Swap the two qubits if bool is true
-
-> JvS: while not explicitly documented, the 1.0 grammar explicitly allows all gates to be controlled. So, for compatibility, I'm just adding it to the spec now.
+> JvS: does anyone have need for a custom specification of two- and three-qubit gates similar to `u`?
 
 
-Qubit measurement
------------------
+Qubit measurement (almost exactly 1.0)
+--------------------------------------
 
 The following single-qubit measurement instructions are available:
 
     prep_x      qubit   # State preparation in X basis
     prep_y      qubit   # State preparation in Y basis
     prep_z      qubit   # State preparation in Z basis
-    prep        qubit   # State preparation in Z basis (same as above)
+    prep        qubit   # NEW IN 2.0: state preparation in Z basis (same as above)
     measure_x   qubit   # Measure qubit in X basis
     measure_y   qubit   # Measure qubit in Y basis
     measure_z   qubit   # Measure qubit in Z basis
@@ -308,10 +290,12 @@ The result of the measurements is stored in the classical bit register associate
 
 There is also an operation to measure an entire qubit register in the Z-basis at once:
 
-    measure_all qreg    # Measure all qubits in register qreg
+    measure_all qreg    # NEW IN 2.0: measure all qubits in register qreg
     measure_all         # Measure all qubits in all registers
 
 > JvS: the latter is for compatibility with 1.0.
+
+> JvS: does it make sense to add `prep_all` equivalents for the `measure_all` instructions? I'm not sure what state preparation means exactly.
 
 It is also possible to measure parity of a number of qubits in specified bases:
 
@@ -320,8 +304,8 @@ It is also possible to measure parity of a number of qubits in specified bases:
 The axes should be `x`, `y`, or `z`. Any number of qubits can be involved in the parity measurement. The result is stored in the measurement register of each involved qubit.
 
 
-Parallelism and timing
-----------------------
+Parallelism and timing (almost exactly 1.0)
+-------------------------------------------
 
 cQASM operates using an unconventional execution model timing-wise, modelling two flows of time within the same program flow.
 
@@ -353,7 +337,7 @@ or
 
     { x q[1] | add i, 1 -> i }
 
-> JvS: the latter is the 1.0 syntax.
+> JvS: the latter is the 1.0 syntax; 1.0 did not allow line breaks even within curly brackets.
 
 The following restrictions and semantics apply to bundles:
 
@@ -375,8 +359,8 @@ Note that in the absence of `wait` operations, the classical and quantum flow of
 > JvS: also note that this model is coincidentally consistent with how 1.0 is specified in terms of simulation when no `wait` statements are specified!
 
 
-SGMQ/SIMD parallelism and array indexation
-------------------------------------------
+SGMQ/SIMD parallelism and array indexation (extended in 2.0)
+------------------------------------------------------------
 
 In addition to the bundle notation described in the previous section, there is also a syntax to describe single-gate-multiple-qubit (SGMQ) and single-instruction-multiple-data (SIMD) operations. This works by allowing array indices to be sets and slices in addition to single indices using the following notation:
 
@@ -415,8 +399,8 @@ The following semantics apply to SGMQ/SIMD indexation:
 > JvS: the latter prevents weird constructs like `x[y[0:2]:y[1,2]]` or whatever.
 
 
-Classical flow control
-----------------------
+Classical flow control (new in 2.0)
+-----------------------------------
 
 Structures such as conditional execution and loops are described using classical jump instructions and labels. Label syntax is borrowed from classical assembly languages:
 
@@ -445,8 +429,8 @@ The following branch instructions are defined. `x` and `y` can be any scalar num
 Execution of a subcircuit starts at the first instruction. You can start elsewhere by simply using a `jmp` instruction. If an architecture implementation allows the start address to be different from the start of the program, its assembler can just interpret a `jmp` at the start of a subcircuit as the entry point declaration.
 
 
-Subroutines
------------
+Subroutines (new in 2.0)
+------------------------
 
 The following instructions support subroutines:
 
@@ -494,8 +478,8 @@ There is an alternative syntax for `push` that makes the pushed data type explic
 Without this notation, it would be impossible to push literals onto the stack, since the bit-width of a literal is undefined.
 
 
-Classical arithmetic
---------------------
+Classical arithmetic (new in 2.0)
+---------------------------------
 
 cQASM 2.0 defines the following arithmetic instructions. Keep in mind that, like everything else in this specification, targets are allowed to support only a subset and reject programs with instructions they do not support.
 
@@ -632,8 +616,8 @@ The following statements are useful for debugging:
 The ellipses in `error` and `print` can be any argument list, including string literals, and (for simulators) qubits. The contents will be printed to stdout separated by spaces (like Python's print statement).
 
 
-Type promotion and conversion semantics
----------------------------------------
+Type promotion and conversion semantics (new in 2.0)
+----------------------------------------------------
 
 For the sake of flexibility in supporting any architecture, any classical instruction that operates on numerical values can take any combination of number representations as inputs and outputs. This requires setting some conversion rules. Note; as usual, real implementations are only expected to support a fraction of these things, but when they do support part of this they should adhere to this. For instance, an assembler for a particular implementation may reduce an int + float -> float addition to an int to float conversion and a floating point addition. If the implementation has no float support, the assembler should probably just reject the source, but it could of course try to emulate floats in software as well.
 
@@ -663,16 +647,113 @@ If the internal operation result is of a different type than the target scalar, 
  - Int/fix conversions: use the exact representation if possible. Round to the most negative representable value if no representation exists. Overflow behavior is undefined for real implementations, but simulators should detect this and raise an error.
 
 
-Pragmas and annotations
------------------------
+Conditional execution (extended in 2.0)
+---------------------------------------
 
-TODO: annotations
+In addition to using classical flow control, conditional execution can be specified for all instructions and gates by prefixing `c-` to the instruction/gate name. This prefixes the parameter list with a boolean operand, which must be true for the instruction to be evaluated. Examples:
 
-The following instructions exist to have a 1.0-compatible interface for interacting with QX specifically:
+    c-x     bool, qubit             # Perform X gate if bool is true
+    c-swap  bool, qubit, qubit      # Swap the two qubits if bool is true
+    c-mov   bool, a -> b            # Move a to b only when bool is true
+    c-jmp   bool, label             # Functionally synonymous to jnz
 
-    display                 # Dump the full quantum state to the console
-    display_binary          # Dump the measurement register state to the console
-    reset_averaging         # Reset measurement averaging
-    error_model mdl, ...    # Set the error model
+This notation not only allows for a more concise notation than the equivalent using jumps and labels, but it may also execute more efficiently in some cases, especially in the context of a VLIW architecture.
+
+> JvS: note; while not explicitly documented, the 1.0 grammar already allowed all gates to be controlled. I don't know if QX "1.0" supports this though.
+
+
+Pragmas and annotations (new in 2.0)
+------------------------------------
+
+Pragmas and annotations are a way to specify things that have no business being in a common language specification, metadata such as line number information, or things that were not accounted for during creation of this specification (pending their addition to a later version of the spec).
+
+Pragmas behave like instructions syntactically. They are specified as follows:
+
+    pragma target name {...}
+
+where `target` and `name` are identifiers used to specify what the pragma is all about, and `{...}` is an optional JSON payload. The `target` identifier is used by targets to detect whether the annotation is meant for them; they can silently ignore any pragmas intended for different targets this way. Conversely, a target is allowed to throw an error if a pragma meant for it has an invalid name or is used incorrectly. If there is no specific target, `com` (abbreviation for common) may be used. 
+
+Annotations instead add arbitrary data to existing constructs. Their syntax is as follows:
+
+    ... @target name {...}
+
+Here, `...` must be one of the following constructs (on the same line):
+
+ - resource declaration
+ - `exclusive` statement
+ - `map` statement
+ - labels
+ - instructions/gates
+ - bundles
+
+`target`, `name`, and `{...}` function the same way as pragmas. Multiple annotations can be specified in sequence by specifying multiple annotations (including the @) in sequence.
+
+The remainder of this section lists some pragma/annotation ideas.
+
+### QX directives
+
+The following pragmas replace what was dedicated syntax in 1.0:
+
+    pragma qx display
+    pragma qx display_binary
+    pragma qx reset_averaging
+    pragma qx error_model {"name": "depolarizing_channel", args: [...]}
+
+### Tracing line numbers
+
+The following annotation specifies information about the original source of a statement across compilation steps:
+
+    @com src {"line_nr": int, "file": "filename", ...}
+
+Compilation steps may include additional information to the JSON object if they want.
+
+### Mutually exclusive resources
+
+The following pragma marks two scalar resources as being mutually exclusive:
+
+    pragma com exclusive {"a": "scalar_x", "b": "scalar_y"}
+
+For a simulator tracking uninitialized values, this pragma means that writing to `scalar_x` should invalidate `scalar_y` and vice versa. This will basically never be useful for handwritten cQASM, but is very useful in the following cases:
+
+ - Recording the results of liveness analysis amidst compilation steps.
+ - Specifying that two values (usually of different types) occupy the same physical storage location in an implementation. For instance, a processor may have a 32x32bit register file that can also be viewed as a 16x64bit register file, as shown below. By having this specification, architectures with these characteristics can be accurately simulated before a microarchitecture-specific simulator is complete.
+
+```
+int<64> reg64[16]
+int<32> reg32[32]
+pragma com exclusive {"a": "reg32[0]", "b": "reg64[0]"}
+pragma com exclusive {"a": "reg32[1]", "b": "reg64[0]"}
+pragma com exclusive {"a": "reg32[2]", "b": "reg64[1]"}
+pragma com exclusive {"a": "reg32[3]", "b": "reg64[1]"}
+...
+```
+
+Deprecated cQASM 1.0 features
+-----------------------------
+
+The following language features should no longer be used because they have been superseded, but are still included in 2.0 for backward-compatibility.
+
+### Qubit register declaration
+
+In cQASM 1.0, the qubit register was implicitly named `q` (for the qubits) and `b` (for the measurements), and was defined as follows:
+
+    qubits 15
+
+Instead of this, use:
+
+    qubit q[15]
+
+and refer to the measurement registers (where ambiguous) using `q.b` instead of `b`.
+
+### QX-specific instructions
+
+cQASM 1.0 defined the following QX-specific instructions:
+
+    display                     # Dump the full quantum state to the console
+    display_binary              # Dump the measurement register state to the console
+    reset_averaging             # Reset measurement averaging
+    error_model mdl, ...        # Set the error model
 
 The ellipsis for the error model is a parameter list of integers and floats literals, while the `mdl` parameter can be any identifier. It is up to QX to check this.
+
+Instead of these instructions, use their `pragma` equivalent instead.
