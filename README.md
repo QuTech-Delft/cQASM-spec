@@ -1,10 +1,66 @@
-## WORK IN PROGRESS; ANYTHING IS SUBJECT TO CHANGE UNTIL TONIGHT
-
 cQASM 2.0 specification
 =======================
 
 This is intended to be a working document for the cQASM 2.0 specification. Feel free to add comments/notes using blockquotes (add your name to the top of it to keep things clear, though `git blame` can always be used in case of confusion). You should be able to use github's built-in editor to edit this file. You can also use the issue system to request and discuss changes.
 
+
+Overview of changes from 1.0 to 2.0
+-----------------------------------
+
+New features and improvements, in approximately the same order as the rest of this document:
+
+ - Improved handling of whitespace and newlines.
+ - Addition of block comments using C syntax (`/* ... */`).
+ - Gates, axes, `q`, and `b` are no longer reserved words.
+ - Overhauled resource declarations, including classical resources of types `int`, `uint`, `fixed`, `ufixed`, `float`, `double`, and `boolean`, as well as 1-dimensional arrays thereof.
+ - Custom one-qubit gate syntax, through specification of its unitary matrix.
+ - `prep` alias for `prep_z`, analogous to `measure` vs `measure_z`.
+ - Classical flow control, including subroutines.
+ - Classical arithmetic instructions.
+ - `stop`, `error` and `print` instructions to ease debugging.
+ - Pragmas and annotations to easily create your own language extensions, without needing to change the cQASM specification and all associated tools.
+
+Deprecated 1.0 features:
+
+ - `qubits #` declaration. This has been superseded by the more new resource declaration syntax.
+ - QX-specific instructions. These are superseded by pragma equivalents.
+
+libQASM's internal representation and API will also of course have to change to support the above modifications. The degree by which this is necessary is to be determined. One planned addition to libQASM is an API call to (pretty-)print its internal representation to a cQASM 2.0 file.
+
+
+Planning
+--------
+
+This table should be removed eventually, but for now I feel like keeping everything in one place is a good idea:
+
+| OK | Feature                             | Dependencies                        | Priority | Responsible | Deadline    |
+|----|-------------------------------------|-------------------------------------|----------|-------------|-------------|
+|    | **cQASM**                           |                                     |          | Jeroen      |             |
+| ✓  | cQASM 2.0 draft                     | -                                   | High     | Jeroen      | 2018-12-12  |
+|    | cQASM 2.0 draft review              | cQASM 2.0 draft                     | High     | Everyone    | 2018-12-21  |
+|    | Frozen cQASM 2.0 specification      | cQASM 2.0 draft review              | High     | Jeroen      | 2018-12-21  |
+|    | **libQASM**                         |                                     |          | Jeroen      |             |
+|    | libQASM lexer                       | Frozen cQASM2.0 specification       | High     | Jeroen      | 2018-12-23  |
+|    | libQASM parser                      | libQASM lexer                       | High     | Jeroen      | 2018-12-23  |
+|    | libQASM semantical + IR             | libQASM parser                      | High     | Jeroen      | 2018-12-23  |
+|    | libQASM unit tests                  | libQASM semantical + IR             | Medium   | Jeroen      | 2019-12-31  |
+|    | libQASM API specification           | Frozen cQASM 2.0 specification      | High     | Jeroen      | 2019-12-23  |
+|    | libQASM API                         | libQASM semantical + IR             | High     | Jeroen      | 2019-12-31  |
+|    | libQASM pretty-printer              | libQASM semantical + IR             | Low      | Jeroen      | ?           |
+|    | **QX**                              |                                     |          | ?           |             |
+|    | QX/libQASM API update               | libQASM API                         | High     | ?           | ?           |
+|    | QX multi-qreg support               | QX/libQASM API update               | ?        | ?           | ?           |
+|    | QX custom gate support              | QX/libQASM API update               | ?        | ?           | ?           |
+|    | QX classical flow control           | QX/libQASM API update               | ?        | ?           | ?           |
+|    | QX classical resource system        | QX/libQASM API update               | ?        | ?           | ?           |
+|    | QX dynamic indexation               | QX classical resource system        | ?        | ?           | ?           |
+|    | QX integer operation support        | QX classical resource system        | ?        | ?           | ?           |
+|    | QX floating point operation support | QX classical resource system        | ?        | ?           | ?           |
+|    | QX fixed point operation support    | QX classical resource system        | ?        | ?           | ?           |
+|    | QX boolean operation support        | QX classical resource system        | ?        | ?           | ?           |
+|    | QX classical type conversions       | Support for types to convert        | ?        | ?           | ?           |
+|    | **OpenQL**                          |                                     |          | Imran?      |             |
+|    | OpenQL ???                          | libQASM API specification?          | ?        | ?           | ?           |
 
 Intended purpose of cQASM 2.0
 -----------------------------
