@@ -205,7 +205,7 @@ Subcircuits can be replicated a static number of times like this:
 
 This will apply the X gate to q[1] three times.
 
-The iteration count must be an positive integer literal; registers are not allowed. To get a dynamic iteration count, a loop must be described using classical instructions.
+The iteration count must be a positive integer literal; registers are not allowed. To get a dynamic iteration count, a loop must be described using classical instructions.
 
 > JvS: This is to prevent cluttering up the subcircuit API. I'm basically assuming that you're either using subcircuits or classical flow control.
 
@@ -518,10 +518,11 @@ The following arithmetic instructions are defined.
     addc    a, b -> c, d    # Add a to b, write result to c and carry to d
     subc    a, b -> c, d    # Subtract b from a, write result to c and carry to d
     mul     a, b -> c       # Multiply a with b, write to c
-    div     a, b -> c       # Divide a by b, write to c
+    div     a, b -> c       # Real number division of a by b, write to c
+    idiv    a, b -> c       # Floored division of a by b, write to c
+    mod     a, b -> c       # Integer remainder of a "tdiv" b, write to c
     sq      a -> b          # Square a, write to b
     sqrt    a -> b          # Square-root a, write to b
-    mod     a, b -> c       # Write a mod b to c
     pow     a, b -> c       # Write a^b to c
     log     a, b -> c       # Write log_a(b) to c
     exp     a -> b          # Write e^a to b
