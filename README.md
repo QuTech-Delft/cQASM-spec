@@ -3,7 +3,7 @@
 cQASM 2.0 specification
 =======================
 
-This is intended to be a working document for the cQASM 2.0 specification. Feel free to add comments/notes using blockquotes (add your name to the top of it to keep things clear, though `git blame` can always be used in case of confusion). You should be able to use github's built-in editor to edit this file.
+This is intended to be a working document for the cQASM 2.0 specification. Feel free to add comments/notes using blockquotes (add your name to the top of it to keep things clear, though `git blame` can always be used in case of confusion). You should be able to use github's built-in editor to edit this file. You can also use the issue system to request and discuss changes.
 
 
 Intended purpose of cQASM 2.0
@@ -54,6 +54,7 @@ Everything in cQASM is case-insensitive.
 > JvS: Same as 1.0.
 
 Identifiers follow the regex pattern `/[a-zA-Z_][a-zA-Z0-9_]*/`. That is, a combination of underscores, letters, and numbers, where the first character is not allowed to be a number. Identifier matching is case-insensitive.
+
 > JvS: Same as 1.0.
 
 Integer literals can be described using C-like decimal, hexadecimal, or binary notation. That is:
@@ -80,6 +81,10 @@ You can also describe real numbers using hexadecimal or binary notation:
 This allows fixed-point numbers to be represented exactly, without roundoff error in the base 10 to 2 conversion.
 
 Boolean literals use the keywords `true` and `false`. These are case-insensitive as usual.
+
+String literals are used on occasion, although cQASM 2.0 does not support string types. Their syntax is `/"([^"]|\\["n])*"/`. That is, text surrounded by `"` symbols, with `\"` as escape sequence for including a `"` in the string and `\n` for including a newline. The newline should be converted to the newline specific to the host platform where applicable.
+
+Finally, annotations (pragma-like information of which the function is to be defined by the target) carry JSON-like data. The toplevel must be an object (= a dict in Python lingo), the string format is limited to the description above, and `null` is not allowed; otherwise the JSON specification is followed. Newlines are allowed within JSON context.
 
 
 Version header
@@ -375,6 +380,12 @@ In addition to the bundle notation described in the previous section, there is a
 
 > JvS: this is consistent with cQASM 1.0. I could not find the combination of ranges and set entries to be specified anywhere, but the grammar already allowed it.
 
+Multi-qubit gates and multi-operand classical instructions can also make use of this indexation method. In this case, the number of selected elements must be the same for each operand, or (for source operands) only a single element must be selected. For instance:
+
+    add x[0:7], 1 -> x[0:7] # Perform 8 increments in parallel
+    mov x[0,1] -> x[1,0]    # A way to write down a classical swap operation
+    cnot q[0], q[1:8]       # Apply CNOT to q[1] through q[8] using q[0] as control
+
 cQASM 2.0 does not require indices, sets, or slices to be literals; they can take any scalar value. For instance,
 
     int<32> v
@@ -385,11 +396,16 @@ cQASM 2.0 does not require indices, sets, or slices to be literals; they can tak
     x   q[a[1],a[2]]        # Operate on qubits ranging from a[1] to a[2]
     # etc.
 
-The following semantics apply here:
+Note, however, that this construct is extremely difficult to support in hardware due to its flexibility and the amount of error conditions. Non-simulator targets are unlikely to support it.
+
+The following semantics apply to SGMQ/SIMD indexation:
 
  - Descending ranges are null, i.e. include zero of the operands.
- - When an operand is specified multiple times, the operation is performed only once (that is, the index list behaves like a set).
+ - When an operand is specified multiple times, the operation is performed that many times. For target operands/qubits, this may lead to undefined/illegal behavior, as outlined in the instruction bundle semantics.
  - Out of range inclusions result in undefined behavior. Simulators may exit with a failure in this case.
+ - Indexation nesting is allowed, but only the topmost level can specify more than one entry. That is, `x[y[0],y[1],y[2]]` is legal, but `x[y[0:2]]` is not.
+
+> JvS: the latter prevents weird constructs like `x[y[0:2]:y[1,2]]` or whatever.
 
 
 Classical flow control
@@ -474,7 +490,139 @@ Without this notation, it would be impossible to push literals onto the stack, s
 Classical arithmetic
 --------------------
 
-    not     boolean     # For compatibility with 1.0
+cQASM 2.0 defines the following arithmetic instructions. Keep in mind that, like everything else in this specification, targets are allowed to support only a subset and reject programs with instructions they do not support.
+
+### Movement and type conversion
+
+The `mov` instruction is used to move/copy classical data around. The format is as follows:
+
+    mov     a -> b          # Sets b to a
+
+For consistency with the quantum gates, source operands are specified first. To prevent confusion in that regard, a `->` arrow is used between the source and destination operands.
+
+Because of the way cQASM typing works (this is elaborated upon in the next section), `mov` instructions can also be used for type conversion:
+
+    int<32> i
+    float f
+    ...
+    mov i -> f              # Convert integer to float
+
+Furthermore, by way of allowing indexation for all operands, they can also model standalone memory operations:
+
+    int<32> mem[4096]
+    int<32> reg
+    ...
+    mov 42 -> mem[0]        # Store operation
+    mov mem[0] -> reg       # Load operation
+
+### Basic arithmetic
+
+The following arithmetic instructions are defined.
+
+    inc     a -> b          # Increment by 1
+    dec     a -> b          # Decrement by 1
+    neg     a -> b          # Negate/two's complement
+    add     a, b -> c       # Add a to b, write to c
+    sub     a, b -> c       # Subtract b from a, write to c
+    addc    a, b -> c, d    # Add a to b, write result to c and carry to d
+    subc    a, b -> c, d    # Subtract b from a, write result to c and carry to d
+    mul     a, b -> c       # Multiply a with b, write to c
+    div     a, b -> c       # Divide a by b, write to c
+    sq      a -> b          # Square a, write to b
+    sqrt    a -> b          # Square-root a, write to b
+    mod     a, b -> c       # Write a mod b to c
+    pow     a, b -> c       # Write a^b to c
+    log     a, b -> c       # Write log_a(b) to c
+    exp     a -> b          # Write e^a to b
+    ln      a -> b          # Write ln(a) to b
+
+The instructions operating on only a single value can also be written with a single operand, without the arrow, for in-place modification:
+
+    inc     a               # Increment in place
+    dec     a               # Decrement in place
+    neg     a               # Negate/two's complement in place
+    sq      a               # Square in place
+    sqrt    a               # Square-root in place
+    exp     a               # Natural exponentiation in place
+    ln      a               # Natural logarithm in place
+
+This is just a shorthand for the explicic destination.
+
+> JvS: this is for consistency with the `not` operation defined in 1.0.
+
+### Trigonometry
+
+The following trigonometric functions are defined. Radians are used as angular unit.
+
+    sin     a -> b          # Write sin(a) to b
+    cos     a -> b          # Write cos(a) to b
+    tan     a -> b          # Write tan(a) to b
+    asin    a -> b          # Write arcsin(a) to b
+    acos    a -> b          # Write arccos(a) to b
+    atan    a -> b          # Write arctan(a) to b
+
+Their shorthand in-place notations (without the arrows) are of course also legal.
+
+    sin     a               # sin(a) in place
+    cos     a               # cos(a) in place
+    tan     a               # tan(a) in place
+    asin    a               # arcsin(a) in place
+    acos    a               # arccos(a) in place
+    atan    a               # arctan(a) in place
+
+### Relational
+
+The relational operators share their names with the jump instructions, except they are prefixed with `c` (compare) instead of `j` (jump).
+
+    ceq     a, b -> c       # Write a == b to c
+    cne     a, b -> c       # Write a != b to c
+    cgt     a, b -> c       # Write a > b to c
+    clt     a, b -> c       # Write a < b to c
+    cge     a, b -> c       # Write a >= b to c
+    cle     a, b -> c       # Write a <= b to c
+
+### Selection
+
+The following selection-based operators are available:
+
+    slct    a, b, c -> d    # As in C: d = a ? b : c
+    min     a, b -> c       # Write the minimum of a and b to c
+    max     a, b -> c       # Write the maximum of a and b to c
+    abs     a -> b          # Write the absolute value of a to b
+    abs     a               # Absolute value in place
+
+### Bitwise and logical
+
+The following bitwise instructions are available. They cannot be applied to floats; this will raise an error. Negative shift amounts are undefined behavior.
+
+    shl     a, b -> c       # Shift a left by b bits, write to c
+    shr     a, b -> c       # Shift a right by b bits logically, write to c
+    ashr    a, b -> c       # Shift a right by b bits arithmetically, write to c
+    rol     a, b -> c       # Rotate a left by b bits, write to c
+    ror     a, b -> c       # Rotate a right by b bits, write to c
+    sbit    a, b -> c       # Set bit, as in C: c = a | (1 << b)
+    cbit    a, b -> c       # Clear bit, as in C: c = a & ~(1 << b)
+    tbit    a, b -> c       # Toggle bit, as in C: c = a ^ (1 << b)
+    inv     a -> b          # Write one's complement of a to b
+    inv     a               # One's complement in place
+    and     a, b -> c       # Bitwise and as in C: c = a & b
+    or      a, b -> c       # Bitwise or as in C: c = a | b
+    xor     a, b -> c       # Bitwise xor as in C: c = a ^ b
+    not     a -> b          # Logical inversion as in C: b = !a
+    not     a               # Logical inversion in place as in C: a = !a (as in 1.0!)
+    land    a, b -> c       # C-like: c = a && b
+    lor     a, b -> c       # C-like: c = a || b
+    lxor    a, b -> c       # C-like: c = !!(a ^ b)
+
+### Debugging
+
+The following statements are useful for debugging:
+
+    stop                    # Terminates the program successfully
+    error ...               # Terminates the program unsuccessfully
+    print ...               # Write information to the debug console
+
+The ellipses in `error` and `print` can be any argument list, including string literals, and (for simulators) qubits. The contents will be printed to stdout separated by spaces (like Python's print statement).
 
 
 Type promotion and conversion semantics
@@ -507,3 +655,17 @@ If the internal operation result is of a different type than the target scalar, 
  - Double to float: use the exact representation if possible. Rounding is undefined otherwise, but should be no worse than rounding up or down (that is, there are two permitted values for the conversion if no exact representation exists). +inf/-inf are used in case of overflow.
  - Int/fix conversions: use the exact representation if possible. Round to the most negative representable value if no representation exists. Overflow behavior is undefined for real implementations, but simulators should detect this and raise an error.
 
+
+Pragmas and annotations
+-----------------------
+
+TODO: annotations
+
+The following instructions exist to have a 1.0-compatible interface for interacting with QX specifically:
+
+    display                 # Dump the full quantum state to the console
+    display_binary          # Dump the measurement register state to the console
+    reset_averaging         # Reset measurement averaging
+    error_model mdl, ...    # Set the error model
+
+The ellipsis for the error model is a parameter list of integers and floats literals, while the `mdl` parameter can be any identifier. It is up to QX to check this.
