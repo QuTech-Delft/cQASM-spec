@@ -126,6 +126,10 @@ The simulator shall terminate with an error if any over- or underflow is detecte
 Resource declarations
 ---------------------
 
+Like 1.0, cQASM 2.0 does not define any computational resources implicitly. Therefore, any useful cQASM program should start with one or more resource definitions. Note that all resources in cQASM are global, and must be defined before the first real instruction.
+
+> JvS: the reason for requiring everything to be global is to simplify libQASM's AST representation, as well as liveness analysis in the compiler.
+
 Scalar values are defined as follows:
 
     int<32> scalar_value
@@ -141,7 +145,7 @@ Arrays always start at zero, and end at the specified length minus one. Simulato
 
 > JvS: Easy to simulate, hard to do in hardware. Well not hard, but takes up logic and lowers frequency. Debugging should be done with a simulator.
 
-Unlike cQASM 1.0, the above notation for qubit registers does not permit a separate name for the qubit itself and its associated classical measurement bit. To disambiguate between the two when needed, use the suffix `.q` (qubit) or `.b` (binary/classical) in the reference. For instance, `cnot data.b[1], data[2]` specifies that the control for the CNOT gate uses the result of a previous measurement as control, instead of the qubit itself. The default for ambiguous situations is to use the qubit itself.
+Unlike cQASM 1.0, the above notation for qubit registers does not permit a separate name for the qubit itself and its associated classical measurement bit. To disambiguate between the two when needed, use the suffix `.q` (qubit) or `.b` (binary/classical) in the reference. For instance, `cnot data.b[1], data[2]` specifies that the control for the CNOT gate uses the result of a previous measurement as control, instead of the qubit itself. The default for ambiguous situations is to use the qubit itself. Note that for classical instructions the only option is the measurement bit, so `.b` is implicit.
 
 > JvS: This seems like the most intuitive implementation that is backward compatible with 1.0's notion of having a qubit represent both an actual qubit and a classical bit for its measurement.
 
@@ -196,7 +200,7 @@ The map statement can be used to specify an alias for a resource:
     map q[0], data
     map q, qubit_reg
 
-These mappings state that `data` and `qubit_reg[0]` can be used in place of `q[0]`. Mappings can be specified anywhere in the code, and go into effect from their declaration onwards. Mappings can also be overridden at any time. Note that while the examples are purely qubits, this works for quantum and classical resources alike.
+These mappings state that `data` and `qubit_reg[0]` can be used in place of `q[0]`. Mappings can be specified anywhere in the code, and go into effect from their declaration onwards. Mappings can also be overridden at any time to refer to a different resource. Note that while the examples are purely qubits, this works for quantum and classical resources alike.
 
 > JvS: this is for compatibility with 1.0.
 
@@ -206,7 +210,7 @@ Mappings do not have any semantical meaning; use of a mapping and use of the act
 Subcircuits
 -----------
 
-Code can optionally be organized into subcircuits as in 1.0. They are defined like this:
+Code can optionally be organized into subcircuits as in 1.0, although it should be noted that classical logic supersedes this, so they are considered deprecated. In any case, they are defined like this:
 
     .subcircuit_one
         x q[0]
@@ -292,10 +296,13 @@ The following single-qubit measurement instructions are available:
     prep_x      qubit   # State preparation in X basis
     prep_y      qubit   # State preparation in Y basis
     prep_z      qubit   # State preparation in Z basis
+    prep        qubit   # State preparation in Z basis (same as above)
     measure_x   qubit   # Measure qubit in X basis
     measure_y   qubit   # Measure qubit in Y basis
     measure_z   qubit   # Measure qubit in Z basis
     measure     qubit   # Measure qubit in Z basis (same as above)
+
+> JvS/AS: added `prep` (new in 2.0) for symmetry with `measure`.
 
 The result of the measurements is stored in the classical bit register associated with the qubit.
 
