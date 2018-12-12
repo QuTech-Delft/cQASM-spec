@@ -59,9 +59,9 @@ Identifiers follow the regex pattern `/[a-zA-Z_][a-zA-Z0-9_]*/`. That is, a comb
 
 Integer literals can be described using C-like decimal, hexadecimal, or binary notation. That is:
 
-    decimal:     /-?[0-9]+/
-    hexadecimal: /0[xX][0-9a-fA-F]+/
-    binary:      /0[bB][01]+/
+    decimal:     /[-+]?[0-9]+/
+    hexadecimal: /[-+]0[xX][0-9a-fA-F]+/
+    binary:      /[-+]0[bB][01]+/
 
 Note that unlike C numbers with zero-prefix are NOT interpreted as octal.
 
@@ -69,14 +69,14 @@ Note that unlike C numbers with zero-prefix are NOT interpreted as octal.
 
 Real numbers use the usual syntax:
 
-    /-?[0-9]*\.[0-9]*([eE][-+]?[0-9]+)[fF]?/
+    /[-+]?[0-9]*\.[0-9]+([eE][-+]?[0-9]+)[fF]?/
 
-where the "f" indicates single precision versus the default double precision. Exception: "." is not a legal floating point number, even though the regex above matches it.
+where the "f" indicates single precision versus the default double precision.
 
 You can also describe real numbers using hexadecimal or binary notation:
 
-    hexadecimal: /0[xX][0-9a-fA-F]*\.[0-9a-fA-F]*/
-    binary:      /0[bB][01]*\.[01]*/
+    hexadecimal: /[-+]?0[xX][0-9a-fA-F]*\.[0-9a-fA-F]*/
+    binary:      /[-+]?0[bB][01]*\.[01]*/
 
 This allows fixed-point numbers to be represented exactly, without roundoff error in the base 10 to 2 conversion.
 
