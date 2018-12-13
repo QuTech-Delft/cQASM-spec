@@ -443,7 +443,7 @@ cQASM 2.0 does not require indices, sets, or slices to be literals; they can tak
     x   q[a[1],a[2]]        # Operate on qubits ranging from a[1] to a[2]
     # etc.
 
-Note, however, that this construct is extremely difficult to support in hardware due to its flexibility and the amount of error conditions. Non-simulator targets are unlikely to support it.
+Note, however, that this construct is extremely difficult to support in hardware due to its flexibility and the amount of error conditions. Non-simulator targets are unlikely to support dynamic indexation in conjunction with the set/range notation, so it's recommended to use only a single index when dynamic indexation is needed.
 
 The following semantics apply to SGMQ/SIMD indexation:
 
@@ -683,9 +683,9 @@ When two input arguments are mixed, the arguments are first converted per the fo
  - Combinations of int/uint/fix/ufix: the inputs are widened to a common integral format that can represent all numbers representable by any of the inputs. Formally:
 
 ```
-fix<a,b>  + fix<c,d>  -> fix <max(a,c),  max(b,d)>
-ufix<a,b> + ufix<c,d> -> ufix<max(a,c),  max(b,d)>
-fix<a,b>  + ufix<c,d> -> fix <max(a,c+1),max(b,d)>
+fixed<a,b>  + fixed<c,d>  -> fixed <max(a,c),  max(b,d)>
+ufixed<a,b> + ufixed<c,d> -> ufixed<max(a,c),  max(b,d)>
+fixed<a,b>  + ufixed<c,d> -> fixed <max(a,c+1),max(b,d)>
 ```
 
  - Booleans are treated as uint<1> values, where `true` equals 1 and `false` equals 0.
@@ -737,13 +737,12 @@ Annotations instead add arbitrary data to existing constructs. Their syntax is a
 Here, `...` must be one of the following constructs (on the same line):
 
  - resource declaration
- - `exclusive` statement
  - `map` statement
  - labels
  - instructions/gates
  - bundles
 
-`target`, `name`, and `{...}` function the same way as pragmas. Multiple annotations can be specified in sequence by specifying multiple annotations (including the @) in sequence.
+`target`, `name`, and `{...}` function the same way as pragmas. Multiple annotations can be specified by simply repeating the annotation syntax.
 
 The remainder of this section lists some pragma/annotation ideas.
 
@@ -813,4 +812,4 @@ cQASM 1.0 defined the following QX-specific instructions:
 
 The ellipsis for the error model is a parameter list of integers and floats literals, while the `mdl` parameter can be any identifier. It is up to QX to check this.
 
-Instead of these instructions, use their `pragma` equivalent instead.
+Instead of these instructions, use their `pragma` equivalent.
