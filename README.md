@@ -289,10 +289,10 @@ The following single-qubit gates are defined:
     rx      qubit, angle            # Arbitrary X rotation (radians)
     ry      qubit, angle            # Arbitrary Y rotation (radians)
     rz      qubit, angle            # Arbitrary Z rotation (radians)
-    x90     qubit                   # X90
-    y90     qubit                   # Y90
-    mx90    qubit                   # mX90
-    my90    qubit                   # mY90
+    x90     qubit                   # Synonym for rx with angle = pi/2
+    y90     qubit                   # Synonym for ry with angle = pi/2
+    mx90    qubit                   # Synonym for rx with angle = -pi/2
+    my90    qubit                   # Synonym for ry with angle = -pi/2
     s       qubit                   # Phase
     sdag    qubit                   # Phase dagger
     t       qubit                   # T
