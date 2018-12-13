@@ -298,6 +298,7 @@ The following single-qubit gates are defined:
     t       qubit                   # T
     tdag    qubit                   # T dagger
     u       qubit,[a,b,c,d,e,f,g,h] # NEW IN 2.0: custom unitary gate
+    u       qubit, theta, phi, lambda # Alternate way to specify the above
 
 > JvS: the syntax for the custom unitary gate is taken from an undocument feature in 1.0's grammar. Actually, any single-qubit gate allows such a matrix to be specified... but since that doesn't to my knowledge make any sense I'm considering it a bug and won't enforce full backwards-compatibility for that.
 
@@ -314,14 +315,18 @@ The parameters for the unitary gate are:
 Two following two-qubit gates are defined:
 
     swap    qubit, qubit            # Swaps two qubits
-    cnot    ctrl, target            # CNOT
+    sqswap  ????                    # ???? TODO
+    cnot    ctrl, target            # CNOT (controlled X gate)
     cz      ctrl, target            # CPHASE
     cr      ctrl, target, angle     # Controlled phase shift (radians)
     crk     ctrl, target, k         # Controlled phase shift (pi/2^k)
 
 The following three-qubit gates are defined:
 
-    toffoli ctrl, ctrl, target      # Toffoli
+    toffoli ctrl, ctrl, target      # Toffoli gate (doubly-controlled X gate)
+    ccnot   ctrl, ctrl, target      # Synonym for the above
+    fredkin ctrl, qubit, qubit      # Fredkin gate (controlled swap)
+    cswap   ctrl, qubit, qubit      # Synonym for the above
 
 > JvS: does anyone have need for a custom specification of two- and three-qubit gates similar to `u`?
 
