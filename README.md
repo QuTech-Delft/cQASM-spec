@@ -41,8 +41,8 @@ This table should be removed eventually, but for now I feel like keeping everyth
 |    | Frozen cQASM 2.0 specification      | cQASM 2.0 draft review              | High     | Jeroen      | 2018-12-21  |
 |    | **libQASM**                         |                                     |          | Jeroen      |             |
 |    | libQASM lexer                       | Frozen cQASM2.0 specification       | High     | Jeroen      | 2018-12-23  |
-|    | libQASM parser                      | libQASM lexer                       | High     | Jeroen      | 2018-12-23  |
-|    | libQASM semantical + IR             | libQASM parser                      | High     | Jeroen      | 2018-12-23  |
+|    | libQASM parser + AST                | libQASM lexer                       | High     | Jeroen      | 2018-12-23  |
+|    | libQASM semantical + IR             | libQASM parser + AST                | High     | Jeroen      | 2018-12-23  |
 |    | libQASM unit tests                  | libQASM semantical + IR             | Medium   | Jeroen      | 2019-12-31  |
 |    | libQASM API specification           | Frozen cQASM 2.0 specification      | High     | Jeroen      | 2019-12-23  |
 |    | libQASM API                         | libQASM semantical + IR             | High     | Jeroen      | 2019-12-31  |
@@ -69,7 +69,7 @@ cQASM 2.0 (common quantum assembly) strives to be an implementation-agnostic ass
 
 cQASM 2.0 also strives to be usable as an intermediate representation for a quantum compiler at all levels. This requires that it can describe some higher-level constructs as well, to be reduced by later compilation steps. For instance, cQASM 2.0 supports the three-qubit Toffoli gate, which implementations most likely would not.
 
-In addition to being a compiler intermediate representation (IR), it is expected that people will also be writing cQASM manually, for instance to use features that the compiler does not yet support. For this reason, unlike most IRs, cQASM should also be user-friendly, allowing some "syntactic sugar" here and there that a compiler would never generate. For instance, using a non-static range of qubits in a SIMD style (that is, defined by the contents of classical registers) would never be defined by a compiler, but might allow algorithms to be written more concisely when coded manually.
+In addition to being a superset of the compiler intermediate representation, it is expected that people will also be writing cQASM manually, for instance to use features that the compiler does not yet support. For this reason, unlike most IRs, cQASM should also be user-friendly, allowing some "syntactic sugar" here and there that a compiler would never generate. For instance, using a non-static range of qubits in a SIMD style (that is, defined by the contents of classical registers) would never be defined by a compiler, but might allow algorithms to be written more concisely when coded manually.
 
 In terms of featureset, described very briefly: cQASM 1.0 allows only specification of pure quantum circuits, while 2.0 expands on this by adding classical instructions.
 
@@ -173,7 +173,7 @@ cQASM 2.0 recognizes the following data types:
  - `int<x>`/`uint<x>`: signed/unsigned integer scalars or arrays of bit-width x, where x is a positive integer literal less than or equal to 64.
  - `fixed<x,y>`/`ufixed<x,y>`: signed/unsigned fixed-point scalars or arrays of bit-width x+y, where x is the number of bits before the decimal point and y is the number of bits after. x and y may be negative or zero, as long as their sum is a positive integer less than or equal to 64; negative x implies that the range is less than 1, while negative y implies that the resolution is greater than 1. y=0 is synonymous with int/uint.
  - `float`, `double`: floating point scalars or arrays.
- - `boolean`: boolean register or array.
+ - `boolean`: boolean scalar or array.
 
 Note that strings do not exist.
 
@@ -349,9 +349,9 @@ The following single-qubit measurement instructions are available:
 
 The result of the measurements is stored in the classical bit register associated with the qubit.
 
-There is also an operation to measure an entire qubit register in the Z-basis at once:
+There is also an operation to measure an entire qubit array in the Z-basis at once:
 
-    measure_all qreg    # NEW IN 2.0: measure all qubits in register qreg
+    measure_all qreg    # NEW IN 2.0: measure all qubits in array qreg
     measure_all         # Measure all qubits in all registers
 
 > JvS: the latter is for compatibility with 1.0.
@@ -402,8 +402,9 @@ or
 
 The following restrictions and semantics apply to bundles:
 
+ - Implementations may not depend on the order in which parallel instructions are specified.
  - It is illegal to write to the same classical value more than once within a bundle. The resultant will be undefined, and simulators may exit with an error for this.
- - At most one flow control operation (`jmp`-like, `call`, `ret`) may be performed within a bundle. Execution is undefined otherwise, and simulators may exit with an error for this.
+ - At most one flow control operation (`jmp`-like, `call`, `ret`) may be performed within a bundle, which is executed after all other instructions complete. Execution is undefined otherwise, and simulators may exit with an error for this.
  - At most one stack operation (`push`, `pop`, `call`, `ret`) may be performed within a bundle. Execution is undefined otherwise, and simulators may exit with an error for this.
  - At most one `wait` instruction may be performed within a bundle.
  - Any `wait` instruction shall be pushed into the quantum gate queue after any quantum gates specified in the same bundle.
@@ -525,6 +526,7 @@ The following rules must be followed for `push` and `pop`:
  - When you push a certain data type, you must always pop the same data type. Not doing so leads to undefined behavior. A simulator should detect this and exit with an error.
  - Every `push` operation must have a respective `pop` operation. That is, when the program terminates, the number of calls to `push` must equal the number of calls to `pop`.
  - Popping when the stack is empty is illegal and leads to undefined behavior. A simulator should detect this and exit with an error.
+ - Only classical values can be pushed.
 
 Note that because `call` and `ret` share the same stack as `push` and `pop`, you must ensure that each subroutine has popped everything it has pushed before calling `ret`, otherwise the return address will not be at the top of the stack.
 
