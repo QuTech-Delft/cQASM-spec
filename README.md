@@ -273,7 +273,7 @@ If the default subcircuit does not contain code, it will not appear in the AST.
 
 > JvS: This currently does NOT appear to be the case; you just end up with an empty subcircuit. Which seems unintuitive.
 
-It should be noted that classical flow control fully superseded the subcircuit syntax. Therefore, programs that require classical flow control should probably avoid using subcircuits. However, while technically superseded, subcircuits still allow repitition to be specified very easily. For this reason they are not deprecated.
+It should be noted that classical flow control fully superseded the subcircuit syntax. Therefore, programs that require classical flow control should probably avoid using subcircuits. However, while technically superseded, subcircuits still allow repetition to be specified very easily. For this reason they are not deprecated.
 
 
 Qubit gates (almost exactly 1.0)
@@ -469,7 +469,7 @@ Structures such as conditional execution and loops are described using classical
 
 Labels are scoped to the current subcircuit. In other words, it is impossible to jump from one subcircuit to another; they function like separate programs. Two different subcircuits can thus also reuse label names.
 
-> JvS: This is to avoid semantic problems for subcircuits that have repitition specified. What would happen, for instance, if you jump out of a repeated subcircuit? The way I see it, you would normally use either 1.0's subcircuit repitition in a piece of code, OR use loops described classically in 2.0's way (since classical branching is functionally a superset of 1.0's functionality).
+> JvS: This is to avoid semantic problems for subcircuits that have repetition specified. What would happen, for instance, if you jump out of a repeated subcircuit? The way I see it, you would normally use either 1.0's subcircuit repetition in a piece of code, OR use loops described classically in 2.0's way (since classical branching is functionally a superset of 1.0's functionality).
 
 Labels can refer both backwards and forwards. There is no need to "forward-declare" a label.
 
