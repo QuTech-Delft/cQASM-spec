@@ -691,7 +691,7 @@ fixed<a,b>  + ufixed<c,d> -> fixed <max(a,c+1),max(b,d)>
  - Booleans are treated as uint<1> values, where `true` equals 1 and `false` equals 0.
  - When an integral type is combined with a float/double, the integral type is converted to float/double. Rounding method for numbers that cannot be perfectly represented is undefined. Note that this is the only potentially lossy "promotion".
 
-Arithmetic operations are performed at full precision. For example, the results of a multiplication of two `int<32>` values becomes an `int<64>` internally.
+Instructions based upon addition, subtraction, multiplication, and shifts are performed at full precision and range. The same thing applies to integer division and modulo. For example, the results of a multiplication of two `int<32>` values becomes an `int<64>` internally. However, more complex instructions, such as square-root and trignonometry, are very difficult to efficiently compute precisely and accurately. As such, their precision and accuracy is implementation-defined.
 
 If the internal operation result is of a different type than the target scalar, it is converted as follows:
 
