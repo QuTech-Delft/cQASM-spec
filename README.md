@@ -574,6 +574,7 @@ The following arithmetic instructions are defined.
     addc    a, b -> c, d    # Add a to b, write result to c and carry to d
     subc    a, b -> c, d    # Subtract b from a, write result to c and carry to d
     mul     a, b -> c       # Multiply a with b, write to c
+    rcp     a -> b          # Real number division of 1 by a, write to b
     div     a, b -> c       # Real number division of a by b, write to c
     idiv    a, b -> c       # Floored division of a by b, write to c
     mod     a, b -> c       # Integer remainder of a "tdiv" b, write to c
@@ -583,16 +584,23 @@ The following arithmetic instructions are defined.
     log     a, b -> c       # Write log_a(b) to c
     exp     a -> b          # Write e^a to b
     ln      a -> b          # Write ln(a) to b
+    floor   a -> b          # Round a down to nearest integer, write to b
+    ceil    a -> b          # Round a up to nearest integer, write to b
+    round   a -> b          # Round a to nearest integer (tie to even), write to b
 
 The instructions operating on only a single value can also be written with a single operand, without the arrow, for in-place modification:
 
     inc     a               # Increment in place
     dec     a               # Decrement in place
     neg     a               # Negate/two's complement in place
+    rcp     a               # Reciprocal in place
     sq      a               # Square in place
     sqrt    a               # Square-root in place
     exp     a               # Natural exponentiation in place
     ln      a               # Natural logarithm in place
+    floor   a               # Round down to nearest integer in place
+    ceil    a               # Round up to nearest integer in place
+    round   a               # Round to nearest integer (tie to even) in place
 
 This is just a shorthand for the explicic destination.
 
