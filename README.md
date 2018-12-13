@@ -576,8 +576,6 @@ The following arithmetic instructions are defined.
     neg     a -> b          # Negate/two's complement
     add     a, b -> c       # Add a to b, write to c
     sub     a, b -> c       # Subtract b from a, write to c
-    addc    a, b -> c, d    # Add a to b, write result to c and carry to d
-    subc    a, b -> c, d    # Subtract b from a, write result to c and carry to d
     mul     a, b -> c       # Multiply a with b, write to c
     rcp     a -> b          # Real number division of 1 by a, write to b
     div     a, b -> c       # Real number division of a by b, write to c
