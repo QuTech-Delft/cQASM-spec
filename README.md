@@ -124,30 +124,30 @@ The following identifiers are illegal, because they are either used as keywords 
 
 Integer literals can be described using C-like decimal, hexadecimal, or binary notation. That is:
 
-    decimal:     /[-+]?[0-9]+/
-    hexadecimal: /[-+]0[xX][0-9a-fA-F]+/
-    binary:      /[-+]0[bB][01]+/
+    decimal:     /[-+]?[0-9]+[uU]?/
+    hexadecimal: /[-+]0[xX][0-9a-fA-F]+[uU]?/
+    binary:      /[-+]0[bB][01]+[uU]?/
 
-Note that unlike C numbers with zero-prefix are NOT interpreted as octal.
+Note that unlike C numbers with zero-prefix are NOT interpreted as octal. By default, integer literals map to the `int` type; when the `u` suffix is added they map to the `uint` type. Their bit-width is based on the minimum needed to represent the number for the decimal representation; for the hexadecimal and binary notations the bit-width is set to (four times) the number of digits.
 
-> JvS: Decimal notation is the same as 1.0, hexadecimal and binary are new. libQASM shall fully abstract this notation away from the API/AST layer.
+> JvS: Decimal notation is a superset of 1.0, hexadecimal and binary are new. libQASM shall fully abstract this notation away from the SAST, AST, and IR output.
 
-Real numbers use the usual syntax:
+Floating-point literals use the usual syntax:
 
     /[-+]?[0-9]*\.[0-9]+([eE][-+]?[0-9]+)[fF]?/
 
 where the "f" indicates single precision versus the default double precision.
 
-You can also describe real numbers using hexadecimal or binary notation:
+Fixed-point literals use the following syntax:
 
-    hexadecimal: /[-+]?0[xX][0-9a-fA-F]*\.[0-9a-fA-F]*/
-    binary:      /[-+]?0[bB][01]*\.[01]*/
+    hexadecimal: /[-+]?0[xX][0-9a-fA-F]*_*\._*[0-9a-fA-F]*[uU]?/
+    binary:      /[-+]?0[bB][01]*_*\._*[01]*[uU]?/
 
-This allows fixed-point numbers to be represented exactly, without roundoff error in the base 10 to 2 conversion.
+This allows fixed-point numbers to be represented exactly, without roundoff error in the base 10 to 2 conversion. Similar to integers, the optional `u` suffix switches between `fixed` and `ufixed`. The number of integer and fractional bits are equal to the number of bits specified (for the hex notation you can only specify multiples of four). To specify negative integer or fractional bit counts (these are explained later), underscores can be used in place of the digits. For example, `0x.__12u` represents a `ufixed<-8,16>` with the value `0.000274658203125`.
 
 Boolean literals use the keywords `true` and `false`. These are case-insensitive as usual.
 
-String literals are used on occasion, although cQASM 2.0 does not support string types. Their syntax is `/"([^"]|\\["n])*"/`. That is, text surrounded by `"` symbols, with `\"` as escape sequence for including a `"` in the string and `\n` for including a newline. The newline should be converted to the newline specific to the host platform where applicable.
+String literals are used on occasion, although cQASM 2.0 does not support string types. Their syntax is `/"([^"\n\r\\]|\\[\\"n])*"/`. That is, text surrounded by `"` symbols, with `\"` as escape sequence for including a `"` in the string, `\n` for including a newline, and `\\` for including a backslash. The newline should be converted to the newline specific to the host platform where applicable.
 
 Finally, annotations (pragma-like information of which the function is to be defined by the target) carry JSON-like data. The toplevel must be an object (= a dict in Python lingo), the string format is limited to the description above, and `null` is not allowed; otherwise the JSON specification is followed. Newlines and comments are allowed within JSON context.
 
