@@ -399,8 +399,9 @@ or
 
 The following restrictions and semantics apply to bundles:
 
- - Implementations may not depend on the order in which parallel instructions are specified.
+ - Barring undefined behavior in the cases described below, implementations may not depend on the order in which parallel instructions are specified.
  - It is illegal to write to the same classical value more than once within a bundle. The resultant will be undefined, and simulators may exit with an error for this.
+ - Using a qubit more than once within a bundle is undefined behavior, and simulators may exit with an error for this.
  - At most one flow control operation (`jmp`-like, `call`, `ret`) may be performed within a bundle, which is executed after all other instructions complete. Execution is undefined otherwise, and simulators may exit with an error for this.
  - At most one stack operation (`push`, `pop`, `call`, `ret`) may be performed within a bundle. Execution is undefined otherwise, and simulators may exit with an error for this.
  - At most one `wait` instruction may be performed within a bundle.
