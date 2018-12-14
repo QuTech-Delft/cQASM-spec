@@ -116,9 +116,10 @@ Identifiers follow the regex pattern `/[a-zA-Z_][a-zA-Z0-9_]*/`. That is, a comb
 
 The following identifiers are illegal, because they are either used as keywords already or are reserved for future versions. They are case-insensitive.
 
-    boolean   complex   const   def   double   extern   false   fixed   float
-    include   int   map   matrix   pragma   qubit   qubits   struct   true
-    type   ufixed   uint   vector   volatile   weak
+    boolean   complex   const      def      double   else      extern   false
+    fixed     float     for        goto     if       include   int      map
+    matrix    pragma    qubit      qubits   struct   true      type     ufixed
+    uint      vector    volatile   weak
 
 > JvS: The introduction of new keywords is the only thing that isn't lexically compatible to 1.0. At the same time though, 2.0 greatly reduces the number of keywords, as instructions are now represented as identifiers instead of keywords. All remaining single-letter keywords were also removed to prevent confusion (`q`, `b`, `x`, `y`, and `z`).
 
