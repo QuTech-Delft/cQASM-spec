@@ -401,7 +401,7 @@ The only difference is that the first is single-line, while the second is multil
 
 or
 
-    { x q[1] | add i, 1 -> i }
+    { x q[1] | z q[2] | add i, 1 -> i }
 
 > JvS: the latter is the 1.0 syntax; 1.0 did not allow line breaks even within curly brackets.
 
