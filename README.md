@@ -589,6 +589,7 @@ The following arithmetic instructions are defined.
     floor   a -> b          # Round a down to nearest integer, write to b
     ceil    a -> b          # Round a up to nearest integer, write to b
     round   a -> b          # Round a to nearest integer (tie to even), write to b
+    rand    a               # Set a to a uniformly distributed number in [0, 1)
 
 The instructions operating on only a single value can also be written with a single operand, without the arrow, for in-place modification:
 
