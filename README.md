@@ -62,6 +62,7 @@ This table should be removed eventually, but for now I feel like keeping everyth
 |    | **OpenQL**                          |                                     |          | Imran?      |             |
 |    | OpenQL ???                          | libQASM API specification?          | ?        | ?           | ?           |
 
+
 Intended purpose of cQASM 2.0
 -----------------------------
 
@@ -822,3 +823,51 @@ cQASM 1.0 defined the following QX-specific instructions:
 The ellipsis for the error model is a parameter list of integers and floats literals, while the `mdl` parameter can be any identifier. It is up to QX to check this.
 
 Instead of these instructions, use their `pragma` equivalent.
+
+
+Reading and printing cQASM code
+-------------------------------
+
+When you need to use cQASM code in some Python or C++ program, you can use libQASM to read and write cQASM files. The library defined three object-oriented representations of a piece of cQASM code, each with a different abstraction level:
+
+ - *Sugared abstract syntax tree (SAST):* A full representation of a single cQASM file, including all so-called syntactic sugar. The only constructs that are not represented at this level are comments, whitespace, and escaped newlines.
+ - *Desugared abstract syntax tree (AST):* Same as the above, but with all file inclusions, template expansions, and constant expressions evaluated, so they are no longer part of the code. 
+ - *Intermediate representation (IR):* Same as above, but with all references resolved, classical type conversions made explicit, and all gates resolved from the target JSON file. This is what OpenQL compilation steps and QX will actually operate on.
+
+```
+                    cQASM 2.0 file
+                          |
+                          v              --.
+                .-------------------.      |
+                | Lexical analyzer  |      |
+                '-------------------'      |
+                          |                |
+                          |                |                            cQASM 2.0 file
+                          | token stream   | cqasm_parse(fname)               ^
+                          |                |                                  |
+                          v                |                                  |               --.
+                .-------------------.      |                         .-------------------.      |
+                |      Parser       |      |                         |  Pretty-printer   |      |
+                '-------------------'      |                         '-------------------'      |
+                          |              --'                                  ^                 |
+                          |                                                  /|                 |
+                          o----------> Sugared abstract syntax tree --------' |                 |
+                          |                                                   |                 |
+                          v              --.                                  |                 |
+   Included     .-------------------.      |                         .-------------------.      | sast.pprint(fname)
+  cQASM 2.0 --->|    Desugaring     |      | sast.desugar(incpath)   |    Resugaring     |      | ast.pprint(fname)
+      files     '-------------------'      |                         '-------------------'      | ir.pprint(fname)
+                          |              --'                                  ^                 |
+                          |                                                  /|                 |
+                          o---------> Desugared abstract syntax tree -------' |                 |
+                          |                                                   |                 |
+                          v              --.                                  |                 |
+     Target     .-------------------.      |                         .-------------------.      |
+description --->|Semantical analyzer|      | ast.analyze(fname)      |     Expansion     |      |
+  JSON file     '-------------------'      |                         '-------------------'      |
+                          |              --'                                  ^               --'
+                          '-----------> Intermediate representation ----------'
+
+              |_______________________|                            |_______________________|
+                        Input                                               Output
+```
