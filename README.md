@@ -281,52 +281,48 @@ Qubit gates (almost exactly 1.0)
 
 The following single-qubit gates are defined:
 
-    i       qubit                   # Identity
-    h       qubit                   # Hadamard
-    x       qubit                   # Pauli-X
-    y       qubit                   # Pauli-Y
-    z       qubit                   # Pauli-Z
-    rx      qubit, angle            # Arbitrary X rotation (radians)
-    ry      qubit, angle            # Arbitrary Y rotation (radians)
-    rz      qubit, angle            # Arbitrary Z rotation (radians)
-    x90     qubit                   # Synonym for rx with angle = pi/2
-    y90     qubit                   # Synonym for ry with angle = pi/2
-    mx90    qubit                   # Synonym for rx with angle = -pi/2
-    my90    qubit                   # Synonym for ry with angle = -pi/2
-    s       qubit                   # Phase
-    sdag    qubit                   # Phase dagger
-    t       qubit                   # T
-    tdag    qubit                   # T dagger
-    u       qubit,[a,b,c,d,e,f,g,h] # NEW IN 2.0: custom unitary gate
-    u       qubit, theta, phi, lambda # Alternate way to specify the above
+| Syntax                        | Description           | Matrix                                                                         |
+|-------------------------------|-----------------------|--------------------------------------------------------------------------------|
+| `i    qubit`                  | Identity              | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/i.png)        |
+| `h    qubit`                  | Hadamard              | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/h.png)        |
+| `x    qubit`                  | Pauli-X               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/x.png)        |
+| `y    qubit`                  | Pauli-Y               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/y.png)        |
+| `z    qubit`                  | Pauli-Z               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/z.png)        |
+| `rx   qubit, angle`           | Arbitrary X rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/rx.png)       |
+| `ry   qubit, angle`           | Arbitrary Y rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/ry.png)       |
+| `rz   qubit, angle`           | Arbitrary Z rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/rz.png)       |
+| `x90  qubit`                  | 90-degree X rotation  | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/x90.png)      |
+| `y90  qubit`                  | 90-degree Y rotation  | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/y90.png)      |
+| `mx90 qubit`                  | -90-degree X rotation | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/mx90.png)     |
+| `my90 qubit`                  | -90-degree Y rotation | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/my90.png)     |
+| `s    qubit`                  | S/phase gate          | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/s.png)        |
+| `sdag qubit`                  | S/phase-dagger gate   | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/sdag.png)     |
+| `t    qubit`                  | T gate                | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/t.png)        |
+| `tdag qubit`                  | T-dagger gate         | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/tdag.png)     |
+| `u qubit, [a,b,c,d,e,f,g,h]`  | Custom unitary gate   | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/u-matrix.png) |
+| `u qubit, theta, phi, lambda` | Custom unitary gate   | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/u-angle.png)  |
 
-> JvS: the syntax for the custom unitary gate is taken from an undocument feature in 1.0's grammar. Actually, any single-qubit gate allows such a matrix to be specified... but since that doesn't to my knowledge make any sense I'm considering it a bug and won't enforce full backwards-compatibility for that.
+All angles are in radians.
 
-The parameters for the unitary gate are:
-
-    .--                --.
-    | a + i·b    c + i·d |
-    |                    |
-    | e + i·f    g + i·h |
-    '--                --'
-
-> JvS/AS: specifying the matrix using 8 reals is inefficient, so this syntax may change in the next few days.
+> JvS: the matrix syntax for the custom unitary gate is taken from an undocument feature in 1.0's grammar. Actually, any single-qubit gate allows such a matrix to be specified... but since that doesn't to my knowledge make any sense I'm considering it a bug and won't enforce full backwards-compatibility for that.
 
 Two following two-qubit gates are defined:
 
-    swap    qubit, qubit            # Swaps two qubits
-    sqswap  ????                    # ???? TODO
-    cnot    ctrl, target            # CNOT (controlled X gate)
-    cz      ctrl, target            # CPHASE
-    cr      ctrl, target, angle     # Controlled phase shift (radians)
-    crk     ctrl, target, k         # Controlled phase shift (pi/2^k)
+| Syntax                        | Description                    | Matrix                                                                       |
+|-------------------------------|--------------------------------|------------------------------------------------------------------------------|
+| `swap   qubit`                | Swap two qubits                | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/swap.png)   |
+| `sqswap qubit`                | Square-root of swap            | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/sqswap.png) |
+| `cnot   ctrl, target`         | CNOT/Controlled X              | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/cnot.png)   |
+| `cz ctrl, target`             | Controlled phase               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/cz.png)     |
+| `cr ctrl, target, phi`        | Controlled phase with rotation | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/cr.png)     |
+| `crk qubit, angle, k`         | Controlled phase with rotation | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/crk.png)    |
 
 The following three-qubit gates are defined:
 
-    toffoli ctrl, ctrl, target      # Toffoli gate (doubly-controlled X gate)
-    ccnot   ctrl, ctrl, target      # Synonym for the above
-    fredkin ctrl, qubit, qubit      # Fredkin gate (controlled swap)
-    cswap   ctrl, qubit, qubit      # Synonym for the above
+| Syntax                                                         | Description  | Matrix                                                                        |
+|----------------------------------------------------------------|--------------------------------|-------------------------------------------------------------|
+| `toffoli ctrl, ctrl, target` or `ccnot ctrl, ctrl, target`     | Toffoli gate | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/ccnot.png) |
+| `fredkin ctrl, target, target` or `cswap ctrl, target, target` | Fredkin gate | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/cswap.png) |
 
 > JvS: does anyone have need for a custom specification of two- and three-qubit gates similar to `u`?
 
