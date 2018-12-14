@@ -180,6 +180,8 @@ Note that strings do not exist.
 
 > JvS: I'm allowing any size integer (<=64bit) to be defined to let people specify exactly what they need, and let implementation-specific subsets of cQASM define exactly what they have. The compiler/assembler can then figure out the best conversion between the two (or reject input they don't yet understand). Fixed-point types were added due to popular request, but I'd still like to add floats as well (even if real implementations are unlikely to support it), because they're so much easier to make an initial algorithm design with.
 
+> XFu: A general comment on supporting floating-point numbers. Supporting floating-point numbers is a good idea since many VQE alogrithms requires to operate on the rotation angles at runtime explicitly. Also, it is also desired in some experiments that pulse generation used in calibration experiments would use different rotation angles.
+
 Any non-simulator implementation is allowed to internally represent integral types with greater range/resolution than required by the resource declaration. This means that arithmetic instructions operating on the representation may return a more accurate result than expected, and that overflow behavior cannot be relied upon.
 
 > JvS: This allows compilation steps to round range/resolution up to the nearest thing supported by the target without violating constraints.
