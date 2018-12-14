@@ -116,10 +116,9 @@ Identifiers follow the regex pattern `/[a-zA-Z_][a-zA-Z0-9_]*/`. That is, a comb
 
 The following identifiers are illegal, because they are either used as keywords already or are reserved for future versions. They are case-insensitive.
 
-    boolean   complex   const      def      double   else      extern   false
-    fixed     float     for        goto     if       include   int      map
-    matrix    pragma    qubit      qubits   struct   true      type     ufixed
-    uint      vector    volatile   weak
+    boolean   complex   const   def   double   extern   false   fixed   float
+    include   int   map   matrix   pragma   qubit   qubits   struct   true
+    type   ufixed   uint   vector   volatile   weak
 
 > JvS: The introduction of new keywords is the only thing that isn't lexically compatible to 1.0. At the same time though, 2.0 greatly reduces the number of keywords, as instructions are now represented as identifiers instead of keywords. All remaining single-letter keywords were also removed to prevent confusion (`q`, `b`, `x`, `y`, and `z`).
 
@@ -193,9 +192,11 @@ Simulators should terminate with an error if any over- or underflow is detected 
 Resource declarations (completely overhauled in 2.0)
 ----------------------------------------------------
 
-Like 1.0, cQASM 2.0 does not define any computational resources implicitly. Therefore, any useful cQASM program should start with one or more resource definitions. Note that all resources in cQASM are global, and must be defined before the first real instruction.
+Like 1.0, cQASM 2.0 does not define any computational resources implicitly. Therefore, any useful cQASM program should start with one or more resource definitions. Resources can be used from their definition onwards (i.e., you cannot refer to a resource that you have not declared yet).
 
-> JvS: the reason for requiring everything to be global is to simplify libQASM's AST representation, as well as liveness analysis in the compiler.
+Declaring a resource with the same name as a previously declared resource is allowed. They become two different resources internally, with the one that is defined later fully hiding the one that was defined earlier, unless a `map` instruction gave it an alternate name.
+
+> JvS: increased flexibility a little here because it makes more sense in the context of macro expansion.
 
 Scalar values are defined as follows:
 
@@ -208,7 +209,7 @@ And arrays are defined like this:
 
 > JvS: note that classical arrays basically represent memory. They can also be used to model register files of course, though an implementation is unlikely to support non-static indexation of registers (`x[y]` vs. `x[0]`).
 
-Arrays always start at zero, and end at the specified length minus one. Simulators should exit with an error if an out-of-range access is performed, but behavior is left as undefined for real implementations.
+The array length must be static (that is, either a literal or an expression of literals, possibly through macro expansion) and must be positive (that is, null arrays are illegal). Arrays always start at zero, and end at the specified length minus one. Simulators should exit with an error if an out-of-range access is performed, but behavior is left as undefined for real implementations.
 
 > JvS: Easy to simulate, hard to do in hardware. Well not hard, but takes up logic and lowers frequency. Debugging should be done with a simulator.
 
@@ -220,13 +221,17 @@ The measurement register associated with a qubit has the same semantics as a boo
 
 > JvS: The `not` exception can be modelled in hardware by having a second bit register in hardware for each qubit that is cleared when a measurement is queued and toggled when the `not` instruction is executed. When the measurement result is subsequently used, the exclusive-or of the two registers is returned. This allows the classical hardware to delay a stall waiting for the measurement to complete beyond the first `not` operation, and it prevents the need for the classical processor to physically be able to write to the measurement register (this is important), while maintaining cQASM 1.0 compatibility (which defined this nasty `not` operation in the first place).
 
-Classical values can also be initialized. The syntax and semantics are borrowed from C, although the array length must always be defined between the square brackets (conversely, C allows the array length to be implicit in the initializer item count).
+Classical values can also be initialized:
 
     int<64> r[16] = {3, 2, 1} # Initializes r to (3,2,1,0,0,0,...,0)
+    int<64> s[] = {3, 2, 1} # Initializes r to (3,2,1)
+    int<64> t[16] = {3, ...} # Initializes all elements of t to 3
     boolean b = true
     int<32> x = 0
-    int<32> y = 0
-    int<32> z = 0
+
+As shown, there are three ways to initialize an array. In the first the undefined elements are implicitly set to zero. It is legal to define zero elements for this syntax as well (in the form of `{}`), but trying to define more elements than the size of the array results in a parse error. The second syntax makes the array size implied by the initializer, in which case a null list is not allowed. The third method specifies a single value with which the entire array is populated.
+
+The value(s) with which they are initialized must be static (that is, either a literal or an expression of literals, possibly through macro expansion), such that in a real quantum accelerator initialization can be done by the host processor before the algorithm is started.
 
 > JvS: Note with respect to the previous 2.0 draft: this resource specification is much more flexible than the previous draft, and is feature-wise a superset; the following declarations: `int<64> r[64]; int<64> mem[(some large number)]` define what was implicit in the previous draft. The approach suggested here instead leaves the mapping of arrays and scalars to registers and memory/memories to the compiler/assembler. This may seem harder on the compiler at first, but it actually prevents very annoying situations compared to when it would not perform this mapping. Consider for instance what it would need to do if it needs to split an instruction into multiple implementable instructions (similar to splitting a SWAP into three CNOTs) in a way that requires a temporary register. If the user already did register and memory allocation for the compiler, there is no good way of determining which (if any) register can be used for this. (if you're going to be doing liveness analysis to handle situations like these, you might as well just perform register allocation).
 
