@@ -187,9 +187,9 @@ Grammatically, all numbers in cQASM 2.0 can be written in the form of a so-calle
     a + 5       # Only legal if "a" refers to a macro paramater;
                 # not legal if "a" refers or maps to a resource
 
-The primary purpose of expressions is to increase the power of macro expansions, described later. Other than that, they're really only useful as syntactic sugar.
+The primary purpose of expressions is to increase the power of macro expansions (described later). They are also used to represent the complex numbers for the description of custom gates. Other than that, they're really only useful as syntactic sugar.
 
-Grammatically, all operands in cQASM 2.0 are expressions. Expressions are defined similar to C. They support Python 3's `//` (integer division) and `**` (power) operators in addition, as well as Java's `>>>` logical shift-right. All operators and functions have classical instruction counterparts and use the exact same semantics, except that they do not perform the final typecast from the intermediate type to the type of the result resource (because there is no result resource). The full list of operators and their precedence (highest first) is listed in the following table.
+Expressions are defined similar to C. They support Python 3's `//` (integer division) and `**` (power) operators in addition, as well as Java's `>>>` logical shift-right, and an uncommon `^^` for logical exclusive or. All operators and functions (with the exception of unary plus and typecast) have classical instruction counterparts and use the exact same semantics, except that they do not implicitly perform a typecast from the intermediate type to the type of the result resource (because there is no result resource). The full list of operators and their precedence (highest first) is listed in the following table.
 
 | Operator    | Description                   | Equivalent insn. | Precedence        |
 |-------------|-------------------------------|------------------|-------------------|
@@ -198,9 +198,9 @@ Grammatically, all operands in cQASM 2.0 are expressions. Expressions are define
 | `log(x, y)` | Logarithm with base `x`       | `log`            | 1                 |
 | `exp(x)`    | Natural exponentiation        | `exp`            | 1                 |
 | `ln(x)`     | Natural logarithm             | `ln`             | 1                 |
-| `floor(x)`  | Round down to nearest int     | `floor           | 1                 |
+| `floor(x)`  | Round down to nearest int     | `floor`          | 1                 |
 | `ceil(x)`   | Round up to nearest int       | `ceil`           | 1                 |
-| `round(x)`  | Round to nearest even         | `round           | 1                 |
+| `round(x)`  | Round to nearest even         | `round`          | 1                 |
 | `sin(x)`    | Sine (radians)                | `sin`            | 1                 |
 | `cos(x)`    | Cosine (radians)              | `cos`            | 1                 |
 | `tan(x)`    | Tangent (radians)             | `tan`            | 1                 |
@@ -241,11 +241,11 @@ Grammatically, all operands in cQASM 2.0 are expressions. Expressions are define
 |             |                               |                  |                   |
 | `x & y`     | Bitwise and                   | `and`            | 9, left-to-right  |
 | `x ^ y`     | Bitwise exclusive or          | `xor`            | 10, left-to-right |
-| `x \| y`     | Bitwise or                   | `or`             | 11, left-to-right |
+| `x \| y`    | Bitwise or                    | `or`             | 11, left-to-right |
 |             |                               |                  |                   |
 | `x && y`    | Boolean and                   | `land`           | 12, left-to-right |
 | `x ^^ y`    | Boolean exclusive or          | `lxor`           | 13, left-to-right |
-| `x \|\| y`    | Boolean or                  | `lor`            | 14, left-to-right |
+| `x \|\| y`  | Boolean or                    | `lor`            | 14, left-to-right |
 |             |                               |                  |                   |
 | `x ? y : z` | Selection                     | `slct`           | 15, right-to-left |
 
@@ -446,7 +446,7 @@ The entries must be static expressions; that is, they must be reducible to a con
  - addition;
  - subtraction;
  - multiplication;
- - and the natural exponentiation function.
+ - and the natural exponentiation function (`exp()`).
 
 The Gram–Schmidt procedure is performed during semantic analysis to ensure that the specified matrix is unitary to within the accuracy of double floating-point arithmetic. If the matrix was not initially found to be unitary, the semantic analyzer has the following behavior:
 
