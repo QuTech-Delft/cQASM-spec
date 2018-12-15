@@ -116,10 +116,10 @@ Identifiers follow the regex pattern `/[a-zA-Z_][a-zA-Z0-9_]*/`. That is, a comb
 
 The following identifiers are illegal, because they are either used as keywords already or are reserved for future versions.
 
-    boolean   complex   const    def        double   else     extern    false
-    fixed     float     for      gate       goto     if       include   int
-    map       matrix    pragma   qubit      qubits   struct   true      type
-    ufixed    uint      vector   volatile   weak
+    boolean    complex    const      def        double     else       eu         extern
+    false      fixed      float      for        gate       goto       if         im
+    include    int        map        matrix     pi         pragma     qubit      qubits
+    struct     true       type       ufixed     uint       vector     volatile   weak
 
 > JvS: The introduction of new keywords is the only thing that isn't lexically compatible to 1.0. At the same time though, 2.0 greatly reduces the number of keywords, as instructions are now represented as identifiers instead of keywords. All remaining single-letter keywords were also removed to prevent confusion (`q`, `b`, `x`, `y`, and `z`).
 
@@ -146,7 +146,17 @@ Fixed-point literals use the following syntax:
 
 This allows fixed-point numbers to be represented exactly, without roundoff error in the base 10 to 2 conversion. Similar to integers, the optional `u` suffix switches between `fixed` and `ufixed`. The number of integer and fractional bits are equal to the number of bits specified (for the hex notation you can only specify multiples of four). To specify negative integer or fractional bit counts (these are explained later), underscores can be used in place of the digits. For example, `0x.__12u` represents a `ufixed<-8,16>` with the value `0.000274658203125`.
 
-Boolean literals use the keywords `true` and `false`. 
+Boolean literals use the keywords `true` and `false`.
+
+The following keywords can be used in place of mathematical constants:
+
+| Keyword | Constant                                |
+|---------|-----------------------------------------|
+| `eu`    | *e*: Euler's number in double precision |
+| `pi`    | π: pi in double precision               |
+| `im`    | *i*: imaginary unit                     |
+
+Note that the imaginary unit is only allowed within the specification of the unitary matrices for custom gates; complex numbers are not supported in any other place.
 
 String literals are used on occasion, although cQASM 2.0 does not support string types. Their syntax is `/"([^"\n\r\\]|\\[\\"n])*"/`. That is, text surrounded by `"` symbols, with `\"` as escape sequence for including a `"` in the string, `\n` for including a newline, and `\\` for including a backslash. The newline should be converted to the newline specific to the host platform where applicable.
 
@@ -165,6 +175,84 @@ cQASM files should start with a version identifier, which is (obviously) 2.0 for
 Major versions greater than libQASM's version shall be discarded with an error message. If only the minor version is greater, a warning message will be generated instead.
 
 > JvS: I don't think libQASM currently does anything with the version number, but this seems like a good idea.
+
+
+Expressions (new in 2.0)
+------------------------
+
+Grammatically, all numbers in cQASM 2.0 can be written in the form of a so-called static expression. The meaning of "static" in this context is that the expressions must be constant before the program is executed; specifically during semantic analysis. Some examples for clarification:
+
+    1 + 3       # Proper static expression, evaluates to 4
+    2 * 33.5    # Proper static expression, evaluates to 67.0
+    a + 5       # Only legal if "a" refers to a macro paramater;
+                # not legal if "a" refers or maps to a resource
+
+The primary purpose of expressions is to increase the power of macro expansions, described later. Other than that, they're really only useful as syntactic sugar.
+
+Grammatically, all operands in cQASM 2.0 are expressions. Expressions are defined similar to C. They support Python 3's `//` (integer division) and `**` (power) operators in addition, as well as Java's `>>>` logical shift-right. All operators and functions have classical instruction counterparts and use the exact same semantics, except that they do not perform the final typecast from the intermediate type to the type of the result resource (because there is no result resource). The full list of operators and their precedence (highest first) is listed in the following table.
+
+| Operator    | Description                   | Equivalent insn. | Precedence        |
+|-------------|-------------------------------|------------------|-------------------|
+| `sqrt(x)`   | Square-root                   | `sqrt`           | 1                 |
+| `pow(x, y)` | Exponentiation with base `x`  | `pow`            | 1                 |
+| `log(x, y)` | Logarithm with base `x`       | `log`            | 1                 |
+| `exp(x)`    | Natural exponentiation        | `exp`            | 1                 |
+| `ln(x)`     | Natural logarithm             | `ln`             | 1                 |
+| `floor(x)`  | Round down to nearest int     | `floor           | 1                 |
+| `ceil(x)`   | Round up to nearest int       | `ceil`           | 1                 |
+| `round(x)`  | Round to nearest even         | `round           | 1                 |
+| `sin(x)`    | Sine (radians)                | `sin`            | 1                 |
+| `cos(x)`    | Cosine (radians)              | `cos`            | 1                 |
+| `tan(x)`    | Tangent (radians)             | `tan`            | 1                 |
+| `asin(x)`   | Inverse sine (radians)        | `asin`           | 1                 |
+| `acos(x)`   | Inverse cosine (radians)      | `acos`           | 1                 |
+| `atan(x)`   | Inverse tangent (radians)     | `atan`           | 1                 |
+| `min(x, y)` | Minimum                       | `min`            | 1                 |
+| `max(x, y)` | Maximum                       | `max`            | 1                 |
+| `abs(x)`    | Absolute value                | `abs`            | 1                 |
+|             |                               |                  |                   |
+| `(type)x`   | Typecast                      | -                | 2, right-to-left  |
+| `+x`        | Unary plus (no-op)            | -                | 2, right-to-left  |
+| `-x`        | Negation                      | `neg`            | 2, right-to-left  |
+| `!x`        | Boolean inversion             | `not`            | 2, right-to-left  |
+| `~x`        | Bitwise inversion             | `inv`            | 2, right-to-left  |
+|             |                               |                  |                   |
+| `x ** y`    | Exponentiation with base `x`  | `pow`            | 3, right-to-left  |
+|             |                               |                  |                   |
+| `x * y`     | Multiplication                | `mul`            | 4, left-to-right  |
+| `x / y`     | True division                 | `div`            | 4, left-to-right  |
+| `x // y`    | Floored division              | `idiv`           | 4, left-to-right  |
+| `x % y`     | Remainder for floored div     | `mod`            | 4, left-to-right  |
+|             |                               |                  |                   |
+| `x + y`     | Addition                      | `add`            | 5, left-to-right  |
+| `x - y`     | Subtraction                   | `sub`            | 5, left-to-right  |
+|             |                               |                  |                   |
+| `x << y`    | Shift left                    | `shl`            | 6, left-to-right  |
+| `x >> y`    | Arithmetic shift right        | `ashr`           | 6, left-to-right  |
+| `x >>> y`   | Logical shift right           | `shr`            | 6, left-to-right  |
+|             |                               |                  |                   |
+| `x > y`     | Greater than                  | `cgt`            | 7, left-to-right  |
+| `x < y`     | Less than                     | `clt`            | 7, left-to-right  |
+| `x >= y`    | Greater/equal                 | `cge`            | 7, left-to-right  |
+| `x <= y`    | Less/equal                    | `cle`            | 7, left-to-right  |
+|             |                               |                  |                   |
+| `x == y`    | Equality                      | `ceq`            | 8, left-to-right  |
+| `x != y`    | Inequality                    | `cne`            | 8, left-to-right  |
+|             |                               |                  |                   |
+| `x & y`     | Bitwise and                   | `and`            | 9, left-to-right  |
+| `x ^ y`     | Bitwise exclusive or          | `xor`            | 10, left-to-right |
+| `x | y`     | Bitwise or                    | `or`             | 11, left-to-right |
+|             |                               |                  |                   |
+| `x && y`    | Boolean and                   | `land`           | 12, left-to-right |
+| `x ^^ y`    | Boolean exclusive or          | `lxor`           | 13, left-to-right |
+| `x || y`    | Boolean or                    | `lor`            | 14, left-to-right |
+|             |                               |                  |                   |
+| `x ? y : z` | Selection                     | `slct`           | 15, right-to-left |
+
+Static expressions are very extensive in terms of what functions they support, although not everything is supported in all contexts due to the type of the expected result.
+
+The following operators are defined. They all have equivalent classical instructions, with the exception of unary plus (which is no-op) and typecasting (which is implicit in every classical instruction). The type conversion and coercion semantics are described later.
+
 
 Resource types (new in 2.0)
 ---------------------------
@@ -291,26 +379,24 @@ Qubit gates (almost exactly 1.0)
 
 The following single-qubit gates are defined:
 
-| Syntax                        | Description           | Matrix                                                                         |
-|-------------------------------|-----------------------|--------------------------------------------------------------------------------|
-| `i    qubit`                  | Identity              | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/i.png)        |
-| `h    qubit`                  | Hadamard              | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/h.png)        |
-| `x    qubit`                  | Pauli-X               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/x.png)        |
-| `y    qubit`                  | Pauli-Y               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/y.png)        |
-| `z    qubit`                  | Pauli-Z               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/z.png)        |
-| `rx   qubit, angle`           | Arbitrary X rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/rx.png)       |
-| `ry   qubit, angle`           | Arbitrary Y rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/ry.png)       |
-| `rz   qubit, angle`           | Arbitrary Z rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/rz.png)       |
-| `x90  qubit`                  | 90-degree X rotation  | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/x90.png)      |
-| `y90  qubit`                  | 90-degree Y rotation  | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/y90.png)      |
-| `mx90 qubit`                  | -90-degree X rotation | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/mx90.png)     |
-| `my90 qubit`                  | -90-degree Y rotation | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/my90.png)     |
-| `s    qubit`                  | S/phase gate          | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/s.png)        |
-| `sdag qubit`                  | S/phase-dagger gate   | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/sdag.png)     |
-| `t    qubit`                  | T gate                | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/t.png)        |
-| `tdag qubit`                  | T-dagger gate         | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/tdag.png)     |
-| `u qubit, [a,b,c,d,e,f,g,h]`  | Custom unitary gate   | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/u-matrix.png) |
-| `u qubit, theta, phi, lambda` | Custom unitary gate   | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/u-angle.png)  |
+| Syntax                        | Description           | Matrix                                                                     |
+|-------------------------------|-----------------------|----------------------------------------------------------------------------|
+| `i    qubit`                  | Identity              | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/i.png)    |
+| `h    qubit`                  | Hadamard              | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/h.png)    |
+| `x    qubit`                  | Pauli-X               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/x.png)    |
+| `y    qubit`                  | Pauli-Y               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/y.png)    |
+| `z    qubit`                  | Pauli-Z               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/z.png)    |
+| `rx   qubit, angle`           | Arbitrary X rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/rx.png)   |
+| `ry   qubit, angle`           | Arbitrary Y rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/ry.png)   |
+| `rz   qubit, angle`           | Arbitrary Z rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/rz.png)   |
+| `x90  qubit`                  | 90-degree X rotation  | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/x90.png)    |
+| `y90  qubit`                  | 90-degree Y rotation  | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/y90.png)    |
+| `mx90 qubit`                  | -90-degree X rotation | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/mx90.png)   |
+| `my90 qubit`                  | -90-degree Y rotation | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/my90.png)   |
+| `s    qubit`                  | S/phase gate          | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/s.png)    |
+| `sdag qubit`                  | S/phase-dagger gate   | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/sdag.png) |
+| `t    qubit`                  | T gate                | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/t.png)    |
+| `tdag qubit`                  | T-dagger gate         | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/tdag.png) |
 
 All angles are in radians.
 
@@ -329,12 +415,44 @@ Two following two-qubit gates are defined:
 
 The following three-qubit gates are defined:
 
-| Syntax                                                         | Description  | Matrix                                                                        |
-|----------------------------------------------------------------|--------------------------------|-------------------------------------------------------------|
+| Syntax                                                         | Description  | Matrix                                                                      |
+|----------------------------------------------------------------|--------------|-----------------------------------------------------------------------------|
 | `toffoli ctrl, ctrl, target` or `ccnot ctrl, ctrl, target`     | Toffoli gate | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/ccnot.png) |
 | `fredkin ctrl, target, target` or `cswap ctrl, target, target` | Fredkin gate | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/cswap.png) |
 
 > JvS: does anyone have need for a custom specification of two- and three-qubit gates similar to `u`?
+
+
+Custom gate declarations (new in 2.0)
+-------------------------------------
+
+It is also possible to specify custom N-qubit gates within the cQASM 2.0 file. The syntax is as follows:
+
+    gate controlled_y [
+        1,  0,  0,  0
+        0,  1,  0,  0
+        0,  0,  0,  -im
+        0,  0,  im, 0
+    ]
+
+This then allows you to use the gate in subsequent code:
+
+    controlled_y qubit, qubit
+
+The number of entries between the square brackets must be four to the power of the number of qubits involved in the gate. Commas, semicolons (not depicted), and newlines between the entries are grammatically equivalent, but it is suggested to keep the matrix square for clarity. Newlines between the `[` and the first entry, and between the last entry and the `]` are optional.
+
+The entries must be static expressions; that is, they must be reducible to a constant number before the code is executed. The entries are evaluated and stored using double-precision floating-point arithmetic. The `im` keyword may be used to describe complex entries, representing *i*. To keep things simple in the implementation of libQASM, only the following operators are defined over complex numbers:
+
+ - addition;
+ - subtraction;
+ - multiplication;
+ - and the natural exponentiation function.
+
+The Gram–Schmidt procedure is performed during semantic analysis to ensure that the specified matrix is unitary to within the accuracy of double floating-point arithmetic. If the matrix was not initially found to be unitary, the semantic analyzer has the following behavior:
+
+ - division by zero during normalization results in a parse error;
+ - normalization is otherwise performed silently (so you explicitly do NOT need to scale the matrix yourself);
+ - and orthogonalization affecting the matrix significantly results in a warning message including the evaluated unitary matrix.
 
 
 Qubit measurement (almost exactly 1.0)
@@ -834,6 +952,29 @@ cQASM 1.0 defined the following QX-specific instructions:
 The ellipsis for the error model is a parameter list of integers and floats literals, while the `mdl` parameter can be any identifier. It is up to QX to check this.
 
 Instead of these instructions, use their `pragma` equivalent.
+
+
+Unsupported cQASM 1.0 features
+------------------------------
+
+The following cQASM 1.0 features are no longer valid.
+
+### Custom unitary gate notation
+
+The (undocumented) feature to describe a custom single-qubit gate with the following notation is no longer supported:
+
+    u qubit, [a, b, c, d, e, f, g, h]
+
+The reasoning is that this notation was not documented to begin with, the current master branches of QX and OpenQL do not support it, and supporting this notation would needlessly complicate the grammar (it is the only thing that uses a matrix-like notation as an operand).
+
+### New keywords
+
+The following identifiers are no longer valid because they are now keywords:
+
+    boolean    complex    const      def        double     else       eu         extern
+    false      fixed      float      for        gate       goto       if         im
+    include    int        matrix     pi         pragma     qubit      struct     true
+    type       ufixed     uint       vector     volatile   weak
 
 
 Reading and printing cQASM code
