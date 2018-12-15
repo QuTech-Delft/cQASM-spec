@@ -241,11 +241,11 @@ Grammatically, all operands in cQASM 2.0 are expressions. Expressions are define
 |             |                               |                  |                   |
 | `x & y`     | Bitwise and                   | `and`            | 9, left-to-right  |
 | `x ^ y`     | Bitwise exclusive or          | `xor`            | 10, left-to-right |
-| `x | y`     | Bitwise or                    | `or`             | 11, left-to-right |
+| `x \| y`     | Bitwise or                   | `or`             | 11, left-to-right |
 |             |                               |                  |                   |
 | `x && y`    | Boolean and                   | `land`           | 12, left-to-right |
 | `x ^^ y`    | Boolean exclusive or          | `lxor`           | 13, left-to-right |
-| `x || y`    | Boolean or                    | `lor`            | 14, left-to-right |
+| `x \|\| y`    | Boolean or                  | `lor`            | 14, left-to-right |
 |             |                               |                  |                   |
 | `x ? y : z` | Selection                     | `slct`           | 15, right-to-left |
 
