@@ -253,6 +253,8 @@ Static expressions are very extensive in terms of what functions they support, a
 
 The following operators are defined. They all have equivalent classical instructions, with the exception of unary plus (which is no-op) and typecasting (which is implicit in every classical instruction). The type conversion and coercion semantics are described later.
 
+Note: later versions of cQASM may support automatic expansion of any kind of expression used as a classical operand into classical instructions, but right now this is not a priority right now.
+
 
 Resource types (new in 2.0)
 ---------------------------
@@ -332,7 +334,12 @@ Simulators should keep track of uninitialized resources and throw an error if th
 Resource mappings (extended in 2.0)
 -----------------------------------
 
-The map statement can be used to specify an alias for a resource:
+The map statement can be used to specify an alias for a resource. You can write them like this:
+
+    map data -> q[0]
+    map qubit_reg -> q
+
+or, for backward compatibility with 1.0:
 
     map q[0], data
     map q, qubit_reg
@@ -340,6 +347,8 @@ The map statement can be used to specify an alias for a resource:
 These mappings state that `data` and `qubit_reg[0]` can be used in place of `q[0]`. Mappings can be specified anywhere in the code, and go into effect from their declaration onwards. Mappings can also be overridden at any time to refer to a different resource. Note that while the examples are purely qubits, this works for quantum and classical resources alike.
 
 > JvS: mappings are here for compatibility with 1.0. I have extended them to allow arrays to be mapped as a whole for symmetry reasons though.
+
+Mappings support only static, singular indexation or a direct reference to a resource.
 
 Mappings do not have any semantical meaning; use of a mapping and use of the actual resource it maps to is completely equivalent. The AST from libQASM abstracts mappings away, though the actual identifier that was used to specify a resource will be made available as a string should an implementation wish to use this metadata.
 
@@ -601,17 +610,30 @@ Labels can refer both backwards and forwards. There is no need to "forward-decla
 
 The following branch instructions are defined. `x` and `y` can be any scalar numerical literal/resource. (note: this implies that comparing a whole array at once is illegal).
 
-    jmp a_label        # Unconditional jump
-    jez x, a_label     # Jump if x == 0 (eq. x == false)
-    jnz x, a_label     # Jump if x != 0 (eq. x == true)
-    jeq x, y, a_label  # Jump if x == y
-    jne x, y, a_label  # Jump if x != y
-    jgt x, y, a_label  # Jump if x > y
-    jlt x, y, a_label  # Jump if x < y
-    jge x, y, a_label  # Jump if x >= y
-    jle x, y, a_label  # Jump if x <= y
+    jmp label        # Unconditional jump to "label"
+    jez x, label     # Jump to "label" if x == 0 (eq. x == false)
+    jnz x, label     # Jump to "label" if x != 0 (eq. x == true)
+    jeq x, y, label  # Jump to "label" if x == y
+    jne x, y, label  # Jump to "label" if x != y
+    jgt x, y, label  # Jump to "label" if x > y
+    jlt x, y, label  # Jump to "label" if x < y
+    jge x, y, label  # Jump to "label" if x >= y
+    jle x, y, label  # Jump to "label" if x <= y
 
 > JvS: I added `jez`/`jnz` to be used in conjunction with booleans, to support architectures that can only branch based on a previously set boolean register.
+
+The following alternative syntax may also be used to make the flow easier to comprehend:
+
+    if !x     goto label # Equivalent to "jez x, label"
+    if x      goto label # Equivalent to "jne x, label"
+    if x == y goto label # Equivalent to "jeq x, y, label"
+    if x != y goto label # Equivalent to "jne x, y, label"
+    if x > y  goto label # Equivalent to "jgt x, y, label"
+    if x < y  goto label # Equivalent to "jlt x, y, label"
+    if x >= y goto label # Equivalent to "jge x, y, label"
+    if x <= y goto label # Equivalent to "jle x, y, label"
+
+Note that cQASM 2.0 does not support arbitraty expressions here; only expressions that can be statically reduced to one of the above are legal.
 
 Execution of a subcircuit starts at the first instruction. You can start elsewhere by simply using a `jmp` instruction. If an architecture implementation allows the start address to be different from the start of the program, its assembler can just interpret a `jmp` at the start of a subcircuit as the entry point declaration.
 
@@ -856,6 +878,8 @@ In addition to using classical flow control, conditional execution can be specif
 This notation not only allows for a more concise notation than the equivalent using jumps and labels, but it may also execute more efficiently in some cases, especially in the context of a VLIW architecture.
 
 > JvS: note; while not explicitly documented, the 1.0 grammar already allowed all gates to be controlled. I don't know if QX "1.0" supports this though.
+
+Note: on very rare occasions, code like `c-x` may appear in an expression. This happens when `c` is a macro parameter with that exact name, `x` is a macro parameter of any name, and you want to subtract the two. If you don't place spaces around the subtraction operator this will lead to an "unexpected CDASH" error from the parser. To avoid this, place a space before and/or after the operator.
 
 
 Pragmas and annotations (new in 2.0)
