@@ -110,11 +110,11 @@ Everything in cQASM is case-insensitive.
 
 > JvS: Same as 1.0.
 
-Identifiers follow the regex pattern `/[a-zA-Z_][a-zA-Z0-9_]*/`. That is, a combination of underscores, letters, and numbers, where the first character is not allowed to be a number. Identifier matching is case-insensitive.
+Identifiers follow the regex pattern `/[a-zA-Z_][a-zA-Z0-9_]*/`. That is, a combination of underscores, letters, and numbers, where the first character is not allowed to be a number.
 
 > JvS: Same as 1.0.
 
-The following identifiers are illegal, because they are either used as keywords already or are reserved for future versions. They are case-insensitive.
+The following identifiers are illegal, because they are either used as keywords already or are reserved for future versions.
 
     boolean   complex   const   def   double   extern   false   fixed   float
     include   int   map   matrix   pragma   qubit   qubits   struct   true
@@ -145,7 +145,7 @@ Fixed-point literals use the following syntax:
 
 This allows fixed-point numbers to be represented exactly, without roundoff error in the base 10 to 2 conversion. Similar to integers, the optional `u` suffix switches between `fixed` and `ufixed`. The number of integer and fractional bits are equal to the number of bits specified (for the hex notation you can only specify multiples of four). To specify negative integer or fractional bit counts (these are explained later), underscores can be used in place of the digits. For example, `0x.__12u` represents a `ufixed<-8,16>` with the value `0.000274658203125`.
 
-Boolean literals use the keywords `true` and `false`. These are case-insensitive as usual.
+Boolean literals use the keywords `true` and `false`. 
 
 String literals are used on occasion, although cQASM 2.0 does not support string types. Their syntax is `/"([^"\n\r\\]|\\[\\"n])*"/`. That is, text surrounded by `"` symbols, with `\"` as escape sequence for including a `"` in the string, `\n` for including a newline, and `\\` for including a backslash. The newline should be converted to the newline specific to the host platform where applicable.
 
