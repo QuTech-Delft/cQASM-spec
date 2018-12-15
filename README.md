@@ -388,26 +388,28 @@ Qubit gates (almost exactly 1.0)
 
 The following single-qubit gates are defined:
 
-| Syntax                        | Description           | Matrix                                                                     |
-|-------------------------------|-----------------------|----------------------------------------------------------------------------|
-| `i    qubit`                  | Identity              | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/i.png)    |
-| `h    qubit`                  | Hadamard              | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/h.png)    |
-| `x    qubit`                  | Pauli-X               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/x.png)    |
-| `y    qubit`                  | Pauli-Y               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/y.png)    |
-| `z    qubit`                  | Pauli-Z               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/z.png)    |
-| `rx   qubit, angle`           | Arbitrary X rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/rx.png)   |
-| `ry   qubit, angle`           | Arbitrary Y rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/ry.png)   |
-| `rz   qubit, angle`           | Arbitrary Z rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/rz.png)   |
-| `x90  qubit`                  | 90-degree X rotation  | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/x90.png)    |
-| `y90  qubit`                  | 90-degree Y rotation  | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/y90.png)    |
-| `mx90 qubit`                  | -90-degree X rotation | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/mx90.png)   |
-| `my90 qubit`                  | -90-degree Y rotation | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/my90.png)   |
-| `s    qubit`                  | S/phase gate          | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/s.png)    |
-| `sdag qubit`                  | S/phase-dagger gate   | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/sdag.png) |
-| `t    qubit`                  | T gate                | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/t.png)    |
-| `tdag qubit`                  | T-dagger gate         | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/tdag.png) |
+| Syntax                        | Description           | Matrix                                                                         |
+|-------------------------------|-----------------------|--------------------------------------------------------------------------------|
+| `i    qubit`                  | Identity              | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/i.png)        |
+| `h    qubit`                  | Hadamard              | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/h.png)        |
+| `x    qubit`                  | Pauli-X               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/x.png)        |
+| `y    qubit`                  | Pauli-Y               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/y.png)        |
+| `z    qubit`                  | Pauli-Z               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/z.png)        |
+| `rx   qubit, angle`           | Arbitrary X rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/rx.png)       |
+| `ry   qubit, angle`           | Arbitrary Y rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/ry.png)       |
+| `rz   qubit, angle`           | Arbitrary Z rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/rz.png)       |
+| `x90  qubit`                  | 90-degree X rotation  | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/x90.png)        |
+| `y90  qubit`                  | 90-degree Y rotation  | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/y90.png)        |
+| `mx90 qubit`                  | -90-degree X rotation | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/mx90.png)       |
+| `my90 qubit`                  | -90-degree Y rotation | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/my90.png)       |
+| `s    qubit`                  | S/phase gate          | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/s.png)        |
+| `sdag qubit`                  | S/phase-dagger gate   | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/sdag.png)     |
+| `t    qubit`                  | T gate                | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/t.png)        |
+| `tdag qubit`                  | T-dagger gate         | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/tdag.png)     |
+| `u qubit, [a,b,c,d,e,f,g,h]`  | Inline custom gate    | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/u-matrix.png) |
+| `u qubit, theta, phi, lambda` | Inline custom gate    | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/u-angle.png)  |
 
-All angles are in radians.
+All angles are in radians, and are represented as double-precision floating points. The matrix indices in the first `u` syntax also use double-precision floating points; behavior is undefined if the described matrix is not unitary. Classical resources can be used to define the angles and matrix elements.
 
 > JvS: the matrix syntax for the custom unitary gate is taken from an undocument feature in 1.0's grammar. Actually, any single-qubit gate allows such a matrix to be specified... but since that doesn't to my knowledge make any sense I'm considering it a bug and won't enforce full backwards-compatibility for that.
 
@@ -422,14 +424,14 @@ Two following two-qubit gates are defined:
 | `cr ctrl, target, phi`        | Controlled phase with rotation | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/cr.png)     |
 | `crk qubit, angle, k`         | Controlled phase with rotation | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/crk.png)    |
 
+The `phi` angle in `cr` is in radians, and is represented as a double-precision floating point. `k` is represented as a `uint<64>` (simply because this format can represent all unsigned integers supported by cQASM). Classical resources can be used to define `phi` and `cr`.
+
 The following three-qubit gates are defined:
 
 | Syntax                                                         | Description  | Matrix                                                                      |
 |----------------------------------------------------------------|--------------|-----------------------------------------------------------------------------|
 | `toffoli ctrl, ctrl, target` or `ccnot ctrl, ctrl, target`     | Toffoli gate | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/ccnot.png) |
 | `fredkin ctrl, target, target` or `cswap ctrl, target, target` | Fredkin gate | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/cswap.png) |
-
-> JvS: does anyone have need for a custom specification of two- and three-qubit gates similar to `u`?
 
 
 Custom gate declarations (new in 2.0)
