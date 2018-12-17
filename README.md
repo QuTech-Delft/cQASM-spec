@@ -63,6 +63,7 @@ Overview of changes from 1.0 to 2.0
  - Added a way to specify custom n-qubit gates.
  - Added a powerful macro expansion system to reduce the amount of typing when writing cQASM manually.
  - Added classical flow control and arithmetic.
+ - Added expression syntax for macros and to be used as a higher level of abstraction for describing classical arithmetic.
  - Added `stop`, `error` and `print` instructions to ease debugging.
  - Added `pragma` statements and annotations to easily create your own language extensions, without needing to change the cQASM specification and all associated tools.
 
@@ -537,12 +538,15 @@ In addition, all indices of qubit arrays must be static. The reason for the latt
 
 All indices must be integral; that is, the number of fractional bits in the `(u)fixed` must be 0 (integer) or negative. Out-of-range indexation behavior is an error when the index is static. It is undefined at runtime, though it is recommended that simulators exit with a failure condition when this happens.
 
+If an index is itself a matrix, its elements are interpreted as if they were comma-separated indices.
+
 Note that all array indices start at 0.
 
 Some examples:
 
     qubit q[5]
     float f[5]
+    uint<32> u[5]
     int<32> i
     ...
     f[3]                # float: f3
@@ -557,6 +561,9 @@ Some examples:
     q[0:3]              # qubit[4]: {q0, q1, q2, q3}
     q[5]                # undefined behavior, out of range
     q[i]                # illegal, cannot dynamically index a qubit array
+    f[1,u[0:2],3]       # float[5]: [f1, fu0, fu1, fu2, f3]
+    u[u]                # swizzle u using itself. legal (as long as all entries of u
+                        #    are in 0:4), but hurts my brain.
 
 ### Selection semantics
 
@@ -745,7 +752,7 @@ where `name` is any identifier used to refer to the macro, `params` is a list of
     hypot x, y -> dist  # Call the hypot macro
     print dist          # Prints "5.0"
 
-This code is converted to the following by libcqasm2 during macro expansion:
+This code reduces to the following:
 
     int<64> x
     int<64> y
@@ -903,6 +910,7 @@ The following rules apply for the `{...}` blocks used in macros (not to be confu
  - For macro subroutines, reference resolution of resources and mappings occurs during the definition, not during its usage (just like mappings).
  - Anything declared within a block goes out of scope at the end of the block. This does not apply to included files.
  - No block or included file can use subcircuit headers. They make no logical sense, because subcircuits can only be terminated by opening another subcircuit.
+ - `def` statements cannot nest into blocks.
 
 ### Classical flow control
 
@@ -910,7 +918,7 @@ Subcircuit repetition and macros allow only static flow control. That is, the pr
 
 #### Conditionals and loops
 
-Structures such as conditional execution and loops are described using classical jump instructions and labels. Label syntax is borrowed from classical assembly languages:
+Structures such as conditional execution and loops are described using classical jump gates and labels. Label syntax is borrowed from classical assembly languages:
 
     start:
 
@@ -920,7 +928,7 @@ Labels are scoped to the current subcircuit. In other words, it is impossible to
 
 Labels can refer both backwards and forwards. There is no need to "forward-declare" a label.
 
-The following branch instructions are defined. `x` and `y` can be any scalar numerical literal/resource. (note: this implies that comparing a whole array at once is illegal).
+The following branch gates are defined. `x` and `y` can be any scalar numerical literal/resource. (note: this implies that comparing a whole array at once is illegal).
 
     jmp label        # Unconditional jump to "label"
     jez x, label     # Jump to "label" if x == 0 (eq. x == false)
@@ -934,24 +942,19 @@ The following branch instructions are defined. `x` and `y` can be any scalar num
 
 > JvS: I added `jez`/`jnz` to be used in conjunction with booleans, to support architectures that can only branch based on a previously set boolean register.
 
-The following alternative syntax may also be used to make the flow easier to comprehend:
+The following alternative syntax may also be used to make classical flow easier to comprehend:
 
-    if !x     goto label # Equivalent to "jez x, label"
-    if x      goto label # Equivalent to "jne x, label"
-    if x == y goto label # Equivalent to "jeq x, y, label"
-    if x != y goto label # Equivalent to "jne x, y, label"
-    if x > y  goto label # Equivalent to "jgt x, y, label"
-    if x < y  goto label # Equivalent to "jlt x, y, label"
-    if x >= y goto label # Equivalent to "jge x, y, label"
-    if x <= y goto label # Equivalent to "jle x, y, label"
+    if expr goto label  # Equivalent to "jnz expr, label"
+
+If the topmost expression can is one of those supported directly by one of the jump gates, that gate is used instead of `jnz`. The expression is automatically expanded to additional artithmetic gates and temporary resources when necessary during expression synthesis.
 
 Note that cQASM 2.0 does not support arbitraty expressions here; only expressions that can be statically reduced to one of the above are legal.
 
-Execution of a subcircuit starts at the first instruction. You can start elsewhere by simply using a `jmp` instruction. If an architecture implementation allows the start address to be different from the start of the program, its assembler can just interpret a `jmp` at the start of a subcircuit as the entry point declaration.
+Execution of a subcircuit starts at the first gate. You can start elsewhere by simply using a `jmp` gate. If an architecture implementation allows the start address to be different from the start of the program, its assembler can just interpret a `jmp` at the start of a subcircuit as the entry point declaration.
 
 #### Classical subroutines
 
-The `call` and `ret` instructions allow you to use subroutines:
+The `call` and `ret` gates allow you to use subroutines:
 
     increment_x:
         add x, 1 -> x
@@ -963,18 +966,18 @@ The `call` and `ret` instructions allow you to use subroutines:
 
 Subroutines allow code to be reused, not just in the cQASM file, but also in the program memory of the quantum computer.
 
-Note that subroutines are no different from normal labels; they are just used differently. It is therefore legal to mix call/jmp instructions, "fall through" to a followup subroutine, etc. Because classical subroutines have no well-defined endpoint (and because dynamic resource allocation would be required) cQASM has no concept of local variables/resource for classical subroutines. They only exist for macros.
+Note that subroutines are no different from normal labels; they are just used differently. It is therefore legal to mix call/jmp gates, "fall through" to a followup subroutine, etc. Because classical subroutines have no well-defined endpoint (and because dynamic resource allocation would be required) cQASM has no concept of local variables/resource for classical subroutines. They only exist for macros.
 
 > JvS: cQASM is ultimately an assembly language, so much like if/then/else and for loop constructs these abstractions do not exist. Adding them would severily complicate the language.
 
-You can make these manually, however, by declaring all the resources you need as globals. You might want to prefix subroutine-specific globals with the label of the subroutine to avoid confusion. This leaves one problem: recursion. Whenever you recursively call a subroutine, you must ensure that its locals and parameters are "backed up" before you assign new values to them for/in the recursive call. This can be done with the `push` and `pop` instructions:
+You can make these manually, however, by declaring all the resources you need as globals. You might want to prefix subroutine-specific globals with the label of the subroutine to avoid confusion. This leaves one problem: recursion. Whenever you recursively call a subroutine, you must ensure that its locals and parameters are "backed up" before you assign new values to them for/in the recursive call. This can be done with the `push` and `pop` gates:
 
     push x  # Pushes the value x on the stack.
     push y  # Pushes the value y on the stack.
     pop a   # Sets a to y, because that was the last value pushed.
     pop b   # Sets b to x, because that was the last value pushed that we haven't popped yet.
 
-A `call` instruction contains an implicit `push` operation; it pushes the return address. `ret` contains an implicit `pop` operation to retrieve the return address and jump to it.
+A `call` gate contains an implicit `push` operation; it pushes the return address. `ret` contains an implicit `pop` operation to retrieve the return address and jump to it.
 
 The following rules must be followed for `push` and `pop`:
 
@@ -1263,11 +1266,11 @@ Classical resources may be assigned using the following notation:
 
 where `a` can be any visible resource/mapping or indexation thereof, and `b` is any dynamic expression.
 
-This notation is automatically expanded to a combination of the classical gates listed in the classical gate section during macro expansion. Any temporary values required are automatically inferred. The equivalent gate for each operator is listed in the section on expressions.
+This notation is automatically expanded to a combination of the classical gates listed in the classical gate section during expression synthesis. Any temporary values required are automatically inferred. The equivalent gate for each operator is listed in the section on expressions.
 
 ### Classical gates
 
-The following classical gates are defined. They behave the same way as their expression operator counterparts. Note that dynamic expressions may be used in these, just like the assignment notation. However, they will then be similarly expanded during macro expansion. Using gates directly, without complex expressions, allows you (or a compiler) to schedule them in parallel and/or be more efficient in terms of temporary resource usage. The only operators that are NOT expanded and may be used in any of these are the `(<<x)y` and `(>>x)y` casts, which serve only as reinterpretation of a fixed-point number.
+The following classical gates are defined. They behave the same way as their expression operator counterparts. Note that dynamic expressions may be used in these, just like the assignment notation. However, they will then be similarly expanded during expression synthesis. Using gates directly, without complex expressions, allows you (or a compiler) to schedule them in parallel and/or be more efficient in terms of temporary resource usage. The only operators that are NOT expanded and may be used in any of these are the `(<<x)y` and `(>>x)y` casts, which serve only as reinterpretation of a fixed-point number.
 
 #### Basic arithmetic
 
@@ -1466,3 +1469,29 @@ Operating on cQASM code
 -----------------------
 
 TODO: this section will contain info about libcqasm2's API. This is still very much a work in progress. I'm trying to figure it out as much as possible while defining the spec though, to avoid finding out that something is (virtually) impossible after freezing the spec.
+
+libcqasm will need the following passes:
+
+ - Lexing (flex).
+ - Parsing (yacc).
+ - Name resolution: resolve and uniquify labels and resources, resolve mappings by replacing references to a mapping with the mapped expression, and remove `map` statements from the AST. Subroutine macro parameters and macro for loop index variables are also replaced with appropriate nodes, to be replaced further by macro expansion.
+ - Replacement of `include` statements with the AST of the included file. This includes all steps up to and including this step for the included files, and also includes checking that the included file does not contain subcircuit statements.
+ - `def` statement gathering (macros can refer backward to allow them to call each other recursively) and removal of them from the AST.
+ - Optional: macro expansion.
+ - Optional: expression synthesis.
+
+Macro expansion substeps:
+
+ - Replace `let` calls with appropriately typed resources.
+ - Expand SIMD/SGMQ gates to bundles of scalar gates.
+ - When encountering an expression, constant-fold it as far as possible.
+ - When encountering a macro subroutine call: 1) make a copy of the AST representing the contents of the macro; 2) replace the (thus far unresolved) parameter references with copies of the expression AST nodes from the call; 3) recursively apply macro expansion to the new AST; 4) replace the macro subroutine call with the generated AST.
+ - When encountering a macro if/else: 1) statically evaluate the condition; 2) reduce to either the if or else block; 3) recursively apply macro expansion to the selected block; 4) replace the macro with the new block.
+ - When encountering a macro for: 1) statically evaluate the loop index list; 2) make a copy of the loop body for each iteration; 3) replace the (thus far unresolved) loop index reference with the expression indicating the current index; 4) apply macro expansion to each of the new ASTs; 5) replace the `for` statement with the list of generated ASTs.
+
+Expression synthesis substeps:
+
+ - Reduce assignment statements to the equivalent list of classical gates and (uniquified) temporary resources.
+ - Reduce `if x goto y` gates to the equivalent list of classical gates and (uniquified) temporary resources.
+ - Reduce all nontrivial expressions used in gates to the equivalent list of classical gates and (uniquified) temporary resources.
+ - The expression reductions above implicitly type-check the expressions as part of the reduction. Whenever promotion is required, a `mov` is synthesized for the type conversion.
