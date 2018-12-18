@@ -503,8 +503,8 @@ Unless otherwise specified, all operands, including destination, share the same 
 | `x + y`     | Addition                        | `add`           | 5, left-to-right  | `sdufc` |
 | `x - y`     | Subtraction                     | `sub`           | 5, left-to-right  | `sdufc` |
 |             |                                 |                 |                   |         |
-| `x << y`    | Shift left                      | `shl`           | 6, left-to-right  | `uf`    |
-| `x >> y`    | Shift right                     | `shr`           | 6, left-to-right  | `uf`    |
+| `x << y`    | Shift left                      | `shl`           | 6, left-to-right  | `uf`*   |
+| `x >> y`    | Shift right                     | `shr`           | 6, left-to-right  | `uf`*   |
 |             |                                 |                 |                   |         |
 | `x > y`     | Greater than                    | `cgt`           | 7, left-to-right  | `sduf`  |
 | `x < y`     | Less than                       | `clt`           | 7, left-to-right  | `sduf`  |
@@ -564,6 +564,56 @@ Some examples:
     f[1,u[0:2],3]       # float[5]: [f1, fu0, fu1, fu2, f3]
     u[u]                # swizzle u using itself. legal (as long as all entries of u
                         #    are in 0:4), but hurts my brain.
+
+### Shift and rotate semantics
+
+The shift operations take their signedness from their operands: if either is signed, the shifts are signed.
+
+Unsigned shifts are trivial. They shift in zeros and throw away the bits that were shifted out. For example:
+
+    uint<4> val = 0b1001u
+    print val >> 2 # 2 = 0b0010 (01 was lost at the LSB side)
+    print val << 2 # 4 = 0b0100 (10 was lost at the MSB side)
+
+Signed shifts are implemented differently. Right-shifts shift in sign bits instead of zeros to maintain the sign. Left-shifts leave the sign alone and only operate on the remainder of the bits. For example:
+
+    int<4> val = 0b1001
+    print val >> 2 # -2 = 0b1110 (sign-extended, 01 was lost at the LSB side)
+    print val << 2 # -4 = 0b1100 (sign replicated, 100 was lost at the MSB side)
+
+In both cases, a left-shift by one bit multiplies by 2, while a right-shift is equivalent to a flooring division by 2. For left-shifts, the sign is maintained even during overflow. Note that "overflow" for shifts is not considered an error, unlike multiplicative overflow.
+
+The type of the shift amount must be a nonnegative integer. The runtime result of a negative shift amount is undefined, and simulators may exit with an error for this.
+
+To understand the "shift decimal point" operators (`(>>a)b` and `(<<a)b`), consider the following situation:
+
+    fixed<1,63> num = (fixed<1,63>)(sqrt(0.5))
+    fixed<11,53> num_times_1024
+    # Set num_times_1024 to 1024*num: how?
+    print num_times_1024
+
+If we would not be limited by the 64-bits-maximum rule, we could first extend the number by 10 bits, then perform a shift, and then perform a typecast:
+
+    fixed<11,63> temp = num # Note: illegal
+    set temp = temp << 10
+    set num_times_1024 = (fixed<11,53>)temp
+
+However, note that `num` and `num_times_1024` should contain the same bits of data after the operation, the decimal point is just interpreted to be in a different place. So even if we would be able to temporarily extend to 74 bits, it would be a bit silly, because a real implementation would then need to do a 74-bit shift-left, followed by a 74-bit shift-right (during the typecast, which moves the interpreted position of the decimal point along with a shift in the opposite direction).
+
+Instead, we can use the shift decimal point operator:
+
+    set num_times_1024 = (<<10)num
+
+Like a typecast, it changes the type (in this case from `fixed<1,63>` to `fixed<11,53>`), but it does not change the data contained within the value. To illustrate (with spaces added in the numbers to align them up):
+
+    num               =           0b0.1011010100 00010011110011[...]
+    num<<10           =                      0b0.00010011110011[...]
+    (fixed<11,53>)num = 0b00000000000.1011010100 00010011110011[...]
+    (<<10)num         =           0b0 1011010100.00010011110011[...]
+
+The left-shift throws away MSB-data (overflow) and the typecast throws away LSB-data (loss of precision), but the shift decimal point operator keeps all bits intact. Note that the decimal point is shifted in the opposite direction as the arrows in the cast, so the numerical result is consistent with what you would expect from a shift in the same direction.
+
+The type of the shift amount for the cast must be a static nonnegative integer.
 
 ### Selection semantics
 
