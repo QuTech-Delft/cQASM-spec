@@ -1278,8 +1278,8 @@ The following classical gates are defined. They behave the same way as their exp
 The following arithmetic instructions are defined.
 
     mov     a -> b          # Set b to a, possibly with a typecast
-    ld      a, i -> b       # Set b to a[i]
-    st      a, i -> b       # Set b to a[i]
+    ld      a[i] -> b       # Set b to a[i]
+    st      a -> b[i]       # Set b[i] to a
     inc     a -> b          # Increment by 1
     dec     a -> b          # Decrement by 1
     neg     a -> b          # Negate/two's complement
