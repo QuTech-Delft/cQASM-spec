@@ -111,8 +111,9 @@ In practice, cQASM 2.0 is expected to be fully backward compatible with 1.0. How
 
     boolean    complex    const      def        double     else       eu         extern
     false      fixed      float      for        gate       goto       if         im
-    include    int        let        matrix     pi         pragma     qubit      string
-    struct     true       type       ufixed     uint       vector     volatile   weak
+    include    int        let        matrix     pi         pragma     qubit      set
+    string     struct     true       type       ufixed     uint       vector     volatile
+    weak
 
 They will cause parse errors.
 
@@ -194,8 +195,8 @@ Identifiers are combinations of letters, numbers, and underscores, used to refer
     boolean    complex    const      def        double     else       eu         extern
     false      fixed      float      for        gate       goto       if         im
     include    int        let        map        matrix     pi         pragma     qubit
-    qubits     string     struct     true       type       ufixed     uint       vector
-    volatile   weak
+    qubits     set        string     struct     true       type       ufixed     uint
+    vector     volatile   weak
 
 Some of these reserved words are already in use as keywords, while others are reserved for future use.
 
@@ -456,7 +457,7 @@ The following table lists the available operators, their precedence, the equival
 All operations are defined over arrays of supported types as well, by means of SIMD/SGMQ rules. They execute piecewise. All non-scalar values must have the same array length for this to make sense; scalar values are applied to each array entry. For instance:
 
     int<32> a[10]
-    a = a + 1
+    set a = a + 1
 
 adds 1 (a scalar) to all entries of a (an array). Refer to the SIMD/SGMQ section for more information.
 
@@ -666,12 +667,12 @@ Example of all of the above:
     let a = 1       # Declares int<64> a with initial value 1
     map b -> a      # Maps b to a
     let a = 1       # Declares int<64> a with initial value 1, hiding the previous a
-    b = 2           # b still refers to the previous a, so
+    set b = 2       # b still refers to the previous a, so
     print a, b      # this prints "1 2"
     let c -> b + 1  # Maps c to b + 1
-    # c = 2         # Illegal, b + 1 is not an lvalue
+    # set c = 2     # Illegal, b + 1 is not an lvalue
     print c         # Prints "3", because b (the first a declaration) was set to 2
-    b = 3           # Sets the first declaration of a to 3
+    set b = 3       # Sets the first declaration of a to 3
     print c         # Prints "4", because b is now 3.
 
 Note that this rather high-level program is abstracted to the following equivalent by libcqasm2:
@@ -743,7 +744,7 @@ where `name` is any identifier used to refer to the macro, `params` is a list of
     def hypot(a, b -> c) {
         map ad -> (double)a
         map bd -> (double)b
-        c = sqrt((ad * ad) + (bd * bd))
+        set c = sqrt((ad * ad) + (bd * bd))
     }
 
     let x = 3
@@ -1262,7 +1263,7 @@ The axes should be `x`, `y`, or `z`. Any number of qubits can be involved in the
 
 Classical resources may be assigned using the following notation:
 
-    a = b
+    set a = b
 
 where `a` can be any visible resource/mapping or indexation thereof, and `b` is any dynamic expression.
 
