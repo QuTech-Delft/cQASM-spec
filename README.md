@@ -309,12 +309,21 @@ You can also specify the type you want explicitly using a typecast. Overflow is 
     (uint<3>)4      # uint<3>: 4
     (uint<3>)80     # ERROR: overflow
 
-Semantically, the bitcount parameters specify only a minimum width: an implementation is free to represent a `uint<5>` as an `uint<8>` or even an `int<64>`. Overflow behavior of an operator like + is therefore fully undefined. However, for typecasts, implementations are required to force the number representation to be representable in that notation using the following rules:
+Semantically, the bitcount parameters specify only a minimum width: an implementation is free to represent a `uint<5>` as an `uint<8>` or even an `int<64>`. Therefore, operators like `+`, `-`, and `*` may set these past-MSB bits during overflow:
+
+    0x10u * 0x10u   # May be 0 as expected (due to overflow), but may
+                    #   also be the unrepresentable number 0x100!
+
+However, for typecasts, implementations are required to force the number representation to be representable in that notation using the following rules:
 
  - Unrepresentable bits are set to zero.
- - For signed fixed-point numbers, the sign is copied to the MSB of the destination type.
+ - For signed fixed-point numbers, the sign is copied to the MSB of the destination type, so sign is always maintained.
 
-It is recommended for simulators to track whether overflow has occurred, so they can exit with an error if a number with undefined overflow is used before an appropriate typecast is applied.
+Thus, if a cast is applied after a `+`, `-`, or `*` operator, the result is defined again:
+
+    (uint<8>)(0x10u * 0x10u) -> 0
+
+It is recommended for simulators to track whether overflow has occurred for a number, so they can exit with an error if the number is used before an appropriate typecast is applied.
 
 #### Floating-point numbers
 
@@ -451,7 +460,7 @@ The following table lists the available operators, their precedence, the equival
  - `u` included: can operate on `ufixed`.
  - `f` included: can operate on `fixed`.
  - `c` included: can operate on `complex`.
- - * included: more information below the table.
+ - * included: more information in the sections below the table.
 
 All operations are defined over arrays of supported types as well, by means of SIMD/SGMQ rules. They execute piecewise. All non-scalar values must have the same array length for this to make sense; scalar values are applied to each array entry. For instance:
 
@@ -460,7 +469,7 @@ All operations are defined over arrays of supported types as well, by means of S
 
 adds 1 (a scalar) to all entries of a (an array). Refer to the SIMD/SGMQ section for more information.
 
-Unless otherwise specified, all operands, including destination, share the same type. Type promotion is automatically applied to the source operands before applying the operation. For the gates, the destination resource may have yet another type, so promotion is performed here again (AFTER the operation). If promotion is not possible, typecasts must be used.
+Unless otherwise specified, all operands must share the same type. Type promotion is automatically applied to the source operands before applying the operation; if this is not possible, an error is generated. The result of the expression has the same type as the operands.
 
 | Operator    | Description                     | Equivalent gate | Precedence        | Types   |
 |-------------|---------------------------------|-----------------|-------------------|---------|
@@ -495,13 +504,13 @@ Unless otherwise specified, all operands, including destination, share the same 
 |             |                                 |                 |                   |         |
 | `x ** y`    | Exponentiation with base `x`    | `pow`           | 3, right-to-left  | `sd`    |
 |             |                                 |                 |                   |         |
-| `x * y`     | Multiplication                  | `mul`           | 4, left-to-right  | `sdufc` |
+| `x * y`     | Multiplication                  | `mul`           | 4, left-to-right  | `sdufc`*|
 | `x / y`     | True division                   | `div`           | 4, left-to-right  | `sduf`  |
 | `x // y`    | Floored division                | `idiv`          | 4, left-to-right  | `sduf`  |
 | `x % y`     | Remainder for floored division  | `mod`           | 4, left-to-right  | `sduf`  |
 |             |                                 |                 |                   |         |
-| `x + y`     | Addition                        | `add`           | 5, left-to-right  | `sdufc` |
-| `x - y`     | Subtraction                     | `sub`           | 5, left-to-right  | `sdufc` |
+| `x + y`     | Addition                        | `add`           | 5, left-to-right  | `sdufc`*|
+| `x - y`     | Subtraction                     | `sub`           | 5, left-to-right  | `sdufc`*|
 |             |                                 |                 |                   |         |
 | `x << y`    | Shift left                      | `shl`           | 6, left-to-right  | `uf`*   |
 | `x >> y`    | Shift right                     | `shr`           | 6, left-to-right  | `uf`*   |
@@ -564,6 +573,17 @@ Some examples:
     f[1,u[0:2],3]       # float[5]: [f1, fu0, fu1, fu2, f3]
     u[u]                # swizzle u using itself. legal (as long as all entries of u
                         #    are in 0:4), but hurts my brain.
+
+### Addition, subtraction, and multiplication semantics
+
+The type returned by addition, subtraction, and multiplication operations is the same as the source operands. Therefore, overflow is possible; the semantics for this are described in the data type section of this document.
+
+The semantics for fixed-point multiplication follow naturally from what has been described thus far, but some examples are in order for building intuition:
+
+    0x01 * 0x100  -> 0x100
+    0x10 * 0x100  -> undefined, overflow
+    (uint<12> 0x10
+    0x.01 * 0x100 -> 0x001.00
 
 ### Shift and rotate semantics
 
