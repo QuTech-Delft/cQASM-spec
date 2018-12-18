@@ -133,11 +133,10 @@ When cQASM code is parsed, a major version number greater than what is supported
 
 *Statements* can be any of the following things:
 
- - resource declarations and mappings;
- - custom gate declarations;
- - bundles;
- - subcircuit headers and labels;
+ - resource declarations, mappings, and assignments;
  - macros;
+ - subcircuit headers and labels;
+ - bundles;
  - or pragmas.
 
 The *bundle* is the most common type of statement. They consist of one or more *gates* that may be executed in parallel, where a gate is defined to be any quantum gate or classical instruction. All statements and gates can be annotated with arbitrary data for extensibility. These features are explained in more detail in later sections of this document.
@@ -697,6 +696,42 @@ which is harder to read for a human, but easier for a computer, because:
  - and all expressions have been turned into single-operation instructions.
 
 Of course, the original example isn't that easy to read either; it is intentionally convoluted to show all the features in a concise program.
+
+### Assignments
+
+Once a resource has been declared (through `let` or through a typed declaration), you can write data to it. The easiest way to do this is through an assignment statement:
+
+    set a = expr
+
+where `a` is a (possibly indexed) named resource or a mapping to one, and `expr` is an expression. If the expression can be evaluated statically and does not require casting, libcqasm2 turns this statement into a `mov` (for scalars) or a `st` (for arrays). For example,
+
+    int<64> x
+    int<64> y[10]
+    set x = 1 + 2
+    set y[3 + 4] = (int<64>)sqrt(9.0)
+
+expands to
+
+    int<64> x
+    int<64> y[10]
+    mov 3 -> x
+    st 3 -> y[7]
+
+If the expression or (for indexed assignments) index cannot be statically evaluated, they are synthesized into instructions. For example,
+
+    int<64> x
+    int<64> y[10]
+    set x = x + 1
+    set y[x // 2] = 10
+
+expands to
+
+    int<64> x
+    int<64> y[10]
+    int<64> temp
+    add x, 1 -> x
+    idiv x, 2 -> temp
+    st 10 -> y[temp]
 
 
 Flow control and code organization
@@ -1259,19 +1294,11 @@ It is also possible to measure parity of a number of qubits in specified bases:
 
 The axes should be `x`, `y`, or `z`. Any number of qubits can be involved in the parity measurement. The result is stored in the measurement register of each involved qubit.
 
-### Assignment notation
-
-Classical resources may be assigned using the following notation:
-
-    set a = b
-
-where `a` can be any visible resource/mapping or indexation thereof, and `b` is any dynamic expression.
-
-This notation is automatically expanded to a combination of the classical gates listed in the classical gate section during expression synthesis. Any temporary values required are automatically inferred. The equivalent gate for each operator is listed in the section on expressions.
-
 ### Classical gates
 
-The following classical gates are defined. They behave the same way as their expression operator counterparts. Note that dynamic expressions may be used in these, just like the assignment notation. However, they will then be similarly expanded during expression synthesis. Using gates directly, without complex expressions, allows you (or a compiler) to schedule them in parallel and/or be more efficient in terms of temporary resource usage. The only operators that are NOT expanded and may be used in any of these are the `(<<x)y` and `(>>x)y` casts, which serve only as reinterpretation of a fixed-point number.
+The following classical gates are defined. They behave the same way as their expression operator counterparts. Note that dynamic expressions may be used in these, just like the assignment notation; they will then be similarly expanded during expression synthesis. The purpose of having these gates is to allow you (or a compiler) to schedule them in parallel and/or be more efficient in terms of temporary resource usage.
+
+The only expression operators that are NOT expanded and may be used in any of these are the `(<<x)y` and `(>>x)y` casts, which serve only as reinterpretation of a fixed-point number.
 
 #### Basic arithmetic
 
