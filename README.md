@@ -1414,30 +1414,26 @@ The following single-qubit measurement instructions are available:
     prep_x      qubit   # State preparation in X basis
     prep_y      qubit   # State preparation in Y basis
     prep_z      qubit   # State preparation in Z basis
-    prep        qubit   # NEW IN 2.0: state preparation in Z basis (same as above)
+    prep        qubit   # Synonym for prep_z
     measure_x   qubit   # Measure qubit in X basis
     measure_y   qubit   # Measure qubit in Y basis
     measure_z   qubit   # Measure qubit in Z basis
-    measure     qubit   # Measure qubit in Z basis (same as above)
-
-> JvS/AS: added `prep` (new in 2.0) for symmetry with `measure`.
+    measure     qubit   # Synonym for measure_z
 
 The result of the measurements is stored in the classical bit register associated with the qubit.
 
-SIMD/SGMQ syntax can be used to easily measure multiple or all qubits in a qubit array at once:
+SIMD/SGMQ syntax can be used to easily initialize or measure multiple or all qubits in a qubit array at once:
 
+    prep        q       # Collapse state of q to |00...0>
     measure     q[0:3]  # Measure the first four qubits
     measure     q       # Measure all qubits in q
 
-There is also an operation to measure all qubit resources in the Z-basis at once:
+There is also an operation to perpare or measure all qubit resources in the Z-basis at once:
 
+    prep_all            # Collapse state of all qubits to |00...0>
     measure_all         # Measure all qubits in all registers
 
 This instruction includes measurement of any qubit resources that may have been hidden.
-
-> JvS: measure_all is there for compatibility with 1.0.
-
-> JvS: does it make sense to add `prep_all` equivalents for the `measure_all` instructions? I'm not sure what state preparation means exactly.
 
 It is also possible to measure parity of a number of qubits in specified bases:
 
