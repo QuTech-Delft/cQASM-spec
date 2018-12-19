@@ -1256,6 +1256,8 @@ Gates
 
 As described earlier, the term *gate* is used for any quantum or classical operation. This section describes the available gates.
 
+Note: while matrices are included to clarify the operation of some of the gates, simulators may choose to use a different global phase factor. For instance, the `x` gate may be implemented using the canonical `[|0, 1; 1, 0|]` matrix, while a 180-degree `rx` gate describes `[|0, -im; -im, 0|]`. This specification only concerns itself with the observable effects of the gates.
+
 ### Single-qubit gates
 
 This section lists the single-qubit gates.
