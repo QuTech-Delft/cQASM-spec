@@ -4,6 +4,57 @@ cQASM 2.0 specification
 This is intended to be a working document for the cQASM 2.0 specification. Feel free to add comments/notes using blockquotes (add your name to the top of it to keep things clear, though `git blame` can always be used in case of confusion). You should be able to use github's built-in editor to edit this file. You can also use the issue system to request and discuss changes.
 
 
+Table of contents
+-----------------
+
+ - [Intended purpose of cQASM](#intended-purpose-of-cqasm)
+ - [Planning](#planning)
+ - [Overview of changes from 1.0 to 2.0](#overview-of-changes-from-10-to-20)
+    * [Deprecated cQASM 1.0 features](#deprecated-cqasm-10-features)
+    * [Unsupported cQASM 1.0 features](#unsupported-cqasm-10-features)
+ - [cQASM file structure](#cqasm-file-structure)
+    * [Whitespace and newlines](#whitespace-and-newlines)
+    * [Comments](#comments)
+    * [Identifiers](#identifiers)
+ - [Data types](#data-types)
+    * [Qubits](#qubits)
+    * [Numeric types](#numeric-types)
+    * [Arrays](#arrays)
+    * [Matrices](#matrices)
+    * [Strings](#strings)
+    * [JSON strings](#json-strings)
+ - [Expressions](#expressions)
+    * [rand()/randf() semantics](#randrandf-semantics)
+    * [Indexation semantics](#indexation-semantics)
+    * [Addition, subtraction, and multiplication semantics](#addition-subtraction-and-multiplication-semantics)
+    * [Shift and rotate semantics](#shift-and-rotate-semantics)
+    * [Selection semantics](#selection-semantics)
+    * [Parentheses](#parentheses)
+ - [Resources](#resources)
+    * [Declarations](#declarations)
+    * [Scoping and mappings](#scoping-and-mappings)
+    * [Assignments](#assignments)
+ - [Flow control and code organization](#flow-control-and-code-organization)
+    * [Subcircuits](#subcircuits)
+    * [Macro expansion](#macro-expansion)
+    * [Classical flow control](#classical-flow-control)
+    * [Conditional execution and controlled gates](#conditional-execution-and-controlled-gates)
+ - [Timing](#timing)
+    * [Execution model](#execution-model)
+    * [Bundles](#bundles)
+    * [SIMD/SGMQ](#simdsgmq)
+    * [Bundle restrictions](#bundle-restrictions)
+ - [Gates](#gates)
+    * [Single-qubit gates](#single-qubit-gates)
+    * [Multi-qubit gates](#multi-qubit-gates)
+    * [Measurement](#measurement)
+    * [Classical gates](#classical-gates)
+    * [Debugging](#debugging)
+ - [Extensibility](#extensibility)
+    * [Pragmas and annotations](#pragmas-and-annotations)
+    * [Gate definition file](#gate-definition-file)
+ - [Operating on cQASM code](#operating-on-cqasm-code)
+
 Intended purpose of cQASM
 -------------------------
 
@@ -394,7 +445,7 @@ Array literals are specified using comma-separated entries and curly brackets. F
 
     {1, 2, 3}   # int<64>[3]
 
-### Complex matrices
+### Matrices
 
 cQASM 2.0 allows complex matrices to be specified. The keyword `matrix` is reserved for this type, but matrix resources are not supported, and they cannot be operated on using expressions. Matrices can be specified in two ways:
 
