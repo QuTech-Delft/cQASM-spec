@@ -225,7 +225,7 @@ Qubits work the same way in cQASM 2.0 as they did in 1.0. That is, each qubit co
 
 There is no literal notation for qubits. The only way to interact with them is through application of quantum gates.
 
-In most contexts where qubits can be specified, it is clear from context whether the qubit itself or its measurement register is used, but for some gates this is not clear. In this case the name of the qubit must be given a `.q` suffix to refer to the qubit or a `.b` suffix to refer to the measurement register. When the qubit is part of an array, the suffix comes after the indexation, for instance `q[0].b`. You are free to use this notation everywhere.
+In most contexts where qubits can be specified, it is clear from context whether the qubit itself or its measurement register is used, but for some gates (in particular when using a qubit register for conditional execution) this is not clear. In this case subscript notation should be used. If the `.q` subscript suffix is applied to the qubit, the actual qubit is selected, whereas `.b` explicitly selects the measurement register. When the qubit is part of an array, the suffix comes after the indexation, for instance `q[0].b`. You are free to use this notation anywhere.
 
 There is an exception to the above for compatibility with 1.0, where qubits were implicitly named `q` and their measurement registers were implicitly named `b`. This notation is deprecated, and only used in conjunction with the equally deprecated nameless qubit register declaration.
 
@@ -1104,7 +1104,7 @@ There is an alternative syntax for `push` that makes the pushed data type explic
 
 Without this notation, it would be impossible to push literals onto the stack, since the bit-width of a literal is undefined.
 
-### Conditional execution
+### Conditional execution and controlled gates
 
 The final method for working with program flow is conditional execution, i.e., only executing a gate when a certain condition applies. Conditional execution can be specified for all gates by prefixing `c-` to the gate name, and prefixing the operand list with a boolean expression serving as the condition. Examples:
 
@@ -1115,19 +1115,28 @@ The final method for working with program flow is conditional execution, i.e., o
 
 This notation not only allows for a more concise notation than the equivalent using jumps and labels, but it may also execute more efficiently in some cases, especially in the context of a VLIW architecture.
 
+For quantum gates, the condition can also be another qubit. This turns the gate into a controlled gate. However, since a qubit can also be used as a boolean representing its latest measurement, this requires disambiguation using the subscript notation:
+
+    c-z     ctrl_qubit, qubit   # Conditionally-executed Z based on
+                                #   ctrl_qubit's latest measurement
+    c-z     ctrl_qubit.b, qubit # Same as above, but more explicit
+    c-z     ctrl_qubit.q, qubit # Controlled phase
+
 Nesting `c-` is allowed, for instance:
 
     c-c-x   a, b, qubit         # Perform X gate if a and b are true
 
-You can also do
+You can of course also do
 
     c-x a && b, qubit
 
-which expands to
+but this expands to
 
     boolean temp
     land a, b -> temp
     c-x temp
+
+during expression synthesis. You can also mix qubit control and boolean conditions.
 
 Note: on rare occasions, code like `c-a` may appear in an expression, when you're trying to subtract `a` (or any other named value) from `c`. This will lead to an "unexpected CDASH" error from the parser, because `c-<identifier>` is a keyword. To avoid this error, place a space before and/or after the operator. The `c-` syntax is defined such for compatibility with 1.0.
 
@@ -1249,55 +1258,103 @@ As described earlier, the term *gate* is used for any quantum or classical opera
 
 ### Single-qubit gates
 
-The following single-qubit gates are defined:
+This section lists the single-qubit gates.
 
-| Syntax                        | Description           | Matrix                                                                         |
-|-------------------------------|-----------------------|--------------------------------------------------------------------------------|
-| `i    qubit`                  | Identity              | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/i.png)        |
-| `h    qubit`                  | Hadamard              | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/h.png)        |
-| `x    qubit`                  | Pauli-X               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/x.png)        |
-| `y    qubit`                  | Pauli-Y               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/y.png)        |
-| `z    qubit`                  | Pauli-Z               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/z.png)        |
-| `rx   qubit, angle`           | Arbitrary X rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/rx.png)       |
-| `ry   qubit, angle`           | Arbitrary Y rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/ry.png)       |
-| `rz   qubit, angle`           | Arbitrary Z rotation  | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/rz.png)       |
-| `x90  qubit`                  | 90-degree X rotation  | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/x90.png)        |
-| `y90  qubit`                  | 90-degree Y rotation  | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/y90.png)        |
-| `mx90 qubit`                  | -90-degree X rotation | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/mx90.png)       |
-| `my90 qubit`                  | -90-degree Y rotation | ![TODO](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/my90.png)       |
-| `s    qubit`                  | S/phase gate          | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/s.png)        |
-| `sdag qubit`                  | S/phase-dagger gate   | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/sdag.png)     |
-| `t    qubit`                  | T gate                | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/t.png)        |
-| `tdag qubit`                  | T-dagger gate         | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/tdag.png)     |
-| `u qubit, theta, phi, lambda` | Inline custom gate    | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/u-angle.png)  |
+#### X-rotations
 
-All angles are in radians, and are represented as double-precision floating points. Dynamic expressions can be used to define them.
+The following gate describes an arbitrary rotation around the X-axis of the Bloch sphere:
 
-> JvS: the matrix syntax for the custom unitary gate is taken from an undocument feature in 1.0's grammar. Actually, any single-qubit gate allows such a matrix to be specified... but since that doesn't to my knowledge make any sense I'm considering it a bug and won't enforce full backwards-compatibility for that.
+    rx      qubit, theta
+
+where `qubit` is any qubit resource, and `theta` expects a `double` expression (can be dynamic) representing the angle in radians. This operation is represented by the following matrix:
+
+![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/rx.png)
+
+Some special cases of this gate have synonyms:
+
+    mx90    qubit       # theta = -1/2 pi
+    i       qubit       # theta = 0 pi
+    x90     qubit       # theta = 1/2 pi
+    x       qubit       # theta = pi
+
+#### Y-rotations
+
+The following gate describes an arbitrary rotation around the Y-axis of the Bloch sphere:
+
+    ry      qubit, theta
+
+where `qubit` is any qubit resource, and `theta` expects a `double` expression (can be dynamic) representing the angle in radians. This operation is represented by the following matrix:
+
+![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/ry.png)
+
+Some special cases of this gate have synonyms:
+
+    my90    qubit       # theta = -1/2 pi
+    i       qubit       # theta = 0 pi
+    y90     qubit       # theta = 1/2 pi
+    y       qubit       # theta = pi
+
+#### Z-rotations
+
+The following gate describes an arbitrary rotation around the Z-axis of the Bloch sphere:
+
+    rz      qubit, theta
+
+where `qubit` is any qubit resource, and `theta` expects a `double` expression (can be dynamic) representing the angle in radians. This operation is represented by the following matrix:
+
+![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/ry.png)
+
+Some special cases of this gate have synonyms:
+
+    sdag    qubit       # theta = -1/2 pi
+    tdag    qubit       # theta = -1/4 pi
+    i       qubit       # theta = 0 pi
+    t       qubit       # theta = 1/4 pi
+    s       qubit       # theta = 1/2 pi
+    z       qubit       # theta = pi
+    rzk     qubit, k    # theta = pi / 2^k
+
+#### Multiple rotations
+
+It is also possible to perform multiple rotations at once, thereby describing any single-qubit gate, with the following syntax:
+
+    r       qubit, theta, phi, lambda
+
+where `qubit` is any qubit resource, and `theta`, `phi`, and `lambda` expect `double` expressions (can be dynamic) representing the angles in radians. This operation is represented by the following matrix:
+
+![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/r.png)
+
+The Hadamard gate is a special case of this:
+
+    h       qubit   # theta = 1/2 pi, phy = 0, lambda = pi
+
+Which reduces to:
+
+![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/h.png)
 
 ### Multi-qubit gates
 
-Two following two-qubit gates are defined:
+This section lists the multi-qubit gates.
 
-| Syntax                        | Description                    | Matrix                                                                       |
-|-------------------------------|--------------------------------|------------------------------------------------------------------------------|
-| `swap   qubit`                | Swap two qubits                | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/swap.png)   |
-| `sqswap qubit`                | Square-root of swap            | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/sqswap.png) |
-| `cnot   ctrl, target`         | CNOT/Controlled X              | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/cnot.png)   |
-| `cz ctrl, target`             | Controlled phase               | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/cz.png)     |
-| `cr ctrl, target, phi`        | Controlled phase with rotation | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/cr.png)     |
-| `crk qubit, angle, k`         | Controlled phase with rotation | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/crk.png)    |
+#### Swap gates
 
-The `phi` angle in `cr` is in radians, and is represented as a double-precision floating point. `k` is represented as a `uint<64>` (simply because this format can represent all unsigned integers supported by cQASM). These values can be specified using dynamic expressions.
+The following gate can be used to swap two qubits:
 
-The following three-qubit gates are defined:
+    swap    qa, qb
 
-| Syntax                                                         | Description  | Matrix                                                                      |
-|----------------------------------------------------------------|--------------|-----------------------------------------------------------------------------|
-| `toffoli ctrl, ctrl, target` or `ccnot ctrl, ctrl, target`     | Toffoli gate | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/ccnot.png) |
-| `fredkin ctrl, target, target` or `cswap ctrl, target, target` | Fredkin gate | ![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/cswap.png) |
+where `qa` and `qb` are two different qubits. This is represented by the following matrix:
 
-### Custom unitary gates
+![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/swap.png)
+
+cQASM 2.0 further introduces the sqswap gate:
+
+    sqswap  qa, qb
+
+which is represented by the following matrix:
+
+![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/sqswap.png)
+
+#### Custom unitary gates
 
 In addition to the gates specified above, it is also possible to specify a custom gate:
 
@@ -1313,18 +1370,40 @@ The Gram–Schmidt procedure is performed during semantic analysis to ensure tha
  - normalization is otherwise performed silently (so you explicitly do NOT need to scale the matrix yourself);
  - and orthogonalization affecting the matrix significantly results in a warning message including the evaluated unitary matrix.
 
-Note that macro subroutines can be used to define reusable custom gates. For instance:
+Note that macro subroutines can be used to define reusable custom gates. For instance, to implement the Ising gate:
 
-    def controlled_y(ctrl, target) {
-        u ctrl, target, [|
-            1,  0,  0,  0
-            0,  1,  0,  0
-            0,  0,  0,  -im
-            0,  0,  im, 0
+    def xx(qa, qb, phi) {
+        u qa, qb, [|
+                    1,          0,         0,  -im*exp(im*phi)
+
+                    0,          1,        -im,        0
+
+                    0,         -im,        1,         0
+
+            -im*exp(-im*phi),   0,         0,         1
         |]
     }
 
-    controlled_y ctrl, target
+    xx qa, qb, phi
+
+Note that this matrix is implicitly normalized through scaling by `1 / sqrt(2)`.
+
+#### Controlled gates
+
+As stated in the section about conditional execution, all qubit gates can be controlled by using the `c-` notation. Some examples:
+
+    c-x     qc,  qt         # Controlled-X a.k.a. CNOT
+    c-c-x   qc1, qc2, qt    # Toffoli gate
+    c-rzk   qc,  qt,  k     # Controlled phase as used in QFT
+
+For compatibility with cQASM 1.0 and to improve readability of some commonly used controlled gates, the following synonyms are defined:
+
+    cnot    qc,  qt         # = c-x     qc,  qt
+    ccnot   qc1, qc2, qt    # = c-c-x   qc1, qc2, qt
+    toffoli qc1, qc2, qt    # = c-c-x   qc1, qc2, qt
+    cz      qc,  qt         # = c-z     qc,  qt
+    cr      qc,  qt,  theta # = c-rz    qc,  qt,  theta
+    crk     qc,  qt,  k     # = c-rzk   qc,  qt,  k
 
 ### Measurement
 
