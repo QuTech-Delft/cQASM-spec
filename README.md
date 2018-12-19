@@ -1302,7 +1302,7 @@ The following gate describes an arbitrary rotation around the Z-axis of the Bloc
 
 where `qubit` is any qubit resource, and `theta` expects a `double` expression (can be dynamic) representing the angle in radians. This operation is represented by the following matrix:
 
-![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/ry.png)
+![matrix](https://github.com/QE-Lab/cQASM-spec/blob/master/gates/rz.png)
 
 Some special cases of this gate have synonyms:
 
