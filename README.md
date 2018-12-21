@@ -771,25 +771,25 @@ expands to
 
 Compare to using `let` instead of map:
 
-    let sqrthalf -> sqrt(0.5)
+    let sqrthalf = sqrt(0.5)
     double x = sqrthalf * 2.0
 
 which expands to
 
     double sqrthalf
     double x
-    sqrthalf -> 0.7071067811865476
+    mov 0.7071067811865476 -> sqrthalf
     mul sqrthalf, 2.0 -> x
 
 because resources are dynamic expressions. Likewise,
 
     map index -> 2
-    x qubit[index]
+    x qbit[index]
 
 is legal because index is static, but
 
     let index = 2
-    x qubit[index]  # Error: cannot index qubit arrays dynamically
+    x qbit[index]  # Error: cannot index qubit arrays dynamically
 
 is not.
 
@@ -802,7 +802,7 @@ Example of all of the above:
     let a = 1       # Declares int<64> a with initial value 1, hiding the previous a
     set b = 2       # b still refers to the previous a, so
     print a, b      # this prints "1 2"
-    let c -> b + 1  # Maps c to b + 1
+    map c -> b + 1  # Maps c to b + 1
     # set c = 2     # Illegal, b + 1 is not an lvalue
     print c         # Prints "3", because b (the first a declaration) was set to 2
     set b = 3       # Sets the first declaration of a to 3
@@ -934,9 +934,9 @@ This code reduces to the following:
     double temp_5
     mov 3 -> x
     mov 4 -> y
-    conv double, x -> temp_1
+    mov x -> temp_1
     mul temp_1, temp_1 -> temp_2
-    conv double, x -> temp_3
+    mov x -> temp_3
     mul temp_3, temp_3 -> temp_4
     add temp_2, temp_4 -> temp_5
     sqrt temp_5 -> dist
@@ -1011,7 +1011,7 @@ where `expr` is a static boolean expression (usually an inequality). If the expr
         mov f -> a
         mov tmp -> f
         if (n > 1) {
-            fib_rec(a, f, tmp, n - 1)
+            fib_rec a, f, tmp, n - 1
         }
     }
 
@@ -1024,7 +1024,7 @@ where `expr` is a static boolean expression (usually an inequality). If the expr
             mov 0 -> a
             mov 1 -> f
             if (n > 2) {
-                fib_rec(a, f, tmp, n + 2)
+                fib_rec a, f, tmp, n + 2
             }
         }
     }
@@ -1181,24 +1181,24 @@ This notation not only allows for a more concise notation than the equivalent us
 
 For quantum gates, the condition can also be another qubit. This turns the gate into a controlled gate. However, since a qubit can also be used as a boolean representing its latest measurement, this requires disambiguation using the subscript notation:
 
-    c-z     ctrl_qubit, qubit   # Conditionally-executed Z based on
+    c-z     ctrl_qbit, qbit     # Conditionally-executed Z based on
                                 #   ctrl_qubit's latest measurement
-    c-z     ctrl_qubit.b, qubit # Same as above, but more explicit
-    c-z     ctrl_qubit.q, qubit # Controlled phase
+    c-z     ctrl_qbit.b, qbit   # Same as above, but more explicit
+    c-z     ctrl_qbit.q, qbit   # Controlled phase
 
 Nesting `c-` is allowed, for instance:
 
-    c-c-x   a, b, qubit         # Perform X gate if a and b are true
+    c-c-x   a, b, qbit          # Perform X gate if a and b are true
 
 You can of course also do
 
-    c-x a && b, qubit
+    c-x a && b, qbit
 
 but this expands to
 
     boolean temp
     land a, b -> temp
-    c-x temp
+    c-x temp, qbit
 
 during expression synthesis. You can also mix qubit control and boolean conditions.
 
@@ -1467,6 +1467,7 @@ For compatibility with cQASM 1.0 and to improve readability of some commonly use
     cnot    qc,  qt         # = c-x     qc,  qt
     ccnot   qc1, qc2, qt    # = c-c-x   qc1, qc2, qt
     toffoli qc1, qc2, qt    # = c-c-x   qc1, qc2, qt
+    fredkin qc,  qt1, qt2   # = c-swap  qc,  qt1, qt2
     cz      qc,  qt         # = c-z     qc,  qt
     cr      qc,  qt,  theta # = c-rz    qc,  qt,  theta
     crk     qc,  qt,  k     # = c-rzk   qc,  qt,  k
