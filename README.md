@@ -1,4 +1,14 @@
-cQASM 2.0 specification
+This specification is currently in superposition
+================================================
+
+> JvS: It was pointed out to me that collaboration of cQASM extends much further than the confines of the TU Delft. Since this specification has not been sufficiently (read: at all) communicated with the other collaborators, it is essentially void until further negotiation. Depending on the direction Koen wants to go in, this specification will either turn into essentially a "TU Delft extension" of cQASM 1.0, or collaboration will continue (slowly) as it has before. In the former case I will probably be making dynamic indexation of qubits part of the specification again in the form of some extension, so cQASM 2.0 can be transpiled into the language specified here. In the latter case this document should be considered as suggestions for 2.0 and 3.0 (in the interest of time, many of the newly added features would not make it to 2.0).
+>
+> Obviously this means that this specification will NOT be frozen as of 2018-12-21.
+>
+> The working document for cQASM 2.0 is, again, [on Overleaf](https://www.overleaf.com/project/59690199d094287443563643), as it is the de facto standard among the current collaborators, and it was ultimately just never up to me to move it to git.
+
+
+????????? specification
 =======================
 
 This is intended to be a working document for the cQASM 2.0 specification. Feel free to add comments/notes using blockquotes (add your name to the top of it to keep things clear, though `git blame` can always be used in case of confusion). You should be able to use github's built-in editor to edit this file. You can also use the issue system to request and discuss changes.
@@ -72,6 +82,9 @@ The only two tools that are expected to support the full featureset of cQASM are
 Planning
 --------
 
+Planning is TBD.
+
+<!---
 This table should be removed eventually, but for now I feel like keeping everything in one place is a good idea:
 
 | OK | Feature                             | Dependencies                        | Priority | Responsible | Deadline    |
@@ -102,7 +115,7 @@ This table should be removed eventually, but for now I feel like keeping everyth
 |    | QX classical type conversions       | Support for types to convert        | ?        | ?           | ?           |
 |    | **OpenQL**                          |                                     |          | Imran?      |             |
 |    | OpenQL ???                          | libcqasm2 API specification?        | ?        | ?           | ?           |
-
+--->
 
 Overview of changes from 1.0 to 2.0
 -----------------------------------
