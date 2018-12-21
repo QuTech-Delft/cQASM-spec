@@ -1641,13 +1641,15 @@ Pragmas and annotations are a way to specify things that have no business being 
 
 Pragmas behave like statements. They are specified as follows:
 
-    pragma target name {|...|}
+    pragma target name
+    pragma target name: ...
 
-where `target` and `name` are identifiers used to specify what the pragma is all about, and `{|...|}` is an optional JSON literal. The `target` identifier is used by targets to detect whether the annotation is meant for them; they can silently ignore any pragmas intended for different targets this way. Conversely, a target is allowed to throw an error if a pragma meant for it has an invalid name or is used incorrectly. If there is no specific target, `com` (abbreviation for common) may be used.
+where `target` and `name` are identifiers used to specify what the pragma is all about, and `...` is an optional comma-separated list of any combination of expressions, strings, JSON strings, and matrices. The `target` identifier is used by targets to detect whether the annotation is meant for them; they can silently ignore any pragmas intended for different targets this way. Conversely, a target is allowed to throw an error if a pragma meant for it has an invalid name or is used incorrectly. If there is no specific target, `com` (abbreviation for common) may be used.
 
 Annotations instead add arbitrary data to existing constructs. Their syntax is as follows:
 
-    ... @target name {...}
+    ... @target name
+    ... @target name: ...
 
 They can be applied to any cQASM statement (including pragmas and bundles) and to individual gates. When there is ambiguity between gate and bundle annotations, the gates are preferred. For example:
 
@@ -1668,13 +1670,13 @@ The following pragmas replace what was dedicated syntax in 1.0:
     pragma qx display
     pragma qx display_binary
     pragma qx reset_averaging
-    pragma qx error_model {"name": "depolarizing_channel", args: [...]}
+    pragma qx error_model: depolarizing_channel, [...]
 
 #### Tracing line numbers
 
 The following annotation specifies information about the original source of a statement across compilation steps:
 
-    @com src {"line_nr": int, "file": "filename", ...}
+    @com src: {|"line_nr": int, "file": "filename", ...|}
 
 Compilation steps may include additional information to the JSON object if they want.
 
@@ -1682,7 +1684,7 @@ Compilation steps may include additional information to the JSON object if they 
 
 The following pragma marks two scalar resources as being mutually exclusive:
 
-    pragma com exclusive {"a": "scalar_x", "b": "scalar_y"}
+    pragma com exclusive: scalar_x, scalar_y
 
 For a simulator tracking uninitialized values, this pragma means that writing to `scalar_x` should invalidate `scalar_y` and vice versa. This will basically never be useful for handwritten cQASM, but is very useful in the following cases:
 
@@ -1692,10 +1694,10 @@ For a simulator tracking uninitialized values, this pragma means that writing to
 ```
 int<64> reg64[16]
 int<32> reg32[32]
-pragma com exclusive {"a": "reg32[0]", "b": "reg64[0]"}
-pragma com exclusive {"a": "reg32[1]", "b": "reg64[0]"}
-pragma com exclusive {"a": "reg32[2]", "b": "reg64[1]"}
-pragma com exclusive {"a": "reg32[3]", "b": "reg64[1]"}
+pragma com exclusive: reg32[0], reg64[0]
+pragma com exclusive: reg32[1], reg64[0]"
+pragma com exclusive: reg32[2], reg64[1]"
+pragma com exclusive: reg32[3], reg64[1]"
 ...
 ```
 
