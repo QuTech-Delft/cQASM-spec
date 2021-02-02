@@ -1,3 +1,9 @@
+# Beware anyone who stumbles into this by chance
+
+This is very much a work in progress, and currently is more of an example
+than an actual specification! The real docs for cQASM are
+[here](https://libqasm.readthedocs.io/en/latest/).
+
 cQASM 2.0 goals
 ===============
 
@@ -19,6 +25,9 @@ cQASM 2.0 goals
    maybe a simulator. Keep in mind that a programming language is an interface
    between components, and changing interfaces should be avoided as much as
    possible. Therefore, when you have to change it, change as much as possible.
+
+ - Nevertheless, the new features are to be chosen such that they do not
+   fundamentally emburden other parts of the toolchain, notably compilation.
 
  - Take the chance to re-engineer the syntax of the language to get rid of
    strange and annoying exceptions in the grammar and lexical rules, at the
