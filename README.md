@@ -9,15 +9,15 @@ cQASM 2.0 goals
 
  - Add the usual classical constructs (if-else, loops, etc.) in both runtime
    and generative forms, to make programming in cQASM more ergonomic (and, in
-   time, hopefully allow the OpenQL Python API to be deprecated), and to
-   support runtime classical constructs in Quantum Inspire.
+   time, hopefully allow the OpenQL Python API for constructing kernels to be
+   deprecated), and to support runtime classical constructs in Quantum
+   Inspire.
 
  - Return to the state where a (set of) cQASM files can be simulated without
-   context (i.e., without needing to recompile the simulator if some backend
-   decides to add a new primitive gate), without losing generality.
-   Essentially, allow gate/instruction sets to be defined from within cQASM
-   (include) files by leveraging the new classical constructs. Then actually
-   update the frontend of QX (and DQCsim) accordingly.
+   context, without losing generality. Essentially, allow gate/instruction
+   sets to be defined from within cQASM (include) files by leveraging the new
+   classical constructs. Then actually update the frontend of QX (and DQCsim)
+   accordingly.
 
  - The newly added constructs should be as general as can reasonably be
    implemented *IN LIBQASM*. It is absolutely a non-goal to immediately
