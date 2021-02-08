@@ -206,10 +206,6 @@ The following constructs are proposed. Exact syntax is TBD.
    a special "elsif" construct. It may also be possible to use this construct
    in a functional context, by replacing the blocks with expressions.
 
- - `switch (<value>) ( case <val1>: <block1> [...] [else: <block>] )`:
-   C-style switch statement, using `break` to control whether cases fall
-   through or not.
-
  - `match (<value>) ( case <val1>: <block1> [...] [else: <block>] )`:
    Rust-style match stastement. Like `switch`, but with the added requirement
    that at most one code block is executed. It may also be possible to use this
@@ -225,6 +221,12 @@ The following constructs are proposed. Exact syntax is TBD.
  - `while (<cond>) <block>`: C-style while loop. This is the same as the for
    loop above with empty startup and increment blocks, and can thus just be
    syntactic sugar for that.
+ 
+ - `repeat <block> until (<cond>)`: like a for loop, but with the condition
+   at the end. The block is always executed once, and will continue to be
+   executed until the condition evaluates to true (note that this is the
+   complement to C's do-while, without loss of generality), or as long as
+   `continue` is called in the block.
 
  - `foreach ([<name> :] <tuple>) <block>` foreach loop. With the addition of a
    range operator (likely this will be `..`, for example `2..5` resulting in
