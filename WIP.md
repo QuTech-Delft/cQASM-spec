@@ -173,7 +173,7 @@ Hexadecimal integer literal unit
 
 Allows integer literals to be specified in hexadecimal format.
 
-Syntax: matching regex `0x[0-9a-fA-F][0-9a-fA-F_]*`.
+Syntax: matching regex `0x[0-9a-fA-F_]+`.
 
 Return type: `int`.
 
@@ -194,7 +194,7 @@ Binary integer literal unit
 
 Allows integer literals to be specified in binary format.
 
-Syntax: matching regex `0x[01][01_]*`.
+Syntax: matching regex `0b[01_]+`.
 
 Return type: `int`.
 
@@ -231,6 +231,10 @@ readable.
 
 If the number is not representable in IEEE 754 binary64, it is silently rounded
 to the nearest representable value.
+
+> Negative reals are constructed via constant propagation through the unary
+> minus operator. Complex numbers are constructed similarly using binary
+> operators and the imaginary unit, predefined as `im`.
 
 String literal unit
 -------------------
@@ -274,25 +278,6 @@ Side effects: none.
 
 Definitions: none.
 
-Range unit
-----------
-
-Allows numerical ranges to be specified intuitively.
-
-Syntax: `<from> .. <to>`, where `<from>` and `<to>` are static units returning
-the same, enumerable type.
-
-Return type: a tuple of size |`<from>` - `<to>`| + 1 with element type
-corresponding to `<from>`/`<to>`.
-
-Return value: the values in the type of `<from>`/`<to>` from `<from>` to `<to>`
-inclusive, with order depending whether `<from>` is less than or greater than
-`<to>` (note that the order does not matter when `<from>` == `<to>`).
-
-Side effects: none.
-
-Definitions: none.
-
 Reference unit
 --------------
 
@@ -320,8 +305,26 @@ alias is resolved.
 > value, variable definitions create an alias referring to a "literal"
 > `reference` value witout indexing, and so on.
 
-All reference units must resolve to something. If no alias exists for a given
-name, an error is thrown during parsing.
+> Note: `qref` and `reference` are two different things. You can have a
+> reference to a `qubit`, or a reference to a `qref`. To be clear:
+>
+>  - a variable of type `qubit` represents an actual qubit, either already
+>    physical, or a virtual qubit to be mapped to a physical qubit;
+>  - a `reference` to a `qubit` variable represents a compile-time reference
+>    to that variable, or an index thereof (note that the index might be
+>    statically known, but might also be a dynamic expression of some kind);
+>  - a variable/constant/parameter of type `qref` represents a link to a qubit
+>    that can potentially be mutated at runtime via assignment statements (if
+>    non-constant);
+>  - a `reference` to a `qref` variable represents a compile-time reference to
+>    the above.
+>
+> Note in particular that `reference` is an internal type of which the values
+> are only used to communicate links to storage locations at compile-time,
+> while a `qref` is something that exists at runtime.
+
+Whenever a name does not resolve to anything currently in scope, an
+`unresolved` for the name is returned instead.
 
 Operator reference unit
 -----------------------
@@ -329,7 +332,11 @@ Operator reference unit
 Allows operator functions to be referenced.
 
 Syntax: `operator <op>`, where `<op>` is one of the overloadable unary or
-binary operator tokens.
+binary operator tokens: `~`, `!`, `*`, `**`, `/`, `//`, `%`, `+`, `-`, `<<`,
+`>>`, `>>>`, `<`, `<=`, `>`, `>=`, `==`, `!=`, `&`, `^`, `^^`, or `|`.
+
+> Note: assignments and the short-circuiting operators cannot be overloaded
+> or referenced this way.
 
 Return type: `function`.
 
@@ -379,21 +386,20 @@ Definitions: none.
 > I'm not sure how to formally define this one in prose, but the idea is that
 > `(1; 2)` is equivalent to/shorthand for `((1,), (2,))`, i.e. a row vector.
 
-Unpacking unit
---------------
+One-dimensional unpacking unit
+------------------------------
 
-For allowing `pack`s to be used in contexts where a comma-separated construct
-(`csep`) is expected.
+For allowing `pack`s and `tuple`s to be used in contexts where a
+comma-separated construct (`csep`) is expected.
 
 Syntax: `*<unit>`, where `<unit>` is an expression unit returning a `pack` or
-`tuple`, or a `csep` of such expression units.
+`tuple`.
 
-Return type: the elements of the `tuple`(s)/`pack`(s) as a `csep`.
+Return type: the elements of the `tuple`/`pack` as a `csep`.
 
-Return value: the elements of the `tuple`(s)/`pack`(s) as a `csep`.
+Return value: the elements of the `tuple`/`pack` as a `csep`.
 
-Side effects: the side effects of the `tuple`(s)/`pack`(s), individually for
-each `csep` element.
+Side effects: the side effects of the `tuple`/`pack`.
 
 Definitions: none.
 
@@ -409,6 +415,49 @@ Definitions: none.
 >    directly. For example, `const a = (0, 3, 2); max(*a)` will look for the
 >    function `max` with 3 integer arguments, rather than a single argument of
 >    type `int[3]`.
+
+Two-dimensional unpacking unit
+------------------------------
+
+> Note: this is sort of the logical amalgamation of the two-dimensional packing
+> unit and the one-dimensional unpacking unit. But I'm not sure if the
+> construct would be useful anywhere currently.
+
+For allowing `pack`s and `tuple`s of `pack`s/`tuple`s to be used in contexts
+where a semicolon- and comma-separated construct (`scsep` of `csep`) is
+expected.
+
+Syntax: `**<unit>`, where `<unit>` is an expression unit returning a `pack` or
+`tuple`, each returning a `pack` or `tuple` of its own.
+
+Return type: the elements of the two-dimensional `tuple`/`pack` as an `scsep`
+of `csep`.
+
+Return value: the elements of the two-dimensional `tuple`/`pack` as an `scsep`
+of `csep`
+
+Side effects: the side effects of the two-dimensional `tuple`/`pack`.
+
+Definitions: none.
+
+Range unit
+----------
+
+Allows numerical ranges to be specified intuitively.
+
+Syntax: `<from> .. <to>`, where `<from>` and `<to>` are static units returning
+the same, enumerable type.
+
+Return type: a tuple of size |`<from>` - `<to>`| + 1 with element type
+corresponding to `<from>`/`<to>`.
+
+Return value: the values in the type of `<from>`/`<to>` from `<from>` to `<to>`
+inclusive, with order depending whether `<from>` is less than or greater than
+`<to>` (note that the order does not matter when `<from>` == `<to>`).
+
+Side effects: none.
+
+Definitions: none.
 
 Block unit
 ----------
@@ -554,6 +603,9 @@ Syntax: `<value>[<index>]`, where:
     - a `csep` of the above, of at most the number of elements as `<value>` has
       dimensions.
 
+> Note the ambiguity in the syntax notation here... the `[]` are explicit in
+> the syntax rather than denoting that `<index>` is optional (it is mandatory).
+
 Return type:
  - if (the comma-separated subunits in) `<index>` promote(s) to a single
    integer, the type of `<value>`, with outer dimensions stripped as per
@@ -599,7 +651,7 @@ Transposed indexing unit
 
 Allows `pack`s and `tuple`s to be indexed, sliced, and swizzled.
 
-Syntax: `<value>[*<index>]`, where:
+Syntax: `<value>[transpose <index>]`, where:
  - `<value>` is the to-be-indexed expression unit, which must be of type `pack`
    or `tuple`, or a `reference` thereof;
  - `<index>` is the index, which must be either:
@@ -608,6 +660,10 @@ Syntax: `<value>[*<index>]`, where:
       `<value>` (a single `int` is treated as a one-tuple of type `int`);
     - a `csep` of the above;
     - an `scsep` of the above.
+
+> Note the ambiguity in the syntax notation here... the `[]` are explicit in
+> the syntax rather than denoting that `transpose <index>` is optional (it is
+> mandatory).
 
 Return type: a tuple of the shape defined by the shape of the
 semicolons/commas as it would be in the tuple unit, with the element type
@@ -639,19 +695,22 @@ Tuple type unit
 
 Allows tuple *types* to be constructed.
 
-Syntax: `<type>[[<size>]]`, where:
+Syntax: `<type>[[<size>|*]]`, where:
  - `<type>` is typename unit;
  - `<size>` is an optional static unit that promotes to `int` or a `csep`
    thereof.
 
 > Note the ambiguity in the syntax notation here... the outer `[]` are explicit
-> in the syntax, the inner `[]` imply that `<size>` is optional.
+> in the syntax, the inner `[]` imply that `<size>` or `*` are optional.
 
 Return type: `typename`.
 
-Return value: depends on `<size>`:
+Return value: depends on `<size>`/`*`:
  - if not specified (i.e. `<type>[]`), a `tuple` type with unbound size is
    returned;
+ - if an asterisk is specified (i.e. `<type>[*]`), a `tuple` type with unbound
+   size is returned, marked as being a vararg tuple (this is only to be used in
+   function prototype specifications);
  - if a single `int` (e.g. `<type>[3]`), a `tuple` type consisting of `<size>`
    elements of type `<type>` is returned;
  - if multiple comma-separated `int`s (e.g. `<type>[3, 4]`), the effect is the
@@ -772,7 +831,8 @@ Allows variables to be assigned or modified.
 
 Syntax: `<lhs> <assignop> <rhs>`, where:
  - `<lhs>` is a static unit of type `reference` (note that static reference
-   values may include non-static indices), or a `pack`, or `tuple` thereof;
+   values may include non-static indices), referring to a variable with a
+   non-quantum type, or a `pack`, or `tuple` thereof;
  - `<assignop>` is one of `=`, `*=`, `**=`, `/=`, `//=`, `%=`, `+=`, `-=`,
    `<<=`, `>>=`, `>>>=`, `&=`, `^=`, or `|=`;
  - `<rhs>` is an expression unit.
@@ -796,12 +856,51 @@ Definitions: none.
 A modifying assignment is only legal when the resolved operator overload
 returns a value of the same type as its left-hand side.
 
+Declaration unit
+----------------
+
+Used in variable, constant, alias, and function parameter specifications to
+combine a name and a type.
+
+Syntax: `<name>: <type>`, where:
+ - `<name>` is a static unit that promotes to `unresolved`;
+ - `<type>` is a typename unit.
+
+Return type: `declaration`.
+
+Return value: a declaration with the given name and type.
+
+Side effects: none.
+
+Definitions: none.
+
+Initialization/default unit
+---------------------------
+
+Allows declarations to be given an initial or default value.
+
+Syntax: `<decl> = <init>`, where:
+ - `<decl>` is a static unit of type `declaration` with no previously bound
+   default value;
+ - `<init>` is an expression unit.
+
+Return type: `declaration`.
+
+Return value: the original declaration with initial value attached.
+
+Side effects: the side effects of `<init>`.
+
+Definitions: none.
+
+> Note that in the grammar this is the same rule as an assignment statement.
+> They are disambiguated based on the type of the left-hand side.
+
 Variable definition unit
 ------------------------
 
 Allows variables to be defined.
 
-Syntax: `[export|global] [static] [primitive] var <name> [: <type>] [= <init>]`, where:
+Syntax: `[export|global] [static] [primitive] var <decl>`, where:
  - the `export` keyword indicates that the variable should be declared in the
    parent scope rather than the current scope;
  - the `global` keyword indicates that the variable should be declared in the
@@ -811,21 +910,19 @@ Syntax: `[export|global] [static] [primitive] var <name> [: <type>] [= <init>]`,
  - the `primitive` keyword indicates that the variable refers to a physical
    resource on the target, that the compiler should recognize by name or by
    means of annotations;
- - `<name>` is the identifier that will be added to the target scope to refer
-   to the variable;
- - `<type>` is a typename unit that optionally specifies the type of the
-   variable, which must be a runtime type;
- - `<init>` is a runtime & statically instantiable expression unit that
-   optionally specifies the initial value for the variable.
+ - `<decl>` is a unit of type `declaration` or `csep` thereof.
 
 Return type: void.
 
 Return value: null.
 
-Side effects: the side effects of `<init>`.
+Side effects: the side effects of `<decl>`.
 
-Definitions: `<name>` is defined as an alias for the reference to the
-constructed variable in either the current, parent, or global scope.
+Definitions:
+ - (a) variable(s) of the type(s) specified in `<decl>` are allocated in the
+   current stack frame (if any, and `static` is not specified) or globally;
+ - the name of `<decl>` is defined as an alias for the reference to the
+   constructed variable in either the current, parent, or global scope.
 
 `export` is illegal in the outermost scope of a function body.
 
@@ -929,15 +1026,13 @@ Function declaration unit
 
 Allows functions to be declared before they are defined.
 
-Syntax: `future function <name> [*]([<types>]) [-> <return>]`, where:
+Syntax: `future function <name> ([<types>]) [-> (<return>)]`, where:
  - `<name>` is either an identifier, the `operator` keyword followed by
    an overloadable operator token (operator overload), or the `operator`
    keyword followed by an identifier (custom promotion rule);
- - `*`: if specified, at least one parameter must be specified, and the last
-   parameter must be of a `tuple` type with undefined size, representing a
-   variable number of arguments;
- - `<types>` is an optional static typename unit or a `csep` thereof,
-   representing the function paramater pack for overload resolution;
+ - `<types>` is an optional static typename unit, declaration unit, or a `csep`
+   thereof, representing the function paramater pack for overload resolution,
+   where each type must be static or runtime, and must not be quantum;
  - `<return>` is an optional static typename unit representing the return
    type for the function.
 
@@ -981,7 +1076,7 @@ Function definition unit
 
 Allows functions to be defined.
 
-Syntax: `[export|global] [inline|runtime|primitive] function <name> [<annot>] [*]([<types>]) [-> <return>] <body>`,
+Syntax: `[export|global] [inline|runtime|primitive] function <name> [<annot>] ([<types>]) [-> (<return>)] <body>`,
 where:
  - the `export` keyword indicates that the function should be declared in the
    parent scope rather than the current scope;
@@ -1008,7 +1103,8 @@ where:
    parameter must be of a `tuple` type with undefined size, representing a
    variable number of arguments;
  - `<types>` is an optional static typename unit or a `csep` thereof,
-   representing the function paramater pack for overload resolution;
+   representing the function paramater pack for overload resolution, where each
+   type must be static or runtime, and must not be quantum;
  - `<return>` is an optional static typename unit representing the return
    type for the function;
  - `<body>` is any unit (usually a block) returning a value of a type that can
@@ -1138,7 +1234,7 @@ If/else statement unit
 Allows blocks to be executed conditionally using ALU branches or conditional
 execution.
 
-Syntax: `[inline|runtime|primitive] if [<annot>] (<condition>) [-> <return>] <if-true> [elsif (<cond2>) <if-cond2>]* [else <if-false>]`,
+Syntax: `[inline|runtime|primitive] if [<annot>] (<condition>) [-> <return>] <if-true> [elif (<cond2>) <if-cond2>]* [else <if-false>]`,
 where:
  - the `inline` keyword indicates that the statement statement *must* be
    inlined during constant propagation, implying that `<condition>` must be a
@@ -1179,13 +1275,13 @@ of `<if-false>`.
 The return value of the selected block is discarded if `<return>` is not
 specified.
 
-> Note that `else if` works just as well as `elsif`, but would require you to
+> Note that `else if` works just as well as `elif`, but would require you to
 > repeat the return type if return types are used.
 
 Conditional execution unit
 --------------------------
 
-Provides a shorthand notation for `primitive if` with no `elsif` or `else`.
+Provides a shorthand notation for `primitive if` with no `elif` or `else`.
 
 Syntax: `cond [<annot>] (<condition>) <unit>`, where:
  - `<annot>` consists of zero or more annotation objects of the form
@@ -1211,11 +1307,11 @@ error if not supported.
 Match unit
 ----------
 
-Provides a shorthand notation for an if-elsif-else statement where each
+Provides a shorthand notation for an if-elif-else statement where each
 condition is a simple equality check between a single unknown value and a
 literal, without re-evaluating the unknown value for every match arm.
 
-Syntax: `[inline|runtime|primitive] match [<annot>] (<unknown>) [-> <return>] { when <val1> -> <unit1> [...] [when others -> <otherwise>] }`,
+Syntax: `[inline|runtime|primitive] match [<annot>] (<unknown>) [-> <return>] { when <val1>: <unit1> [...] [else <otherwise>] }`,
 where:
  - the `inline` keyword indicates that the statement statement *must* be
    inlined during constant propagation, implying that `<unknown>` must be a
@@ -1267,7 +1363,7 @@ For loop unit
 
 Allows dynamic loops to be specified.
 
-Syntax: `[runtime|primitive] for [#<lbl>] [<annot>] (<control>) <body>`, where:
+Syntax: `[runtime|primitive] for [.<lbl>] [<annot>] (<control>) <body>`, where:
  - the `runtime` keyword indicates that the statement *must* be implemented
    using classical branch statements (i.e., a compiler must generate an error
    if this is impossible);
@@ -1330,7 +1426,7 @@ While loop unit
 
 Syntactic sugar for a for loop unit with null init and update.
 
-Syntax: `[runtime|primitive] while [#<lbl>] [<annot>] (<cond>) <body>`, where:
+Syntax: `[runtime|primitive] while [.<lbl>] [<annot>] (<cond>) <body>`, where:
  - the `runtime` keyword indicates that the statement *must* be implemented
    using classical branch statements (i.e., a compiler must generate an error
    if this is impossible);
@@ -1374,7 +1470,7 @@ Repeat until unit
 Like a while loop, but with the condition at the end and the body evaluated at
 least once.
 
-Syntax: `[runtime|primitive] repeat [#<lbl>] [<annot>] <body> until (<cond>)`, where:
+Syntax: `[runtime|primitive] repeat [.<lbl>] [<annot>] <body> until (<cond>)`, where:
  - the `runtime` keyword indicates that the statement *must* be implemented
    using classical branch statements (i.e., a compiler must generate an error
    if this is impossible);
@@ -1417,7 +1513,7 @@ Foreach loop unit
 A loop for which the (maximum) iteration count is known at compile-time,
 iterating over the elements of a `tuple`.
 
-Syntax: `[static] [inline|runtime|primitive] foreach [#<lbl>] [<annot>] ([<name> :] <tuple>) <body>`,
+Syntax: `[static] [inline|runtime|primitive] foreach [.<lbl>] [<annot>] ([<name> :] <tuple>) <body>`,
 where:
  - the `static` keyword asserts that, when the loop returns, the number of
    iterations must be exactly the number of elements in `<tuple>`, and `<body>`
@@ -1539,8 +1635,8 @@ Send unit
 The send unit models information transfer from the classical processor to the
 host.
 
-Syntax: `_builtin_send([<args>])`, where `<args>` is an optional expression
-unit or `csep` thereof.
+Syntax: `send([<args>])`, where `<args>` is an optional expression unit or
+`csep` thereof.
 
 Return type: void.
 
@@ -1558,8 +1654,8 @@ Receive unit
 The receive unit models information transfer from the host to the classical
 processor.
 
-Syntax: `_builtin_receive([<types>])`, where `<types>` is an optional typename
-unit or `csep` thereof.
+Syntax: `receive([<types>])`, where `<types>` is an optional typename unit or
+`csep` thereof.
 
 Return type: a pack of the given `<types>`, or void if `<types>` is not
 specified.
@@ -1759,7 +1855,11 @@ A *static* type is a type that can be instantiated at compile-time (i.e. one
 that can exist as the result of a constant-propagated expression, in some
 cases a literal, or can be bound to a constant).
 
-A *user* type is a runtime type defined using the `typedef` construct.
+A *quantum* type is a type representing quantum information. Quantum
+information cannot be copied, and thus cannot be used in many contexts; it
+is typically only used in variable declarations to declare resource usage.
+
+A *user* type is a runtime type defined using the `type` construct.
 
 A *product* type is a type defined as the product of other types.
 
@@ -1770,7 +1870,8 @@ logically enumerated. That is, types derived from `bool`, `int`, or custom
 enumerations.
 
 The following builtin types exist:
- - `qubit`: a runtime, non-static type for qubits.
+ - `qubit`: a runtime, quantum type for non-static type for qubits.
+ - `qref`: a runtime, static type for referring to qubits.
  - `bool`: a runtime, static type for boolean values (either true or false)
  - `int`: a static, non-runtime type identifying for integers between -2^63 and
    2^63-1 inclusive;
@@ -1792,7 +1893,11 @@ The following builtin types exist:
  - `reference`: an internal, static, non-runtime type for referring to one or
    more variables or indices thereof;
  - `function`: an internal, static, non-runtime type for referring to all
-   overloads of some named function or operator in a particular scope.
+   overloads of some named function or operator in a particular scope;
+ - `unresolved`: an internal, static, non-runtime type for unresolved
+   identifiers;
+ - `declaration`: an internal, static, non-runtime type for declarations
+   (variables, constants, aliases, or function parameters).
 
 *void* is used as a synonym for a pack with zero subtypes. Its sole value is
 referred to as *null*.
@@ -1803,3 +1908,8 @@ referred to as *null*.
 > pointer), `reference` (i.e. pointers/references), or `typename` (i.e. dynamic
 > types). It also means that any classical types that the target architecture
 > can deal with at runtime (besides `bool`) must be user-defined.
+
+
+
+
+TODO: definitions cannot start with `_builtin_` (reserved prefix)
