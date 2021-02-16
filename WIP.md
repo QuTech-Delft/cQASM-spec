@@ -721,8 +721,8 @@ Side effects: none.
 
 Definitions: none.
 
-Unary expression unit
----------------------
+Regular unary expression unit
+-----------------------------
 
 Allows unary expressions to be applied to expressions.
 
@@ -806,9 +806,9 @@ Ternary conditional unit
 Ternary conditional operator with short-circuiting behavior. Essentially this
 is shorthand for if-else.
 
-Syntax: `<cond> ? <a> : <b>`, where:
- - `<cond>` is a scalar expression unit returning a value of type `bool`;
- - `<a>` and `<b>` are scalar expression units with no definitions.
+Syntax: `<a> when <cond> else <b>`, where:
+ - `<a>` and `<b>` are scalar expression units with no definitions;
+ - `<cond>` is a scalar expression unit returning a value of type `bool`.
 
 Return type: the type returned by `<a>` if `<cond>` evaluates to true, or the
 type returned by `<b>` if `<cond>` evaluates to false.
@@ -823,6 +823,11 @@ Definitions: none.
 
 If `<cond>` is not static, `<a>` and `<b>` must be of the exact same type;
 there is no logic to determine a type that all subtypes can promote to.
+
+> Note: this syntax is used rather than the C syntax because the `<a> : <b>`
+> part of the C syntax conflicts with the declaration unit, and rather than
+> the Python syntax because it can't be distinguished from a normal `if` due
+> to `x;` being an expression as well as a statement.
 
 Assignment unit
 ---------------
@@ -906,7 +911,9 @@ Syntax: `[export|global] [static] [primitive] var <decl>`, where:
  - the `global` keyword indicates that the variable should be declared in the
    global scope rather than the current scope;
  - the `static` keyword indicates that the variable should be bound to
-   statically allocated program memory rather than the current stack frame;
+   statically allocated program memory rather than the current stack frame (if
+   any), *and* that the initializing expression (if any) must be statically
+   evaluable;
  - the `primitive` keyword indicates that the variable refers to a physical
    resource on the target, that the compiler should recognize by name or by
    means of annotations;
@@ -926,20 +933,19 @@ Definitions:
 
 `export` is illegal in the outermost scope of a function body.
 
-`global` implies `static` (that is, `static` may be omitted for `global`
-variables).
-
 `primitive` implies `static` (that is, `static` may be omitted for `primitive`
 variables).
 
-The `static` keyword is no-op when the variable definition is not inside a
-function body.
-
 > Note that `global`/`export` and `static` control different things: the former
-> controls the *visibility* of the variable, while `static` controls whether it
-> is allocated globally or on the stack frame of the current function. It is
-> always no-op for targets that don't support stack frames or function
-> recursion, as in this case everything can be allocated globally.
+> controls the *visibility* of the variable, while `static` controls its
+> lifetime; unlike C++, `static` is never abused for visibility (of functions).
+> `static`'s counterpart would be `auto` in C lingo, but no one ever really
+> uses that because it's the default. Note that while cQASM 2.0 has no
+> specified RAII mechanics (because nothing would make use of it), there is
+> still a difference between a regular non-stacked variable and a static
+> non-stacked variable: the former may (need to) be initialized at runtime due
+> to a non-static initializer expression, while the latter mandates that the
+> initializer expression can be evaluated at compile-time.
 
 Either `<type>` or `<init>` must be specified.
 
@@ -961,11 +967,13 @@ Constant definition unit
 
 Allows constants to be defined.
 
-Syntax: `[export|global] const <name> [: <type>] = <value>`, where:
+Syntax: `[export|global] [static] const <name> [: <type>] = <value>`, where:
  - the `export` keyword indicates that the constant should be declared in the
    parent scope rather than the current scope;
  - the `global` keyword indicates that the constant should be declared in the
    global scope rather than the current scope;
+ - the `static` keyword asserts that the initializer expression can be
+   evaluated at compile-time;
  - `<name>` is the identifier that will be added to the target scope to refer
    to the constant;
  - `<type>` is a typename unit that optionally specifies the type of the
@@ -1171,7 +1179,7 @@ Type definition unit
 
 Allows types to be defined.
 
-Syntax: `[export|global] [primitive] type <name> = <parent>` or `... type <name>: (<values>)`,
+Syntax: `[export|global] [primitive] type <name> = <parent> { <TODO> }` or `... type <name>: (<values>)`,
 where:
  - the `export` keyword indicates that the type should be declared in the
    parent scope rather than the current scope;
@@ -1234,7 +1242,7 @@ If/else statement unit
 Allows blocks to be executed conditionally using ALU branches or conditional
 execution.
 
-Syntax: `[inline|runtime|primitive] if [<annot>] (<condition>) [-> <return>] <if-true> [elif (<cond2>) <if-cond2>]* [else <if-false>]`,
+Syntax: `[inline|runtime|primitive] if [<annot>] (<condition>) [-> (<return>)] <if-true> [elif (<cond2>) <if-cond2>]* [else <if-false>]`,
 where:
  - the `inline` keyword indicates that the statement statement *must* be
    inlined during constant propagation, implying that `<condition>` must be a
@@ -1513,7 +1521,7 @@ Foreach loop unit
 A loop for which the (maximum) iteration count is known at compile-time,
 iterating over the elements of a `tuple`.
 
-Syntax: `[static] [inline|runtime|primitive] foreach [.<lbl>] [<annot>] ([<name> :] <tuple>) <body>`,
+Syntax: `[static] [inline|runtime|primitive] foreach [.<lbl>] [<annot>] (<tuple>) <body>`,
 where:
  - the `static` keyword asserts that, when the loop returns, the number of
    iterations must be exactly the number of elements in `<tuple>`, and `<body>`
@@ -1532,9 +1540,8 @@ where:
  - `<annot>` consists of zero or more annotation objects of the form
    `@<iface>.<oper>([<expr>])` (this is syntactic sugar for applying the
    annotation unit to the complete statement for each annotation);
- - `<name>` is an optional name for a special constant defined only within
-   `<body>` that takes the value of the tuple element for the current
-   iteration;
+ - `<tuple>` is a unit returning either a `tuple` or a `definition` with
+   an initializing expression that returns a `tuple`;
  - `<body>` is the scalar unit of which the side effects are evaluated for each
    loop iteration.
 
@@ -1550,6 +1557,14 @@ Side effects: the side effects of `<tuple>`, followed by the side effects of
 `<body>`.
 
 Definitions: the definitions of `<body>`.
+
+When `<tuple>` returns a value of type `definition`, the initializing
+expression is used as the tuple to iterate over, no type must be attached,
+and the name is used to define a `const` or `static const` (if `inline`)
+within the loop body that holds the tuple element associated with the
+current iteration. When `<tuple>` returns a `tuple`, the current element is
+inaccessible (effectively, the contents of the tuple are discarded, and only
+its length has an effect).
 
 The `inline` marker implies `static`.
 
