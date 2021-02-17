@@ -1,10 +1,10 @@
 cQASM 2.0 toplevel grammar
 ==========================
 
-Syntax: `<version> <parameter*> <include*> <main>`, where:
+Syntax: `<version> <directives*> <main>`, where:
  - `<version>` is a version directive;
- - `<generic*>` is a pack of zero or more generic directives;
- - `<include*>` is a pack of zero or more include directives;
+ - `<directives*>` consists of zero or more parameter, generic, or include
+   directives;
  - `<parameter*>` is a pack of zero or more parameter directives;
  - `<main>` is any unit.
 
@@ -66,23 +66,6 @@ The generic directive defines a constant in file scope set to either:
 If a generic value is externally specified, a `generic` with matching name must
 exist.
 
-Include directive
-=================
-
-Syntax: `include <filename>[(<binding*>)]`, where:
- - `<filename>` is a static unit of type `string` identifying the file to
-   include;
- - `<binding*>` is an optional, comma-separated list of zero or more bindings,
-   each with syntax `<name> => <value>`, where:
-    - `<name>` is an identifier mapping to a generic defined in the included
-      file;
-    - `<value>` is a static unit of a type that can be promoted to the type
-      expected by the generic of the included file.
-
-It is illegal to include a cQASM 2.0 file with one or more parameters.
-
-The return value of an included cQASM 2.0 file is discarded.
-
 Parameter directive
 ===================
 
@@ -94,6 +77,23 @@ Syntax: `parameter <name>: <type>;`, where:
 
 When a cQASM 2.0 file is run, an argument pack exactly matching the types of
 the parameters must be available.
+
+Include directive
+=================
+
+Syntax: `include <filename>[<<generics*>>][(<parameters*>)]`, where:
+ - `<filename>` is a static unit of type `string` identifying the file to
+   include;
+ - `<generics*>` and `<parameters*>` are optional, comma-separated lists of
+   zero or more bindings, each with syntax `<name> = <value>`, where:
+    - `<name>` is an identifier mapping to a generic or parameter defined in
+      the included file;
+    - `<value>` is a static unit of a type that can be promoted to the type
+      expected by the generic of the included file.
+
+It is illegal to include a cQASM 2.0 file with one or more parameters.
+
+The return value of an included cQASM 2.0 file is discarded.
 
 Units
 =====
@@ -886,7 +886,8 @@ Allows declarations to be given an initial or default value.
 
 Syntax: `<decl> = <init>`, where:
  - `<decl>` is a static unit of type `declaration` with no previously bound
-   default value;
+   default value, or a static unit returning a type that promotes to
+   `unresolved`;
  - `<init>` is an expression unit.
 
 Return type: `declaration`.
@@ -905,49 +906,88 @@ Variable definition unit
 
 Allows variables to be defined.
 
-Syntax: `[export|global] [static] [primitive] var <decl>`, where:
+Syntax: `[export|global] [static] [inline|runtime|primitive] var <decl>`, where:
  - the `export` keyword indicates that the variable should be declared in the
    parent scope rather than the current scope;
  - the `global` keyword indicates that the variable should be declared in the
    global scope rather than the current scope;
  - the `static` keyword indicates that the variable should be bound to
    statically allocated program memory rather than the current stack frame (if
-   any), *and* that the initializing expression (if any) must be statically
-   evaluable;
+   any);
+ - the `inline` keyword indicates that the initializing unit (if any) must be
+   static;
+ - the `runtime` keyword indicates that the variable *must* be initialized at
+   runtime via a load/assignment instruction evaluated in the context of the
+   variable definition, rather than via (the equivalent of) a `.data` or `.bss`
+   section or some other means;
  - the `primitive` keyword indicates that the variable refers to a physical
-   resource on the target, that the compiler should recognize by name or by
-   means of annotations;
- - `<decl>` is a unit of type `declaration` or `csep` thereof.
+   resource on the target, which the compiler should recognize by name or by
+   means of annotations, and that the initializing unit (if any) must be
+   static;
+ - `<decl>` is a unit of type `declaration`, or a `csep` thereof.
 
 Return type: void.
 
 Return value: null.
 
-Side effects: the side effects of `<decl>`.
+Side effects: for each `csep`'d variable, the side effects of the initialization
+unit within `<decl>`, followed by the initializing variable assignment if the
+variable is non-`static`.
 
-Definitions:
- - (a) variable(s) of the type(s) specified in `<decl>` are allocated in the
-   current stack frame (if any, and `static` is not specified) or globally;
+Definitions: for each `csep`'d variable:
+ - a variable of the type specified in `<decl>` is allocated in the current
+   stack frame of the variable is non-`static`, or globally if `static`;
  - the name of `<decl>` is defined as an alias for the reference to the
    constructed variable in either the current, parent, or global scope.
 
-`export` is illegal in the outermost scope of a function body.
+> A variable declaration thus consists of three things.
+>
+>  - The variable is allocated somehow, controlled by the (implicit) presence of
+>    the `static` keyword. Non-static variables are allocated within the current
+>    stack frame, or globally if the variable is not inside a function, and only
+>    need to actually be allocated at runtime while the variable is in scope.
+>    `static` variables are instead allocated exactly once for the duration of
+>    the program.
+>  - The variable is initialized somehow, controlled by the (implicit) presence
+>    of the `static`, `inline`, `runtime`, and `primitive` keywords:
+>     - plain and `inline` variables are initialized in an unspecified way before
+>       the variable comes into scope;
+>     - `runtime` variables are initialized via an assignment statement when the
+>       variable is defined;
+>     - `static inline` variables are initialized when the program is started,
+>       typically (but not necessarily) by the host via an initial memory image
+>       before the algorithm starts;
+>     - `static primitive` variables are expected to be initialized by hardware
+>       in an unspecified way.
+>  - An alias is made for the variable, controlled by the presence of the
+>    `global` or `parent` keywords:
+>     - plain variables are aliased in the current scope only;
+>     - parent variables are aliased in the parent scope;
+>     - global variables are aliased in global scope.
 
-`primitive` implies `static` (that is, `static` may be omitted for `primitive`
-variables).
+`global`, `export`, and `primitive` imply `static` (that is, `static` may be
+omitted in these cases, but they are always static).
 
-> Note that `global`/`export` and `static` control different things: the former
-> controls the *visibility* of the variable, while `static` controls its
-> lifetime; unlike C++, `static` is never abused for visibility (of functions).
-> `static`'s counterpart would be `auto` in C lingo, but no one ever really
-> uses that because it's the default. Note that while cQASM 2.0 has no
-> specified RAII mechanics (because nothing would make use of it), there is
-> still a difference between a regular non-stacked variable and a static
-> non-stacked variable: the former may (need to) be initialized at runtime due
-> to a non-static initializer expression, while the latter mandates that the
-> initializer expression can be evaluated at compile-time.
+`static` implies `inline` if `primitive` is not already specified.
 
-Either `<type>` or `<init>` must be specified.
+`runtime` is implicit if the optional initializing unit is non-static.
+
+Any conflicts arising from the above rules cause the program to be rejected.
+
+> The above rules allow only the following types of variables to be created:
+>
+>  - `var`: a local variable, initialized in an unspecified way.
+>  - `inline var`: exactly the same as `var`, but requiring that the
+>    initializing unit is static;
+>  - `runtime var`: a local variable for which the initializing assignment
+>    may not be optimized away;
+>  - `[export|global] static inline var`: a variable with static lifetime,
+>    aliased in either the current, parent, or global scope;
+>  - `[export|global] static primitive var`: a hardware resource that must
+>    be recognized by the target, accessible as a read/write variable,
+>    aliased in either the current, parent, or global scope.
+
+`<decl>` must contain eitherEither `<type>` or `<init>` must be specified.
 
 If both `<type>` and `<init>` are specified, `<init>` must return a type
 that is equal to or can be promoted to `<type>`.
@@ -966,6 +1006,11 @@ Constant definition unit
 ------------------------
 
 Allows constants to be defined.
+
+TODO: a constant is exactly the same as a variable, except it cannot be
+assigned. Primitive constants also exist; they're like `volatile const` in C
+in that they can vary but the algorithm can't write to them. Also, `runtime const`
+actually makes a variable, except that variable cannot be assigned.
 
 Syntax: `[export|global] [static] const <name> [: <type>] = <value>`, where:
  - the `export` keyword indicates that the constant should be declared in the
@@ -1110,9 +1155,10 @@ where:
  - `*`: if specified, at least one parameter must be specified, and the last
    parameter must be of a `tuple` type with undefined size, representing a
    variable number of arguments;
- - `<types>` is an optional static typename unit or a `csep` thereof,
-   representing the function paramater pack for overload resolution, where each
-   type must be static or runtime, and must not be quantum;
+ - `<types>` is an optional static unit returning a value of type `declaration`
+   or a `csep` thereof, representing the function paramater pack for overload
+   resolution, where each type must be static or runtime, and must not be
+   quantum;
  - `<return>` is an optional static typename unit representing the return
    type for the function;
  - `<body>` is any unit (usually a block) returning a value of a type that can
@@ -1897,8 +1943,11 @@ The following builtin types exist:
  - `string`: a static, non-runtime type for a string of bytes (typically, but
    not necessarily, encoded as UTF-8);
  - `json`: a static, non-runtime type for a JSON object;
- - `pack`: a product type consisting of zero or more other subtypes;
- - `tuple`: a product type for one or more instances of a single subtype.
+ - `pack`: an anonymous product type consisting of zero or more other subtypes;
+ - `tuple`: an anonymous product type for one or more instances of a single
+   subtype;
+ - `product`: a user-defined product type;
+ - `sum`: a user-defined sum type;
  - `csep`: an internal product type consisting of zero or more other subtypes,
    not yet combined into a pack;
  - `scsep`: an internal product type consisting of zero or more other subtypes,
