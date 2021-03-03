@@ -294,9 +294,10 @@ in a function definition; specifically, this must return a value of type
 Unfortunately, *some* context is required when evaluating units, namely whether
 the unit is to be evaluated as regular code or as a variable, constant, alias,
 or parameter definition pack. The difference is needed because the initializing
-assignment unit conflicts with a regular assignment, and identifier tokens must
-be interpreted as `unresolved` values rather than as `typename`, `reference`,
-or `function` values. This boolean is, however, the only required context.
+assignment unit conflicts with a regular assignment, identifier tokens must be
+interpreted as `unresolved` values rather than as `typename`, `reference`, or
+`function` values, and the declaration unit (two units separated by a colon) is
+used for labels. This boolean is, however, the only required context.
 
 Let's look at the cQASM 2.0 types, since we've mentioned most of the internal
 ones already. The full list is as follows.
