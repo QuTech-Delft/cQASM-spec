@@ -203,6 +203,11 @@ define the following terms.
    lifetime is the special lifetime that envelops all other lifetimes,
    including compile-time.
 
+ - *Primitive:* a construct that maps to a single, primitive hardware resource
+   or instruction.
+
+ - *Builtin:* a construct of which the semantics are language-defined.
+
 Structure
 ---------
 
@@ -263,17 +268,23 @@ Object types
  - *Plain/automatic variables:* mutable objects with a lifetime from the point
    where they are declared to the end of the current scope. They are usually
    allocated within the current stack frame.
+
  - *Plain/automatic constants:* exactly as above, but immutable.
+
  - *Static variables:* mutable objects with static lifetime. They are usually
    allocated within global data memory. Their initial value must also be
    static, i.e. be evaluable at compile-time.
+
  - *Static (inline) constants:* immutable objects with static lifetime and
    value. libqasm will replace references to such constants with the assigned
    value, so the constants do not exist anymore on the API.
+
  - *Static runtime constants:* as above, but libqasm will not inline them,
    making them behave as immutable static variables.
+
  - *Primitive variables:* mutable objects with static lifetime that represent
    physical registers with read/write access.
+
  - *Primitive constants:* immutable objects with static lifetime that represent
    physical registers with read-only access. Note that the value of a primitive
    constant may still be modified externally; they should be treated like the
@@ -289,5 +300,135 @@ reduces the object types to only:
  - primitive objects, assumed to exist in the target in a predefined location,
    thus not allocated at all.
 
+Value types
+-----------
+
+The following builtin scalar types exist and can be used explicitly.
+
+ - `qref`: a reference to a qubit.
+ - `bool`: an enumerated type with the values `true` and `false`.
+ - `int`: an integer between -2^63 and 2^63-1 inclusive.
+ - `real`: a real number represented using IEEE 754 double precision.
+ - `complex`: a complex number represented using two IEEE 754 double precision
+   reals (real and imaginary value).
+ - `string`: a variable-length string of characters.
+ - `json`: a generalized JSON object.
+
+Types can also be combined, using the following product types.
+
+ - Tuples: tuple values consist of N >= 1 values of one element type. The size
+   of the tuple (N) is part of the type, so tuples are *not* variable-length.
+   The syntax for a tuple type is `<element-type>[N]`; for example `int[10]` is
+   a tuple of 10 integers. `<element-type>[]` is also allowed in the context of
+   function parameters in order to generate a function for every tuple length
+   the function is called with, but this is still decidedly *not* a
+   variable-length tuple. There is no notation for tuple literals, but packs
+   with matching types coerce to tuples, and can thus be used instead.
+
+ - Packs: pack values consist of N >= 0 values of potentially different types.
+   The syntax for a pack type is a comma-separated list of types within
+   parentheses; for example `(int, bool)` for a pack consisting of an integer
+   and a boolean. If only one type is used, a trailing comma must be used, for
+   example `(int,)`. The same syntax is used for pack literals; for example,
+   `(42, true)` or `(3,)`. `()` is special: it is known as "void" in type
+   context and "null" in value context. It is a type with itself as the only
+   value, used in contexts where no value logically exists, but one is
+   grammatically required.
+
+In both cases, the `x[y]` unit is used to select individual elements of a tuple
+or pack. In case of a pack, the index must be static, in order for the
+resulting type to be known at compile-time.
+
+Users can also define their own enumerated types and derived types.
+
+### Enumerated types
+
+Enumerated types may be defined using the following syntax.
+
+```
+[export|global] [primitive] type <type-name>: (<comma-separated-value-names>)
+```
+
+This defines a type that can assume one of the one or more given values, and
+defines the following aliases in local (no specifier), parent (`export`
+specifier), or global (`global` specifier) scope:
+
+ - `<type-name>` aliases the newly defined type;
+ - `<value-name>` aliases a static constant containing one of the possible
+   values for the newly defined type.
+
+In addition, the following functions are defined automatically in the same
+scope, `T` being the new type.
+
+ - `T() -> (T)` (default constructor): returns the first value in the
+   comma-separated list of possible values.
+ - `int(T) -> (int)`: casts `T` to an integer, returning the zero-based index
+   of the value within the list of possible values.
+ - `T(int) -> (T)`: the inverse of the above. Aborts upon out of range.
+ - `string(T) -> (string)`: returns a textual representation of T.
+ - `T(string) -> (T)`: the inverse of the above. Aborts if the string does not
+   exactly match one of the possible values.
+ - `operator==(T, T) -> (bool)`: equality.
+ - `operator!=(T, T) -> (bool)`: inequality.
+ - `operator>(T, T) -> (bool)`: greater-than using the defined ordering.
+ - `operator>=(T, T) -> (bool)`: greater-than-or-equal using the defined
+   ordering.
+ - `operator<(T, T) -> (bool)`: less-than using the defined ordering.
+ - `operator<=(T, T) -> (bool)`: less-than-or-equal using the defined ordering.
+ - `operator++(T) -> (T)`: returns the next possible value. Aborts if out of
+   range.
+ - `operator--(T) -> (T)`: returns the previous possible value. Aborts if out
+   of range.
+
+Note that `bool` is just a predefined enumerated type. Therefore, all the above
+functions are defined for `bool` as well. The value order of `bool` is
+`(false, true)`.
+
+The `primitive` specifier specifies to the target that the user expects the
+type to map to a particular type that physically exists in hardware. How this
+mapping is accomplished is target-specific (it may be via name lookup, via
+annotations on the type, or by some other means). If this is not the case, the
+target must emit a compile error, rather than emulating the type with a
+sufficiently-sized integral type.
+
+### Derived types
+
+Derived types may be defined using the following syntax.
+
+```
+[export|global] [primitive] type <type-name> = <base-type-name> { <defs> }
+```
+
+This defines a type that can assume the exact same types as the given base
+type internally, but behaves like a distinct type. Its semantics thus somewhat
+resemble private inheritance in C++.
+
+The only alias implicitly defined in local (no specifier), parent (`export`
+specifier), or global (`global` specifier) scope is `<type-name>`, which
+aliases the newly defined type, and the only function implicitly defined in
+this scope is `T() -> (T)` (the default constructor), which returns the
+default value for the base type. However, the following functions are defined
+in addition within the `<defs>` scope:
+
+ - `unpack(T) -> (Base)`: converts the derived type into the base type;
+ - `pack(Base) -> (T)`: converts the base type into the derived type.
+
+These may then be used to define the functions and operators for the newly
+defined type. These functions must be either marked `export` or not
+marked with a scope specifier (`global` is not legal); in the former case,
+their scope will automatically be promoted to the scope that `<type-name>`
+is defined in, and in the latter case, they will remain private to the
+`<defs>` scope.
+
+`<defs>` must be a semicolon-separated list of only function declaration and
+function definition units. Any other unit is illegal.
+
+The `primitive` specifier specifies to the target that the user expects the
+type to map to a particular type that physically exists in hardware. How this
+mapping is accomplished is target-specific (it may be via name lookup, via
+annotations on the type, or by some other means). If this is not the case, the
+target must emit a compile error, rather than emulating the type using its
+base type.
 
 # WIP
+
