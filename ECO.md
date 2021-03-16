@@ -94,3 +94,25 @@ final program. But it also allows (the tuple size of) the return type to be
 specified based on parameters, as is implicitly done in
 [Rabi.qasm](https://github.com/DiCarloLab-Delft/ElecPrj_QYASM/blob/dev-wouter/qasm/cal/Rabi.qasm).
 
+Assignment statement RHS: allow csep
+------------------------------------
+
+While normal comma-separated lists cannot appear here due to precedence, they
+can appear due to starred expressions and SGMQ. They should be treated the
+same way (unit) would treat them.
+
+SGMQ notation
+-------------
+
+As per email discussion.
+
+
+
+
+
+
+"fn(generic <param-def>)" -> "fn(template <param-def>)"
+
+"generic <generic-defs>" -> "template parameter <generic-defs>"
+
+
