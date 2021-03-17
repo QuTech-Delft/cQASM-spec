@@ -262,8 +262,37 @@ static      template    transpose   type        until       var
 when        while
 ```
 
-Object types
-------------
+Type system
+-----------
+
+cQASM uses a strong, static type system, in which the return value type of any
+unit can be determined without context. This allows units that require input
+values to be trivially overloaded based on the types presented to them, and
+allows for type coercion rules (i.e. automatic typecasting, for example from an
+`int` to a `real`, or a `real` to a `complex`) to be applied when there is no
+direct match.
+
+cQASM 2.0 extends on the 1.x type system with first-class compound/indexed
+types rather than relying on special cases for matrices and (qu)bit registers,
+and with user-definable enumerated and derived types. The former greatly extend
+the expressive power of the language when writing complex algorithms, while the
+latter is intended moreso to allow target-specific types (narrow integer
+registers for example) to be specified from within the language, rather than
+via the API or custom code added to libqasm.
+
+Note that neither version of cQASM has first-class references or pointers.
+Qubit references are the only exception: there is no such thing as the value of
+a qubit in the classical sense, so they *must* be references. Everything else
+is passed by value. Multiple things can be returned at once by simply returning
+a pack of values.
+
+The word "type" on its own is a bit ambiguous. We distinguish between "object
+types" and "value types" here, by which we mean the type of storage used for an
+object and the type of the values it can assume respectively.
+
+### Object types
+
+The following types of objects can be defined from within the language.
 
  - *Plain/automatic variables:* mutable objects with a lifetime from the point
    where they are declared to the end of the current scope. They are usually
@@ -290,18 +319,35 @@ Object types
    constant may still be modified externally; they should be treated like the
    `const volatile` construct from C.
 
-While the constness of an object is reported through the API, it does not have
-a semantical meaning associated with it after libqasm finishes analyzing, as it
-only designates whether the object can be assigned from within cQASM. This
-reduces the object types to only:
+Plain file and function parameters are plain constant, and template file and
+function parameters are static constant. This means that, unlike in C and
+Python, they are not assignable inside the function body. When this is needed,
+the user may copy the parameter into a variable.
 
- - automatic objects, allocated on the stack;
- - static objects, allocated in global data memory; and
+While the constness of an object is reported through libqasm's API, it does not
+have any semantical meaning associated with it after libqasm finishes
+analyzing, as it only designates whether the object can be assigned from within
+cQASM. This reduces the object types to only:
+
+ - automatic objects, behaving as if they are allocated on the stack;
+ - static objects, behaving as if they are allocated in global data memory
+   during compilation; and
  - primitive objects, assumed to exist in the target in a predefined location,
    thus not allocated at all.
 
-Value types
------------
+Note that a compiler may allocate objects differently if it can determine that
+behavior is unaffected. For example, if function recursion is illegal or
+unused, automatic variables may also be allocated in global data memory, and a
+compiler may move objects to and from registers or alternative storage
+locations at any time.
+
+Simulators may treat primitive objects as static objects.
+
+In case a target has multiple address spaces, annotations on the object
+declaration, the value type of the object, or annotations on the value type
+may for instance be used to designate the intended address space.
+
+### Value types
 
 The following builtin scalar types exist and can be used explicitly.
 
@@ -316,16 +362,7 @@ The following builtin scalar types exist and can be used explicitly.
 
 Types can also be combined, using the following product types.
 
- - Tuples: tuple values consist of N >= 1 values of one element type. The size
-   of the tuple (N) is part of the type, so tuples are *not* variable-length.
-   The syntax for a tuple type is `<element-type>[N]`; for example `int[10]` is
-   a tuple of 10 integers. `<element-type>[]` is also allowed in the context of
-   function parameters in order to generate a function for every tuple length
-   the function is called with, but this is still decidedly *not* a
-   variable-length tuple. There is no notation for tuple literals, but packs
-   with matching types coerce to tuples, and can thus be used instead.
-
- - Packs: pack values consist of N >= 0 values of potentially different types.
+ - *Packs:* pack values consist of N >= 0 values of potentially different types.
    The syntax for a pack type is a comma-separated list of types within
    parentheses; for example `(int, bool)` for a pack consisting of an integer
    and a boolean. If only one type is used, a trailing comma must be used, for
@@ -335,13 +372,263 @@ Types can also be combined, using the following product types.
    value, used in contexts where no value logically exists, but one is
    grammatically required.
 
+ - *Tuples:* tuples are a special case of packs, for which all elements have
+   the same type, and at least one such element exists. The syntax for a tuple
+   type is `<element-type>[N]`; for example `int[10]` is a tuple of 10
+   integers. `<element-type>[]` is also allowed in the context of function
+   parameters in order to generate a function for every tuple length the
+   function is called with, but this is still decidedly *not* a variable-length
+   tuple. There is no explicit notation for tuple literals, but packs and
+   tuples coerce to one another as long as all elements coerce, so for instance
+   `(1, 2, 3)` coerces to `int[3]` and can thus effectively be used as a
+   literal for it.
+
 In both cases, the `x[y]` unit is used to select individual elements of a tuple
 or pack. In case of a pack, the index must be static, in order for the
 resulting type to be known at compile-time.
 
-Users can also define their own enumerated types and derived types.
+Users can also define their own enumerated types and derived types. The primary
+use case for this is to define the behavior of certain kinds of values that
+actually exist in hardware, for example narrow integer registers or fixed-point
+values.
 
-### Enumerated types
+Besides these types, libqasm internally uses a few additional types. These
+behave as regular types for as far as the type system is concerned, but can
+only exist statically. They are used to model context-sensitive constructs
+(without making the actual type system context-sensitive), and for resolved
+references (without making these instantiable as references/pointers from
+within the language).
+
+ - `csep`: the type for a context-sensitive comma-separated list of values,
+   for example used to separate function arguments.
+ - `scsep`: the type for a context-sensitive semicolon-separated list of
+   values, for example used to sequentially execute statement-like units in a
+   block.
+ - `cnsep`: the type for a context-sensitive colon-separated two-tuple of
+   values (used in object definitions), for example used to annotate the type
+   of a new variable.
+ - `eqsep`: the type for an context-sensitive equals-sign-separated two-tuple
+   of values, for example used in the initial-value assignment of a new
+   variable.
+ - `ident`: the type for a context-sensitive/unresolved identifier, for example
+   the type of the identifier unit used to name a new variable.
+ - `starred`: the type for a context-sensitive starred unit, for example the
+   type of the left-hand-side of `*q: qref[]` within the context of a function
+   parameter.
+ - `templ`: the type for a context-sensitive `template`-prefixed unit, for
+   example the type of the left-hand-side of `template *q: qref[]`.
+ - `typename`: a reference to a value type, for example the type of the
+   identifier `int` under typical circumstances.
+ - `reference`: a reference to an object or an element thereof, for example the
+   type of `q` when `q` was previously defined as a qubit reference.
+ - `function`: a reference to the set of overloads for a particular function,
+   for example the type of the identifier `cos` (cosine function) under typical
+   circumstances.
+
+These types should never appear in libqasm's API, and are therefore not
+documented in greater detail here.
+
+The following subsections document the available types in detail.
+
+#### `qref`
+
+The `qref` type is used to refer to a single qubit.
+
+`qref`s are usually declared using the `qubit` unit, which is just syntactic
+sugar for defining plain constants of type `qref`. Note that this does not mean
+that the qubit itself cannot be "mutated," it means it is illegal to use a
+classical assignment statement to redirect the reference to a different qubit,
+which is usually what you want. Nevertheless, cQASM does not impose any
+requirements on how `qref`s are used at the language level: it is for example
+legal for multiple `qref`s to refer to the same qubit, and it is legal to make
+variable `qref`s. Targets need not necessarily support this, however; in more
+cases than not they fundamentally cannot do this because qubits are scheduled
+and mapped at compile-time, and in many other cases determining which `qref`
+points to which qubit at a particular time in the schedule is intractable.
+Ultimately, `qref`s are only defined this way because it allows the classical
+type system to be leveraged for qubits as well.
+
+The following builtin functions exist for qubits.
+
+ - `qref() -> (qref)` (default constructor): returns a reference to a qubit
+   that is not currently referred to by any other `qref`, or aborts if no
+   free qubits remain.
+ - `[_builtin_]physical_qubit(int) -> (qref)`: returns a `qref` for the given
+   physical qubit, regardless of whether this qubit is in use. This is intended
+   to be used only in post-mapping cQASM files.
+ - `[_builtin_]qubit_index_of(qref) -> (int)`: returns the physical zero-based
+   qubit index that the given `qref` refers to, or -1 if the `qref` is not
+   mapped yet. This may be used to express different gate behavior depending
+   on the physical qubits the gate is applied to.
+ - `[_builtin_]apply_unitary(qref[], complex[][]) -> ()`: applies the given
+   unitary matrix to the given set of qubits.
+ - `[_builtin_]apply_density(qref[], real[][]) -> ()`: applies the given
+   density operator to the given set of qubits.
+ - `[_builtin_]prepare_z(qref[]) -> ()`: prepares the given qubits in
+   the `|0>` state.
+ - `[_builtin_]measure_z(q: qref[]) -> (bool[len(q)])`: measures the given
+   qubits in the Z basis simultaneously, returning `true` upon collapse to
+   `|1>` and `false` upon collapse to `|0>` for each qubit individually.
+ - `operator==(qref, qref) -> (bool)`: returns whether the two given `qref`s
+   refer to the same qubit. If both `qref`s point to a statically-known
+   default-constructed qubit or to a statically-known physical qubit, the
+   operator is evaluated statically by libqasm, otherwise its evaluation will
+   be postponed.
+ - `operator!=(qref, qref) -> (bool)`: returns the complement of the above.
+
+The behavior of a program that uses both `qref`'s default constructor and
+`physical_qubit()` is undefined. You should only use the former for programs
+that are yet to be mapped, and only the latter for programs that have already
+been mapped.
+
+On the API layer, `qref` values are represented as signed integers. `qref()`
+returns unique negative integers starting from -1 by means of a static counter,
+to represent distinct unmapped qubits. Physical qubits are addressed using
+nonnegative integers.
+
+#### `bool`
+
+The `bool` type is used for boolean values.
+
+`bool`s behave exactly as a custom enumerated type declared as follows:
+
+```
+global type bool: (false, true)
+```
+
+That means that the following functions are defined by default (see also the
+section on enumerated types).
+
+ - `bool() -> (bool)` (default constructor): returns false.
+ - `int(bool) -> (int)`: returns `0` for `false` and `1` for `true`.
+ - `bool(int) -> (bool)`: returns `false` for `0` and `true` for any other
+   integer.
+ - `string(bool) -> (string)`: returns `"true"` for `true` and `"false"` for
+   `false`.
+ - `bool(string) -> (bool)`: the inverse of the above. Aborts if the string
+   does not exactly match `"true"` or `"false"`.
+ - `operator==(T, T) -> (bool)`: equality.
+ - `operator!=(T, T) -> (bool)`: inequality.
+ - `operator>(T, T) -> (bool)`: returns `true` if the LHS is `true` and the RHS
+   is `false`, `false` otherwise.
+ - `operator>=(T, T) -> (bool)`: returns `true` if the LHS is `true` or the RHS
+   is `false`, `false` otherwise.
+ - `operator<(T, T) -> (bool)`: returns `true` if the LHS is `false` and the
+   RHS is `true`, `false` otherwise.
+ - `operator<=(T, T) -> (bool)`: returns `true` if the LHS is `false` or the
+   RHS is `true`, `false` otherwise.
+ - `operator++(T) -> (T)`: returns `true` if the value was `false`, aborts
+   otherwise.
+ - `operator--(T) -> (T)`: returns `false` if the value was `true`, aborts
+   otherwise.
+
+The following functions are defined in addition.
+
+ - `operator~(T) -> (T)`: returns `true` for `false` and `false` for `true`.
+ - `operator&(T, T) -> (T)`: returns `true` if both values evaluate to `true`,
+   `false` otherwise. Note that both operands are always evaluated.
+ - `operator^(T, T) -> (T)`: returns `true` if the values differ, `false`
+   otherwise.
+ - `operator|(T, T) -> (T)`: returns `true` if either value evaluates to
+   `true`, `false` otherwise. Note that both operands are always evaluated.
+ - `operator!(T) -> (T)`: returns `true` for `false` and `false` for `true`.
+ - `operator^^(T, T) -> (T)`: returns `true` if the values differ, `false`
+   otherwise.
+
+Furthermore, the short-circuiting `&&` and `||` operators are defined for
+booleans. These are not represented as regular operator functions however,
+because functions always evaluate all their arguments before the function
+is evaluated.
+
+#### `int`
+
+The `int` type is used for integer values. In cQASM 2.0 it is represented as
+a 64-bit signed integer, thus the range is from -2^63 to 2^63-1. However,
+arbitrary-precision integers may be used in the future if a use case pops up
+for this. These integers are primarily intended to be used for constant
+propagation and code generation; targets should define derived primitive types
+modelling correct overflow behavior for the integers actually supported by the
+hardware (if any).
+
+Positive integer literals can be specified in the usual decimal, hexadecimal,
+and binary notation. Refer to the respective literal units for the exact
+syntax.
+
+The following functions are defined on integers.
+
+**TODO:** long list. Integers coerce to `real` and `complex` and default to 0;
+otherwise this is mostly just standard stuff.
+
+#### `real`
+
+The `real` type is used for real numbers. They are represented as IEEE 754
+doubles.
+
+Positive real-number literals can be specified in the usual notation. Refer to
+the real-number literal unit section for the exact syntax. In addition,
+`[_builtin_]pi` is defined to the most accurate representation of *π* that is
+representable, `[_builtin_]eu` is same thing for *e*, and `[_builtin_]infinity`
+maps to positive infinity.
+
+The following functions are defined on real numbers.
+
+**TODO:** long list. Reals coerce to `complex` and default to 0.0; otherwise
+this is mostly just standard stuff.
+
+#### `complex`
+
+The `complex` type is used for complex numbers. They are represented as two
+IEEE 754 doubles; one for the real part, and one for the imaginary part.
+
+There is no literal syntax for complex numbers. Instead, they are constructed
+via constant propagation of real numbers and `[_builtin_]im`, the imaginary
+unit *i*.
+
+The following functions are defined on complex numbers.
+
+**TODO:** long list. Complex numbers default to 0.0; otherwise this is mostly
+just standard stuff.
+
+#### `string`
+
+The `string` type is used for strings of text or bytes. The type is only
+intended for use in constant propagation, printing debug messages, and so on.
+
+String literals use double-quote delimiters, for example `"hello"`. The most
+common backslash-based escape sequences are supported as well. For the exact
+syntax, refer to the string literal unit section.
+
+The following functions are defined on strings.
+
+**TODO:** long list. Complex numbers default to 0.0; otherwise this is mostly
+just standard stuff.
+
+#### `json`
+
+The `json` type can be used to insert arbitrary JSON data into cQASM. The type
+is primarily intended for use in annotations and pragmas.
+
+JSON literals use `{|`...`|}` delimiters for the outer object to disambiguate
+between JSON and cQASM grammar. Inside these delimiters, the entire JSON syntax
+may be used. Note that JSON does *not* define any syntax for comments, and as
+such comments are not supported within these delimiters.
+
+The following functions are defined on JSON objects.
+
+**TODO** (not much here, though)
+
+#### Packs
+
+A pack is a type consisting of zero or more elements of potentially different
+subtypes.
+
+**TODO**
+
+#### Tuples
+
+**TODO**
+
+#### Enumerated types
 
 Enumerated types may be defined using the following syntax.
 
@@ -364,7 +651,8 @@ scope, `T` being the new type.
    comma-separated list of possible values.
  - `int(T) -> (int)`: casts `T` to an integer, returning the zero-based index
    of the value within the list of possible values.
- - `T(int) -> (T)`: the inverse of the above. Aborts upon out of range.
+ - `T(int) -> (T)`: the inverse of the above. Returns the last value in the
+   comma-separated list of possible values if the integer is out of range.
  - `string(T) -> (string)`: returns a textual representation of T.
  - `T(string) -> (T)`: the inverse of the above. Aborts if the string does not
    exactly match one of the possible values.
@@ -391,7 +679,7 @@ annotations on the type, or by some other means). If this is not the case, the
 target must emit a compile error, rather than emulating the type with a
 sufficiently-sized integral type.
 
-### Derived types
+#### Derived types
 
 Derived types may be defined using the following syntax.
 
@@ -430,5 +718,13 @@ annotations on the type, or by some other means). If this is not the case, the
 target must emit a compile error, rather than emulating the type using its
 base type.
 
-# WIP
+Units
+-----
 
+Besides the version statement, all syntax in cQASM 2.0 is defined recursively
+using only units. The type system and constant propagation logic (collectively
+referred to as "analysis" in this document) is subsequently used to assign
+meaning to certain unit patterns, and to throw out patterns that do not make
+sense.
+
+# TODO
