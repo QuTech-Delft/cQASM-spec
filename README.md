@@ -84,6 +84,27 @@ into the parser, the complexity of this is hidden from the various pieces of
 software that use libqasm, making them available regardless of how much of the
 language they support.
 
+Almost everything in cQASM is parameterizable as well, both at compile-time via
+so-called template parameters and at runtime via plain parameters. The former
+is not dissimilar from specifying predefining preprocessor macros on a C++
+compiler's command line, while the latter is not dissimilar from the `argv`
+parameter passed to `main()` or (in Python) accessible via `sys.argv`, except
+that type-safety is provided, and that the same syntax is used for both. The
+parameters are passed to the toplevel cQASM file only, but this file may
+propagate some or all of these parameters, even via expressions, to files that
+it `include`s. All of this is intended to reduce the need to generate cQASM
+code for complex algorithms; cQASM should be ergonomic enough to be
+user-written, rather than only being an intermediate file format.
+
+At runtime, the values for the plain parameters are expected to be passed to
+the algorithm by the *host*; that is, the server that sends commands to the
+firmware and reads back results. This is not a one-way street: cQASM 2.0 files
+can also `return` data when they complete, and can communicate asynchronously
+with the host in the interim via queues, using the `send` and `receive`
+constructs. The language also provides `print` and `abort` statements that may
+be used to emit debug messages or to indicate that a fatal error has occurred
+respectively.
+
 On the opposite end of the spectrum, there is also first-class support for
 defining and directly using "primitives." These are intended to map one-to-one
 to something that the software reading the cQASM file must understand and
@@ -98,6 +119,14 @@ parser or (in later API versions) is configurable via API calls: context beyond
 the cQASM language specification was needed to parse or interpret a file, the
 effect of which being that every implementation using cQASM was essentially
 using its own dialect of cQASM.
+
+Normally, the primitives supported by some target are defined in either a
+regular `include` file or in the prelude, the latter being a file that is
+automatically included by libqasm before the first line of the toplevel cQASM
+file is even read. The prelude and include path are configurable using
+libqasm's API, allowing target-specific context to be provided similar to how
+this was done in the 1.x API, except via more cQASM files rather than via API
+calls.
 
 Like cQASM 1.x, the language is statically typed, with quite a strict system
 that supports only basic type coercion. Also like cQASM 1.x, 2.0 provides a
@@ -114,7 +143,7 @@ platforms.
 
 Unlike most languages, cQASM 2.0 makes no grammatical distinction between
 statements, expressions, or definitions. The mix of these is referred to as a
-"unit." Things that are normally statements or definitions just return `null`
+*unit*. Things that are normally statements or definitions just return `null`
 (equivalent to `None` in Python, or `void` in C++), and can otherwise be used
 in most contexts, as long as the context supports side effects or definitions.
 However, some of the statement-like constructs do or can return something more
@@ -152,14 +181,18 @@ simplify expressing lots of parallel gates of the same type, functions that
 expect scalar qubit references as arguments may be called with tuples of qubits
 instead: this is implicitly expanded to a "comma-separated list" of
 piecewise-applied functions, which will be executed in parallel if used inside
-a braced block, or sequentially if used inside parentheses. Long idle times can
-be specified using a builtin "skip" function, similar to 1.x's `skip` gate.
-1.x's `wait` gate (essentially a barrier) is not defined as part of the
-language, and should instead be written as a primitive function. This is
-because cQASM 2.0 has no notion of gate or instruction duration, making a
-`wait` builtin no different from any other function. Also, while quantum
-hardware always has some kind of delay instruction, a barrier like 1.x's `wait`
-is purely a scheduler directive.
+a braced block, or sequentially if used inside parentheses.
+
+cQASM 2.0 leaves the exact definition of "sequential" and "parallel" to the
+target. For instance, a compiler may not define any difference between them at
+its input, because it will do the scheduling automatically, whereas a
+timing-aware simulator might define parallel operations to start at the same
+time and sequential operations to start in consecutive cycles, with a primitive
+function that has a configurable duration, like 1.x's skip gate. The only
+requirement is that the program behaves as if all units are evaluated
+left-to-right, regardless of schedule.
+
+# WIP from here on
 
 Terminology
 -----------
