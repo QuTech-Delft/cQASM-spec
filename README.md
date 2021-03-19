@@ -154,14 +154,16 @@ closures, so the use of this is limited. The primary reason for this design
 choice is that generalizing constructs as much as possible increases the
 expressive power of the language with minimal additional effort.
 
-cQASM 2.0 allows subprograms to be described using functions. This conceptually
-replaces the named kernel concept from cQASM 1.x; one can now simply write the
-program as a list of function calls if they want. cQASM 2.0's functions also
-replace cQASM 1.x's gates; a gate is simply represented as a function call with
-at least one qubit reference as an argument. Furthermore, functions are used
-internally for operators, typecasts, and coercion rules as well. This, again,
-is intended to reduce code duplication in libqasm and elsewhere, and to
-simplify the language specification.
+cQASM 2.0 allows subprograms to be described using functions. Among many other
+things, this conceptually replaces cQASM 1.x's kernels: any cQASM 1.x program
+can be written as a sequence of cQASM 2.0 function calls, possibly in a
+range-based foreach loop to mimic the repetition count, and convey exactly the
+same information. cQASM 2.0's functions also replace cQASM 1.x's gates; a gate
+is simply represented as a function call with at least one qubit reference as
+an argument. Furthermore, functions are used internally for operators,
+typecasts, and coercion rules as well. This, again, is intended to reduce code
+duplication in libqasm and elsewhere, and to simplify the language
+specification.
 
 Like C++, cQASM 2.0 allows functions to be overloaded using the argument types.
 For example, one might define `X(qref)` to do a 180-degree X rotation, but also
@@ -172,6 +174,15 @@ are implemented using `operator+`. However, to keep things simple, the language
 is defined such that the return type of any unit can be determined before
 knowing the context it is being used in. This means that distinguishing
 overloads by return type only is not supported.
+
+A notable difference between the type/value system of C++ and cQASM is that all
+variables and constants must (appear to) have a well-defined value at all
+times. In C++, all C-style (POD) types are uninitialized and contain garbage
+until they are explicitly assigned; in cQASM 2.0, all variables are implicitly
+initialized with a type-specified default value if no explicit initializer is
+given. When cQASM 2.0 is used as a compiler IR, a pass that determines that no
+default initialization is actually needed because the value is never used may
+convey this information to the next pass by annotating the object.
 
 To facilitate expression of circuits with explicit parallelism and timing,
 cQASM 2.0's braced block unit allows semicolons to be used to separate
@@ -219,12 +230,20 @@ define the following terms.
    object can assume.
 
  - *Value:* the value associated with an object at some instant, or the
-   (anonymous) return value of a unit of some kind.
+   (anonymous) return value of a unit of some kind, possibly only evaluable at
+   runtime.
 
  - *(Value) type:* the type of a value. Examples of types are `int`, `bool`,
    and `qref`, but also combined types such as `complex[2][2]` for a 2x2
    complex matrix, or `(int, string)` for a so-called pack consisting of an
    integer and a string.
+
+ - *Runtime value:* a value that requires runtime processing to be evaluated.
+   This processing incurs *side effects*. These side effects are eventually
+   used to describe the entire algorithm, even if the actual value returned is
+   void and not even used. For example, the block `{ x(q[0]); y(q[1]); }` is
+   formally a runtime value with value type void, that results in an X gate on
+   `q[0]` followed by a Y gate on `q[1]` when evaluated to null at runtime.
 
  - *Alias:* a name used to refer to an object, function, or some other named
    unit.
@@ -232,9 +251,16 @@ define the following terms.
  - *Scope:* the context in/duration for which aliases exist. The global scope
    is the special scope that envelops all other scopes.
 
- - *Lifetime:* the context in/duration for which objects exist. The static
+ - *Lifetime:* the context in/duration for which objects exist. The *static*
    lifetime is the special lifetime that envelops all other lifetimes,
-   including compile-time.
+   including compile-time. *Automatic* lifetimes are lifetimes determined by
+   context, for example the lifetime of a local variable within a function.
+
+ - *Frame:* the conceptual region in which objects with automatic lifetime
+   are are allocated. All frames are scopes, but not all scopes are frames;
+   scopes are also used to support the notion of private functions and objects.
+   Objects with static lifetime are allocated in the special, toplevel static
+   frame.
 
  - *Primitive:* a construct that maps to a single, primitive hardware resource
    or instruction.
@@ -327,9 +353,12 @@ object and the type of the values it can assume respectively.
 
 The following types of objects can be defined from within the language.
 
- - *Plain/automatic variables:* mutable objects with a lifetime from the point
-   where they are declared to the end of the current scope. They are usually
-   allocated within the current stack frame.
+ - *Plain/automatic variables:* mutable objects with a lifetime set by the
+   innermost frame in which they are defined. They are only visible and thus
+   usable from the point at which they are declared and until the point where
+   all aliases to them go out of scope, thus the actual lifetime of the
+   object may be reduced further by the compiler when performing liveness
+   analysis.
 
  - *Plain/automatic constants:* exactly as above, but immutable.
 
@@ -351,6 +380,11 @@ The following types of objects can be defined from within the language.
    physical registers with read-only access. Note that the value of a primitive
    constant may still be modified externally; they should be treated like the
    `const volatile` construct from C.
+
+cQASM 2.0 completely decouples these mutability, lifetime, and implementation
+style qualifiers from scoping qualifiers, other than that the lifetime of an
+object must be at least as long as its scope. Refer to the section on scoping
+for details.
 
 Plain file and function parameters are plain constant, and template file and
 function parameters are static constant. This means that, unlike in C and
@@ -452,11 +486,14 @@ within the language).
    example the type of the left-hand-side of `template *q: qref[]`.
  - `typename`: a reference to a value type, for example the type of the
    identifier `int` under typical circumstances.
- - `reference`: a reference to an object or an element thereof, for example the
+ - `objname`: a reference to an object or an element thereof, for example the
    type of `q` when `q` was previously defined as a qubit reference.
- - `function`: a reference to the set of overloads for a particular function,
+ - `funcname`: a reference to the set of overloads for a particular function,
    for example the type of the identifier `cos` (cosine function) under typical
    circumstances.
+ - `ident`: an unresolved identifier.
+ - `error`: a special type that coerces to the default value of any other type,
+   used for error recovery.
 
 These types should never appear in libqasm's API, and are therefore not
 documented in greater detail here.
@@ -481,7 +518,7 @@ points to which qubit at a particular time in the schedule is intractable.
 Ultimately, `qref`s are only defined this way because it allows the classical
 type system to be leveraged for qubits as well.
 
-The following builtin functions exist for qubits.
+The following builtin functions exist for qubit references.
 
  - `qref() -> (qref)` (default constructor): returns a reference to a qubit
    that is not currently referred to by any other `qref`, or aborts if no
@@ -751,6 +788,59 @@ annotations on the type, or by some other means). If this is not the case, the
 target must emit a compile error, rather than emulating the type using its
 base type.
 
+Scopes and frames
+-----------------
+
+When you declare an object (variable or constant), two things happen.
+
+ - First, the object is allocated somewhere. Where this is depends on whether
+   you mark the object as `static`, `primitive`, or leave it unmarked
+   (automatic): automatic objects will be allocated in the innermost frame,
+   `static` objects will be allocated in static/global memory, and `primitive`
+   objects are expected to not need allocation because they serve as a
+   reference to some hardware construct. Objects in cQASM do not intrinsically
+   have a name associated with them, so while the object *exists* at this
+   point, it cannot be referred to yet.
+
+ - Second, an *alias* to a reference to the otherwise anonymous object is made
+   in some scope. Which scope this is depends on whether you mark the object
+   declaration with `export`, `global`, or leave it unmarked (local): local
+   objects will be aliased in the innermost scope, `export`ed objects will be
+   aliased in the parent scope, and `global` objects will be allocated in
+   global scope.
+
+Function and type declarations and definitions follow the same pattern. The key
+takeaway here is that lifetimes and aliases are two entirely distinct concepts
+in cQASM.
+
+Aliases are valid only from the point where they are declared onwards. For
+function aliases, it is possible to declare the function before defining it
+using the `future` keyword, to facilitate recursive programming patterns.
+
+Objects can have multiple different aliases pointing to them, and these new
+aliases can be exported to parent scope or made global. That means it is
+possible to extend the scope of an object. However, it is illegal to extend
+the scope of an automatic object beyond its frame. For example, a variable
+declared inside an `if` statement cannot be exported out of that statement,
+because if the branch is not taken it technically would not even exist.
+Similarly, a local variable in a function cannot be exported out of the
+function, because any number of instances of the variable might then exist at
+a time (including zero).
+
+cQASM 2.0 allows redefinition of aliases at any time. The latest definition
+that is still in scope always takes precedence. For functions, the same
+mechanism is used for overload resolution: the resolver will check whether
+the latest function definition matches the provided argument pack, then check
+the next if not, and so on, until all definitions are exhausted. Note that this
+behavior differs from C++, where an overload defined in a subscope hides any
+previously defined overloads.
+
+The body of a function must only make use of objects defined in the static
+frame, in the toplevel frame of the function itself, or control-flow subframes
+thereof. That is, closures are not supported: when a function is defined within
+a function, the inner function may not use local variables from the outer
+function.
+
 Units
 -----
 
@@ -760,4 +850,619 @@ referred to as "analysis" in this document) is subsequently used to assign
 meaning to certain unit patterns, and to throw out patterns that do not make
 sense.
 
+During analysis, the unit tree is traversed pre-order depth-first (unless
+otherwise noted), each unit or unit tree being converted to its return value.
+This may be a "runtime value," in which case the value describes the steps that
+need to be taken to evaluate the value at runtime, including any side effects,
+or even frames (i.e. local objects) needed along the way. These steps usually
+include the values returned by the subunits, which may again be runtime values,
+thus recursively specifying runtime program behavior.
+
+To do so, the following context is needed.
+
+ - The unit being analyzed.
+ - Whether the unit is to be analyzed as a definition or not.
+ - The state of the name resolver, in which new aliases may be defined.
+ - A stack of frames that have not yet been absorbed into a unit, in which new
+   objects may be allocated.
+ - The nodes describing user-defined types and functions, to eventually be
+   absorbed into the root node of the semantic tree, in which new types and
+   functions may be defined.
+ - A list of error messages, to which new messages may be added. If any of
+   these exist when all units have been parsed, compilation fails. Analysis of
+   a unit may also yield a non-recoverable error, in which case analysis stops
+   immediately.
+
+The following sections exhaustively list the available units.
+
+### Literal units
+
+The literal units allow data to be entered into the program as static values.
+
+#### Decimal integer literal unit
+
+The decimal integer literal unit consists of a single token that matches the
+regular expression `[0-9][0-9_]*`; that is, any integer number, optionally
+with some amount of leading zeros, containing or ending with an underscore.
+Any embedded or trailing underscore is ignored when parsing the number; the
+intention is that they may be used as for example a thousands separator in
+long numbers.
+
+The return value is a static `int` with the given positive value. Integers
+too large to be represented by `int` are illegal.
+
+Negative integers can be constructed using the negation operator unit. The
+negative integer -9223372036854775808 (= -2**63) can *not* be represented this
+way, because the positive part would be out of range; hexadecimal or binary
+notation must be used instead.
+
+#### Hexadecimal integer literal unit
+
+The hexadecimal integer literal unit consists of a single token that matches
+the regular expression `0x[0-9a-fA-F_]+`; that is, any case-insensitive
+hexadecimal number with `0x` prefix, possibly containing underscores before,
+after, or between the digits. Any embedded or trailing underscore is ignored
+when parsing the number; the intention is that they may be used to group
+the digits for easier readability. The `0x_` special case of the regular
+expression is illegal.
+
+The return value is a static `int` with the given value. Bit 63, if
+specified, indicates the sign bit of the number in two's complement notation.
+Integers too large to be represented by `int` are illegal.
+
+#### Binary integer literal unit
+
+The binary integer literal unit consists of a single token that matches the
+regular expression `0b[01_]+`; that is, any binary number with `0b` prefix,
+possibly containing underscores before, after, or between the digits. Any
+embedded or trailing underscore is ignored when parsing the number; the
+intention is that they may be used to group the digits for easier readability.
+The `0b_` special case of the regular expression is illegal.
+
+The return value is a static `int` with the given value. Bit 63, if
+specified, indicates the sign bit of the number in two's complement notation.
+Integers too large to be represented by `int` are illegal.
+
+#### Real literal unit
+
+The real-number literal unit consists of a single token that matches the
+regular expression `([0-9][0-9_]*)?\.[0-9][0-9_]*([eE][-+]?[0-9]+)?`; that is,
+an optional integer part, followed by the mandatory `.` decimal separator,
+followed by at least one fractional digit, optionally followed by a power-of-10
+exponent. The integer and fractional parts may include underscores, except at
+the front; these underscores are ignored during parsing, and are intended to be
+used for digit grouping to improve readability.
+
+The return value is a static `real` with the closest representation of the
+given value as per the IEEE 754 default rounding rules.
+
+#### String literal unit
+
+The string literal unit consists of a leading and trailing `"` with text in
+between. Any character, including a newline, can be used within the string and
+will be copied as written unless otherwise specified via an escape sequence;
+only a `"` can terminate the string. The following escape sequences are
+available:
+
+ - `\t` yields a tab character (ASCII 9);
+ - `\n` yields a newline (ASCII 10);
+ - `\'` yields `'`;
+ - `\"` yields `"`;
+ - `\\` yields a single `\`; and
+ - a `\` followed by an actual newline is removed from the string.
+
+The return value is a static `string` with contents as described above.
+
+#### JSON literal unit
+
+The JSON literal unit consists of an opening `{|` and a closing `|}` token,
+with the contents of a JSON object (`{`..`}`) in the between, not including
+the outer `{` and `}`. The special opening and closing tokens serve to
+disambiguate cQASM grammar from JSON grammar. All JSON syntax within the
+opening and closing tokens is allowed, including for example `|}` within a
+JSON string, as long as the toplevel entity is an object.
+
+The return value is a static `json` object.
+
+### Identifier units
+
+Identifiers represent references to previously declared things. All identifiers
+are resolved via the alias system.
+
+#### Regular identifier unit
+
+A regular identifier unit consists of a single token matching the regular
+expression `[a-zA-Z_][a-zA-Z0-9_]*`; that is, any word consisting of letters,
+digits, and underscores, not starting with a digit.
+
+Keywords take precedence over identifiers. Therefore, the following words
+are not legal identifiers:
+
+```
+abort       alias       break       cond        const       continue
+elif        else        export      for         foreach     function
+future      global      goto        if          include     inline
+match       operator    parameter   pragma      primitive   print
+qubit       receive     repeat      return      runtime     send
+static      template    transpose   type        until       var
+when        while
+```
+
+The behavior of the regular identifier unit depends on context.
+
+ - If the unit is parsed as part of a definition, a static `ident` value is
+   returned, consisting of the specified identifier.
+
+ - Otherwise, if the specified identifier matches a currently-visible alias,
+   the aliased value is returned.
+
+ - Otherwise, a suitable recoverable error message is appended to the list of
+   errors, and `error` is returned.
+
+#### Operator identifier unit
+
+The operator identifier unit consists of the `operator` keyword followed by one
+of the following operator tokens:
+
+```
++   -   ~   !   **   *   /   //   %   <<   >>
+>>>   <   <=   >   >=   ==   !=   &   ^   |
+```
+
+It behaves the same way as a regular identifier unit, but using the otherwise
+impossible name `operator<tok>` for the identifier, where `<tok>` represents
+the symbol-based token. Any spacing between `operator` and the subsequent token
+is ignored; the resulting identifier never contains a space.
+
+Identifiers of this form are used only for naming functions that serve as
+custom operator overloads. These identifiers are illegal in any other context.
+Refer to the function definition unit for more information.
+
+#### Coercion identifier unit
+
+The coercion identifier unit consists of the `operator` keyword followed by a
+regular identifier token. It behaves the same way as a regular identifier unit,
+but using the otherwise impossible name `(<identifier>)` for the identifier,
+where `<identifier>` represents the contents of the regular identifier. For
+example, `operator hello` would yield a static `ident` with value `(hello)`
+when used in definition context.
+
+Identifiers of this form are used only for naming functions that serve as
+custom coercion rules (implicit typecasts). These identifiers are illegal in
+any other context. Refer to the function definition unit for more information.
+
+### Packing/grouping parentheses unit
+
+The packing/grouping parentheses unit consists of a `(`, followed by an
+optional subunit, followed by a `)`.
+
+The behavior of the packing/grouping parentheses unit is as follows.
+
+ - If no subunit is specified, an empty pack (a.k.a. null in value context
+   or void in type context) is returned.
+
+ - Otherwise, if the subunit returned a value of type `csep`, the `csep` is
+   converted to a pack of the `csep` elements.
+
+ - Otherwise, if the subunit returned a value of type `scsep`, the `scsep` is
+   converted to a pack of the `scsep` elements, except if these elements are of
+   type `csep`, in which case the elements are also converted to packs,
+   resulting in a two-dimensional pack.
+
+ - Otherwise, the value returned by the subunit is returned without
+   modification. This is useful for overriding operator precedence.
+
+### Unpacking units
+
+The unpacking units allow packs (or tuples) to be unpacked back into the
+internal `csep` or `scsep` types, to allow them to be used in contexts where
+a comma/semicolon-separated list is expected otherwise, or for elegant
+concatenation of packs. The notation is inspired by Python's starred notation,
+and in many cases has similar semantics.
+
+#### One-dimensional unpacking unit
+
+The one-dimensional unpacking unit consists of a `*` token followed by a
+subunit. The behavior is as follows.
+
+ - If the unit is parsed as part of a definition, a value of type `starred` is
+   returned, containing the value returned by the subunit.
+
+ - Otherwise, if the subunit returned a value that is or coerces to a pack, the
+   elements of the (outermost) pack are converted to a `csep`.
+
+ - Otherwise, an appropriate error message is appended to the list of error
+   messages, and the value returned by the subunit is returned without
+   modification.
+
+#### Two-dimensional unpacking unit
+
+The two-dimensional unpacking unit consists of a `**` token followed by a
+subunit. The behavior is as follows.
+
+ - Otherwise, if the subunit returned a value that is or coerces to a pack, the
+   elements of the (outermost) pack are converted to an `scsep`. If a resulting
+   element is also or also coerces to a pack, the element is converted to a
+   `csep`. Thus, at most two dimensions are converted to `scsep`/`csep`.
+
+ - Otherwise, an appropriate error message is appended to the list of error
+   messages, and the value returned by the subunit is returned without
+   modification.
+
+### Indexing units
+
+The indexing units are used to index into packs and tuples. By indexing using
+integer tuples, it is also possible to select multiple elements at the same
+time, shift them around, and so on.
+
+#### Regular indexing unit
+
+TODO
+
+#### Transposed indexing unit
+
+TODO
+
+### Range unit
+
+TODO
+
+### Overloadable unary operator units
+
+#### Identity unit
+
+TODO
+
+#### Negation unit
+
+TODO
+
+#### Bitwise complement unit
+
+TODO
+
+#### Boolean complement unit
+
+TODO
+
+### Overloadable binary operator units
+
+#### Exponentiation unit
+
+TODO
+
+#### Multiplication unit
+
+TODO
+
+#### True division unit
+
+TODO
+
+#### Euclidian division unit
+
+TODO
+
+#### Modulo unit
+
+TODO
+
+#### Addition unit
+
+TODO
+
+#### Subtraction unit
+
+TODO
+
+#### Left-shift unit
+
+TODO
+
+#### Arithmetic right-shift unit
+
+TODO
+
+#### Logical right-shift unit
+
+TODO
+
+#### Less-than unit
+
+TODO
+
+#### Less-than-or-equal unit
+
+TODO
+
+#### Greater-than unit
+
+TODO
+
+#### Greater-than-or-equal unit
+
+TODO
+
+#### Equality unit
+
+TODO
+
+#### Inequality unit
+
+TODO
+
+#### Bitwise AND unit
+
+TODO
+
+#### Bitwise XOR unit
+
+TODO
+
+#### Bitwise OR unit
+
+TODO
+
+### Short-circuiting operator units
+
+#### Logical AND unit
+
+TODO
+
+#### Logical OR unit
+
+TODO
+
+#### Selection unit
+
+TODO
+
+### Simple assignment unit
+
+TODO
+
+### Increment & decrement units
+
+#### Post-increment unit
+
+TODO
+
+#### Post-decrement unit
+
+TODO
+
+#### Pre-increment unit
+
+TODO
+
+#### Pre-decrement unit
+
+TODO
+
+### Mutating assignment units
+
+#### Power-by unit
+
+TODO
+
+#### Multiply-by unit
+
+TODO
+
+#### True-divide-by unit
+
+TODO
+
+#### Euclidian-divide-by unit
+
+TODO
+
+#### Modulo-by unit
+
+TODO
+
+#### Increment-by unit
+
+TODO
+
+#### Decrement-by unit
+
+TODO
+
+#### Shift-left-by unit
+
+TODO
+
+#### Arithmically-shift-right-by unit
+
+TODO
+
+#### Logically-shift-right-by unit
+
+TODO
+
+#### Bitwise-AND-by unit
+
+TODO
+
+#### Bitwise-XOR-by unit
+
+TODO
+
+#### Bitwise-OR-by unit
+
+TODO
+
+### Function call unit
+
+TODO
+
+### Block unit
+
+TODO
+
+### Conditional units
+
+#### If-elif-else unit
+
+TODO
+
+#### Conditional execution unit
+
+TODO
+
+#### Match unit
+
+TODO
+
+### Looping units
+
+#### For loop unit
+
+TODO
+
+#### Foreach loop unit
+
+TODO
+
+#### While loop unit
+
+TODO
+
+#### Repeat-until loop unit
+
+TODO
+
+### Special statement-like units
+
+#### Goto unit
+
+TODO
+
+#### Return unit
+
+TODO
+
+#### Break unit
+
+TODO
+
+#### Continue unit
+
+TODO
+
+#### Send unit
+
+TODO
+
+#### Receive unit
+
+TODO
+
+#### Print unit
+
+TODO
+
+#### Abort unit
+
+TODO
+
+### Annotation units
+
+#### Annotation operator unit
+
+TODO
+
+#### Pragma unit
+
+TODO
+
+### Object definition units
+
+#### Qubit definition unit
+
+TODO
+
+#### Variable definition unit
+
+TODO
+
+#### Constant definition unit
+
+TODO
+
+### Alias definition unit
+
+TODO
+
+### Function definition units
+
+#### Function declaration unit
+
+TODO
+
+#### Function definition unit
+
+TODO
+
+### Type definition units
+
+#### Sum type definition unit
+
+TODO
+
+#### Derived type definition unit
+
+TODO
+
+### File parameter unit
+
+TODO
+
+### File inclusion unit
+
+TODO
+
+### Context-sensitive grammatical units
+
+#### Template marker unit
+
+TODO
+
+#### Colon-separated unit
+
+TODO
+
+#### Comma-separated unit
+
+TODO
+
+#### Comma suffix unit
+
+TODO
+
+#### Semicolon-separated unit
+
+TODO
+
+#### Semicolon suffix unit
+
+TODO
+
+
+
 # TODO
+
+
+Map<Str, List<Tup<HierarchyLevel scope, HierarchyLevel frame, Value>>> aliases
+Stack<HierarchyLevel> frames
+Stack<HierarchyLevel> function_frames
+
+frame level 0 (static) is always accessible. frame levels above zero are only
+accessible from the current function frame and upwards.
+
+
+
+when an alias is made, its frame level is set to the hierarchy level of the
+innermost frame
+
