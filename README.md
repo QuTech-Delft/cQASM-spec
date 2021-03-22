@@ -414,6 +414,11 @@ In case a target has multiple address spaces, annotations on the object
 declaration, the value type of the object, or annotations on the value type
 may for instance be used to designate the intended address space.
 
+Besides the above object types, an internal object type exists for function
+template bindings. They may be used to specify the relation between tuple
+sizes in the parameter pack and/or return pack of a function, without putting
+constraints on their actual value. Their value type is always `int`.
+
 ### Value types
 
 The following builtin scalar types exist and can be used explicitly.
@@ -520,9 +525,9 @@ type system to be leveraged for qubits as well.
 
 The following builtin functions exist for qubit references.
 
- - `qref() -> (qref)` (default constructor): returns a reference to a qubit
-   that is not currently referred to by any other `qref`, or aborts if no
-   free qubits remain.
+ - `[_builtin_]qref() -> (qref)` (default constructor): returns a reference to
+   a qubit that is not currently referred to by any other `qref`, or aborts if
+   no free qubits remain.
  - `[_builtin_]physical_qubit(int) -> (qref)`: returns a `qref` for the given
    physical qubit, regardless of whether this qubit is in use. This is intended
    to be used only in post-mapping cQASM files.
@@ -539,12 +544,13 @@ The following builtin functions exist for qubit references.
  - `[_builtin_]measure_z(q: qref[]) -> (bool[len(q)])`: measures the given
    qubits in the Z basis simultaneously, returning `true` upon collapse to
    `|1>` and `false` upon collapse to `|0>` for each qubit individually.
- - `operator==(qref, qref) -> (bool)`: returns whether the two given `qref`s
-   refer to the same qubit. If both `qref`s point to a statically-known
-   default-constructed qubit or to a statically-known physical qubit, the
-   operator is evaluated statically by libqasm, otherwise its evaluation will
-   be postponed.
- - `operator!=(qref, qref) -> (bool)`: returns the complement of the above.
+ - `operator==(qref, qref) -> (bool)` a.k.a. `[_builtin_]is_equal`: returns
+   whether the two given `qref`s refer to the same qubit. If both `qref`s point
+   to a statically-known default-constructed qubit or to a statically-known
+   physical qubit, the operator is evaluated statically by libqasm, otherwise
+   its evaluation will be postponed.
+ - `operator!=(qref, qref) -> (bool)` a.k.a. `[_builtin_]is_not_equal`: returns
+   the complement of the above.
 
 The behavior of a program that uses both `qref`'s default constructor and
 `physical_qubit()` is undefined. You should only use the former for programs
@@ -569,41 +575,46 @@ global type bool: (false, true)
 That means that the following functions are defined by default (see also the
 section on enumerated types).
 
- - `bool() -> (bool)` (default constructor): returns false.
- - `int(bool) -> (int)`: returns `0` for `false` and `1` for `true`.
- - `bool(int) -> (bool)`: returns `false` for `0` and `true` for any other
-   integer.
- - `string(bool) -> (string)`: returns `"true"` for `true` and `"false"` for
-   `false`.
- - `bool(string) -> (bool)`: the inverse of the above. Aborts if the string
-   does not exactly match `"true"` or `"false"`.
- - `operator==(T, T) -> (bool)`: equality.
- - `operator!=(T, T) -> (bool)`: inequality.
- - `operator>(T, T) -> (bool)`: returns `true` if the LHS is `true` and the RHS
-   is `false`, `false` otherwise.
- - `operator>=(T, T) -> (bool)`: returns `true` if the LHS is `true` or the RHS
-   is `false`, `false` otherwise.
- - `operator<(T, T) -> (bool)`: returns `true` if the LHS is `false` and the
-   RHS is `true`, `false` otherwise.
- - `operator<=(T, T) -> (bool)`: returns `true` if the LHS is `false` or the
-   RHS is `true`, `false` otherwise.
- - `operator++(T) -> (T)`: returns `true` if the value was `false`, aborts
+ - `[_builtin_]bool() -> (bool)` (default constructor): returns false.
+ - `[_builtin_]int(bool) -> (int)`: returns `0` for `false` and `1` for `true`.
+ - `[_builtin_]bool(int) -> (bool)`: returns `false` for `0` and `true` for any
+   other integer.
+ - `[_builtin_]string(bool) -> (string)`: returns `"true"` for `true` and
+   `"false"` for `false`.
+ - `[_builtin_]bool(string) -> (bool)`: the inverse of the above. Aborts if the
+   string does not exactly match `"true"` or `"false"`.
+ - `operator==(bool, bool) -> (bool)` a.k.a. `[_builtin_]is_equal`: equality.
+ - `operator!=(bool, bool) -> (bool)` a.k.a. `[_builtin_]is_not_equal`:
+   inequality.
+ - `operator>(bool, bool) -> (bool)` a.k.a. `[_builtin_]is_greater`: returns
+   `true` if the LHS is `true` and the RHS is `false`, `false` otherwise.
+ - `operator>=(bool, bool) -> (bool)` a.k.a. `[_builtin_]is_greater_equal`:
+   returns `true` if the LHS is `true` or the RHS is `false`, `false`
    otherwise.
- - `operator--(T) -> (T)`: returns `false` if the value was `true`, aborts
+ - `operator<(bool, bool) -> (bool)` a.k.a. `[_builtin_]is_less`: returns
+   `true` if the LHS is `false` and the RHS is `true`, `false` otherwise.
+ - `operator<=(bool, bool) -> (bool)` a.k.a. `[_builtin_]is_less_equal`:
+   returns `true` if the LHS is `false` or the RHS is `true`, `false`
    otherwise.
+ - `operator++(bool) -> (bool)` a.k.a. `[_builtin_]increment`: returns `true`
+   if the value was `false`, aborts otherwise.
+ - `operator--(bool) -> (bool)` a.k.a. `[_builtin_]decrement`: returns `false`
+   if the value was `true`, aborts otherwise.
 
 The following functions are defined in addition.
 
- - `operator~(T) -> (T)`: returns `true` for `false` and `false` for `true`.
- - `operator&(T, T) -> (T)`: returns `true` if both values evaluate to `true`,
-   `false` otherwise. Note that both operands are always evaluated.
- - `operator^(T, T) -> (T)`: returns `true` if the values differ, `false`
-   otherwise.
- - `operator|(T, T) -> (T)`: returns `true` if either value evaluates to
-   `true`, `false` otherwise. Note that both operands are always evaluated.
- - `operator!(T) -> (T)`: returns `true` for `false` and `false` for `true`.
- - `operator^^(T, T) -> (T)`: returns `true` if the values differ, `false`
-   otherwise.
+ - `operator~(bool) -> (bool)` a.k.a. `[_builtin_]bit_complement`: returns
+   `true` for `false` and `false` for `true`.
+ - `operator&(bool, bool) -> (bool)` a.k.a. `[_builtin_]bit_and`: returns
+   `true` if both values evaluate to `true`, `false` otherwise. Note that both
+   operands are always evaluated.
+ - `operator^(bool, bool) -> (bool)` a.k.a. `[_builtin_]bit_xor`: returns
+   `true` if the values differ, `false` otherwise.
+ - `operator|(bool, bool) -> (bool)` a.k.a. `[_builtin_]bit_or`: returns `true`
+   if either value evaluates to `true`, `false` otherwise. Note that both
+   operands are always evaluated.
+ - `operator!(bool) -> (bool)` a.k.a. `[_builtin_]bool_not`: returns `true` for
+   `false` and `false` for `true`.
 
 Furthermore, the short-circuiting `&&` and `||` operators are defined for
 booleans. These are not represented as regular operator functions however,
@@ -626,8 +637,95 @@ syntax.
 
 The following functions are defined on integers.
 
-**TODO:** long list. Integers coerce to `real` and `complex` and default to 0;
-otherwise this is mostly just standard stuff.
+ - `[_builtin_]int() -> (int)` (default constructor): returns 0.
+ - `[_builtin_]bool(int) -> (bool)`: returns `false` for `0` and `true` for any
+   other integer.
+ - `[_builtin_]int(bool) -> (int)`: returns `0` for `false` and `1` for `true`.
+ - `operator [_builtin_]real(int) -> (real)`: coerces an integer to its
+   real-number representation.
+ - `[_builtin_]int(real) -> (int)`: converts a real number to an integer by
+   truncating to 0. Overflow behavior is undefined.
+ - `operator [_builtin_]complex(int) -> (complex)`: coerces an integer to its
+   complex-number representation (with no imaginary component).
+ - `[_builtin_]int(complex) -> (int)`: converts a complex number to an integer
+   by discarding the imaginary component and truncating to 0. Overflow behavior
+   is undefined.
+ - `[_builtin_]string(int) -> (string)`: returns the decimal string
+   representation of the integer.
+ - `[_builtin_]int(string) -> (int)`: parses the given string as a decimal
+   integer, aborting if the conversion fails.
+ - `operator==(int, int) -> (bool)` a.k.a. `[_builtin_]is_equal`: equality.
+ - `operator!=(int, int) -> (bool)` a.k.a. `[_builtin_]is_not_equal`:
+   inequality.
+ - `operator>(int, int) -> (bool)` a.k.a. `[_builtin_]is_greater`: greater-than
+   comparison.
+ - `operator>=(int, int) -> (bool)` a.k.a. `[_builtin_]is_greater_equal`:
+   greater-or-equal comparison.
+ - `operator<(int, int) -> (bool)` a.k.a. `[_builtin_]is_less`: less-then
+   comparison.
+ - `operator<=(int, int) -> (bool)` a.k.a. `[_builtin_]is_less_equal`:
+   less-or-equal comparison.
+ - `operator++(int) -> (int)` a.k.a. `[_builtin_]increment`: returns the given
+   integer plus one. Overflow behavior is undefined.
+ - `operator--(int) -> (int)` a.k.a. `[_builtin_]decrement`: returns the given
+   integer minus one. Overflow behavior is undefined.
+ - `operator+(int) -> (int)` a.k.a. `[_builtin_]identity`: returns the integer
+   without modification.
+ - `operator-(int) -> (int)` a.k.a. `[_builtin_]negate`: returns the negated
+   integer.
+ - `operator+(int, int) -> (int)` a.k.a. `[_builtin_]add`: returns the sum of
+   the given integers. Overflow behavior is undefined.
+ - `operator-(int, int) -> (int)` a.k.a. `[_builtin_]subtract`: returns the
+   difference of the given integers. Overflow behavior is undefined.
+ - `operator*(int, int) -> (int)` a.k.a. `[_builtin_]multiply`: returns the
+   product of the given integers. Overflow behavior is undefined.
+ - `operator/(int, int) -> (real)` a.k.a. `[_builtin_]true_divide`: returns the
+   "true" result obtained when dividing the two integers as a real number.
+   Division by zero returns NaN.
+ - `operator//(int, int) -> (int)` a.k.a. `[_builtin_]euclidian_divide`:
+   returns the Euclidian division of the two given integers, i.e. the division
+   value rounded to negative infinity. Division by zero yields zero.
+ - `operator%(int, int) -> (int)` a.k.a. `[_builtin_]modulo`: returns the
+   modulo of the two given integers, equivalent to the remainder of the
+   Euclidian division operator. Division by zero yields the left-hand-side.
+ - `operator**(int, int) -> (int)` a.k.a. `[_builtin_]exponentiate`: returns
+   the LHS raised to the RHS's power. Overflow behavior is undefined.
+ - `operator<<(int, int) -> (int)` a.k.a. `[_builtin_]left_shift`: returns
+   the LHS shifted left by the number of bits indicated by the RHS. Zero is
+   shifted in from the LSB. If the RHS is negative, arithmetic right-shift is
+   used, i.e. the sign bit is shifted in from the MSB. The RHS shall be
+   appropriately clamped to avoid overflow, such that numbers too large
+   result in 0, and numbers too low result in the sign replicating across all
+   bits.
+ - `operator>>(int, int) -> (int)` a.k.a. `[_builtin_]arithmetic_right_shift`:
+   returns the LHS arithmically shifted right by the number of bits indicated
+   by the RHS. The sign bit is shifted in from the MSB. If the RHS is negative,
+   left-shift is used, i.e. zero is shifted in from the LSB. The RHS shall be
+   appropriately clamped to avoid overflow, such that numbers too large
+   result in 0, and numbers too low result in the sign replicating across all
+   bits.
+ - `operator>>>(int, int) -> (int)` a.k.a. `[_builtin_]logical_right_shift`:
+   returns the LHS logically shifted right by the number of bits indicated
+   by the RHS. Zero is shifted in from the MSB regardless of the sign. If the
+   RHS is negative, left-shift is used, i.e. zero is shifted in from the LSB.
+   The RHS shall be appropriately clamped to avoid overflow, such that numbers
+   too large result in 0, and numbers too low result in the sign replicating
+   across all bits.
+ - `operator~(int) -> (int)` a.k.a. `[_builtin_]bit_complement`: returns the
+   bitwise complement of the given integer.
+ - `operator&(int, int) -> (int)` a.k.a. `[_builtin_]bit_and`: returns the
+   bitwise AND of all the bits.
+ - `operator^(int, int) -> (int)` a.k.a. `[_builtin_]bit_xor`: returns the
+   bitwise XOR of all the bits.
+ - `operator|(int, int) -> (int)` a.k.a. `[_builtin_]bit_or`: returns the
+   bitwise OR of all the bits.
+ - `[_builtin_]abs(int) -> int`: returns the negation of the given integer if it
+   is negative, and return the given integer without modification if it is
+   positive or zero.
+ - `[_builtin_]max(*int[]) -> int`: returns the integer that is closest to
+   positive infinity.
+ - `[_builtin_]min(*int[]) -> int`: returns the integer that is closest to
+   negative infinity.
 
 #### `real`
 
@@ -642,8 +740,92 @@ maps to positive infinity.
 
 The following functions are defined on real numbers.
 
-**TODO:** long list. Reals coerce to `complex` and default to 0.0; otherwise
-this is mostly just standard stuff.
+ - `[_builtin_]real() -> (real)` (default constructor): returns 0.0.
+ - `[_builtin_]int(real) -> (int)`: converts a real number to an integer by
+   truncating to 0. Overflow behavior is undefined.
+ - `operator [_builtin_]real(int) -> (real)`: coerces an integer to its
+   real-number representation.
+ - `operator [_builtin_]complex(real) -> (complex)`: coerces a real number to
+   its complex-number representation (with no imaginary component).
+ - `[_builtin_]real(complex) -> (real)`: converts a complex number to a real
+   number by discarding the imaginary component.
+ - `[_builtin_]string(real) -> (string)`: returns a decimal string
+   representation of the real number.
+ - `[_builtin_]real(string) -> (real)`: parses the given string as a real
+   number.
+ - `operator==(real, real) -> (bool)` a.k.a. `[_builtin_]is_equal`: equality.
+ - `operator==(real[N][M], real[N][M]) -> (bool)` a.k.a. `[_builtin_]is_equal`:
+   equality.
+ - `operator!=(real, real) -> (bool)` a.k.a. `[_builtin_]is_not_equal`:
+   inequality.
+ - `operator!=(real[N][M], real[N][M]) -> (bool)` a.k.a. `[_builtin_]is_not_equal`:
+   inequality.
+ - `operator>(real, real) -> (bool)` a.k.a. `[_builtin_]is_greater`:
+   greater-than comparison.
+ - `operator>=(real, real) -> (bool)` a.k.a. `[_builtin_]is_greater_equal`:
+   greater-or-equal comparison.
+ - `operator<(real, real) -> (bool)` a.k.a. `[_builtin_]is_less`: less-then
+   comparison.
+ - `operator<=(real, real) -> (bool)` a.k.a. `[_builtin_]is_less_equal`:
+   less-or-equal comparison.
+ - `operator+(real) -> (real)` a.k.a. `[_builtin_]identity`: returns the given
+   number without modification.
+ - `operator+(real[N][M]) -> (real[N][M])` a.k.a. `[_builtin_]identity`:
+   returns the given matrix without modification.
+ - `operator-(real) -> (real)` a.k.a. `[_builtin_]negate`: returns the negated
+   real number.
+ - `operator-(real[N][M]) -> (real[N][M])` a.k.a. `[_builtin_]negate`: returns
+   the negated matrix.
+ - `operator+(real, real) -> (real)` a.k.a. `[_builtin_]add`: returns the sum
+   of the given real numbers.
+ - `operator+(real[N][M], real[N][M]) -> (real[N][M])` a.k.a. `[_builtin_]add`:
+   returns the sum of the given matrices.
+ - `operator-(real, real) -> (real)` a.k.a. `[_builtin_]subtract`: returns the
+   difference of the given real numbers.
+ - `operator-(real[N][M], real[N][M]) -> (real[N][M])` a.k.a. `[_builtin_]subtract`:
+   returns the difference of the given matrices.
+ - `operator*(real, real) -> (real)` a.k.a. `[_builtin_]multiply`: returns the
+   product of the given real numbers.
+ - `operator*(real, real[N][M]) -> (real[N][M])` a.k.a. `[_builtin_]multiply`:
+   scales the given matrix.
+ - `operator*(real[N][M], real) -> (real[N][M])` a.k.a. `[_builtin_]multiply`:
+   scales the given matrix.
+ - `operator*(real[X][M], real[N][X]) -> (real[N][M])` a.k.a. `[_builtin_]multiply`:
+   returns the outer product of the given matrices.
+ - `operator/(real, real) -> (real)` a.k.a. `[_builtin_]true_divide`: returns
+   the quotient of the given real numbers.
+ - `operator/(real[N][M], real) -> (real[N][M])` a.k.a. `[_builtin_]true_divide`:
+   scales the given matrix.
+ - `operator**(real, real) -> (real)` a.k.a. `[_builtin_]exponentiate`: returns
+   the LHS raised to the RHS's power.
+ - `[_builtin_]abs(real) -> real`: returns the absolute value of the given real
+   number.
+ - `[_builtin_]max(*real[N]) -> real`: returns the real number that is closest
+   to positive infinity.
+ - `[_builtin_]min(*real[N]) -> real`: returns the real number that is closest
+   to negative infinity.
+ - `[_builtin_]is_inf(real) -> bool`: returns whether the given real number is
+   positive or negative infinity.
+ - `[_builtin_]is_nan(real) -> bool`: returns whether the given real number is
+   NaN.
+ - `[_builtin_]sqrt(real) -> real`: returns the square-root of the given real
+   number. NaN is returned if the operand is negative.
+ - `[_builtin_]exp(real) -> real`: returns the natural exponent of the given
+   number.
+ - `[_builtin_]log(real) -> real`: returns the natural logarithm of the given
+   number.
+ - `[_builtin_]log(real, real) -> real`: returns the logarithm of the given
+   number with the given base.
+ - `[_builtin_][a]sin[h](real) -> real`: returns the (inverse of the)
+   (hyperbolic) sine of the given operand, using radians.
+ - `[_builtin_][a]cos[h](real) -> real`: returns the (inverse of the)
+   (hyperbolic) cosine of the given operand, using radians.
+ - `[_builtin_][a]tan[h](real) -> real`: returns the (inverse of the)
+   (hyperbolic) tangent of the given operand, using radians.
+ - `[_builtin_]deg(real) -> real`: returns the given number times 180 divided
+   by pi, converting radians to degrees.
+ - `[_builtin_]rad(real) -> real`: returns the given number times pi divided by
+   180, converting degrees to radians.
 
 #### `complex`
 
@@ -656,8 +838,110 @@ unit *i*.
 
 The following functions are defined on complex numbers.
 
-**TODO:** long list. Complex numbers default to 0.0; otherwise this is mostly
-just standard stuff.
+ - `[_builtin_]complex() -> (complex)` (default constructor): returns 0.0.
+ - `[_builtin_]int(complex) -> (int)`: converts a complex number to an integer
+   by discarding the imaginary component and truncating to 0. Overflow behavior
+   is undefined.
+ - `operator [_builtin_]complex(int) -> (complex)`: coerces an integer to its
+   complex-number representation (with no imaginary component).
+ - `[_builtin_]real(complex) -> (real)`: converts a complex number to a real
+   number by discarding the imaginary component.
+ - `operator [_builtin_]complex(real) -> (complex)`: coerces a real number to
+   its complex-number representation (with no imaginary component).
+ - `[_builtin_]string(complex) -> (string)`: returns a decimal string
+   representation of the complex number.
+ - `operator==(complex, complex) -> (bool)` a.k.a. `[_builtin_]is_equal`:
+   equality.
+ - `operator==(complex[N][M], complex[N][M]) -> (bool)` a.k.a. `[_builtin_]is_equal`:
+   equality.
+ - `operator!=(complex, complex) -> (bool)` a.k.a. `[_builtin_]is_not_equal`:
+   inequality.
+ - `operator!=(complex[N][M], complex[N][M]) -> (bool)` a.k.a. `[_builtin_]is_not_equal`:
+   inequality.
+ - `operator+(complex) -> (complex)` a.k.a. `[_builtin_]identity`: returns the
+   given number without modification.
+ - `operator+(complex[N][M]) -> (complex[N][M])` a.k.a. `[_builtin_]identity`:
+   returns the given matrix without modification.
+ - `operator-(complex) -> (complex)` a.k.a. `[_builtin_]negate`: returns the
+   negated complex number.
+ - `operator-(complex[N][M]) -> (complex[N][M])` a.k.a. `[_builtin_]negate`:
+   returns the negated matrix.
+ - `operator+(complex, complex) -> (complex)` a.k.a. `[_builtin_]add`: returns
+   the sum of the given complex numbers.
+ - `operator+(complex[N][M], complex[N][M]) -> (complex[N][M])` a.k.a. `[_builtin_]add`:
+   returns the sum of the given matrices.
+ - `operator-(complex, complex) -> (complex)` a.k.a. `[_builtin_]subtract`:
+   returns the difference of the given complex numbers.
+ - `operator-(complex[N][M], complex[N][M]) -> (complex[N][M])` a.k.a. `[_builtin_]subtract`:
+   returns the difference of the given matrices.
+ - `operator*(complex, complex) -> (complex)` a.k.a. `[_builtin_]multiply`:
+   returns the product of the given complex numbers.
+ - `operator*(complex, complex[N][M]) -> (complex[N][M])` a.k.a. `[_builtin_]multiply`:
+   scales the given matrix.
+ - `operator*(complex[N][M], complex) -> (complex[N][M])` a.k.a. `[_builtin_]multiply`:
+   scales the given matrix.
+ - `operator*(complex[N][M], complex[K][N]) -> (complex[K][M])` a.k.a. `[_builtin_]multiply`:
+   returns the outer product of the given matrices.
+ - `operator/(complex, complex) -> (complex)` a.k.a. `[_builtin_]true_divide`:
+   returns the quotient of the given complex numbers.
+ - `operator/(complex[N][M], complex) -> (complex[N][M])` a.k.a. `[_builtin_]true_divide`:
+   scales the given matrix.
+ - `operator**(complex, complex) -> (complex)` a.k.a. `[_builtin_]exponentiate`:
+   returns the LHS raised to the RHS's power.
+ - `[_builtin_]imag(complex) -> real`: returns the imaginary component of the
+   given complex number.
+ - `[_builtin_]abs(complex) -> real`: returns the magnitude of the given
+   complex number.
+ - `[_builtin_]arg(complex) -> real`: returns the angle of the complex number
+   in radians between -pi (exclusive) and pi (inclusive). Zero is returned when
+   the complex number is zero.
+ - `[_builtin_]conj(complex) -> complex`: returns the complex conjugate of the
+   given number.
+ - `[_builtin_]norm(complex) -> complex`: normalize the given complex number to
+   magnitude 1.
+ - `[_builtin_]is_inf(complex) -> complex`: returns whether the given complex
+   number is positive or negative infinity for either the real or imaginary
+   component.
+ - `[_builtin_]is_nan(complex) -> complex`: returns whether the given complex
+   number is NaN for either the real or imaginary component.
+ - `[_builtin_]sqrt(complex) -> complex`: returns the square-root of the given
+   number. NaN is returned if the operand is negative.
+ - `[_builtin_]exp(complex) -> complex`: returns the natural exponent of the
+   given number.
+ - `[_builtin_]log(complex) -> complex`: returns the natural logarithm of the
+   given number.
+ - `[_builtin_][a]sin[h](complex) -> complex`: returns the (inverse of the)
+   (hyperbolic) sine of the given operand, using radians.
+ - `[_builtin_][a]cos[h](complex) -> complex`: returns the (inverse of the)
+   (hyperbolic) cosine of the given operand, using radians.
+ - `[_builtin_][a]tan[h](complex) -> complex`: returns the (inverse of the)
+   (hyperbolic) tangent of the given operand, using radians.
+ - `[_builtin_]rx_unitary(real) -> (complex[2][2])`: constructs the unitary
+   matrix for an arbitrary X rotation, specified using an angle in radians.
+ - `[_builtin_]ry_unitary(real) -> (complex[2][2])`: constructs the unitary
+   matrix for an arbitrary Y rotation, specified using an angle in radians.
+ - `[_builtin_]rz_unitary(real) -> (complex[2][2])`: constructs the unitary
+   matrix for an arbitrary Z rotation, specified using an angle in radians.
+ - `[_builtin_]arb_unitary(real, real, real) -> (complex[2][2])`: constructs
+   a unitary matrix using Qiskit's unitary notation in radians.
+ - `[_builtin_]normalize_unitary(complex[N][N]) -> (complex[N][N])`:
+   "normalizes" the given unitary gate matrix as follows:
+    - orthogonalize the column vectors;
+    - normalize the column vectors;
+    - normalize global phase heuristically:
+       - if index `[0,0]` is nonzero after rounding to 5 digits, apply global
+         phase to make its phase 0;
+       - otherwise, if index `[0,1]` is nonzero after rounding to 5 digits,
+         apply global phase to make its phase *i* (this makes the standard Y
+         matrix look right);
+       - otherwise, for i in 2 <= i < N, if index `[0,i]` is nonzero after
+         rounding to 5 digits, apply global phase to make its phase 0 (this
+         should always succeed).
+ - `[_builtin_]controlled_unitary(complex[N][N]) -> (complex[N*N][N*N])`: turns
+   the given unitary gate matrix into its controlled variant.
+ - `[_builtin_]controlled_unitary(complex[N][N], template count: int) -> (complex[N**(count+1)][N**(count+1)])`:
+   turns the given unitary gate matrix into its controlled variant with the
+   given number of control qubits.
 
 #### `string`
 
@@ -670,8 +954,21 @@ syntax, refer to the string literal unit section.
 
 The following functions are defined on strings.
 
-**TODO:** long list. Complex numbers default to 0.0; otherwise this is mostly
-just standard stuff.
+ - `[_builtin_]string(bool) -> (string)`: returns `"true"` for `true` and
+   `"false"` for `false`.
+ - `[_builtin_]bool(string) -> (bool)`: the inverse of the above. Aborts if the
+   string does not exactly match `"true"` or `"false"`.
+ - `[_builtin_]string(int) -> (string)`: returns the decimal string
+   representation of the integer.
+ - `[_builtin_]int(string) -> (int)`: parses the given string as a decimal
+   integer, aborting if the conversion fails.
+ - `[_builtin_]string(real) -> (string)`: returns a decimal string
+   representation of the real number.
+ - `[_builtin_]real(string) -> (real)`: parses the given string as a real
+   number.
+ - `[_builtin_]string(complex) -> (string)`: returns a decimal string
+   representation of the complex number.
+ - `[_builtin_]string(json) -> (string)`: returns the given JSON as a string.
 
 #### `json`
 
@@ -685,18 +982,83 @@ such comments are not supported within these delimiters.
 
 The following functions are defined on JSON objects.
 
-**TODO** (not much here, though)
+ - `[_builtin_]string(json) -> (string)`: returns the given JSON as a string.
+ - `[_builtin_]get(json, string) -> (json)`: indexes into a JSON object. Aborts
+   if the JSON operand is not an object.
+ - `[_builtin_]get(json, int) -> (json)`: indexes into a JSON array. Aborts if
+   the JSON operand is not an array.
+ - `[_builtin_]as_bool(json) -> (bool)`: converts the given JSON boolean to a
+   cQASM boolean. Aborts if the JSON operand is not a boolean.
+ - `[_builtin_]as_int(json) -> (int)`: converts the given JSON integer to a
+   cQASM integer. Aborts if the JSON operand is not an integer.
+ - `[_builtin_]as_real(json) -> (real)`: converts the given JSON float to a
+   cQASM real. Aborts if the JSON operand is not a floating point number.
+ - `[_builtin_]as_str(json) -> (string)`: converts the given JSON string to a
+   cQASM string. Aborts if the JSON operand is not a string.
 
 #### Packs
 
 A pack is a type consisting of zero or more elements of potentially different
 subtypes.
 
-**TODO**
+Pack literals are built using comma-separated lists of values surrounded by
+parentheses, for example `(1, true, 3.14)`. A single-element pack can be made
+using a trailing comman, for example `(1,)`. The same applies for identifying
+pack types; these would be `(int, bool, real)` and `(int,)` for the previous
+examples. `()` is special: it refers to both the zero-element pack type and its
+sole value. In type context this is called *void*, and in value context this is
+called *null*.
+
+Semicolons may also be used within parentheses. These are a shorthand for a
+second pack dimension. For example, `(1, 2; 3, 4)` is the same as
+`((1, 2), (3, 4))`. This is intended to make writing matrices more ergonomic.
+
+A `*` or `**` prefix may be used to convert a pack back to comma-separated or
+comma/semicolon-separated context. For example, a function that takes two
+arguments may be called with a pack via `some_fn(*pack)`. This is similar to
+Python's starred expressions. Similarly, `**` is the inverse of the pack
+literal with semicolons included.
+
+Packs can be indexed using the `x[y]` index operator. Unless all elements have
+exactly the same type (no coercion is done), the index must be static, in order
+for the return type to be determinable during compile time. Out-of-range
+accesses result in a call to abort, at compile-time if static or at runtime if
+non-static.
 
 #### Tuples
 
-**TODO**
+Tuples are a special case of packs where each element has the same type, and at
+least one such element exists. Internally they are distinct types, but they
+can be used interchangeably, because all tuples coerce to their respective
+pack, and a pack coerces to a tuple with some element type if the pack has at
+least one element and all pack elements coerce to said element type. For this
+reason, no special syntax is needed for tuple literals; a pack literal can be
+used instead.
+
+Tuple types are represented as `T[N]`, where `T` is the elemental type, and `N`
+is the size of the tuple. Note that `T[N][M]` represents a two-dimensional
+tuple with *minor* dimension `N` and *major* dimension `M`, because it is a
+tuple of size `M` with `T[N]` elements. This is backward from C, and also
+backward from how you would index the tuple! To avoid confusion, the `T[M,N]`
+syntax may be used instead: it is sugar for `T[N][M]` in type context, while
+`val[i,j]` is sugar for `val[i][j]`.
+
+The special case of `real[][]` and `complex[][]` is used for matrices; that is,
+operators and functions are defined on them that implement basic matrix
+algebra. There is nothing special about them otherwise. The tuples are
+row-major, such that `(a; b)` results in a column vector, `(a, b;)` results in
+a row vector, and `(a, b, c; d, e, f)` represents a two-by-three matrix of the
+form
+
+```
+ _         _
+|  a  b  c  |
+|           |
+|_ d  e  f _|
+```
+
+`T[M,N]` or `T[N][M]` represent an M-by-N matrix, and `val[i,j]` or `val[i][j]`
+index into it. The indices are zero-based, so `0 ≤ i < M` and `0 ≤ j < N`.
 
 #### Enumerated types
 
@@ -787,6 +1149,30 @@ mapping is accomplished is target-specific (it may be via name lookup, via
 annotations on the type, or by some other means). If this is not the case, the
 target must emit a compile error, rather than emulating the type using its
 base type.
+
+#### Special functions
+
+The following functions are defined programmatically from within C++ with
+overloads that are not (easily) representable in cQASM 2.0 function definition
+syntax.
+
+ - `[_builtin_]len(T) -> (int)`: returns the length of a string, pack, or
+   tuple.
+ - `[_builtin_]shape(T) -> (int)`: returns the shape of a multidimensional
+   pack or tuple.
+ - `[_builtin_]type_of(T) -> (typename)`: returns the type of the given
+   expression.
+ - `[_builtin_]get_annotation(str, str, T) -> (S)`: fetches the payload of the
+   first annotation with the given interface and operation identifier
+   (represented as strings) found on the given object. The object may be
+   anything with an alias:
+    - for function aliases, this searches for annotations on the function
+      definition;
+    - for type aliases, this searches for annotations on the type definition;
+    - for object aliases, this searches for annotations on the object
+      definition (use `type_of()` to get annotations on its type instead);
+    - for custom aliases, this searches for annotations on the aliased unit.
+   If the annotation does not exist, `()` is returned.
 
 Scopes and frames
 -----------------
@@ -1097,209 +1483,702 @@ time, shift them around, and so on.
 
 #### Regular indexing unit
 
-TODO
+The regular indexing unit has the syntax `x[y]`, where `x` is either a tuple, a
+pack, an `objname`, or a `typename`, and `y` can be a number of things.
+
+##### `x` = tuple
+
+In the simplest case, `x` is a tuple and `y` is a unit that returns something
+that coerces to `int`. In this case, the index operator has the usual
+semantics; i.e., the outermost tuple/pack is indexed by `y`, using zero-based
+indices. Out-of-range accesses result in a call to abort, either during
+analysis if `y` is statically known, or at runtime if not.
+
+It is also allowed to use a tuple/pack of any shape with only `int` elements
+for `y`. In this case, the result of the index operation will have the same
+shape, with the index operator applied piecewise.
+
+Finally, `y` may be a comma-separated list of the above. In this case, multiple
+dimensions of `x` are indexed at once: the first element of the comma-separated
+indexes the outermost tuple, the next indexes the next, and so on. If `x` has
+insufficient dimensions, abort is called during analysis.
+
+The two notations can be combined. All comma-separated elements of `y` must
+then have the same shape, or abort is called during analysis.
+
+##### `x` = pack
+
+If (one or more indexed dimensions of) `x` is a pack, all of the above still
+applies, but (that comma-separated element of) `y` must be statically known.
+This is needed to determine the resulting type.
+
+##### `x` = `objname`
+
+If `x` is an `objname`, the semantics are as described above, but the result
+will be an appropriately modified `objname`. This means that the index operator
+can be used on the left-hand side of an assignment unit.
+
+##### `x` = `typename`
+
+If `x` is a `typename`, the semantics are very different. In this case, `y`
+must be something that coerces to either a static `int`, an `int` that only
+depends on function template bindings, or a comma-separated list of any
+combinationg thereof.
+
+If `y` is a single `int`, it converts the type `x` to a tuple of that type with
+length `y`. For example, `int[4]` refers to a tuple type consisting of four
+integers.
+
+If `y` is a comma-sepated list, this operation is applied recursively with the
+elements of `y` in right-to-left order. For example, `complex[2,3]` represents
+a two-by-three complex matrix.
+
+Within function declaration/definition context, bindings may be used to
+generically specify the relation between various tuple sizes used in the
+parameter/return type packs.
 
 #### Transposed indexing unit
 
-TODO
+The regular indexing unit has the syntax `x[transpose y]`, where `x` is either
+a tuple, a pack, or an `objname`, and `y` can be a number of things.
+Conceptually, it behaves the same as the regular index operator, but the
+meaning of the comma-separated list and tuple/pack shape of its elements is
+swapped.
+
+##### `x` = tuple
+
+In the simplest case, `x` is a tuple and `y` is a unit that returns something
+that coerces to `int`. In this case, behavior is no different from the regular
+index operator.
+
+It is also allowed to use a one-dimensional tuple of `int` elements, with a
+size no more than the dimensionality of `x` (abort is called during analysis
+otherwise). The elements of this tuple correspond with the dimensions of `x`.
+For example, `matrix[transpose (1, 2)]` selects matrix element `1,2`.
+
+Finally, `y` may be a semicolon and/or comma-separated list of the above. In
+this case, the result will be a one- or two-dimensional tuple/pack containing
+the result of piecewise application of the above rule.
+
+As an example, consider the following context.
+
+```
+const x = (11, 12, 13; 21, 22, 23);
+const sel_11 = (0, 0);
+const sel_12 = (0, 1);
+const sel_13 = (0, 2);
+const sel_21 = (1, 0);
+const sel_22 = (1, 1);
+const sel_23 = (1, 2);
+```
+
+In this context, `x[transpose sel_11, sel_23]` (a.k.a.
+`x[transpose (0, 0), (1, 2)]`) would yield `(11, 23)`. You would not be able
+to write this succinctly with only the regular index operator, because the
+(expanded) equivalent for the same indices would be `x[(0, 1), (0, 2)]`.
+
+#### Unbound size unit
+
+The unbound size unit has the same syntax as the regular indexing unit, except
+there is no `y` (that is, the syntax is `x[]`), and `x` must be a `typename`.
+This may only be used in function declaration/definition context, and is sugar
+for specifying a tuple type with no size constraints. For example,
+`function x<N>(int[N])` and `function x(int[])` mean the same thing, i.e. a
+function generically applicable to a tuple of any size.
 
 ### Range unit
 
-TODO
+The range unit provides a succint notation for tuples with incrementing or
+decrementing indices of some type. The syntax is `x..y`, where `x` and `y` must
+be static values with exactly the same type. This type may be any type for
+which the following operators are defined:
 
-### Overloadable unary operator units
+ - `operator++(T) -> (T)`
+ - `operator--(T) -> (T)`
+ - `operator>(T) -> (T)`
+ - `operator==(T) -> (T)`
+
+This includes `int` and enumerated types.
+
+The unit returns a static tuple of the same type as `x` and `y`, generated
+using the following rules.
+
+ - If `x == y`, return `(x,)`. For example, `1..1` yields `(1,)`.
+
+ - Otherwise, if `x > y`, return the tuple whose elements are generated by
+   iteratively calling `operator++()` on `x` until `x==y`, including `x` and
+   `y`. For example, `1..3` yields `(1, 2, 3)`.
+
+ - Otherwise, return the tuple whose elements are generated by
+   iteratively calling `operator--()` on `x` until `x==y`, including `x` and
+   `y`. For example, `3..1` yields `(3, 2, 1)`.
+
+Note that it is possible to get infinite recursion during analysis when the
+operators are defined incorrectly, or to get very large tuples by specifying
+values that are very far apart. libqasm will emit a warning if it spends a
+long time evaluating a particular range unit, but does not impose any
+particular restriction.
+
+### Overloadable operator units
+
+Similar to C++, cQASM 2.0 supports operator overloading, and does so for almost
+all common operators.
 
 #### Identity unit
 
-TODO
+The identity unit has the syntax `+x`, where `x` is a unit returning any type
+that can be coerced to a type for which `operator+(x)` is defined. The return
+value and side effects are determined by the implementation of that function.
+Normally it would yield `x` unchanged.
 
 #### Negation unit
 
-TODO
+The identity unit has the syntax `-x`, where `x` is a unit returning any type
+that can be coerced to a type for which `operator-(x)` is defined. The return
+value and side effects are determined by the implementation of that function.
+Normally it would yield the two's complement of `x`.
 
 #### Bitwise complement unit
 
-TODO
+The identity unit has the syntax `~x`, where `x` is a unit returning any type
+that can be coerced to a type for which `operator~(x)` is defined. The return
+value and side effects are determined by the implementation of that function.
+Normally it would yield the bitwise/one's complement of `x`.
 
 #### Boolean complement unit
 
-TODO
-
-### Overloadable binary operator units
+The identity unit has the syntax `!x`, where `x` is a unit returning any type
+that can be coerced to a type for which `operator!(x)` is defined. The return
+value and side effects are determined by the implementation of that function.
+Normally it would yield the boolean complement of `x`.
 
 #### Exponentiation unit
 
-TODO
+The exponentiation unit has the syntax `x ** y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator**(x, y)` is defined. The return value and side effects are determined
+by the implementation of that function. Normally it would yield `x` raised to
+the `y`th power.
 
 #### Multiplication unit
 
-TODO
+The multiplication unit has the syntax `x * y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator*(x, y)` is defined. The return value and side effects are determined
+by the implementation of that function. Normally it would yield the product
+of `x` and `y`.
 
 #### True division unit
 
-TODO
+The true division unit has the syntax `x / y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator/(x, y)` is defined. The return value and side effects are determined
+by the implementation of that function. Normally it would yield the quotient
+of `x` and `y` as a real number, without any rounding other than what may be
+needed to represent the value using an IEEE 754 double. This mirrors Python's
+implementation of the operator.
 
 #### Euclidian division unit
 
-TODO
+The Euclidian division unit has the syntax `x // y`, where `x` and `y` are
+units returning any pair of types that can be coerced to a pair of types for
+which `operator//(x, y)` is defined. The return value and side effects are
+determined by the implementation of that function. Normally it would yield the
+Euclidian quotient of `x` and `y`, i.e. rounded toward negative infinity. This
+mirrors Python's implementation of the operator.
 
 #### Modulo unit
 
-TODO
+The modulo division unit has the syntax `x % y`, where `x` and `y` are
+units returning any pair of types that can be coerced to a pair of types for
+which `operator%(x, y)` is defined. The return value and side effects are
+determined by the implementation of that function. Normally it would yield the
+modulus of `x` and `y`, matching the remainder of the Euclidian division unit.
+This mirrors Python's implementation of the operator.
 
 #### Addition unit
 
-TODO
+The addition unit has the syntax `x + y`, where `x` and `y` are units returning
+any pair of types that can be coerced to a pair of types for which
+`operator+(x, y)` is defined. The return value and side effects are determined
+by the implementation of that function. Normally it would yield the sum of `x`
+and `y`.
 
 #### Subtraction unit
 
-TODO
+The subtraction unit has the syntax `x - y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator-(x, y)` is defined. The return value and side effects are determined
+by the implementation of that function. Normally it would yield the difference
+of `x` and `y`.
 
 #### Left-shift unit
 
-TODO
+The left-shift unit has the syntax `x << y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator<<(x, y)` is defined. The return value and side effects are determined
+by the implementation of that function. Normally it would yield `x`
+(arithmically) shifted left by `y` bits.
 
 #### Arithmetic right-shift unit
 
-TODO
+The arithmetic right-shift unit has the syntax `x >> y`, where `x` and `y` are
+units returning any pair of types that can be coerced to a pair of types for
+which `operator>>(x, y)` is defined. The return value and side effects are
+determined by the implementation of that function. Normally it would yield `x`
+arithmically shifted right by `y` bits.
 
 #### Logical right-shift unit
 
-TODO
+The logical right-shift unit has the syntax `x >> y`, where `x` and `y` are
+units returning any pair of types that can be coerced to a pair of types for
+which `operator>>>(x, y)` is defined. The return value and side effects are
+determined by the implementation of that function. Normally it would yield `x`
+logically shifted right by `y` bits.
 
 #### Less-than unit
 
-TODO
+The less-than unit has the syntax `x < y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator<(x, y)` is defined. The return value and side effects are
+determined by the implementation of that function. Normally it would yield a
+boolean indicating whether `x` is less than `y`.
 
 #### Less-than-or-equal unit
 
-TODO
+The less-than-or-equal unit has the syntax `x <= y`, where `x` and `y` are
+units returning any pair of types that can be coerced to a pair of types for
+which `operator<=(x, y)` is defined. The return value and side effects are
+determined by the implementation of that function. Normally it would yield a
+boolean indicating whether `x` is less than or equal to `y`.
 
 #### Greater-than unit
 
-TODO
+The greater-than unit has the syntax `x > y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator>(x, y)` is defined. The return value and side effects are
+determined by the implementation of that function. Normally it would yield a
+boolean indicating whether `x` is greater than `y`.
 
 #### Greater-than-or-equal unit
 
-TODO
+The greater-than-or-equal unit has the syntax `x >= y`, where `x` and `y` are
+units returning any pair of types that can be coerced to a pair of types for
+which `operator>=(x, y)` is defined. The return value and side effects are
+determined by the implementation of that function. Normally it would yield a
+boolean indicating whether `x` is greater than or equal to `y`.
 
 #### Equality unit
 
-TODO
+The equality unit has the syntax `x == y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator==(x, y)` is defined. The return value and side effects are determined
+by the implementation of that function. Normally it would yield a boolean
+indicating whether `x` is equal to `y`.
 
 #### Inequality unit
 
-TODO
+The inequality unit has the syntax `x == y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator!=(x, y)` is defined. The return value and side effects are determined
+by the implementation of that function. Normally it would yield a boolean
+indicating whether `x` is not equal to `y`.
 
 #### Bitwise AND unit
 
-TODO
+The bitwise AND unit has the syntax `x & y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator&(x, y)` is defined. The return value and side effects are determined
+by the implementation of that function. Normally it would yield the bitwise AND
+of the two operands.
 
 #### Bitwise XOR unit
 
-TODO
+The bitwise XOR unit has the syntax `x ^ y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator^(x, y)` is defined. The return value and side effects are determined
+by the implementation of that function. Normally it would yield the bitwise XOR
+of the two operands.
 
 #### Bitwise OR unit
 
-TODO
+The bitwise OR unit has the syntax `x | y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator|(x, y)` is defined. The return value and side effects are determined
+by the implementation of that function. Normally it would yield the bitwise OR
+of the two operands.
 
 ### Short-circuiting operator units
 
+Unlike cQASM 1.x, "expressions" may have side effects, because everything is a
+unit. Therefore, the usual short-circuiting `&&` and `||` operators are now
+sensible, as is the ternary conditional operator. The `^^` operator from cQASM
+1.x is dropped, as it makes no sense in this context, and unlike C, cQASM 2.0
+has no context in which it might find a use (for example, `&&` and `||` in C
+also cast the operands to bool, whereas in cQASM 2.0 this must be done
+explicitly anyway).
+
+These units are not implemented via functions like regular operators, because
+application of a function always triggers analysis and/or evaluation before
+the function implementation is involved. Therefore, they cannot be overloaded.
+
 #### Logical AND unit
 
-TODO
+The logical AND unit has the syntax `x && y`, where `x` and `y` are units
+returning `bool`. The semantics are as follows.
+
+ - If `x` is static `false`, `y` is not analyzed, and static `false` is
+   returned.
+
+ - Otherwise, if `y` is static `false`, the unit is equivalent to `{x; false}`.
+   That is, any side effects of `x` are evaluated at runtime, its result is
+   discarded, and `false` is returned instead.
+
+ - Otherwise, if both `x` and `y` are static `true`, static `true` is returned.
+
+ - Otherwise, the operation is evaluated at runtime. If `x` evaluates to
+   `false`, `false` is returned and `y` is not evaluated. Otherwise, the result
+   of evaluating `y` is returned.
 
 #### Logical OR unit
 
-TODO
+The logical OR unit has the syntax `x || y`, where `x` and `y` are units
+returning `bool`. The semantics are as follows.
+
+ - If `x` is static `true`, `y` is not analyzed, and static `true` is returned.
+
+ - Otherwise, if `y` is static `true`, the unit is equivalent to `{x; true}`.
+   That is, any side effects of `x` are evaluated at runtime, its result is
+   discarded, and `true` is returned instead.
+
+ - Otherwise, if both `x` and `y` are static `true`, static `true` is returned.
+
+ - Otherwise, the operation is evaluated at runtime. If `x` evaluates to
+   `true`, `true` is returned and `y` is not evaluated. Otherwise, the result
+   of evaluating `y` is returned.
 
 #### Selection unit
 
-TODO
+The selection unit has the syntax `x when y else z`. `y` must be a unit
+returning `bool`. The semantics are as follows.
+
+ - If `y` is static `true`, `x` is returned, and `z` is not analyzed.
+
+ - Otherwise, if `y` is static `false`, `z` is returned, and `x` is not
+   analyzed.
+
+ - Otherwise, `x` and `z` must return exactly the same type, and the
+   selection is done at runtime. `y` and its side effects are evaluated first.
+   If it yields `true`, `x` is evaluated, and its result is returned, without
+   `z` ever being evaluated. Otherwise, `z` is evaluated, and its result is
+   returned, without `x` ever being evaluated.
+
+Note that `x` and `z` need not have the same type if the value of `y` is
+static.
 
 ### Simple assignment unit
 
-TODO
+The simple assignment unit has the syntax `x = y`, and is used to assign the
+value of `x`.
+
+If the unit is evaluated in regular context, `x` must be a unit yielding a
+`objname` to a variable object (i.e. not a constant), and `y` must return a
+value that can be coerced to the value type of the reference. The semantics
+are then that `x` is set to `y` as a "side effect," and the new value of `x` is
+returned.
+
+If the unit is evaluated in definition context, a context-sensitive `eqsep`
+value is returned, containing the analyzed `x` and `y` units. The `y` unit is
+always analyzed in regular context, despite the context that the assignment
+unit is analyzed in.
 
 ### Increment & decrement units
 
+The increment and decrement units are taken from C++. They are usually a
+shorthand notation for adding or subtracting one, but are also defined for
+enumerated types, where adding or subtracting an arbitrary amount is not
+supported.
+
 #### Post-increment unit
 
-TODO
+The post-increment unit has the syntax `x++`, where `x` must be an `objname`
+referring to a variable (i.e. not a constant) with any value type that can be
+coerced to a type for which `operator++(x) -> (x)` is defined. The semantics
+are then as follows.
+
+ - A copy is made of the current value in `x`.
+ - `operator++(x)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The copy of the original value of `x` is returned.
 
 #### Post-decrement unit
 
-TODO
+The post-decrement unit has the syntax `x--`, where `x` must be an `objname`
+referring to a variable (i.e. not a constant) with any value type that can be
+coerced to a type for which `operator--(x) -> (x)` is defined. The semantics
+are then as follows.
+
+ - A copy is made of the current value in `x`.
+ - `operator--(x)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The copy of the original value of `x` is returned.
 
 #### Pre-increment unit
 
-TODO
+The pre-increment unit has the syntax `++x`, where `x` must be an `objname`
+referring to a variable (i.e. not a constant) with any value type that can be
+coerced to a type for which `operator++(x) -> (x)` is defined. The semantics
+are then as follows.
+
+ - `operator++(x)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 #### Pre-decrement unit
 
-TODO
+The pre-decrement unit has the syntax `--x`, where `x` must be an `objname`
+referring to a variable (i.e. not a constant) with any value type that can be
+coerced to a type for which `operator--(x) -> (x)` is defined. The semantics
+are then as follows.
+
+ - `operator--(x)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 ### Mutating assignment units
 
+These units are syntactic sugar for expressions of the form `x = x <op> y` for
+various operators.
+
 #### Power-by unit
 
-TODO
+The power-by unit has the syntax `x **= y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator**(x, y) -> (x)` is defined, `x` being a `reference` to a variable
+(not a constant). The semantics are then as follows.
+
+ - `operator**(x, y)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 #### Multiply-by unit
 
-TODO
+The multiply-by unit has the syntax `x *= y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator*(x, y) -> (x)` is defined, `x` being a `reference` to a variable
+(not a constant). The semantics are then as follows.
+
+ - `operator*(x, y)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 #### True-divide-by unit
 
-TODO
+The true-divide-by unit has the syntax `x /= y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator/(x, y) -> (x)` is defined, `x` being a `reference` to a variable
+(not a constant). The semantics are then as follows.
+
+ - `operator/(x, y)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 #### Euclidian-divide-by unit
 
-TODO
+The Euclidian-divide-by unit has the syntax `x //= y`, where `x` and `y` are
+units returning any pair of types that can be coerced to a pair of types for
+which `operator//(x, y) -> (x)` is defined, `x` being a `reference` to a
+variable (not a constant). The semantics are then as follows.
+
+ - `operator//(x, y)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 #### Modulo-by unit
 
-TODO
+The modulo-by unit has the syntax `x %= y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator%(x, y) -> (x)` is defined, `x` being a `reference` to a variable (not
+a constant). The semantics are then as follows.
+
+ - `operator%(x, y)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 #### Increment-by unit
 
-TODO
+The increment-by unit has the syntax `x += y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator+(x, y) -> (x)` is defined, `x` being a `reference` to a
+variable (not a constant). The semantics are then as follows.
+
+ - `operator+(x, y)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 #### Decrement-by unit
 
-TODO
+The decrement-by unit has the syntax `x -= y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator-(x, y) -> (x)` is defined, `x` being a `reference` to a
+variable (not a constant). The semantics are then as follows.
+
+ - `operator-(x, y)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 #### Shift-left-by unit
 
-TODO
+The shift-left-by unit has the syntax `x <<= y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator<<(x, y) -> (x)` is defined, `x` being a `reference` to a variable
+(not a constant). The semantics are then as follows.
+
+ - `operator<<(x, y)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 #### Arithmically-shift-right-by unit
 
-TODO
+The arithmically-shift-right-by unit has the syntax `x >>= y`, where `x` and
+`y` are units returning any pair of types that can be coerced to a pair of
+types for which `operator>>(x, y) -> (x)` is defined, `x` being a `reference`
+to a variable (not a constant). The semantics are then as follows.
+
+ - `operator>>(x, y)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 #### Logically-shift-right-by unit
 
-TODO
+The logically-shift-right-by unit has the syntax `x >>>= y`, where `x` and `y`
+are units returning any pair of types that can be coerced to a pair of types
+for which `operator>>>(x, y) -> (x)` is defined, `x` being a `reference` to a
+variable (not a constant). The semantics are then as follows.
+
+ - `operator>>>(x, y)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 #### Bitwise-AND-by unit
 
-TODO
+The bitwise-AND-by unit has the syntax `x &= y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator&(x, y) -> (x)` is defined, `x` being a `reference` to a variable (not
+a constant). The semantics are then as follows.
+
+ - `operator&(x, y)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 #### Bitwise-XOR-by unit
 
-TODO
+The bitwise-XOR-by unit has the syntax `x ^= y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator^(x, y) -> (x)` is defined, `x` being a `reference` to a variable (not
+a constant). The semantics are then as follows.
+
+ - `operator^(x, y)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 #### Bitwise-OR-by unit
 
-TODO
+The bitwise-OR-by unit has the syntax `x |= y`, where `x` and `y` are units
+returning any pair of types that can be coerced to a pair of types for which
+`operator|(x, y) -> (x)` is defined, `x` being a `reference` to a variable (not
+a constant). The semantics are then as follows.
+
+ - `operator|(x, y)` and any of its side effects are evaluated, and `x` is
+   assigned to its result as a further side effect.
+ - The new value of `x` is returned.
 
 ### Function call unit
 
-TODO
+The function call unit has the syntax `x(y)`, where `x` is a unit of type
+`funcname`, and `y` is a potentially comma-separated list of units, the return
+values of which the function is to be called with.
+
+The semantics depend on the function.
+
+**TODO**
 
 ### Block unit
 
-TODO
+The block unit has the syntax `{x}`, where `x` may one of the following things.
+
+ - Nothing, i.e. `{}`. This is equivalent to `()`.
+ - A single unit. This is equivalent to that unit on its own.
+ - A semicolon- and/or comma-separated list of units, with semantics described
+   below.
+
+Within a block, a semicolon acts as the sequentialization operator, either as
+`x; y` or `x;`. In the former case, the side effects of `x` are evaluated,
+sequentially followed by the side effects of `y`, and the value returned by `y`
+is returned. In the latter case, the side effects of `x` are evaluated, and
+null is returned.
+
+Furthermore, a comma acts as the parallelization operator, either as `x, y` or
+`x,`. In the former case, the side effects of `x` are evaluated in parallel to
+the side effects of `y`, and the value returned by `y` is returned. In the
+latter case, the side effects of `x` are evaluated, and null is returned.
+
+Two interpretations are available for the exact definitions of "sequential" and
+"parallel".
+
+ - *Unscheduled.* This is the flavor that the average user is expected to
+   write as the input to the compiler. In this flavor, there is no defined
+   difference between the `;` and `,` separators. That is, the contents of a
+   block are always evaluated left-to-right. Thus, something like
+   `{X(q[0]), X(q[0])}` is perfectly permissible, even though it is logically
+   impossible to perform a gate on the same qubit at the same time. It implies
+   that the X gates are simply executed sequentially. A compiler may use the
+   difference between `;` and `,` as scheduling hints, but ultimately, the
+   schedule is undefined.
+
+ - *Scheduled.* in this flavor:
+    - a semicolon separator issues the first primitive of the second unit one
+      cycle after the last primitive of the first unit was issued;
+    - a comma separator issues the last primitive of the second unit in the
+      same cycle the last primitive of the first unit was issued;
+    - dependencies of the last primitive of either are always issued in their
+      own, private cycle; and
+    - evaluation order of the unscheduled interpretation is maintained, except
+      for the last primitive of comma-separated units.
+
+   Here, "primitive" means any of the following, including assignment of its
+   return value to a variable (if any):
+    - a call to a function marked primitive, either explicitly or implicitly
+      via operator usage or a coercion;
+    - an `if`, `match`, or `foreach` marked primitive;
+    - evaluation of a short-circuiting unit;
+    - a `goto`, `return`, `break`, `continue`, `send`, `receive`, `print`,
+      `abort`, or `pragma` unit;
+    - evaluation of `{}` or `()` (no-operation).
+
+   The body of a primitive construct is treated as a behavioral description of
+   a single, atomic instruction, and is thus treated as a single node in the
+   schedule.
+
+   The construct `runtime foreach (1..N) {}` may be used to skip `N` cycles,
+   similar to the `skip` instruction in the default gateset of cQASM 1.x.
+
+Note that the functional behavior of either interpretation is almost identical;
+the only difference is that side effects of the last primitives of
+comma-separated units in a block are evaluated in a different order compared to
+their dependencies; it is up to implementations that convert from one
+representation to another to ensure that this does not lead to behavioral
+differences, which they would normally ensure anyway, by explicitly scheduling
+the unit trees via intermediate value assignments. Ultimately, the main
+difference is only that the latter has a defined schedule and the former does
+not.
+
+Note also that the rules need to be this complicated to support the full cQASM
+2.0 syntax: for example `{x(), {y(); z()}}` (assuming all are marked
+`primitive`) reduces to `{y(); x(), z()}` by the above rules, while a simpler
+ruleset would fall apart due to the `;` embedded in the `,`. If this seems
+contrived, note that this sort of thing is likely to happen for any inlined
+function call.
 
 ### Conditional units
 
