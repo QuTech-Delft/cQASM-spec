@@ -1881,11 +1881,13 @@ static.
 The simple assignment unit has the syntax `x = y`, and is used to assign the
 value of `x`.
 
-If the unit is evaluated in regular context, `x` must be a unit yielding a
+If the unit is evaluated in regular context, `x` must be a unit yielding an
 `objname` to a variable object (i.e. not a constant), and `y` must return a
 value that can be coerced to the value type of the reference. The semantics
 are then that `x` is set to `y` as a "side effect," and the new value of `x` is
 returned.
+
+**TODO**: packing/unpacking assignment syntax is not described
 
 If the unit is evaluated in definition context, a context-sensitive `eqsep`
 value is returned, containing the analyzed `x` and `y` units. The `y` unit is
@@ -2096,12 +2098,278 @@ a constant). The semantics are then as follows.
 ### Function call unit
 
 The function call unit has the syntax `x(y)`, where `x` is a unit of type
-`funcname`, and `y` is a potentially comma-separated list of units, the return
-values of which the function is to be called with.
+`funcname`, and `y` may be nothing, a single unit, or a comma-separated list of
+units, the return values of which the function is to be called with.
 
-The semantics depend on the function.
+In general, function call units behaves as you might expect them to, coming
+from other languages. However, due to function overloading,
+single-gate-multiple-qubit (SGMQ) notation support, and the advanced generative
+abilities of cQASM 2.0, the exact process that takes place for function calls
+is quite complex. To keep things readable, we provide both examples for common
+cases and the complete algorithm used to cover all these cases as well as all
+edge cases for reference.
 
-**TODO**
+#### Normal function calls
+
+In the simplest case, only one function with the given name is visible within
+the scope in which the function call is made, and the expected argument types
+for the function are fully specified. In this case, the actual arguments you
+provide to the function (`y`) are matched against the argument set that the
+function expects. If this succeeds, the function is either inlined, or
+instantiated as an independent piece of callable code and called at runtime.
+If this fails, a value of the `error` type is returned, and an appropriate
+error message is emitted.
+
+#### Overloading
+
+cQASM 2.0 allows functions to be overloaded by the type of its argument pack.
+That is, multiple functions can have the same name, as long as the expected
+argument types differ sufficiently. For example, you may define a function that
+takes an `int` with the same name as a function that takes a `real`. This is
+particularly important for operator overloading; after all, `1 + 2` means
+something entirely different than `"1" + "2"`. You may use this to keep the
+names of your functions short, improving readability.
+
+The overload resolution process proceeds quite simply: when you call a
+function, all candidate function overloads are matched against the argument
+pack you provide, and the first one encountered is used. This is not affected
+in any way by which scope the overloads are defined in (unlike C++).
+
+It is also legal to completely override a function at any time, by providing
+a new declaration/definition with the same (or sufficiently similar) set of
+expected arguments as a previous definition. In this case, the original
+function will not be callable anymore until the override goes out of scope
+(and the original is still in scope).
+
+#### Single-gate-multiple-qubit notation
+
+Whenever a one or more of the arguments expected by a function are of type
+`qref`, these arguments may also be bound to tuples of qubits. This is
+syntactic sugar for calling the function piecewise for each element in the
+`qref` tuples. For example, assuming a function with the prototype
+`CR(qref, qref, real) -> ()` exists and `q` is a qubit tuple,
+
+```
+CR(q[0..1], q[(2,5)], pi)
+```
+
+is automatically reduced to
+
+```
+CR(q[0], q[2], pi), CR(q[1], q[5], pi)
+```
+
+Side note: the index notation differs significantly between cQASM 1.x and 2.0.
+`q[2,5]` means something entirely different from `q[(2,5)]`, and the latter is
+the one you want here! The former instead treats `q` as a two-dimensional
+variable, and in this simple case is the same as `q[2][5]`.
+
+**TODO** this is still bothering me. The syntax for this should be more simple,
+as it's used often.
+
+#### Treatment of template arguments and bindings
+
+In more complex cases, you may want to automatically generate subtly different
+functions for different kinds of argument packs. This is especially the case
+for many of cQASM 2.0's builtin functions. For example, all the functions
+operating on matrices are defined generically for all matrix sizes, even though
+cQASM does not support variable-sized tuples. Instead, whenever such a generic
+function is called for multiple different tuple sizes in the same program, a
+distinct function will be generated from the generic function body for each
+tuple size.
+
+Three mechanisms are provided for this.
+
+ - Tuple sizes may be left unbound in function parameter definitions (for
+   example `function prepare(q: qref[])`), or may be bound to a template binding
+   (for example `function add_vectors<N>(a: real[N], b: real[N]) -> (real[N])`).
+   In the latter case, each instance of the binding must map to the same value,
+   but the actual value of the binding is generic.
+
+ - A variable number of arguments may be accomplished by adding an `*` in front
+   of the name of a tuple parameter. For example
+   `function max(*x: real[]) -> (real)` may be called as `max(0.1)`, but also
+   as `max(0.5, 0.2)`. This is similar to Python's `*args` notation, but tuples
+   must have at least one element and thus must match at least one argument,
+   and the type of each argument must be the same.
+
+ - Parameters may be marked with the `template` keyword, for example
+   `function X(template q: qref) -> ()`. This causes the function to be
+   instantiated for every distinct value of `q` (i.e., for every distinct
+   qubit), rather than leaving the qubit reference unknown until the function
+   is called at runtime. This is very important for quantum gates when you
+   compile for a real architecture, as compilation depends on all qubit
+   references being known at compile-time!
+
+libqasm is fully reduces these constructs during analysis, so tools using
+libqasm need not be aware of them.
+
+#### Complete algorithm
+
+cQASM 2.0 allows functions to be overloaded by the type of its argument pack.
+That is, multiple functions can have the same name, as long as the expected
+argument types differ sufficiently. The overload resolution process follows the
+following steps, after determining the subset of currently visible function
+aliases with the given name in declaration order, and determining the types of
+the argument units. For each visible candidate function, starting from the most
+recently declared, check if the argument pack coerces to the expected argument
+pack type using the following algorithm. For each actual argument type in the
+comma-separated list, from left to right, while also tracking the current
+expected argument type, also starting from the left:
+
+ - If we run out of actual or expected argument types, the actual and
+   expected argument types mismatch in number of arguments.
+
+ - If the current expected argument is non-starred, match the tuple shape
+   of the expected argument type with the tuple shape of the actual argument
+   type (note that this also catches non-tuple types; the shape for these is
+   simply zero-dimensional):
+
+    - If the actual argument is of type `qref[]` and the expected argument
+      is of type `qref`, proceed as if the actual argument is of type `qref`
+      and remember using a flag that single-gate-multiple-qubit notation is
+      used.
+
+    - If the dimensionality mismatches (after application of the above
+      exception), or if the actual element type does not coerce to the
+      expected element type, the actual and expected argument types
+      mismatch, so continue with the next function candidate.
+
+    - Otherwise, for each tuple dimension:
+
+       - If the expected tuple size is unbound, continue with the next
+         dimension.
+
+       - If the expected tuple size is an `objname` to a binding, and this
+         binding has no value yet, constrain the binding to the actual tuple
+         size and continue with the next dimension.
+
+       - Substitute any references to previously constrained bindings with
+         their values, then evaluate the resulting expression to a constant
+         integer. If this integer matches the actual tuple size, continue
+         with the next dimension.
+
+       - Otherwise, this dimension mismatches, therefore the actual and
+         expected argument types for this candidate function mismatch, so
+         continue with the next function candidate.
+
+      If all dimensions match, proceed with the next actual and expected
+      argument.
+
+      Note that unbound or templated tuples inside packs are not supported;
+      the sizes of such tuples must be fully specified and are matched via
+      the normal coercion logic, which simply matches shape and checks
+      coercion for the element types.
+
+ - If the current expected argument type is a starred tuple that has not
+   been matched to any argument yet:
+
+    - If its element type is another tuple, process the contained tuple as
+      per the non-starred tuple matching rule above to match and fully
+      define its type. Otherwise, try coercing the actual type to the
+      expected type directly. If this fails, the actual and expected
+      argument types for this candidate function mismatch, so continue with
+      the next function candidate.
+
+ - If the current expected argument type is a starred tuple that has been
+   matched before:
+
+    - If the starred tuple has a bound size, exactly this many arguments
+      need to be matched. If not all of them have been matched yet, match
+      the current actual argument with it via the coercion rules. If this
+      fails, the actual and expected argument types for this candidate
+      function mismatch, so continue with the next function candidate.
+
+    - If the starred tuple has an unbound size, greedily match the current
+      actual argument with it via coercion. If this succeeds, increase the
+      size of the unbound starred tuple by one, advance to the next actual
+      argument, but do not advance the expected (starred) argument, to try
+      matching more arguments.
+
+    - If the above fails, the starred tuple is now fully matched. If its
+      size is bound by an unconstrained binding, constrain it by the
+      determined size. Then advance to the next expected argument, but do
+      not advance the actual argument, and proceed from the beginning of
+      this ruleset again.
+
+If we run out of candidate functions, push an appropriate error and return
+a value of type `error`. Otherwise, we have now matched the function call with
+a function definition. We proceed with the following checks:
+
+ - If SGMQ syntax was used:
+
+    - Ensure that all actual `qref[]` arguments bound to `qref` expected
+      arguments have the same tuple size. If not, push an appropriate error and
+      return a value of type `error`.
+
+    - Otherwise, apply the remainder of the rules piecewise for each element of
+      the actual `qref[]` arguments, returning the result of the individual
+      function call expansions as a `csep`. This means that if the function
+      call is inside a `{}`, the individual functions will be called in
+      parallel (refer to the section on blocks for more information).
+      Otherwise, they will be called sequentially.
+
+ - Ensure that all actual arguments bound to expected argument marked using
+   `template` are actually static values.
+
+ - If the function definition is marked `inline`, or the function is not marked
+   with `runtime` or `primitive` and all actual arguments have static values,
+   inline the function as follows.
+
+    - Construct an AST subtree for a block. In it, add using
+      semicolon-separation:
+
+       - a constant object definition for all non-`template` parameters,
+         initialized using the actual arguments bound to them;
+
+       - a static constant object definition for all `template` parameters,
+         initialized using the values bound to them for this particular
+         function instance;
+
+       - an anonymous variable object for the function return value;
+
+       - the AST corresponding to the function body, with any `return` units
+         replaced with assignment statements to the anonymous return value
+         variable if a value is returned, followed by a `goto` unit to
+         `.return`; **TODO**: return label uniquification, also goto must
+         therefore be able to jump out of control flow to a any parent block!
+
+       - the equivalent of `.return: retval`, where `retval` is a reference
+         to the anonymous return value variable.
+
+    - Analyze this subtree within the global scope, keeping track of the
+      inline call tree to report possible infinite recursion to the user.
+      Return the result of this analysis as the unit result (or a `csep`
+      element of it in case SGMQ rules apply).
+
+ - Otherwise, a runtime function call value must be generated as follows.
+
+    - Check whether the function has been called before with this particular
+      set of bindings and `template` arguments. If not, instantiate the
+      function as follows:
+
+       - Construct an AST subtree for a block. In it, add using
+         semicolon-separation:
+
+          - an alias for all non-`template` parameters to internal parameter
+            reference nodes;
+
+          - a static constant object definition for all `template` parameters,
+            initialized using the values bound to them for this particular
+            function instance;
+
+          - the AST corresponding to the function body, using the runtime
+            interpretation of the `return` unit;
+
+          - an implicit `return` at the end.
+
+       - Analyze this subtree within the global scope.
+
+       - Emit the analysis result for this function as a function instance.
+
+    - Return a runtime function call to the function instance with the bound
+      non-`template` arguments as the unit result (or a `csep` element of it
+      in case SGMQ rules apply).
 
 ### Block unit
 
@@ -2120,8 +2388,10 @@ null is returned.
 
 Furthermore, a comma acts as the parallelization operator, either as `x, y` or
 `x,`. In the former case, the side effects of `x` are evaluated in parallel to
-the side effects of `y`, and the value returned by `y` is returned. In the
-latter case, the side effects of `x` are evaluated, and null is returned.
+the side effects of `y`, and a pack of the returned values is returned. In the
+latter case, the side effects of `x` are evaluated, and the result is returned
+as a single-valued pack. If more than two comma-separated units appear in a
+sequence, the resulting pack will be flattened.
 
 Two interpretations are available for the exact definitions of "sequential" and
 "parallel".
@@ -2154,7 +2424,10 @@ Two interpretations are available for the exact definitions of "sequential" and
     - evaluation of a short-circuiting unit;
     - a `goto`, `return`, `break`, `continue`, `send`, `receive`, `print`,
       `abort`, or `pragma` unit;
-    - evaluation of `{}` or `()` (no-operation).
+    - evaluation of `()` (no-operation).
+
+   Some units, such as type or alias definitions or empty blocks, do not issue
+   any primitives. Such units are simply not part of the schedule.
 
    The body of a primitive construct is treated as a behavioral description of
    a single, atomic instruction, and is thus treated as a single node in the
