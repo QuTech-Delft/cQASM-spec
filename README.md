@@ -25,8 +25,8 @@ which many user-friendliness features of the language are already reduced to
 their most primitive form. Besides the C++ APIs, libqasm also includes a Python
 wrapper.
 
-The user-facing cQASM language and the program-facing libqasm API both come in
-different versions. Roughly speaking, four versions of the cQASM language
+The user-facing cQASM language and the application-facing libqasm API both come
+in different versions. Roughly speaking, four versions of the cQASM language
 exist, but unfortunately the version number was used more as a "hype" term than
 as an actual version number, resulting in some confusion.
 
@@ -62,9 +62,9 @@ API is documented [here](https://libqasm.readthedocs.io/en/latest/doxy/index.htm
 cQASM 2.0
 =========
 
-As stated in the introduction, cQASM 2.0's primary goal is to extend upon 1.x
-by adding support for control-flow. However, unlike all the previous versions,
-it is no longer backward-compatible.
+cQASM 2.0's primary goal is to extend upon 1.x by adding support for
+control-flow. However, unlike all the previous versions, it is no longer
+backward-compatible.
 
 cQASM 2.0 is designed as an imperative, structured programming language, with
 a small amount of functional syntax peppered in. This means that the language
@@ -113,12 +113,14 @@ still written in a way that their function is immediately clear to someone
 reading the program, and such that they can be interpreted by a simulator. For
 example, the primitive function definition for an MX90 gate may use a
 generalized RX function to perform a -90 degree rotation, and the RX function
-would in turn use the builtin unitary gate function to process the gate. This
-contrasts with the cQASM 1.x approach, where the gateset is built into the
-parser or (in later API versions) is configurable via API calls: context beyond
-the cQASM language specification was needed to parse or interpret a file, the
-effect of which being that every implementation using cQASM was essentially
-using its own dialect of cQASM.
+would in turn use the builtin unitary gate function to process the gate;
+however, because the MX90 gate function is declared as primitive, it will never
+be reduced to its contents, and will always output a single machine instruction
+when compiled. This contrasts with the cQASM 1.x approach, where the gateset is
+built into the parser or (in later API versions) is configurable via API calls:
+context beyond the cQASM language specification was needed to parse or
+correctly interpret a file, the effect of which being that every implementation
+using cQASM was essentially using its own dialect of cQASM.
 
 Normally, the primitives supported by some target are defined in either a
 regular `include` file or in the prelude, the latter being a file that is
@@ -141,8 +143,29 @@ defined, with the same overflow behavior that the hardware uses. This, again,
 prevents the need for a simulator to have hardcoded support for different
 platforms.
 
+The lack of an explicit type for qubits perhaps requires some explanation. As
+it turns out, the problem with a qubit type in context of classical code is
+very difficult: qubits cannot be copied, therefore cannot be placed on a stack,
+and therefore would not be usable as function arguments (even if, eventually,
+the compiler probably has to make them static anyway in order to do
+compile-time scheduling and mapping). Supporting generics/templates or making
+qubits a completely separate thing (the latter being OpenQASM's approach) would
+work around this, but would also complicate the language. Instead, cQASM 2.0
+only supports references to qubits, i.e. a `qref`. Since these references are
+classical, they can be treated like any other classical type. The default
+initializer for a `qref` "allocates" a virtual qubit: it asserts that a real
+qubit that is not currently live must be used to implement it, but makes no
+assertion as to which one that is. An alternate initializer
+(`real_qubit(int) -> qref`) creates a reference to a real qubit by means of its
+index, allowing mapped code to be represented in cQASM 2.0 as well.
+
+A qubit is considered live when one or more `qref`s referencing it are live.
+This means that a compiler needs to be able to statically determine which
+`qref`s map to which virtual or real qubit, and thus all `qref`s must be static
+const for a program to be compilable.
+
 Unlike most languages, cQASM 2.0 makes no grammatical distinction between
-statements, expressions, or definitions. The mix of these is referred to as a
+statements, expressions, and definitions. The mix of these is referred to as a
 *unit*. Things that are normally statements or definitions just return `null`
 (equivalent to `None` in Python, or `void` in C++), and can otherwise be used
 in most contexts, as long as the context supports side effects or definitions.
@@ -180,9 +203,11 @@ variables and constants must (appear to) have a well-defined value at all
 times. In C++, all C-style (POD) types are uninitialized and contain garbage
 until they are explicitly assigned; in cQASM 2.0, all variables are implicitly
 initialized with a type-specified default value if no explicit initializer is
-given. When cQASM 2.0 is used as a compiler IR, a pass that determines that no
-default initialization is actually needed because the value is never used may
-convey this information to the next pass by annotating the object.
+given. This makes the language more predictable; forgetting to initialize
+something should not result in undefined behavior. When cQASM 2.0 is used as a
+compiler IR, a pass that determines that no default initialization is actually
+needed because the value is never used may convey this information to the next
+pass by annotating the object.
 
 To facilitate expression of circuits with explicit parallelism and timing,
 cQASM 2.0's braced block unit allows semicolons to be used to separate
@@ -210,7 +235,9 @@ Terminology
 
 Because cQASM 2.0 is not an entirely conventional language, some of the usual
 terminology (statement, expression, etc) does not apply. To avoid ambiguity, we
-define the following terms.
+define the following terms. Note that some of them have already been loosely
+used in the introduction; however, if there is a conflict, these definitions
+are leading.
 
  - *Unit:* the collective term for all of cQASM's individual language
    constructs. Units represent the expressions, statements, and declarations of
@@ -266,6 +293,17 @@ define the following terms.
    or instruction.
 
  - *Builtin:* a construct of which the semantics are language-defined.
+
+ - *Virtual `qref`:* a qubit which, when compiled, must at every time instant
+   while it is live map to a single real qubit (or be in the process of being
+   routed to another real qubit) that is not in use by any other virtual or
+   real qubit/`qref`.
+
+ - *Real `qref`:* a reference to a qubit on the target device as created using
+   `real_qubit(int) -> qref`. It is the responsibility of the writer of the
+   algorithm using the real `qref` (which may be a compiler) to ensure that all
+   device constraints are met (for example, applying a two-qubit gate on two
+   real `qref`s that cannot interact is an error).
 
 Structure
 ---------
@@ -528,13 +566,13 @@ The following builtin functions exist for qubit references.
  - `[_builtin_]qref() -> (qref)` (default constructor): returns a reference to
    a qubit that is not currently referred to by any other `qref`, or aborts if
    no free qubits remain.
- - `[_builtin_]physical_qubit(int) -> (qref)`: returns a `qref` for the given
-   physical qubit, regardless of whether this qubit is in use. This is intended
+ - `[_builtin_]real_qubit(int) -> (qref)`: returns a `qref` for the given
+   real qubit, regardless of whether this qubit is in use. This is intended
    to be used only in post-mapping cQASM files.
- - `[_builtin_]qubit_index_of(qref) -> (int)`: returns the physical zero-based
+ - `[_builtin_]qubit_index_of(qref) -> (int)`: returns the real zero-based
    qubit index that the given `qref` refers to, or -1 if the `qref` is not
    mapped yet. This may be used to express different gate behavior depending
-   on the physical qubits the gate is applied to.
+   on the real qubits the gate is applied to.
  - `[_builtin_]apply_unitary(qref[], complex[][]) -> ()`: applies the given
    unitary matrix to the given set of qubits.
  - `[_builtin_]apply_density(qref[], real[][]) -> ()`: applies the given
@@ -547,19 +585,19 @@ The following builtin functions exist for qubit references.
  - `operator==(qref, qref) -> (bool)` a.k.a. `[_builtin_]is_equal`: returns
    whether the two given `qref`s refer to the same qubit. If both `qref`s point
    to a statically-known default-constructed qubit or to a statically-known
-   physical qubit, the operator is evaluated statically by libqasm, otherwise
+   real qubit, the operator is evaluated statically by libqasm, otherwise
    its evaluation will be postponed.
  - `operator!=(qref, qref) -> (bool)` a.k.a. `[_builtin_]is_not_equal`: returns
    the complement of the above.
 
 The behavior of a program that uses both `qref`'s default constructor and
-`physical_qubit()` is undefined. You should only use the former for programs
+`real_qubit()` is undefined. You should only use the former for programs
 that are yet to be mapped, and only the latter for programs that have already
 been mapped.
 
 On the API layer, `qref` values are represented as signed integers. `qref()`
 returns unique negative integers starting from -1 by means of a static counter,
-to represent distinct unmapped qubits. Physical qubits are addressed using
+to represent distinct unmapped qubits. Real qubits are addressed using
 nonnegative integers.
 
 #### `bool`
