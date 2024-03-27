@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  mkdocs_qne:
+    container_name: mkdocs_cqasm
+    image: mkdocs
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: serve -f mkdocs-base.yml -a 0.0.0.0:8000
+    volumes:
+      - .:/docs
+    ports:
+      - 8106:8000
+    restart: unless-stopped
