@@ -1,7 +1,7 @@
 mkdocs==1.5.3
 mkdocs-exclude==1.0.2
 mkdocs-glightbox==0.3.7
-mkdocs-material==9.5.14
+mkdocs-material==9.5.17
 mkdocs-material-extensions==1.3.1
 mkdocs-build-plantuml-plugin==1.9.0
 mkdocs-render-swagger-plugin==0.1.1
