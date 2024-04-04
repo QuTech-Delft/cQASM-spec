@@ -4,8 +4,10 @@ repo_url: https://gitub.com/qutech-delft/cqasm-spec
 use_directory_urls: false
 
 nav:
-  - Home:
-      - index.md
+  - Introduction: index.md
+  - Language specification:
+    - Structure: ./language-specification/structure.md
+    - Statements: ./language-specification/statements.md
 
 theme:
   name: material
@@ -39,6 +41,8 @@ markdown_extensions:
   - def_list
   - footnotes
   - md_in_html
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.caret
   - pymdownx.critic
   - pymdownx.details
@@ -59,9 +63,15 @@ markdown_extensions:
   - pymdownx.tilde
   - tables
 
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
 plugins:
   - glightbox
   - search
 
 watch:
   - mkdocs-base.yml
+
