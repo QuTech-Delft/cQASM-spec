@@ -1,13 +1,25 @@
 site_name: cQASM specification
 site_dir: public
-repo_url: https://gitub.com/qutech-delft/cqasm-spec
+repo_url: https://github.com/qutech-delft/cqasm-spec
 use_directory_urls: false
 
 nav:
   - Introduction: index.md
   - Language specification:
-    - Structure: ./language-specification/structure.md
-    - Statements: ./language-specification/statements.md
+    - Structure:
+      - General structure: ./language-specification/structure/general-structure.md
+      - File extension: ./language-specification/structure/file-extension.md
+      - Case sensitivity: ./language-specification/structure/case-sensitivity.md
+      - Whitespace & Comments: ./language-specification/structure/whitespace-comments.md
+      - Identifiers: ./language-specification/structure/identifiers.md
+      - Reserved keywords: ./language-specification/structure/reserved-keywords.md
+      - Predefined constants: ./language-specification/structure/predefined-constants.md
+    - Statements:
+      - Version statement: ./language-specification/statements/version-statement.md
+      - Qubit (register) declaration: ./language-specification/statements/qubit-register-declaration.md
+    - Instructions:
+      - Gates: ./language-specification/instructions/gates.md
+      - Measure instruction: ./language-specification/instructions/measure-instruction.md
 
 theme:
   name: material

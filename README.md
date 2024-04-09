@@ -1,14 +1,10 @@
-# cQASM specification
+# cQASM language specification
 
-This repository contains the specification for cQASM v3. This documentation can be viewed via the provisioned Docker
-container.
+This repository contains the specification documents of the cQASM quantum programming language. 
+The [cQASM language specification](https://qutech-delft.github.io/cQASM-spec/) is hosted through GitHub Pages.
 
-## Installation
+Documentation development and deployment information can be found in the [Wiki](https://github.com/QuTech-Delft/cQASM-spec/wiki).
 
-Run the docker container with the following command
+## Authors
 
-```shell
-docker compose up -d
-```
-
-The documentation can now be viewed at <http://localhost:8106>.
+Quantum Inspire: [support@quantum-inspire.com](mailto:"support@quantum-inspire.com")
