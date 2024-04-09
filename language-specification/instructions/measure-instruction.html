@@ -841,7 +841,22 @@
   <h1>Measure instruction</h1>
 
 <p>Currently, cQASM only supports the following measurement instruction at the end of the circuit.</p>
-<p><code>measure &lt;qubit(-register)-name:ID&gt;[&lt;qubit-index&gt;]?</code></p>
+<p><code>measure &lt;qubit(-register)-name:ID&gt;[&lt;qubit-index(-list): INT&gt;]?</code></p>
+<p>The following code snippet shows how the measure instruction might be used</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>version 3.0
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>qubit[2] q
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>H q[0]
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>CNOT q[0], q[1]
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>measure q[0]  // Measurement of the state of the qubit at index 0 in the Z-basis.
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>measure q[1]  // Measurement of the state of the qubit at index 1 in the Z-basis.
+</code></pre></div>
+<p>In the last step of this simple program the respective states of both qubits are measured in the <span class="arithmatex">\(Z\)</span>-basis, <em>i.e.</em>, the computational basis.
+Note that the measure instruction accepts SGMQ-notation, <em>e.g.</em> the two separate measurement instructions in the above code example can be written as</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>measure q[0, 1]  // Measurement of the state of the qubits at indices 0 an 1 in the Z-basis.
+</code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>Midcircuit measurements are not supported at this stage.</p>
