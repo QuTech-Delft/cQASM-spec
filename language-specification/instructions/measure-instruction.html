@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="qubit-register-declaration.html">
+        <link rel="prev" href="gates.html">
       
-      
-        <link rel="next" href="../standard-gate-set.html">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>Instructions - cQASM specification</title>
+        <title>Measure instruction - cQASM specification</title>
       
     
     
@@ -80,11 +78,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#gates" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -119,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Instructions
+              Measure instruction
             
           </span>
         </div>
@@ -610,10 +603,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -621,19 +612,17 @@
       
         
       
-        
-      
     
     
       
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
@@ -647,7 +636,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             Statements
@@ -661,7 +650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="version-statement.html" class="md-nav__link">
+      <a href="../statements/version-statement.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -682,11 +671,86 @@
   
   
     <li class="md-nav__item">
-      <a href="qubit-register-declaration.html" class="md-nav__link">
+      <a href="../statements/qubit-register-declaration.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Qubit (register) declaration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Instructions
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Instructions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gates.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gates
   </span>
   
 
@@ -710,76 +774,15 @@
       
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Instructions
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="instructions.html" class="md-nav__link md-nav__link--active">
+      <a href="measure-instruction.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Instructions
+    Measure instruction
   </span>
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#gates" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gates
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Gates">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#single-gate-multi-qubit-sgmq-notation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Single-gate-multi-qubit (SGMQ) notation
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#measurement" class="md-nav__link">
-    <span class="md-ellipsis">
-      Measurement
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -789,27 +792,6 @@
           </ul>
         </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../standard-gate-set.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Standard Gate Set
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -840,47 +822,6 @@
   
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#gates" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gates
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Gates">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#single-gate-multi-qubit-sgmq-notation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Single-gate-multi-qubit (SGMQ) notation
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#measurement" class="md-nav__link">
-    <span class="md-ellipsis">
-      Measurement
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -897,38 +838,8 @@
   
 
 
-  <h1>Instructions</h1>
+  <h1>Measure instruction</h1>
 
-<p>In cQASM, instructions are either gates or a measure instruction.</p>
-<h2 id="gates">Gates</h2>
-<h3 id="single-gate-multi-qubit-sgmq-notation">Single-gate-multi-qubit (SGMQ) notation</h3>
-<p>A single qubit gate can be applied to multiple qubits by making use of single-gate-multi-qubit (SGMQ) notation. 
-At the location of the (single) qubit argument either</p>
-<ul>
-<li>
-<p>the whole qubit register <code>q</code>;</p>
-</li>
-<li>
-<p>a slice thereof <code>q[i:j]</code>, where <span class="arithmatex">\(0 \leq i &lt; j \leq N-1\)</span>;</p>
-</li>
-<li>
-<p>or a list of indices can be passed <code>q[i,]</code>, where <span class="arithmatex">\(0 \leq i \leq N-1\)</span>,</p>
-</li>
-</ul>
-<p>with <span class="arithmatex">\(N\)</span> the size of the qubit register.
-The following slicing convention is adopted: a slice <code>q[i:j]</code> includes qubits <code>q[i]</code>, <code>q[j]</code>, and all qubits in between. The code block below demonstrates some examples:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>qubit[5] q;
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>X q;  // is functionally equivalent to
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>X q[0]; X q[1]; X q[2]; X q[3]; X q[4];
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>X q[1:3];  // is functionally equivalent to
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>X q[1]; X q[2]; X q[3];
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>X q[0,2,4];  // is functionally equivalent to
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>X q[0]; X q[2]; X q[4];  
-</code></pre></div>
-<h2 id="measurement">Measurement</h2>
 <p>Currently, cQASM only supports the following measurement instruction at the end of the circuit.</p>
 <p><code>measure &lt;qubit(-register)-name:ID&gt;[&lt;qubit-index&gt;]?</code></p>
 <div class="admonition info">
