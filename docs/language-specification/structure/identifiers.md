@@ -5,14 +5,23 @@ Identifiers ID must follow the following regular expression pattern,
 
 `[_a-zA-Z][a-zA-Z0-9_]*`
 
-Examples are given below
+!!! example
 
-```
-q
-_i
-Id
-b01
-2k	// Invalid identifier: first character cannot be a digit!
-```
+    === "Valid identifiers"
 
-Note that there exist certain predefined keywords that cannot be used as an identifier; a list of these keywords can be found under the section _Keywords_.
+        ```
+        q
+        _i
+        ID
+        b01
+        ```
+    
+    === "Invalid identifiers" 
+        
+        ```
+        1q	   // first character cannot be a digit
+        +q     // the underscore '_' is only permissible special character 
+        qubit  // 'qubit' is a reserved keyword
+        ```
+
+Note that there exist certain predefined keywords that cannot be used as an identifier; a list of these keywords can be found under the section [Reserved keywords](reserved-keywords.md).

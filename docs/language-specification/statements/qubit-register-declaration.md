@@ -4,22 +4,32 @@ The general form of the declaration of a qubit reference or qubit register is gi
 
 In cQASM, one can only declare either a qubit or qubit register once. 
 
-Example of a single qubit declaration and subsequent use:
+!!! example
 
-```
-qubit q;
-H q;
-measure q;
-```
+    === "Single qubit declaration"
 
-Example of a qubit register declaration and subsequent use:
+        ```linenums="1"
+        qubit q
 
-```
-qubit[5] q;
-H q[0];
-CNOT q[0], q[1];
-measure q[0], q[1];
-```
+        H q
+
+        measure q
+
+
+        ```
+    
+    === "Qubit register declaration"
+
+        ```linenums="1"
+        qubit[5] q
+
+        H q[0]
+        CNOT q[0], q[1]
+
+        measure q
+
+
+        ```
 
 Note in the latter example, that the number of qubits, _i.e._, the size of the qubit register, needs to be defined during declaration.
 For instance, the statement `qubit[5] q` declares a qubit register named `q`, consisting of 5 qubits.

@@ -25,8 +25,8 @@ An example of single-line commenting is show below:
 
 ```
 // This is a single-line comment, which ends on the new line.
-H q[0];
-CNOT q[0], q[1];  // A single-line comment can follow an instruction or statement.
+H q[0]
+CNOT q[0], q[1]  // A single-line comment can follow an instruction or statement.
 ```
 
 ## Multi-line comments

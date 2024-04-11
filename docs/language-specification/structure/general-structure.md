@@ -1,46 +1,49 @@
 The general structure of a cQASM program is as follows:
 
-- **Comment(s)** 
+- **[Comment(s)](whitespace-comments.md)** 
     - _optional_ 
     - _at any location in the program_
-- **Version statement**
+- **[Version statement](../statements/version-statement.md)**
     - _mandatory_
     - _at the top, save for some potential comment(s)_
-- **Qubit (register) declaration statement**
+- **[Qubit (register) declaration statement](../statements/qubit-register-declaration.md)**
     - _optional_
 - **Instruction(s)**
-    - Gate(s)
+    - [Gate(s)](../instructions/gates.md)
         - _optional_ 
         - _requires a qubit (register) declaration_ 
-    - Measure instruction
+    - [Measure instruction](../instructions/measure-instruction.md)
         - _optional_ 
         - _requires a qubit (register) declaration_ 
         - _at the end, save for some potential following comment(s)_
+        - only a single measure instruction
 
-An example cQASM program may look accordingly:
+!!! example
 
-```
-// Example program according to the cQASM language specification
+    === "Example cQASM program"
 
-// Version statement
-version 3.0
+        ```linenums="1"
+        // Example program according to the cQASM language specification
+        
+        // Version statement
+        version 3.0
+        
+        // Qubit register declaration statement
+        qubit[2] q
+        
+        // Instructions (Gates)
+        Rx(pi/2) q[0]
+        H q[0]; H q[1]
+        CNOT q[0], q[1]
+        
+        // Instructions (Measure instruction)
+        H q[0]
+        measure q[0, 1]
+        
+        ```
 
-// Qubit register declaration statement
-qubit[2] q;
+    === "Smallest valid cQASM program"
 
-// Instructions (Gates)
-Rx(1.57) q[0];
-H q[0]; H q[1];
-CNOT q[0], q[1];
-
-// Instructions (Measure instruction)
-H q[0];
-measure q[0];
-
-```
-
-Incidentally, the smallest valid cQASM program is given as follows:
-
-```
-version 3.0
-```
+        ```linenums="1"
+        version 3
+        ```

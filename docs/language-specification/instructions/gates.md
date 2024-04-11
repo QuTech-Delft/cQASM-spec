@@ -1,3 +1,19 @@
+`<gate-name:ID>(<parameter(s):FLOAT|INT,>)? <qubit-argument(s):QUBIT,>`
+
+```
+// <gate-name:ID> <qubit-argument:QUBIT>
+H q[0]
+
+// <gate-name:ID> <qubit-arguments:QUBIT,>
+CZ q[0], q[1]
+
+// <gate-name:ID>(<parameter:FLOAT>) <qubit-argument:QUBIT>
+Rx(pi/2) q[0]
+
+// <gate-name:ID>(<parameter:INT>) <qubit-argument(s):QUBIT,>
+CRk(2) q[1], q[0]
+```
+
 ## Single-gate-multi-qubit (SGMQ) notation
 
 A single qubit gate can be applied to multiple qubits by making use of single-gate-multi-qubit (SGMQ) notation. 
@@ -15,38 +31,50 @@ The following slicing convention is adopted: a slice `q[i:j]` includes qubits `q
 ```
 qubit[5] q;
 
-X q;  // is functionally equivalent to
+
+// the whole qubit register 
+
+X q;  // is semantically equivalent to
 X q[0]; X q[1]; X q[2]; X q[3]; X q[4];
 
-X q[1:3];  // is functionally equivalent to
+
+// a slice of the qubit register
+
+X q[1:3];  // is semantically equivalent to
 X q[1]; X q[2]; X q[3];
 
-X q[0,2,4];  // is functionally equivalent to
-X q[0]; X q[2]; X q[4];  
+
+// a list of indices of the qubit register
+
+X q[0,2,4];  // is semantically equivalent to
+X q[0]; X q[2]; X q[4];
+
 ```
+
+In the above example we have used the semicolon `;` to separate statements occurring on the same line.
 
 ## Standard gate set
 
 
-| Name | Description                              | Example user        |
-|------|------------------------------------------|---------------------|
-| I    | Identity gate                            | `I q[0]`            |
-| H    | Hadamard gate                            | `H q[0]`            |
-| X    | Pauli-X                                  | `X q[0]`            |
-| X90  | Rotation around the _x_-axis of $\pi/2$  | `X90 q[0]`          |
-| mX90 | Rotation around the _x_-axis of $-\pi/2$ | `mX90 q[0]`         |
-| Y    | Pauli-Y                                  | `Y q[0]`            |
-| Y90  | Rotation around the _y_-axis of $\pi/2$  | `Y90 q[0]`          |
-| mY90 | Rotation around the _y_-axis of $-\pi/2$ | `mY90 q[0]`         |
-| Z    | Pauli-Z                                  | `Z q[0]`            |
-| S    | Phase gate                               | `S q[0]`            |
-| Sdag | S dagger gate                            | `Sdag q[0]`         |
-| T    | T                                        | `T q[0]`            |
-| Tdag | T dagger gate                            | `Tdag q[0]`         |
-| Rx   | Arbitrary rotation around _x_-axis       | `Rx(pi) q[0]`       |
-| Ry   | Arbitrary rotation around _y_-axis       | `Ry(pi) q[0]`       |
-| Rz   | Arbitrary rotation around _z_-axis       | `Rz(pi) q[0]`       |
-| CNOT | Controlled-NOT gate                      | `CNOT q[0], q[1]`   |
-| CZ   | Controlled-Z, Controlled-Phase           | `CZ q[0], q[1]`     |
-| CR   | Controlled phase shift (arbitrary angle) | `CR(pi) q[0], q[1]` |
-| CRk  | Controlled phase shift (pi/2^k)          | `CRk(2) q[0], q[1]` |
+| Name | Description                              | Example use          |
+|------|------------------------------------------|----------------------|
+| I    | Identity gate                            | `I q[0]`             |
+| H    | Hadamard gate                            | `H q[0]`             |
+| X    | Pauli-X                                  | `X q[0]`             |
+| X90  | Rotation around the _x_-axis of $\pi/2$  | `X90 q[0]`           |
+| mX90 | Rotation around the _x_-axis of $-\pi/2$ | `mX90 q[0]`          |
+| Y    | Pauli-Y                                  | `Y q[0]`             |
+| Y90  | Rotation around the _y_-axis of $\pi/2$  | `Y90 q[0]`           |
+| mY90 | Rotation around the _y_-axis of $-\pi/2$ | `mY90 q[0]`          |
+| Z    | Pauli-Z                                  | `Z q[0]`             |
+| S    | Phase gate                               | `S q[0]`             |
+| Sdag | S dagger gate                            | `Sdag q[0]`          |
+| T    | T                                        | `T q[0]`             |
+| Tdag | T dagger gate                            | `Tdag q[0]`          |
+| Rx   | Arbitrary rotation around _x_-axis       | `Rx(pi) q[0]`        |
+| Ry   | Arbitrary rotation around _y_-axis       | `Ry(pi) q[0]`        |
+| Rz   | Arbitrary rotation around _z_-axis       | `Rz(pi) q[0]`        |
+| CNOT | Controlled-NOT gate                      | `CNOT q[0], q[1]`    |
+| CZ   | Controlled-Z, Controlled-Phase           | `CZ q[0], q[1]`      |
+| CR   | Controlled phase shift (arbitrary angle) | `CR(pi) q[0], q[1]`  |
+| CRk  | Controlled phase shift ($\pi/2^k$)       | `CRk(2) q[0], q[1]`  |

@@ -2,8 +2,8 @@ cQASM is now a case-sensitive language, in contrast to previous versions.
 The following lines of code need not be equivalent
 
 ```
-h q[0];
-H Q[0];
+h q[0]
+H Q[0]
 ```
 
 Note that gate names are case-sensitive.
