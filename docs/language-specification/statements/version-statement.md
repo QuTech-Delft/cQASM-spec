@@ -5,7 +5,7 @@ It has the following form,
 `version <M:INT>.<m:INT>`
 
 where the version number is to be given as two period separated integers, respectively indicating the major `M` and minor `m` version of the cQASM language.
-It is permitted to only specify the major version number `M`. In that case, the program is presumed to be written according to the specification of the latest minor `m` version.
+It is permitted to only specify the major version number `M`. In that case, `m` will be interpreted as `0`.
 
 An example of the version statement for cQASM is given below,
 
