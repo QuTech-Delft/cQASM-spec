@@ -12,11 +12,10 @@ The general structure of a cQASM program is as follows:
     - [Gate(s)](../instructions/gates.md)
         - _optional_ 
         - _requires a qubit (register) declaration_ 
-    - [Measure instruction](../instructions/measure-instruction.md)
+    - [Measure instruction(s)](../instructions/measure-instruction.md)
         - _optional_ 
         - _requires a qubit (register) declaration_ 
         - _at the end, save for some potential following comment(s)_
-        - only a single measure instruction
 
 !!! example
 
@@ -32,14 +31,12 @@ The general structure of a cQASM program is as follows:
         qubit[2] q
         
         // Instructions (Gates)
-        Rx(pi/2) q[0]
-        H q[0]; H q[1]
+        Rx(pi/2) q[0:1]
+        H q[0]; X q[1]
         CNOT q[0], q[1]
         
         // Instructions (Measure instruction)
-        H q[0]
         measure q[0, 1]
-        
         ```
 
     === "Smallest valid cQASM program"

@@ -1,16 +1,12 @@
 `<gate-name:ID>(<parameter(s):FLOAT|INT,>)? <qubit-argument(s):QUBIT,>`
 
 ```
-// <gate-name:ID> <qubit-argument:QUBIT>
 H q[0]
 
-// <gate-name:ID> <qubit-arguments:QUBIT,>
 CZ q[0], q[1]
 
-// <gate-name:ID>(<parameter:FLOAT>) <qubit-argument:QUBIT>
 Rx(pi/2) q[0]
 
-// <gate-name:ID>(<parameter:INT>) <qubit-argument(s):QUBIT,>
 CRk(2) q[1], q[0]
 ```
 
@@ -29,25 +25,25 @@ with $N$ the size of the qubit register.
 The following slicing convention is adopted: a slice `q[i:j]` includes qubits `q[i]`, `q[j]`, and all qubits in between. The code block below demonstrates some examples:
 
 ```
-qubit[5] q;
+qubit[5] q
 
 
 // the whole qubit register 
 
-X q;  // is semantically equivalent to
-X q[0]; X q[1]; X q[2]; X q[3]; X q[4];
+X q  // is semantically equivalent to
+X q[0]; X q[1]; X q[2]; X q[3]; X q[4]
 
 
 // a slice of the qubit register
 
-X q[1:3];  // is semantically equivalent to
-X q[1]; X q[2]; X q[3];
+X q[1:3]  // is semantically equivalent to
+X q[1]; X q[2]; X q[3]
 
 
 // a list of indices of the qubit register
 
-X q[0,2,4];  // is semantically equivalent to
-X q[0]; X q[2]; X q[4];
+X q[0,2,4]  // is semantically equivalent to
+X q[0]; X q[2]; X q[4]
 
 ```
 

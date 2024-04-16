@@ -1,9 +1,8 @@
-The first character of an identifier may either be an upper or lowercase letter from the ISO basic Latin alphabet or an underscore, _i.e._, it cannot be a digit.
-Any following character(s) follow the same rule as the first character, but now may also be a digit.
-Identifiers cannot contain spaces.
-Identifiers ID must follow the following regular expression pattern,
+An identifier `ID` is a single character or a sequence characters of the following form: upper or lowercase letters from the ISO basic Latin alphabet, underscore, and digits, with the constraint that the first (or singular) character cannot be a digit. Moreover, identifiers `ID` cannot contain spaces.
 
-`[_a-zA-Z][a-zA-Z0-9_]*`
+??? info "Regex pattern"
+
+    `ID`: `[_a-zA-Z][a-zA-Z0-9_]*`
 
 !!! example
 
@@ -24,4 +23,4 @@ Identifiers ID must follow the following regular expression pattern,
         qubit  // 'qubit' is a reserved keyword
         ```
 
-Note that there exist certain predefined keywords that cannot be used as an identifier; a list of these keywords can be found under the section [Reserved keywords](reserved-keywords.md).
+There exist certain predefined keywords that cannot be used as an identifier; a list of these keywords can be found under the section [Reserved keywords](reserved-keywords.md).
