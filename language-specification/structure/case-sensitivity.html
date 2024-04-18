@@ -843,13 +843,18 @@
   <h1>Case sensitivity</h1>
 
 <p>cQASM is now a case-sensitive language, in contrast to previous versions. 
-The following lines of code need not be equivalent</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>h q[0];
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>H Q[0];
+The following lines of code are semantically distinct</p>
+<div class="admonition example">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>h q[0]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>H Q[0]
 </code></pre></div>
-<p>Note that gate names are case-sensitive.
-Even though, it is common practice to write variable names or function identifiers in lowercase, we choose to define the gate names of the predefined standard gate set in PascalCase or UPPERCASE, as this is more in line with how these gates are represented in the field of quantum information processing (QIP).
-A list of the predefined cQASM standard gate set can be found in section below.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Gate names are case-sensitive.
+The recognized gates and their proper syntactic form are defined in the <a href="../instructions/gates.html#standard-gate-set">cQASM standard gate set</a>.
+Even though, it is common practice to write variable names or function identifiers in lowercase, we choose to define the gate names in the predefined cQASM standard gate set in UPPERCASE or CamelCase, as this is more in line with how these gates are represented in the field of quantum information processing (QIP). </p>
+</div>
 
 
 

@@ -844,27 +844,27 @@
 
 <p>The general structure of a cQASM program is as follows:</p>
 <ul>
-<li><strong>Comment(s)</strong> <ul>
+<li><strong><a href="whitespace-comments.html">Comment(s)</a></strong> <ul>
 <li><em>optional</em> </li>
 <li><em>at any location in the program</em></li>
 </ul>
 </li>
-<li><strong>Version statement</strong><ul>
+<li><strong><a href="../statements/version-statement.html">Version statement</a></strong><ul>
 <li><em>mandatory</em></li>
 <li><em>at the top, save for some potential comment(s)</em></li>
 </ul>
 </li>
-<li><strong>Qubit (register) declaration statement</strong><ul>
+<li><strong><a href="../statements/qubit-register-declaration.html">Qubit (register) declaration statement</a></strong><ul>
 <li><em>optional</em></li>
 </ul>
 </li>
 <li><strong>Instruction(s)</strong><ul>
-<li>Gate(s)<ul>
+<li><a href="../instructions/gates.html">Gate(s)</a><ul>
 <li><em>optional</em> </li>
 <li><em>requires a qubit (register) declaration</em> </li>
 </ul>
 </li>
-<li>Measure instruction<ul>
+<li><a href="../instructions/measure-instruction.html">Measure instruction(s)</a><ul>
 <li><em>optional</em> </li>
 <li><em>requires a qubit (register) declaration</em> </li>
 <li><em>at the end, save for some potential following comment(s)</em></li>
@@ -873,27 +873,49 @@
 </ul>
 </li>
 </ul>
-<p>An example cQASM program may look accordingly:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>// Example program according to the cQASM language specification
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>// Version statement
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>version 3.0
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>// Qubit register declaration statement
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>qubit[2] q;
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>// Instructions (Gates)
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>Rx(1.57) q[0];
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>H q[0]; H q[1];
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>CNOT q[0], q[1];
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>// Instructions (Measure instruction)
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>H q[0];
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>measure q[0];
-</code></pre></div>
-<p>Incidentally, the smallest valid cQASM program is given as follows:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>version 3.0
-</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Example cQASM program</label><label for="__tabbed_1_2">Smallest valid cQASM program</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>// Example program according to the cQASM language specification
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>// Version statement
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>version 3.0
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>// Qubit register declaration statement
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>qubit[2] q
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>// Instructions (Gates)
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>Rx(pi/2) q[0:1]
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>H q[0]; X q[1]
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>CNOT q[0], q[1]
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>// Instructions (Measure instruction)
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>measure q[0, 1]
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>version 3
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+</div>
 
 
 

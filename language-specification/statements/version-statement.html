@@ -842,12 +842,16 @@
 
   <h1>Version statement</h1>
 
-<p>The version statement indicates which version of the cQASM language the quantum program is written in.
+<p>The version statement is mandatory and indicates which version of the cQASM language the quantum program is written in.
 Apart from comments, it must be the first statement of the program and occur only once.
 It has the following form,</p>
 <p><code>version &lt;M:INT&gt;.&lt;m:INT&gt;</code></p>
+<details class="info">
+<summary>Regex pattern</summary>
+<p><code>version [0-9](.[0-9]+)?</code></p>
+</details>
 <p>where the version number is to be given as two period separated integers, respectively indicating the major <code>M</code> and minor <code>m</code> version of the cQASM language.
-It is permitted to only specify the major version number <code>M</code>. In that case, the program is presumed to be of the latest minor <code>m</code> version.</p>
+It is permitted to only specify the major version number <code>M</code>, <em>i.e.</em>, the specification of the minor version number <code>.m</code> is optional. In that case, <code>m</code> will be interpreted as <code>0</code>.</p>
 <p>An example of the version statement for cQASM is given below,</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>// Only comments may appear before the version statement.
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>version 3.0

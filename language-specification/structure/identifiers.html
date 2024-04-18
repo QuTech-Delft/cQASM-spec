@@ -842,19 +842,32 @@
 
   <h1>Identifiers</h1>
 
-<p>The first character of an identifier may either be an upper or lowercase letter from the ISO basic Latin alphabet or an underscore, <em>i.e.</em>, it cannot be a digit.
-Any following character(s) follow the same rule as the first character, but now may also be a digit.
-Identifiers cannot contain spaces.
-Identifiers ID must follow the following regular expression pattern,</p>
-<p><code>[_a-zA-Z][a-zA-Z0-9_]*</code></p>
-<p>Examples are given below</p>
+<p>An identifier <code>ID</code> is a single character or a sequence characters of the following form: upper or lowercase letters from the ISO basic Latin alphabet, underscore, and digits, with the constraint that the first (or singular) character cannot be a digit. Moreover, identifiers <code>ID</code> cannot contain spaces.</p>
+<details class="info">
+<summary>Regex pattern</summary>
+<p><code>ID</code>: <code>[_a-zA-Z][a-zA-Z0-9_]*</code></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">Examples</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Valid identifiers</label><label for="__tabbed_1_2">Invalid identifiers</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>_i
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Id
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>ID
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>b01
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>2k  // Invalid identifier: first character cannot be a digit!
 </code></pre></div>
-<p>Note that there exist certain predefined keywords that cannot be used as an identifier; a list of these keywords can be found under the section <em>Keywords</em>.</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>1q     // first character cannot be a digit
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>+q     // the underscore &#39;_&#39; is the only permissible special character 
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>qubit  // &#39;qubit&#39; is a reserved keyword
+</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>There exist certain predefined keywords that cannot be used as an identifier; a list of these keywords can be found under the section <a href="reserved-keywords.html">Reserved keywords</a>.</p>
 
 
 
