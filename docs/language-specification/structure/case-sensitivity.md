@@ -1,12 +1,10 @@
 cQASM is now a case-sensitive language, in contrast to previous versions. 
 The following lines of code are semantically distinct
 
-!!! example ""
-
-    ```
-    h q[0]
-    H Q[0]
-    ```
+```
+h q[0]
+H Q[0]
+```
 
 !!! note
 

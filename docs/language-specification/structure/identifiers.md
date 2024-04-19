@@ -2,9 +2,14 @@ An identifier `ID` is a single character or a sequence characters of the followi
 
 ??? info "Regex pattern"
 
-    `ID`: `[_a-zA-Z][a-zA-Z0-9_]*`
+    ```hl_lines="4"
+    LETTER=[_a-zA-Z]
+    DIGIT=[0-9]
+    
+    ID={LETTER}({LETTER}|{DIGIT}+)*
+    ```
 
-!!! example
+!!! example "Examples"
 
     === "Valid identifiers"
 
@@ -19,7 +24,7 @@ An identifier `ID` is a single character or a sequence characters of the followi
         
         ```
         1q	   // first character cannot be a digit
-        +q     // the underscore '_' is only permissible special character 
+        +q     // the underscore '_' is the only permissible special character 
         qubit  // 'qubit' is a reserved keyword
         ```
 

@@ -1,27 +1,42 @@
-Currently, cQASM only supports the following measurement instruction at the end of the circuit.
+Currently, cQASM only supports a measurement statement at the end of the circuit, _i.e._, only comments or additional measurement statements may follow. The general form of a measurement statement is as follows:
 
-`measure <qubit(-register)-name:ID>[<qubit-index:INT>]?`
+`measure <qubit-argument:QUBIT>`
 
-```
-// measure <qubit-name:ID>
-qubit single_qubit
-measure single_qubit
-
-// measure <qubit-register-name:ID>
-qubit[5] qubit_register
-measure qubit_register
-
-// measure <qubit-register-name:ID>[<qubit-index:INT>]
-measure q[0]
-```
-
-!!! info
+??? info "Regex pattern"
     
-    Only a single measure instruction is supported for now, at the end of the cQASM program. Multiple qubits can be measured by passing the name of the qubit register as an argument or using SGMQ notation. 
+    ```hl_lines="7"
+    LETTER=[_a-zA-Z]
+    DIGIT=[0-9]
+    INT={DIGIT}+
+    ID={LETTER}({LETTER}|{INT})*
+    QUBIT={ID}(\[{INT}\])?
 
-The following code snippet shows how the measure instruction might be used
+    measure (ID | QUBIT)
+    ```
 
-```linenums="1"
+!!! example
+    
+    === "Qubit measurement"
+    
+        ```hl_lines="2"
+        qubit q
+        measure q
+        ```
+    
+    === "Qubit measurement (register index)"
+    
+        ```hl_lines="2"
+        qubit[5] qreg
+        measure qreg[0]
+        ```
+
+!!! note
+
+    The measure instruction accepts [SGMQ notation](gates.md#single-gate-multi-qubit-sgmq-notation), similar to gates.
+
+The following code snippet shows how the measure instruction might be used in context
+
+```linenums="1" hl_lines="8"
 version 3.0
 
 qubit[2] q
@@ -29,17 +44,12 @@ qubit[2] q
 H q[0]
 CNOT q[0], q[1]
 
-measure q  // Measurement of the qubit states in the Z-basis.
+measure q  // Measurement of the qubit states in the standard basis.
 ```
 
-In the last step of this simple program the respective states of both qubits are measured in the $Z$-basis, _i.e._, the computational basis.
-Note that the measure instruction accepts [SGMQ-notation](gates.md#single-gate-multi-qubit-sgmq-notation), _e.g._ the following statement is semantically equivalent:
+On the last line of this simple cQASM program, the respective states of both qubits in the qubit register are measured along the standard/computational basis.
 
-```linenums="8"
-measure q[0, 1]  // Measurement of the state of the qubits at indices 0 an 1 in the Z-basis.
-```
+!!! warning
 
-!!! info
-
-    Midcircuit measurements are not supported at this stage.
+    Neither intermediate nor midcircuit measurements are supported at this stage.
 
