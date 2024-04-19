@@ -842,57 +842,63 @@
 
   <h1>Qubit (register) declaration</h1>
 
-<p>A single qubit or qubit register can only be declared once in a cQASM program. This must occur before the qubit(-register) is used.
+<p>A qubit or qubit register can only be declared once and must occur before it is used.
 The general form is given as follows</p>
 <p><code>qubit[&lt;number-of-qubits:INT&gt;] &lt;qubit(-register)-name:ID&gt;</code></p>
 <details class="info">
 <summary>Regex pattern</summary>
-<p><code>qubit(\[[0-9]\])? ID</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>LETTER=[_a-zA-Z]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>DIGIT=[0-9]
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>INT={DIGIT}+
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>ID={LETTER}({LETTER}|{INT})*
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="hll">qubit(\[{INT}\])? {ID}    
+</span></code></pre></div>
 </details>
 <p>Its form is similar to the declaration of an arbitrary variable, whereby the type of the variable is specified first, <em>i.e.</em> <a href="../structure/reserved-keywords.html"><code>qubit</code></a> denotes that the declared variable is of type <em>qubit</em>.
 Then, if no square brackets <code>[ ]</code> are used directly following the type, a <em>single qubit</em> is declared, else a <em>qubit register</em> is declared containing the number of qubits that is specified within the square brackets.
-Lastly, the name of the qubit(-register) is defined as its <a href="../structure/identifiers.html">identifier</a>. 
-The declaration of a qubit(-register) is optional. </p>
+Lastly, the name of the qubit (register) is defined as its <a href="../structure/identifiers.html">identifier</a>. 
+The declaration of a qubit (register) is optional. </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The qubit (register) declaration replaces the <em>qubit statement</em>, <code>qubits &lt;number-of-qubits:INT&gt;</code>, of previous versions of the cQASM language.</p>
 </div>
-<p>Find below examples, respectively, of a single qubit and qubit register declaration.</p>
+<p>Find below examples, respectively, of a single qubit declaration and qubit register declaration.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Single qubit declaration</label><label for="__tabbed_1_2">Qubit register declaration</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
-<span class="normal"><a href="#__codelineno-0-2">2</a></span>
-<span class="normal"><a href="#__codelineno-0-3">3</a></span>
-<span class="normal"><a href="#__codelineno-0-4">4</a></span>
-<span class="normal"><a href="#__codelineno-0-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="hll">qubit q  // Single qubit declaration of a qubit named &#39;q&#39;.
-</span><a id="__codelineno-0-2" name="__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a>H q
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a>measure q
-</code></pre></div></td></tr></table></div>
-</div>
-<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
 <span class="normal"><a href="#__codelineno-1-4">4</a></span>
-<span class="normal"><a href="#__codelineno-1-5">5</a></span>
-<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="hll">qubit[5] qreg  // Qubit register declaration of a register containing 5 qubits, named &#39;qreg&#39;.
+<span class="normal"><a href="#__codelineno-1-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="hll">qubit q  // Single qubit declaration of a qubit named &#39;q&#39;.
 </span><a id="__codelineno-1-2" name="__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a>H qreg[0]
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a>CNOT qreg[0], qreg[1]
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a>measure qreg
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>H q
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a>measure q
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span>
+<span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="hll">qubit[5] qreg  // Qubit register declaration of a register containing 5 qubits, named &#39;qreg&#39;.
+</span><a id="__codelineno-2-2" name="__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>H qreg[0]
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a>CNOT qreg[0], qreg[1]
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a>measure qreg
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 </div>
-<p>The individual qubits of a qubit register can be referred to by their register index, <em>e.g.</em> in the example above of the <em>Qubit register declaration</em>, the gate operation <code>H qreg[0]</code> applies the Hadamard gate on the qubit located at index <code>0</code> in the qubit register <code>qreg</code>. </p>
-<p>Qubits, either declared as a single qubit or as elements of a register, are presumed to be initialized in the state <span class="arithmatex">\(|0\rangle\)</span> of the computational basis.</p>
+<p>The individual qubits of a qubit register can be referred to by their register index, <em>e.g.</em> in the example of the <em>Qubit register declaration</em>, the statement <code>H qreg[0]</code> indicates the application of a Hadamard gate <code>H</code> on the qubit located at index <code>0</code> of the qubit register <code>qreg</code>. </p>
+<p>Qubits, either declared as a single qubit or as elements of a register, are presumed to be initialized in the state <span class="arithmatex">\(|0\rangle\)</span> of the standard/computational basis.</p>
 
 
 
