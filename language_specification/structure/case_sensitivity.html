@@ -1195,11 +1195,13 @@
 
 <p>cQASM is now a case-sensitive language, in contrast to previous versions. 
 The following lines of code are all semantically distinct</p>
+<div class="admonition example">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>H q[0]
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>h Q[0]
 </code></pre></div>
-<p>In the first line of the example above, the Hadamard gate <code>H</code> is applied to the qubit at index 0 of the qubit register <code>q</code>.
-The next line starts with an undefined gate <code>h</code> that operates on the qubit at index 0 of the qubit register <code>Q</code>, which in turn does <em>not</em> refer to the qubit register <code>q</code>.</p>
+</div>
+<p>In the first line of the example above, the Hadamard gate <code>H</code> is applied to the qubit at index <code>0</code> of the qubit register <code>q</code>.
+The next line starts with an undefined gate <code>h</code> that operates on the qubit at index <code>0</code> of the qubit register <code>Q</code>, which in turn does <em>not</em> refer to the qubit register <code>q</code>.</p>
 <p>Take care that case sensitivity not only applies to <a href="identifiers.html">identifiers</a>, but also to all other lexical components of the language, like <a href="reserved_keywords.html">reserved keywords</a>, <a href="../type_system/types.html">types</a>, <a href="../expressions/predefined_constants.html">predefined constants</a>, and <a href="../expressions/builtin_functions.html">built-in functions</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

@@ -1270,13 +1270,15 @@
 
   <h1>Gates</h1>
 
-<p>Gates are unitary quantum instructions that define particular operations on qubit.
-Individual gates are designed to operate on a fixed number of qubits, comprising either single or <span class="arithmatex">\(n\)</span>-qubit gates, that modify the state of the qubit(s) in a deterministic fashion.</p>
-<p>In essence, a quantum algorithm consists of a sequence of gates and non-unitary quantum instructions, <em>e.g.</em>, the <a href="measure.html">measurement instruction</a>.</p>
-<p>The general form of a gate instruction statement is given by the following:</p>
+<p>Gates define single-qubit or multi-qubit unitary operations that change the state of a qubit register in a deterministic fashion.
+In essence, a quantum algorithm consists of a sequence of gates and non-unitary quantum instructions, <em>e.g.</em>, the <a href="measure.html">measurement instruction</a>.
+The general form of a gate instruction statement is given by the following:</p>
 <p><code>&lt;gate-name:ID&gt; &lt;qubit-argument(s):QUBIT,&gt;</code></p>
-<p>Parentheses are used for specifying parameterized gates:</p>
+<p>Parameterized unitary operations are represented by parameterized gates.
+The general form of a parameterized gate instruction statement is given as follows:</p>
 <p><code>&lt;gate-name:ID&gt;(&lt;parameter(s):FLOAT|INT,&gt;) &lt;qubit-argument(s):QUBIT,&gt;</code></p>
+<p>Note that the parameters, either single or a list of multiple parameters, appear within parentheses directly following the gate name.
+We distinguish between the <em>parameters</em> of a parameterized gate, in terms of <a href="../expressions/number_literals.html">number literals</a>, and the <em>qubit arguments</em> a (parameterized) gate instruction acts on.</p>
 <details class="info">
 <summary>Regex pattern</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>LETTER=[_a-zA-Z]
@@ -1290,19 +1292,33 @@ Individual gates are designed to operate on a fixed number of qubits, comprising
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="hll">ID(\((INT|FLOAT)(,(INT|FLOAT))*\))? QUBIT(,QUBIT)*
 </span></code></pre></div>
 </details>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>H q[0]
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>CZ q[0], q[1]
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Rx(pi/2) q[0]
+<p>A few examples of gate instruction statements are shown below.</p>
+<div class="admonition example">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>// A single-qubit Hadamard gate
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>H q[0]
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>// A two-qubit controlled-Z gate (control: q[0], target: q[1])
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>CZ q[0], q[1]
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>CRk(2) q[1], q[0]
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>// A paramterized single-qubit Rx gate (with π/2 rotation around the x-axis)
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>Rx(pi/2) q[0]
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>// A parametrized two-qubit controlled phase-shift gate (control: q[1], target: q[0])
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>CRk(2) q[1], q[0]
 </code></pre></div>
+</div>
 <p>The gates that are supported by the language are listed below in the <a href="gates.html#standard-gate-set">standard gate set</a>.</p>
 <h2 id="single-gate-multi-qubit-sgmq-notation">Single-gate-multi-qubit (SGMQ) notation</h2>
 <p>It is possible to pass multiple qubits as an argument to a single-qubit gate, by making use of the single-gate-multi-qubit (SGMQ) notation.
-The single-qubit gate will then be applied to each qubit, respectively.
-If the name of the qubit register is <code>q</code>, then the following can be passed as an argument to the single-qubit gate:</p>
+The single-qubit gate will then be applied to each qubit, respectively.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>SGMQ notation does not imply that the gates are, necessarily, executed in parallel on the target device. 
+SGMQ notation is nothing other than <em>syntactic sugar</em>, whereby a series of instruction statements can be written as one.
+Moreover, SGMQ notation should not be confused with multiple-qubit gates, <em>e.g.</em>, <code>X q[0,1]</code> means <code>X q[0]; X q[1]</code>, and does not represent the 2-qubit gate statement <code>XX q[0], q[1]</code>.
+Note that the latter 2-qubit gate <code>XX</code> is currently not supported by the cQASM language, see the <a href="gates.html#standard-gate-set">standard gate set</a> below.</p>
+</div>
+<p>If the name of the qubit register is <code>q</code>, then the following can be passed as an argument to the single-qubit gate:</p>
 <ul>
 <li>
 <p>the whole qubit register <code>q</code>;</p>
