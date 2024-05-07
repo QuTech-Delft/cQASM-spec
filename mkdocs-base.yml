@@ -4,22 +4,34 @@ repo_url: https://github.com/qutech-delft/cqasm-spec
 use_directory_urls: false
 
 nav:
-  - Introduction: index.md
+  - Introduction:
+    - Home: ./index.md
+    - History: ./introduction/history.md
+    - Context: ./introduction/context.md
+    - Acknowledgements: ./introduction/acknowledgements.md
   - Language specification:
     - Structure:
-      - General structure: ./language-specification/structure/general-structure.md
-      - File extension: ./language-specification/structure/file-extension.md
-      - Case sensitivity: ./language-specification/structure/case-sensitivity.md
-      - Whitespace & Comments: ./language-specification/structure/whitespace-comments.md
-      - Identifiers: ./language-specification/structure/identifiers.md
-      - Reserved keywords: ./language-specification/structure/reserved-keywords.md
-      - Predefined constants: ./language-specification/structure/predefined-constants.md
+      - General structure: ./language_specification/structure/general_structure.md
+      - File extension: ./language_specification/structure/file_extension.md
+      - Case sensitivity: ./language_specification/structure/case_sensitivity.md
+      - Whitespace & Comments: ./language_specification/structure/whitespace_comments.md
+      - Identifiers: ./language_specification/structure/identifiers.md
+      - Reserved keywords: ./language_specification/structure/reserved_keywords.md
     - Statements:
-      - Version statement: ./language-specification/statements/version-statement.md
-      - Qubit (register) declaration: ./language-specification/statements/qubit-register-declaration.md
+      - Version statement: ./language_specification/statements/version_statement.md
+      - Qubit (register) declaration statement: ./language_specification/statements/qubit_register_declaration_statement.md
+      - Instruction statement: ./language_specification/statements/instruction_statement.md
     - Instructions:
-      - Gates: ./language-specification/instructions/gates.md
-      - Measure instruction: ./language-specification/instructions/measure-instruction.md
+      - Gates: ./language_specification/instructions/gates.md
+      - Measure: ./language_specification/instructions/measure.md
+    - Type system:
+      - Types: ./language_specification/type_system/types.md
+    - Expressions:
+      - Number literals: ./language_specification/expressions/number_literals.md
+      - Indexing and slicing: ./language_specification/expressions/indexing_and_slicing.md
+      - Predefined constants: ./language_specification/expressions/predefined_constants.md
+      - Built-in functions: ./language_specification/expressions/builtin_functions.md
+      - Operators: ./language_specification/expressions/operators.md
 
 theme:
   name: material
@@ -27,6 +39,7 @@ theme:
     - navigation.indexes
     - navigation.tabs
     - navigation.tracking
+    - navigation.footer
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
@@ -86,4 +99,3 @@ plugins:
 
 watch:
   - mkdocs-base.yml
-

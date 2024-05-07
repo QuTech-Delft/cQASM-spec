@@ -1,12 +1,13 @@
 cQASM is newline-sensitive, _i.e._ a newline terminates a statement.
-A semicolon `;` may be used, instead of a newline to separate statements, if the code is more readable when multiple statements occupy the same line.
-In the code examples we add semicolons to signify the end of lines for clarity, but these can be omitted without changing the semantics of the programs.
+A semicolon `;` may be used instead of a newline to separate statements, for instance when putting multiple statements on the same line.
+Semicolons can also be put at the end of the line for clarity without changing the semantics of the program.
 
 In general, cQASM is not whitespace-sensitive, apart from newlines. 
 Spaces and tabs can be placed in between tokens.
 
 Comments can be written as single-line comments or as multi-line comments within a comment block.
-Only comments can appear before the _version statement_ (see section _Version statement_ below). Whitespace before a single-line or multi-line comment is permitted.
+Only comments can appear before the [`version` statement](../statements/version_statement.md).
+Whitespace before a single-line or multi-line comment is permitted.
 
 ## Single-line comment
 

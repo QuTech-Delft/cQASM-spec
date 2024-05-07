@@ -1,4 +1,6 @@
-Currently, cQASM only supports a measurement statement at the end of the circuit, _i.e._, only comments or additional measurement statements may follow. The general form of a measurement statement is as follows:
+Currently, cQASM only supports a measurement statement at the end of the circuit, _i.e._, only comments or additional measurement statements may follow.
+
+The general form of a measurement instruction statement is as follows:
 
 `measure <qubit-argument:QUBIT>`
 

@@ -14,10 +14,12 @@ The general form is given as follows
     qubit(\[{INT}\])? {ID}    
     ```
 
-Its form is similar to the declaration of an arbitrary variable, whereby the type of the variable is specified first, _i.e._ [`qubit`](../structure/reserved-keywords.md) denotes that the declared variable is of type _qubit_.
-Then, if no square brackets `[ ]` are used directly following the type, a _single qubit_ is declared, else a _qubit register_ is declared containing the number of qubits that is specified within the square brackets.
-Lastly, the name of the qubit (register) is defined as its [identifier](../structure/identifiers.md). 
-The declaration of a qubit (register) is optional. 
+Its form is similar to the declaration of an arbitrary variable, whereby the type of the variable is specified first, _i.e._ [`qubit`](../type_system/types.md) denotes that the declared variable is of type _qubit_.
+The size of the qubit register is declared by an integer value between square brackets `[<number-of-qubits:INT>]`, directly following the type.
+A single qubit can also be declared by omitting the square brackets `[]`.
+The name of the qubit (register) is defined through an [identifier](../structure/identifiers.md). 
+
+The declaration of a qubit (register) is _optional_. 
 
 !!! note
 
@@ -49,5 +51,6 @@ Find below examples, respectively, of a single qubit declaration and qubit regis
         ```
 
 The individual qubits of a qubit register can be referred to by their register index, _e.g._ in the example of the _Qubit register declaration_, the statement `H qreg[0]` indicates the application of a Hadamard gate `H` on the qubit located at index `0` of the qubit register `qreg`. 
+Note that in the case of a single qubit, the qubit is referred to through its identifier, not through a register index.
 
 Qubits, either declared as a single qubit or as elements of a register, are presumed to be initialized in the state $|0\rangle$ of the standard/computational basis.

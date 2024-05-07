@@ -1,15 +1,16 @@
-Gates are unitary quantum instructions that define particular operations on qubit.
-Individual gates are designed to operate on a fixed number of qubits, comprising either single or $n$-qubit gates, that modify the state of the qubit(s) in a deterministic fashion.
-
-In essence, a quantum algorithm consists of a sequence of gates and non-unitary quantum instructions, _e.g._, the [measurement instruction](measure-instruction.md).
-
+Gates define single-qubit or multi-qubit unitary operations that change the state of a qubit register in a deterministic fashion.
+In essence, a quantum algorithm consists of a sequence of gates and non-unitary quantum instructions, _e.g._, the [measurement instruction](measure.md).
 The general form of a gate instruction statement is given by the following:
 
 `<gate-name:ID> <qubit-argument(s):QUBIT,>`
 
-Parentheses are used for specifying parameterized gates:
+Parameterized unitary operations are represented by parameterized gates.
+The general form of a parameterized gate instruction statement is given as follows:
 
 `<gate-name:ID>(<parameter(s):FLOAT|INT,>) <qubit-argument(s):QUBIT,>`
+
+Note that the parameters, either single or a list of multiple parameters, appear within parentheses directly following the gate name.
+We distinguish between the _parameters_ of a parameterized gate, in terms of [number literals](../expressions/number_literals.md), and the _qubit arguments_ a (parameterized) gate instruction acts on.
 
 ??? info "Regex pattern"
     
@@ -25,15 +26,23 @@ Parentheses are used for specifying parameterized gates:
     ID(\((INT|FLOAT)(,(INT|FLOAT))*\))? QUBIT(,QUBIT)*
     ```
 
-```
-H q[0]
+A few examples of gate instruction statements are shown below.
 
-CZ q[0], q[1]
+!!! example ""
 
-Rx(pi/2) q[0]
-
-CRk(2) q[1], q[0]
-```
+    ```
+    // A single-qubit Hadamard gate
+    H q[0]
+    
+    // A two-qubit controlled-Z gate (control: q[0], target: q[1])
+    CZ q[0], q[1]
+    
+    // A paramterized single-qubit Rx gate (with π/2 rotation around the x-axis)
+    Rx(pi/2) q[0]
+    
+    // A parametrized two-qubit controlled phase-shift gate (control: q[1], target: q[0])
+    CRk(2) q[1], q[0]
+    ```
 
 The gates that are supported by the language are listed below in the [standard gate set](gates.md#standard-gate-set).
 
@@ -41,6 +50,14 @@ The gates that are supported by the language are listed below in the [standard g
 
 It is possible to pass multiple qubits as an argument to a single-qubit gate, by making use of the single-gate-multi-qubit (SGMQ) notation.
 The single-qubit gate will then be applied to each qubit, respectively.
+
+!!! note
+
+    SGMQ notation does not imply that the gates are, necessarily, executed in parallel on the target device. 
+    SGMQ notation is nothing other than _syntactic sugar_, whereby a series of instruction statements can be written as one.
+    Moreover, SGMQ notation should not be confused with multiple-qubit gates, _e.g._, `X q[0,1]` means `X q[0]; X q[1]`, and does not represent the 2-qubit gate statement `XX q[0], q[1]`.
+    Note that the latter 2-qubit gate `XX` is currently not supported by the cQASM language, see the [standard gate set](gates.md#standard-gate-set) below.
+
 If the name of the qubit register is `q`, then the following can be passed as an argument to the single-qubit gate:
 
 - the whole qubit register `q`;
@@ -87,7 +104,6 @@ In the above examples we have used the semicolon `;` to separate statements occu
 
 | Name | Description                              | Example use          |
 |------|------------------------------------------|----------------------|
-| I    | Identity gate                            | `I q[0]`             |
 | H    | Hadamard gate                            | `H q[0]`             |
 | X    | Pauli-X                                  | `X q[0]`             |
 | X90  | Rotation around the _x_-axis of $\pi/2$  | `X90 q[0]`           |
