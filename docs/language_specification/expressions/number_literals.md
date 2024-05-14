@@ -1,4 +1,18 @@
-| Literal        | Size / precision          | Regex pattern                               | 
-|:---------------|:--------------------------|:--------------------------------------------|
-| Integer        | 64-bit signed             | `[0-9]+`                                    |
-| Floating-point | IEEE 754 double precision | `[+-]?([0-9]*[.])?[0-9]+([eE][+-]?[0-9]+)?` |
+| Literal | Size / precision          |
+|:--------|:--------------------------|
+| Integer | 64-bit signed             |
+| Float   | IEEE 754 double precision |
+
+??? info "Grammar definition"
+
+    ```
+    fragment Digit: [0-9];
+    fragment Exponent: [eE][-+]?Digit+;
+
+    INTEGER_LITERAL: Digit+;
+
+    FLOAT_LITERAL:
+        Digit+ '.' Digit+ Exponent?
+        | Digit+ '.' Exponent?
+        | '.' Digit+ Exponent?; 
+    ```
