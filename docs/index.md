@@ -12,7 +12,7 @@ In the rest of the documentation we will drop the version label of language and 
 !!! warning
 
     The cQASM language is currently under active development. 
-    cQASM 3.0-beta1 serves as a minimum viable product; to be used as a baseline version for the further development of, _e.g._, the [LibQASM](https://github.com/QuTech-Delft/libqasm) language parser library, [OpenSquirrel](https://github.com/QuTech-Delft/OpenSquirrel) quantum algorithm compiler, and [QX simulator](https://github.com/QuTech-Delft/qx-simulator).
+    cQASM 3.0-beta1 serves as a minimum viable product; to be used as a baseline version for the further development of, _e.g._, the [libQASM](https://github.com/QuTech-Delft/libqasm) language parser library, [OpenSquirrel](https://github.com/QuTech-Delft/OpenSquirrel) quantum algorithm compiler, and [QX simulator](https://github.com/QuTech-Delft/qx-simulator).
     The cQASM specification will be updated as new features are introduced to the language.
     Where applicable, these features are then also implemented in the aformentioned software components, in an iterative fashion.
     
