@@ -5,7 +5,7 @@ cQASM 3.0-beta1 supersedes the [cQASM 1.[012] languages](https://libqasm.readthe
 
 !!! note
 
-    Even though, cQASM 3.0-beta1 is conceptually similar to previous language specifications, it is not a straightforward extension thereof; the syntax and grammar of cQASM 3.0-beta1 differ fundamentally from its predecessors. These changes break backwards compatibility.
+    Even though cQASM 3.0-beta1 is conceptually similar to previous language specifications, it is not a straightforward extension thereof; the syntax and grammar of cQASM 3.0-beta1 differ fundamentally from its predecessors. These changes break backwards compatibility.
 
 In the rest of the documentation we will drop the version label of language and simply refer to it as the cQASM language.
 
