@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   mkdocs_qne:
     container_name: mkdocs_cqasm
