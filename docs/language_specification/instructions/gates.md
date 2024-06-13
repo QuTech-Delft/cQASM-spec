@@ -1,29 +1,29 @@
 Gates define single-qubit or multi-qubit unitary operations that change the state of a qubit register in a deterministic fashion.
 In essence, a quantum algorithm consists of a sequence of gates and non-unitary quantum instructions, _e.g._, the [measurement instruction](measure.md).
-The general form of a gate instruction statement is given by the following:
+The general form of a gate instruction statement is given by the gate name followed by the (comma-separated list of) qubit operand(s), _e.g._, `X q[0]`:
 
 `<gate-name:ID> <qubit-argument(s):QUBIT,>`
 
 Parameterized unitary operations are represented by parameterized gates.
-The general form of a parameterized gate instruction statement is given as follows:
+The general form of a parameterized gate instruction statement is given by the gate name followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses, which in turn is followed by the (comma-separated list of) qubit operand(s), _e.g._ `CRk(2) q[0], q[1]`:
 
 `<gate-name:ID>(<parameter(s):FLOAT|INT,>) <qubit-argument(s):QUBIT,>`
 
 Note that the parameters, either single or a list of multiple parameters, appear within parentheses directly following the gate name.
 We distinguish between the _parameters_ of a parameterized gate, in terms of [number literals](../expressions/number_literals.md), and the _qubit arguments_ a (parameterized) gate instruction acts on.
 
-??? info "Regex pattern"
+??? info "Syntax definition"
     
     ```hl_lines="9"
     LETTER=[_a-zA-Z]
     DIGIT=[0-9]
     INT={DIGIT}+
     EXPONENT=[eE][-+]?{INT} 
-    FLOAT=({INT}?[.])?{INT}{EXPONENT}?
+    FLOAT=({INT}?[\.])?{INT}{EXPONENT}?
     ID={LETTER}({LETTER}|{INT})*
     QUBIT={ID}(\[{INT}\])?
     
-    ID(\((INT|FLOAT)(,(INT|FLOAT))*\))? QUBIT(,QUBIT)*
+    ID(\(({INT}|{FLOAT})(,({INT}|{FLOAT}))*\))? {QUBIT}(,{QUBIT})*
     ```
 
 A few examples of gate instruction statements are shown below.
