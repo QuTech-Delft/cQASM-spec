@@ -4,3 +4,5 @@ The following kinds of instruction exist:
 
 - [Gates](../instructions/gates.md)
 - [Measure](../instructions/measure.md)
+
+In the case of the measurement instruction statement, the measurement outcome is directly assigned to a bit.

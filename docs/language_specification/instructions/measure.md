@@ -1,35 +1,36 @@
-Currently, cQASM only supports a measurement statement at the end of the circuit, _i.e._, only comments or additional measurement statements may follow.
-
 The general form of a measurement instruction statement is as follows:
 
-`measure <qubit-argument:QUBIT>`
+`<bit-name:BIT> = measure <qubit-argument:QUBIT>`
 
-??? info "Regex pattern"
+??? info "Syntax definition"
     
-    ```hl_lines="7"
-    LETTER=[_a-zA-Z]
-    DIGIT=[0-9]
-    INT={DIGIT}+
-    ID={LETTER}({LETTER}|{INT})*
-    QUBIT={ID}(\[{INT}\])?
+    ```hl_lines="8"
+    LETTER: [a-zA-Z_]
+    DIGIT: [0-9]
+    INT: DIGIT+
+    ID: LETTER (LETTER | DIGIT)*
+    BIT: ID('[' INT ']')?
+    QUBIT: ID('[' INT ']')?
 
-    measure (ID | QUBIT)
+    (ID | BIT) = measure (ID | QUBIT)
     ```
 
 !!! example
     
-    === "Qubit measurement"
+    === "Measurement of a single qubit"
     
-        ```hl_lines="2"
+        ```hl_lines="3"
         qubit q
-        measure q
+        bit b
+        b = measure q
         ```
     
-    === "Qubit measurement (register index)"
+    === "Measurement of multiple qubits through their register index"
     
-        ```hl_lines="2"
+        ```hl_lines="3"
         qubit[5] qreg
-        measure qreg[0]
+        bit[2] breg
+        breg[0, 1] = measure qreg[2, 4]
         ```
 
 !!! note
@@ -38,20 +39,16 @@ The general form of a measurement instruction statement is as follows:
 
 The following code snippet shows how the measure instruction might be used in context
 
-```linenums="1" hl_lines="8"
+```linenums="1" hl_lines="9"
 version 3.0
 
 qubit[2] q
+bit[2] b
 
 H q[0]
 CNOT q[0], q[1]
 
-measure q  // Measurement of the qubit states in the standard basis.
+b[0, 1] = measure q[0, 1]  // Measurement in the standard basis.
 ```
 
 On the last line of this simple cQASM program, the respective states of both qubits in the qubit register are measured along the standard/computational basis.
-
-!!! warning
-
-    Neither intermediate nor midcircuit measurements are supported at this stage.
-

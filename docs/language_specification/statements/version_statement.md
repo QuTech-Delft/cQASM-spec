@@ -4,13 +4,13 @@ It has the following form,
 
 `version <M:INT>.<m:INT>`
 
-??? info "Regex pattern"
+??? info "Syntax definition"
 
     ```hl_lines="4"
-    DIGIT=[0-9]
-    INT={DIGIT}+
+    DIGIT: [0-9]
+    INT: DIGIT+
     
-    version INT(.INT)?
+    version INT('.' INT)?
     ```
 
 where the version number is to be given as two period separated integers, respectively indicating the major `M` and minor `m` version of the cQASM language.

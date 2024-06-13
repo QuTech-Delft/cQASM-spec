@@ -15,15 +15,15 @@ We distinguish between the _parameters_ of a parameterized gate, in terms of [nu
 ??? info "Syntax definition"
     
     ```hl_lines="9"
-    LETTER=[_a-zA-Z]
-    DIGIT=[0-9]
-    INT={DIGIT}+
-    EXPONENT=[eE][-+]?{INT} 
-    FLOAT=({INT}?[\.])?{INT}{EXPONENT}?
-    ID={LETTER}({LETTER}|{INT})*
-    QUBIT={ID}(\[{INT}\])?
+    LETTER: [a-zA-Z_]
+    DIGIT: [0-9]
+    EXPONENT: [eE][-+]?DIGIT+
+    INT: DIGIT+
+    FLOAT: DIGIT+ '.' DIGIT+ EXPONENT? | DIGIT+ '.' EXPONENT? | '.' DIGIT+ EXPONENT? 
+    ID: LETTER (LETTER | DIGIT)*
+    QUBIT: ID('[' INT ']')?
     
-    ID(\(({INT}|{FLOAT})(,({INT}|{FLOAT}))*\))? {QUBIT}(,{QUBIT})*
+    ID('(' (INT | FLOAT)(',' (INT | FLOAT))* ')')? QUBIT(',' QUBIT)*
     ```
 
 A few examples of gate instruction statements are shown below.
@@ -102,24 +102,25 @@ In the above examples we have used the semicolon `;` to separate statements occu
 
 ## Standard gate set
 
-| Name | Description                              | Example use          |
-|------|------------------------------------------|----------------------|
-| H    | Hadamard gate                            | `H q[0]`             |
-| X    | Pauli-X                                  | `X q[0]`             |
-| X90  | Rotation around the _x_-axis of $\pi/2$  | `X90 q[0]`           |
-| mX90 | Rotation around the _x_-axis of $-\pi/2$ | `mX90 q[0]`          |
-| Y    | Pauli-Y                                  | `Y q[0]`             |
-| Y90  | Rotation around the _y_-axis of $\pi/2$  | `Y90 q[0]`           |
-| mY90 | Rotation around the _y_-axis of $-\pi/2$ | `mY90 q[0]`          |
-| Z    | Pauli-Z                                  | `Z q[0]`             |
-| S    | Phase gate                               | `S q[0]`             |
-| Sdag | S dagger gate                            | `Sdag q[0]`          |
-| T    | T                                        | `T q[0]`             |
-| Tdag | T dagger gate                            | `Tdag q[0]`          |
-| Rx   | Arbitrary rotation around _x_-axis       | `Rx(pi) q[0]`        |
-| Ry   | Arbitrary rotation around _y_-axis       | `Ry(pi) q[0]`        |
-| Rz   | Arbitrary rotation around _z_-axis       | `Rz(pi) q[0]`        |
-| CNOT | Controlled-NOT gate                      | `CNOT q[0], q[1]`    |
-| CZ   | Controlled-Z, Controlled-Phase           | `CZ q[0], q[1]`      |
-| CR   | Controlled phase shift (arbitrary angle) | `CR(pi) q[0], q[1]`  |
-| CRk  | Controlled phase shift ($\pi/2^k$)       | `CRk(2) q[0], q[1]`  |
+| Name | Description                              | Example use         |
+|------|------------------------------------------|---------------------|
+| I    | Identity gate                            | `I q[0]`            |
+| H    | Hadamard gate                            | `H q[0]`            |
+| X    | Pauli-X                                  | `X q[0]`            |
+| X90  | Rotation around the _x_-axis of $\pi/2$  | `X90 q[0]`          |
+| mX90 | Rotation around the _x_-axis of $-\pi/2$ | `mX90 q[0]`         |
+| Y    | Pauli-Y                                  | `Y q[0]`            |
+| Y90  | Rotation around the _y_-axis of $\pi/2$  | `Y90 q[0]`          |
+| mY90 | Rotation around the _y_-axis of $-\pi/2$ | `mY90 q[0]`         |
+| Z    | Pauli-Z                                  | `Z q[0]`            |
+| S    | Phase gate                               | `S q[0]`            |
+| Sdag | S dagger gate                            | `Sdag q[0]`         |
+| T    | T                                        | `T q[0]`            |
+| Tdag | T dagger gate                            | `Tdag q[0]`         |
+| Rx   | Arbitrary rotation around _x_-axis       | `Rx(pi) q[0]`       |
+| Ry   | Arbitrary rotation around _y_-axis       | `Ry(pi) q[0]`       |
+| Rz   | Arbitrary rotation around _z_-axis       | `Rz(pi) q[0]`       |
+| CNOT | Controlled-NOT gate                      | `CNOT q[0], q[1]`   |
+| CZ   | Controlled-Z, Controlled-Phase           | `CZ q[0], q[1]`     |
+| CR   | Controlled phase shift (arbitrary angle) | `CR(pi) q[0], q[1]` |
+| CRk  | Controlled phase shift ($\pi/2^k$)       | `CRk(2) q[0], q[1]` |

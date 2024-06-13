@@ -3,16 +3,14 @@
 | Integer | 64-bit signed             |
 | Float   | IEEE 754 double precision |
 
-??? info "Grammar definition"
+??? info "Syntax definition"
 
-    ```
-    fragment Digit: [0-9];
-    fragment Exponent: [eE][-+]?Digit+;
+    
 
-    INTEGER_LITERAL: Digit+;
+    ```hl_lines="4-5"
+    DIGIT: [0-9]
+    EXPONENT: [eE][-+]?DIGIT+
 
-    FLOAT_LITERAL:
-        Digit+ '.' Digit+ Exponent?
-        | Digit+ '.' Exponent?
-        | '.' Digit+ Exponent?; 
+    INT: DIGIT+
+    FLOAT: DIGIT+ '.' DIGIT+ EXPONENT? | DIGIT+ '.' EXPONENT? | '.' DIGIT+ EXPONENT? 
     ```

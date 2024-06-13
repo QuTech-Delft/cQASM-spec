@@ -20,6 +20,7 @@ nav:
     - Statements:
       - Version statement: ./language_specification/statements/version_statement.md
       - Qubit (register) declaration statement: ./language_specification/statements/qubit_register_declaration_statement.md
+      - Bit (register) declaration statement: ./language_specification/statements/bit_register_declaration_statement.md
       - Instruction statement: ./language_specification/statements/instruction_statement.md
     - Instructions:
       - Gates: ./language_specification/instructions/gates.md

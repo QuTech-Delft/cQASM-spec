@@ -1,8 +1,9 @@
 The table below lists the available variable types in cQASM.
 
-| Type    | Keyword | Form                      | 
-|:--------|:--------|:--------------------------|
-| Qubit   | `qubit` | -                         | 
+| Type  | Keyword | Form                      | 
+|:------|:--------|:--------------------------|
+| Qubit | `qubit` | -                         | 
+| Bit   | `bit`   | -                         | 
 
 !!! note
 
