@@ -1,5 +1,5 @@
 services:
-  mkdocs_qne:
+  mkdocs_cqasm:
     container_name: mkdocs_cqasm
     image: mkdocs
     build:
