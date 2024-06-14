@@ -19,4 +19,4 @@ Take care that case sensitivity not only applies to [identifiers](identifiers.md
 
     Gate names are identifiers and are therefore case-sensitive.
     The syntax of the gates defined in cQASM are listed in the [cQASM standard gate set](../instructions/gates.md#standard-gate-set).
-    Even though, it is common practice to write variable names or function identifiers in lowercase, we choose to define the gate names in the predefined cQASM standard gate set in UPPERCASE or CamelCase, as this is more in line with how these gates are represented in the field of quantum information processing (QIP). 
+    Even though it is common practice to write variable names or function identifiers in lowercase, we choose to define the gate names in the predefined cQASM standard gate set in UPPERCASE or CamelCase, as this is more in line with how these gates are represented in the field of quantum information processing (QIP). 
