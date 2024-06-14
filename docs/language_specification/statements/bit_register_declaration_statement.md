@@ -44,14 +44,14 @@ Find below examples, respectively, of a single qubit declaration and qubit regis
         ```linenums="1" hl_lines="4"
         version 3
 
-        qubit[5] qreg
-        bit[2] breg  // Bit register declaration of a register containing 2 bits, named 'breg'.
+        qubit[5] q
+        bit[2] b  // Bit register declaration of a register containing 2 bits, named 'b'.
 
-        H qreg[0]
-        CNOT qreg[0], qreg[1]
+        H q[0]
+        CNOT q[0], q[1]
 
-        breg[0] = measure qreg[0]
-        breg[1] = measure qreg[1]
+        b[0] = measure q[0]
+        b[1] = measure q[1]
         ```
 
 The individual bits of a bit register can be referred to by their register index, _e.g._ in the example of the _Bit register declaration_, the statement `breg[0] = measure q[0]` indicates that the measurement outcome is stored at the bit located at index `0` of the bit register `breg`. 

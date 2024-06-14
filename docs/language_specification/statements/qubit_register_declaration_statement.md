@@ -47,13 +47,13 @@ Find below examples, respectively, of a single qubit declaration and qubit regis
         ```linenums="1" hl_lines="3"
         version 3
 
-        qubit[5] qreg  // Qubit register declaration of a register containing 5 qubits, named 'qreg'.
-        bit[2] breg
+        qubit[5] q  // Qubit register declaration of a register containing 5 qubits, named 'q'.
+        bit[2] b
 
-        H qreg[0]
-        CNOT qreg[0], qreg[1]
+        H q[0]
+        CNOT q[0], q[1]
 
-        breg[0, 1] = measure qreg[0, 1]
+        b[0, 1] = measure q[0, 1]
         ```
 
 The individual qubits of a qubit register can be referred to by their register index, _e.g._ in the example of the _Qubit register declaration_, the statement `H qreg[0]` indicates the application of a Hadamard gate `H` on the qubit located at index `0` of the qubit register `qreg`. 

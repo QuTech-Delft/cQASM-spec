@@ -62,9 +62,9 @@ If the name of the qubit register is `q`, then the following can be passed as an
 
 - the whole qubit register `q`;
 
-- a slice thereof `q[i:j]`, where $0 \leq i < j \leq N-1$;
+- a slice thereof `q[i:j]`, where $0 \leq i < j < N$;
 
-- or a list of indices can be passed `q[i,]`, where $0 \leq i \leq N-1$,
+- or a list of indices can be passed `q[i,]`, where $0 \leq i < N$,
 
 with $N$ the size of the qubit register.
 The following slicing convention is adopted: a slice `q[i:j]` includes qubits `q[i]`, `q[j]`, and all qubits in between. The code block below demonstrates some examples.
@@ -102,7 +102,7 @@ In the above examples we have used the semicolon `;` to separate statements occu
 
 ## Standard gate set
 
-| Name | Description                              | Example use         |
+| Name | Description                              | Example of use      |
 |------|------------------------------------------|---------------------|
 | I    | Identity gate                            | `I q[0]`            |
 | H    | Hadamard gate                            | `H q[0]`            |
