@@ -51,7 +51,7 @@ An example of multi-line commenting is given by the following:
     /* This is a multi-
     line comment. */
     CNOT q[0], /* A comment block can
-    be placed in between tokens. */ q[1];
+    be placed in between tokens. */ q[1]
     ```
 
 A pair of forward slashes `//` may be part of a multi-line comment block.
