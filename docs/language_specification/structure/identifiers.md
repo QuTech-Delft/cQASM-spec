@@ -1,5 +1,4 @@
 An identifier `ID` is a single character or a sequence of characters of the following form: upper or lowercase letters from the ISO basic Latin alphabet, underscore, and digits, with the constraint that the first (or singular) character cannot be a digit.
-Moreover, identifiers `ID` cannot contain spaces.
 
 For now, they are used to define the names of (qu)bits or (qu)bit registers by the user, and predefine the names of useful [mathematical constants](../expressions/predefined_constants.md), [built-in functions](../expressions/builtin_functions.md), and [gates](../instructions/gates.md).
 Note that identifiers are not protected, _i.e._ they can be reused. 
