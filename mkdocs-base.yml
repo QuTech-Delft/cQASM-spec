@@ -1,11 +1,38 @@
 site_name: cQASM specification
 site_dir: public
-repo_url: https://gitub.com/qutech-delft/cqasm-spec
+repo_url: https://github.com/qutech-delft/cqasm-spec
 use_directory_urls: false
 
 nav:
-  - Home:
-      - index.md
+  - Introduction:
+    - Home: ./index.md
+    - History: ./introduction/history.md
+    - Context: ./introduction/context.md
+    - Acknowledgements: ./introduction/acknowledgements.md
+  - Language specification:
+    - Structure:
+      - General structure: ./language_specification/structure/general_structure.md
+      - File extension: ./language_specification/structure/file_extension.md
+      - Case sensitivity: ./language_specification/structure/case_sensitivity.md
+      - Whitespace & Comments: ./language_specification/structure/whitespace_comments.md
+      - Identifiers: ./language_specification/structure/identifiers.md
+      - Reserved keywords: ./language_specification/structure/reserved_keywords.md
+    - Statements:
+      - Version statement: ./language_specification/statements/version_statement.md
+      - Qubit (register) declaration statement: ./language_specification/statements/qubit_register_declaration_statement.md
+      - Bit (register) declaration statement: ./language_specification/statements/bit_register_declaration_statement.md
+      - Instruction statement: ./language_specification/statements/instruction_statement.md
+    - Instructions:
+      - Gates: ./language_specification/instructions/gates.md
+      - Measure: ./language_specification/instructions/measure.md
+    - Type system:
+      - Types: ./language_specification/type_system/types.md
+    - Expressions:
+      - Number literals: ./language_specification/expressions/number_literals.md
+      - Indexing and slicing: ./language_specification/expressions/indexing_and_slicing.md
+      - Predefined constants: ./language_specification/expressions/predefined_constants.md
+      - Built-in functions: ./language_specification/expressions/builtin_functions.md
+      - Operators: ./language_specification/expressions/operators.md
   - Appendices:
       - Spin-2: appendices/spin.md
 
@@ -15,6 +42,7 @@ theme:
     - navigation.indexes
     - navigation.tabs
     - navigation.tracking
+    - navigation.footer
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
@@ -41,6 +69,8 @@ markdown_extensions:
   - def_list
   - footnotes
   - md_in_html
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.caret
   - pymdownx.critic
   - pymdownx.details
@@ -60,6 +90,11 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tilde
   - tables
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 plugins:
   - glightbox
