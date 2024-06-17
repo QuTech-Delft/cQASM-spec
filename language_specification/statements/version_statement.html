@@ -279,6 +279,26 @@
   
 
       
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../appendices/spin.html" class="md-tabs__link">
+          
+  
+    
+  
+  Appendices
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -712,6 +732,8 @@
       
         
       
+        
+      
     
     
       
@@ -784,6 +806,27 @@
   
   <span class="md-ellipsis">
     Qubit (register) declaration statement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="bit_register_declaration_statement.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bit (register) declaration statement
   </span>
   
 
@@ -1157,6 +1200,76 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Appendices
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Appendices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/spin.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spin-2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1198,11 +1311,11 @@ Apart from comments, it must be the first statement of the program and occur onl
 It has the following form,</p>
 <p><code>version &lt;M:INT&gt;.&lt;m:INT&gt;</code></p>
 <details class="info">
-<summary>Regex pattern</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>DIGIT=[0-9]
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>INT={DIGIT}+
+<summary>Syntax definition</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>DIGIT: [0-9]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>INT: DIGIT+
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="hll">version INT(.INT)?
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="hll">version INT(&#39;.&#39; INT)?
 </span></code></pre></div>
 </details>
 <p>where the version number is to be given as two period separated integers, respectively indicating the major <code>M</code> and minor <code>m</code> version of the cQASM language.

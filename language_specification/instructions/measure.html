@@ -279,6 +279,26 @@
   
 
       
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../appendices/spin.html" class="md-tabs__link">
+          
+  
+    
+  
+  Appendices
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -710,6 +730,8 @@
       
         
       
+        
+      
     
     
       
@@ -774,6 +796,27 @@
   
   <span class="md-ellipsis">
     Qubit (register) declaration statement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../statements/bit_register_declaration_statement.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bit (register) declaration statement
   </span>
   
 
@@ -1157,6 +1200,76 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Appendices
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Appendices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/spin.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spin-2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1193,32 +1306,34 @@
 
   <h1>Measure</h1>
 
-<p>Currently, cQASM only supports a measurement statement at the end of the circuit, <em>i.e.</em>, only comments or additional measurement statements may follow.</p>
 <p>The general form of a measurement instruction statement is as follows:</p>
-<p><code>measure &lt;qubit-argument:QUBIT&gt;</code></p>
+<p><code>&lt;bit-name:BIT&gt; = measure &lt;qubit-argument:QUBIT&gt;</code></p>
 <details class="info">
-<summary>Regex pattern</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>LETTER=[_a-zA-Z]
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>DIGIT=[0-9]
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>INT={DIGIT}+
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>ID={LETTER}({LETTER}|{INT})*
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>QUBIT={ID}(\[{INT}\])?
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="hll">measure (ID | QUBIT)
+<summary>Syntax definition</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>LETTER: [a-zA-Z_]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>DIGIT: [0-9]
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>INT: DIGIT+
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>ID: LETTER (LETTER | DIGIT)*
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>BIT: ID(&#39;[&#39; INT &#39;]&#39;)?
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>QUBIT: ID(&#39;[&#39; INT &#39;]&#39;)?
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="hll">(ID | BIT) = measure (ID | QUBIT)
 </span></code></pre></div>
 </details>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Qubit measurement</label><label for="__tabbed_1_2">Qubit measurement (register index)</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Measurement of a single qubit</label><label for="__tabbed_1_2">Measurement of multiple qubits through their register index</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>qubit q
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="hll">measure q
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>bit b
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="hll">b = measure q
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>qubit[5] qreg
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="hll">measure qreg[0]
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>bit[2] breg
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="hll">breg[0, 1] = measure qreg[2, 4]
 </span></code></pre></div>
 </div>
 </div>
@@ -1236,20 +1351,18 @@
 <span class="normal"><a href="#__codelineno-3-5">5</a></span>
 <span class="normal"><a href="#__codelineno-3-6">6</a></span>
 <span class="normal"><a href="#__codelineno-3-7">7</a></span>
-<span class="normal"><a href="#__codelineno-3-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>version 3.0
+<span class="normal"><a href="#__codelineno-3-8">8</a></span>
+<span class="normal"><a href="#__codelineno-3-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>version 3.0
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3"></a>qubit[2] q
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a>H q[0]
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a>CNOT q[0], q[1]
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="hll">measure q  // Measurement of the qubit states in the standard basis.
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>bit[2] b
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>H q[0]
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a>CNOT q[0], q[1]
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="hll">b[0, 1] = measure q[0, 1]  // Measurement in the standard basis.
 </span></code></pre></div></td></tr></table></div>
 <p>On the last line of this simple cQASM program, the respective states of both qubits in the qubit register are measured along the standard/computational basis.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Neither intermediate nor midcircuit measurements are supported at this stage.</p>
-</div>
 
 
 

@@ -284,6 +284,26 @@
   
 
       
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../appendices/spin.html" class="md-tabs__link">
+          
+  
+    
+  
+  Appendices
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -715,6 +735,8 @@
       
         
       
+        
+      
     
     
       
@@ -779,6 +801,27 @@
   
   <span class="md-ellipsis">
     Qubit (register) declaration statement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../statements/bit_register_declaration_statement.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bit (register) declaration statement
   </span>
   
 
@@ -1208,6 +1251,76 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Appendices
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Appendices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/spin.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spin-2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1272,24 +1385,24 @@
 
 <p>Gates define single-qubit or multi-qubit unitary operations that change the state of a qubit register in a deterministic fashion.
 In essence, a quantum algorithm consists of a sequence of gates and non-unitary quantum instructions, <em>e.g.</em>, the <a href="measure.html">measurement instruction</a>.
-The general form of a gate instruction statement is given by the following:</p>
+The general form of a gate instruction statement is given by the gate name followed by the (comma-separated list of) qubit operand(s), <em>e.g.</em>, <code>X q[0]</code>:</p>
 <p><code>&lt;gate-name:ID&gt; &lt;qubit-argument(s):QUBIT,&gt;</code></p>
 <p>Parameterized unitary operations are represented by parameterized gates.
-The general form of a parameterized gate instruction statement is given as follows:</p>
+The general form of a parameterized gate instruction statement is given by the gate name followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses, which in turn is followed by the (comma-separated list of) qubit operand(s), <em>e.g.</em> <code>CRk(2) q[0], q[1]</code>:</p>
 <p><code>&lt;gate-name:ID&gt;(&lt;parameter(s):FLOAT|INT,&gt;) &lt;qubit-argument(s):QUBIT,&gt;</code></p>
 <p>Note that the parameters, either single or a list of multiple parameters, appear within parentheses directly following the gate name.
 We distinguish between the <em>parameters</em> of a parameterized gate, in terms of <a href="../expressions/number_literals.html">number literals</a>, and the <em>qubit arguments</em> a (parameterized) gate instruction acts on.</p>
 <details class="info">
-<summary>Regex pattern</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>LETTER=[_a-zA-Z]
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>DIGIT=[0-9]
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>INT={DIGIT}+
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>EXPONENT=[eE][-+]?{INT} 
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>FLOAT=({INT}?[.])?{INT}{EXPONENT}?
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>ID={LETTER}({LETTER}|{INT})*
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>QUBIT={ID}(\[{INT}\])?
+<summary>Syntax definition</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>LETTER: [a-zA-Z_]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>DIGIT: [0-9]
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>EXPONENT: [eE][-+]?DIGIT+
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>INT: DIGIT+
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>FLOAT: DIGIT+ &#39;.&#39; DIGIT+ EXPONENT? | DIGIT+ &#39;.&#39; EXPONENT? | &#39;.&#39; DIGIT+ EXPONENT? 
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>ID: LETTER (LETTER | DIGIT)*
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>QUBIT: ID(&#39;[&#39; INT &#39;]&#39;)?
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="hll">ID(\((INT|FLOAT)(,(INT|FLOAT))*\))? QUBIT(,QUBIT)*
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="hll">ID(&#39;(&#39; (INT | FLOAT)(&#39;,&#39; (INT | FLOAT))* &#39;)&#39;)? QUBIT(&#39;,&#39; QUBIT)*
 </span></code></pre></div>
 </details>
 <p>A few examples of gate instruction statements are shown below.</p>
@@ -1324,10 +1437,10 @@ Note that the latter 2-qubit gate <code>XX</code> is currently not supported by 
 <p>the whole qubit register <code>q</code>;</p>
 </li>
 <li>
-<p>a slice thereof <code>q[i:j]</code>, where <span class="arithmatex">\(0 \leq i &lt; j \leq N-1\)</span>;</p>
+<p>a slice thereof <code>q[i:j]</code>, where <span class="arithmatex">\(0 \leq i &lt; j &lt; N\)</span>;</p>
 </li>
 <li>
-<p>or a list of indices can be passed <code>q[i,]</code>, where <span class="arithmatex">\(0 \leq i \leq N-1\)</span>,</p>
+<p>or a list of indices can be passed <code>q[i,]</code>, where <span class="arithmatex">\(0 \leq i &lt; N\)</span>,</p>
 </li>
 </ul>
 <p>with <span class="arithmatex">\(N\)</span> the size of the qubit register.
@@ -1367,10 +1480,15 @@ The following slicing convention is adopted: a slice <code>q[i:j]</code> include
 <tr>
 <th>Name</th>
 <th>Description</th>
-<th>Example use</th>
+<th>Example of use</th>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>I</td>
+<td>Identity gate</td>
+<td><code>I q[0]</code></td>
+</tr>
 <tr>
 <td>H</td>
 <td>Hadamard gate</td>

@@ -279,6 +279,26 @@
   
 
       
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../appendices/spin.html" class="md-tabs__link">
+          
+  
+    
+  
+  Appendices
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -720,6 +740,8 @@
       
         
       
+        
+      
     
     
       
@@ -784,6 +806,27 @@
   
   <span class="md-ellipsis">
     Qubit (register) declaration statement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../statements/bit_register_declaration_statement.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bit (register) declaration statement
   </span>
   
 
@@ -1157,6 +1200,76 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Appendices
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Appendices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/spin.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spin-2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1193,17 +1306,17 @@
 
   <h1>Identifiers</h1>
 
-<p>An identifier <code>ID</code> is a single character or a sequence characters of the following form: upper or lowercase letters from the ISO basic Latin alphabet, underscore, and digits, with the constraint that the first (or singular) character cannot be a digit.
-Moreover, identifiers <code>ID</code> cannot contain spaces.</p>
-<p>For now, they are used to define the names of <a href="../statements/qubit_register_declaration_statement.html">qubits or qubit registers</a> by the user, and predefine the names of useful <a href="../expressions/predefined_constants.html">mathematical constants</a>, <a href="../expressions/builtin_functions.html">built-in functions</a>, and <a href="../instructions/gates.html">gates</a>.
-Note that identifiers are not protected, <em>i.e.</em> they can be reused. For example, it is permissible, however discouraged, to name a qubit (register) <code>pi</code>, <code>cos</code>, or <code>X</code>.</p>
+<p>An identifier <code>ID</code> is a single character or a sequence of characters of the following form: upper or lowercase letters from the ISO basic Latin alphabet, underscore, and digits, with the constraint that the first (or singular) character cannot be a digit.</p>
+<p>For now, they are used to define the names of (qu)bits or (qu)bit registers by the user, and predefine the names of useful <a href="../expressions/predefined_constants.html">mathematical constants</a>, <a href="../expressions/builtin_functions.html">built-in functions</a>, and <a href="../instructions/gates.html">gates</a>.
+Note that identifiers are not protected, <em>i.e.</em> they can be reused. 
+For example, it is permissible, however discouraged, to name a (qu)bit or (qu)bit register<code>pi</code>, <code>cos</code>, or <code>X</code>.</p>
 <p><a href="reserved_keywords.html">Reserved keywords</a> cannot be used as an identifier.</p>
 <details class="info">
-<summary>Regex pattern</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>LETTER=[_a-zA-Z]
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>DIGIT=[0-9]
+<summary>Syntax definition</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>LETTER: [a-zA-Z_]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>DIGIT: [0-9]
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="hll">ID={LETTER}({LETTER}|{DIGIT}+)*
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="hll">ID: LETTER (LETTER | DIGIT)*
 </span></code></pre></div>
 </details>
 <div class="admonition example">

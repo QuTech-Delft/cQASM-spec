@@ -279,6 +279,26 @@
   
 
       
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../appendices/spin.html" class="md-tabs__link">
+          
+  
+    
+  
+  Appendices
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -710,6 +730,8 @@
       
         
       
+        
+      
     
     
       
@@ -774,6 +796,27 @@
   
   <span class="md-ellipsis">
     Qubit (register) declaration statement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../statements/bit_register_declaration_statement.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bit (register) declaration statement
   </span>
   
 
@@ -1157,6 +1200,76 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Appendices
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Appendices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/spin.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spin-2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1198,22 +1311,28 @@
 <tr>
 <th style="text-align: left;">Literal</th>
 <th style="text-align: left;">Size / precision</th>
-<th style="text-align: left;">Regex pattern</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;">Integer</td>
 <td style="text-align: left;">64-bit signed</td>
-<td style="text-align: left;"><code>[0-9]+</code></td>
 </tr>
 <tr>
-<td style="text-align: left;">Floating-point</td>
+<td style="text-align: left;">Float</td>
 <td style="text-align: left;">IEEE 754 double precision</td>
-<td style="text-align: left;"><code>[+-]?([0-9]*[.])?[0-9]+([eE][+-]?[0-9]+)?</code></td>
 </tr>
 </tbody>
 </table>
+<details class="info">
+<summary>Syntax definition</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>DIGIT: [0-9]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>EXPONENT: [eE][-+]?DIGIT+
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="hll">INT: DIGIT+
+</span><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="hll">FLOAT: DIGIT+ &#39;.&#39; DIGIT+ EXPONENT? | DIGIT+ &#39;.&#39; EXPONENT? | &#39;.&#39; DIGIT+ EXPONENT? 
+</span></code></pre></div>
+</details>
 
 
 
