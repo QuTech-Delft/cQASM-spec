@@ -1,6 +1,6 @@
 The general structure of a cQASM program is as follows:
 
-- **[Comment(s)](whitespace_comments.md)** (_optional_)
+- **[Comment(s)](../tokens/white_space)** (_optional_)
 - **[Version statement](../statements/version_statement.md)** (_mandatory_)
 - **[Qubit (register) declaration statement](../statements/qubit_register_declaration_statement.md)** (_optional_)
 - **[Bit (register) declaration statement](../statements/bit_register_declaration_statement.md)** (_optional_)

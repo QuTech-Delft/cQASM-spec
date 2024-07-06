@@ -14,25 +14,29 @@ nav:
       - General structure: ./language_specification/structure/general_structure.md
       - File extension: ./language_specification/structure/file_extension.md
       - Case sensitivity: ./language_specification/structure/case_sensitivity.md
-      - Whitespace & Comments: ./language_specification/structure/whitespace_comments.md
-      - Identifiers: ./language_specification/structure/identifiers.md
-      - Reserved keywords: ./language_specification/structure/reserved_keywords.md
+    - Tokens:
+      - Tokens: ./language_specification/tokens/tokens.md
+      - White space: ./language_specification/tokens/white_space.md
+      - Literals: ./language_specification/tokens/literals.md
+      - Identifiers: ./language_specification/tokens/identifiers.md
+      - Keywords: ./language_specification/tokens/keywords.md
+      - Operators and punctuators: ./language_specification/tokens/operators_and_punctuators.md
     - Statements:
       - Version statement: ./language_specification/statements/version_statement.md
       - Qubit (register) declaration statement: ./language_specification/statements/qubit_register_declaration_statement.md
       - Bit (register) declaration statement: ./language_specification/statements/bit_register_declaration_statement.md
       - Instruction statement: ./language_specification/statements/instruction_statement.md
     - Instructions:
+      - Indices: ./language_specification/instructions/indices.md
       - Gates: ./language_specification/instructions/gates.md
       - Measure: ./language_specification/instructions/measure.md
     - Type system:
       - Types: ./language_specification/type_system/types.md
     - Expressions:
-      - Number literals: ./language_specification/expressions/number_literals.md
       - Indexing and slicing: ./language_specification/expressions/indexing_and_slicing.md
       - Predefined constants: ./language_specification/expressions/predefined_constants.md
       - Built-in functions: ./language_specification/expressions/builtin_functions.md
-      - Operators: ./language_specification/expressions/operators.md
+    - How to read the grammar: ./language_specification/how_to_read_the_grammar.md
   - Appendices:
       - Spin-2: appendices/spin.md
 

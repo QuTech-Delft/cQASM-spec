@@ -2,29 +2,42 @@ Gates define single-qubit or multi-qubit unitary operations that change the stat
 In essence, a quantum algorithm consists of a sequence of gates and non-unitary quantum instructions, _e.g._, the [measurement instruction](measure.md).
 The general form of a gate instruction statement is given by the gate name followed by the (comma-separated list of) qubit operand(s), _e.g._, `X q[0]`:
 
-`<gate-name:ID> <qubit-argument(s):QUBIT,>`
+`gate qubit-arguments`
 
 Parameterized unitary operations are represented by parameterized gates.
-The general form of a parameterized gate instruction statement is given by the gate name followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses, which in turn is followed by the (comma-separated list of) qubit operand(s), _e.g._ `CRk(2) q[0], q[1]`:
+The general form of a parameterized gate instruction statement is given by the gate name followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses,
+which in turn is followed by the (comma-separated list of) qubit operand(s), _e.g._ `CRk(2) q[0], q[1]`:
 
-`<gate-name:ID>(<parameter(s):FLOAT|INT,>) <qubit-argument(s):QUBIT,>`
+`gate(parameters) qubit-arguments`
 
 Note that the parameters, either single or a list of multiple parameters, appear within parentheses directly following the gate name.
-We distinguish between the _parameters_ of a parameterized gate, in terms of [number literals](../expressions/number_literals.md), and the _qubit arguments_ a (parameterized) gate instruction acts on.
+We distinguish between the _parameters_ of a parameterized gate, in terms of [number literals](../tokens/literals),
+and the _qubit arguments_ a (parameterized) gate instruction acts on.
 
-??? info "Syntax definition"
+??? info "Grammar for gates"
     
-    ```hl_lines="9"
-    LETTER: [a-zA-Z_]
-    DIGIT: [0-9]
-    EXPONENT: [eE][-+]?DIGIT+
-    INT: DIGIT+
-    FLOAT: DIGIT+ '.' DIGIT+ EXPONENT? | DIGIT+ '.' EXPONENT? | '.' DIGIT+ EXPONENT? 
-    ID: LETTER (LETTER | DIGIT)*
-    QUBIT: ID('[' INT ']')?
-    
-    ID('(' (INT | FLOAT)(',' (INT | FLOAT))* ')')? QUBIT(',' QUBIT)*
-    ```
+    _gate_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_ _parameters<sub>opt</sub>_ _qubit-arguments_</br>
+    _parameters_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<code>__(__</code> _parameter-list_ <code>__)__</code></br>
+    _parameter-list_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_parameter_</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_parameter-list_ <code>__,__</code> _parameter_</br>
+    _parameter_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_integer-literal_</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_floating-literal_</br>
+    _qubit-arguments_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-argument-list_</br>
+    _qubit-argument-list_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-argument_</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-argument-list_ <code>__,__</code> _qubit-argument_</br>
+    _qubit-argument_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-variable_</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-index_</br>
+    _qubit-variable_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_</br>
+    _qubit-index_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_index_
 
 A few examples of gate instruction statements are shown below.
 
@@ -48,15 +61,18 @@ The gates that are supported by the language are listed below in the [standard g
 
 ## Single-gate-multi-qubit (SGMQ) notation
 
-It is possible to pass multiple qubits as an argument to a single-qubit gate, by making use of the single-gate-multi-qubit (SGMQ) notation.
+It is possible to pass multiple qubits as an argument to a single-qubit gate,
+by making use of the single-gate-multi-qubit (SGMQ) notation.
 The single-qubit gate will then be applied to each qubit, respectively.
 
 !!! note
 
     SGMQ notation does not imply that the gates are, necessarily, executed in parallel on the target device. 
     SGMQ notation is nothing other than _syntactic sugar_, whereby a series of instruction statements can be written as one.
-    Moreover, SGMQ notation should not be confused with multiple-qubit gates, _e.g._, `X q[0,1]` means `X q[0]; X q[1]`, and does not represent the 2-qubit gate statement `XX q[0], q[1]`.
-    Note that the latter 2-qubit gate `XX` is currently not supported by the cQASM language, see the [standard gate set](gates.md#standard-gate-set) below.
+    Moreover, SGMQ notation should not be confused with multiple-qubit gates, _e.g._, `X q[0,1]` means `X q[0]; X q[1]`,
+    and does not represent the 2-qubit gate statement `XX q[0], q[1]`.
+    Note that the latter 2-qubit gate `XX` is currently not supported by the cQASM language,
+    see the [standard gate set](gates.md#standard-gate-set) below.
 
 If the name of the qubit register is `q`, then the following can be passed as an argument to the single-qubit gate:
 
@@ -67,7 +83,8 @@ If the name of the qubit register is `q`, then the following can be passed as an
 - or a list of indices can be passed `q[i,]`, where $0 \leq i < N$,
 
 with $N$ the size of the qubit register.
-The following slicing convention is adopted: a slice `q[i:j]` includes qubits `q[i]`, `q[j]`, and all qubits in between. The code block below demonstrates some examples.
+The following slicing convention is adopted: a slice `q[i:j]` includes qubits `q[i]`, `q[j]`,
+and all qubits in between. The code block below demonstrates some examples.
 
 !!! example
 

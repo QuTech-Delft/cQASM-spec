@@ -1,26 +1,25 @@
 A bit or bit register must be declared before they can be used.
-The general form is given as follows
+The general form is given as follows:
 
-`bit[<number-of-bits:INT>] <bit(-register)-name:ID>`
+`bit[size] identifier`
 
-??? info "Syntax definition"
+??? info "Grammar for bit (register) declaration"
     
-    ```hl_lines="6"
-    LETTER: [a-zA-Z_]
-    DIGIT: [0-9]
-    INT: DIGIT+  
-    ID: LETTER (LETTER | DIGIT)*
+    _bit-declaration_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<code>__bit__</code> _array-size-declaration<sub>opt</sub>_ _identifier_</br>
+    _array-size-declaration_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<code>__[__</code> _integer-literal_ <code>__]__</code></br>
 
-    bit('[' INT ']')? ID     
-    ```
-
-Its form is similar to the declaration of an arbitrary variable, whereby the type of the variable is specified first, _i.e._ [`bit`](../type_system/types.md) denotes that the declared variable is of type _bit_.
-The size of the bit register is declared by an integer value between square brackets `[<number-of-bits:INT>]`, directly following the type.
-A single bit can also be declared by omitting the square brackets `[]`.
-The name of the bit (register) is defined through an [identifier](../structure/identifiers.md). 
+Its form is similar to the declaration of an arbitrary variable,
+whereby the type of the variable is specified first, _i.e._ [`bit`](../type_system/types.md
+denotes that the declared variable is of type _bit_.
+The size of the bit register is declared by an integer value between square brackets `[size]`, directly following the type.
+A single bit can also be declared by omitting the size.
+The name of the bit (register) is defined through an [identifier](../tokens/identifiers.md). 
 
 The declaration of a bit (register) is _optional_,
-Nevertheless, since measurement outcomes are stored as bits, [measurement instruction statements](../instructions/measure.md) require a previously declared bit (register).
+Nevertheless, since measurement outcomes are stored as bits,
+[measurement instruction statements](../instructions/measure.md) require a previously declared bit (register).
 
 Find below examples, respectively, of a single qubit declaration and qubit register declaration.
 
@@ -54,5 +53,7 @@ Find below examples, respectively, of a single qubit declaration and qubit regis
         b[1] = measure q[1]
         ```
 
-The individual bits of a bit register can be referred to by their register index, _e.g._ in the example of the _Bit register declaration_, the statement `breg[0] = measure q[0]` indicates that the measurement outcome is stored at the bit located at index `0` of the bit register `breg`. 
+The individual bits of a bit register can be referred to by their register index,
+_e.g._ in the example of the _Bit register declaration_,
+the statement `b[0] = measure q[0]` indicates that the measurement outcome is stored at the bit located at index `0` of the bit register `b`. 
 Note that in the case of a single bit, the bit is referred to through its identifier, not through a register index.

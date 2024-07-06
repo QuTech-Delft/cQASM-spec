@@ -1,19 +1,25 @@
 The general form of a measurement instruction statement is as follows:
 
-`<bit-name:BIT> = measure <qubit-argument:QUBIT>`
+`bit-argument = measure qubit-argument`
 
-??? info "Syntax definition"
+??? info "Grammar for measure"
     
-    ```hl_lines="8"
-    LETTER: [a-zA-Z_]
-    DIGIT: [0-9]
-    INT: DIGIT+
-    ID: LETTER (LETTER | DIGIT)*
-    BIT: ID('[' INT ']')?
-    QUBIT: ID('[' INT ']')?
-
-    (ID | BIT) = measure (ID | QUBIT)
-    ```
+    _measure_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_bit-argument_ <code>__=__</code> _measure_ _qubit-argument_</br>
+    _bit-argument_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_bit-variable_</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_bit-index_</br>
+    _bit-variable_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_</br>
+    _bit-index_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_index_</br>
+    _qubit-argument_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-variable_</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-index_</br>
+    _qubit-variable_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_</br>
+    _qubit-index_:</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;_index_</br>
 
 !!! example
     
@@ -48,7 +54,8 @@ bit[2] b
 H q[0]
 CNOT q[0], q[1]
 
-b[0, 1] = measure q[0, 1]  // Measurement in the standard basis.
+b = measure q  // Measurement in the standard basis.
 ```
 
-On the last line of this simple cQASM program, the respective states of both qubits in the qubit register are measured along the standard/computational basis.
+On the last line of this simple cQASM program,
+the respective states of both qubits in the qubit register are measured along the standard/computational basis.

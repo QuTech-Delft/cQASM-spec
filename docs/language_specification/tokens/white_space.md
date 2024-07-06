@@ -1,8 +1,4 @@
-cQASM is newline-sensitive, _i.e._ a newline terminates a statement.
-A semicolon `;` may be used instead of a newline to separate statements, for instance when putting multiple statements on the same line.
-Semicolons can also be put at the end of the line for clarity without changing the semantics of the program.
-
-In general, cQASM is not whitespace-sensitive, apart from newlines. 
+In general, cQASM is not whitespace-sensitive, apart from newlines.
 Spaces and tabs can be placed in between tokens.
 
 Comments can be written as single-line comments or as multi-line comments within a comment block.
