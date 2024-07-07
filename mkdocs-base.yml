@@ -10,6 +10,7 @@ nav:
     - Context: ./introduction/context.md
     - Acknowledgements: ./introduction/acknowledgements.md
   - Language specification:
+    - About the grammar sections: ./language_specification/about_the_grammar_sections.md
     - Structure:
       - General structure: ./language_specification/structure/general_structure.md
       - File extension: ./language_specification/structure/file_extension.md
@@ -36,7 +37,6 @@ nav:
       - Indexing and slicing: ./language_specification/expressions/indexing_and_slicing.md
       - Predefined constants: ./language_specification/expressions/predefined_constants.md
       - Built-in functions: ./language_specification/expressions/builtin_functions.md
-    - How to read the grammar: ./language_specification/how_to_read_the_grammar.md
   - Appendices:
       - Spin-2: appendices/spin.md
 

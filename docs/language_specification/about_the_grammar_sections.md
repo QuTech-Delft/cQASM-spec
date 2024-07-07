@@ -1,9 +1,11 @@
 1. In the syntax notation used in this documentation, syntactic categories are indicated by _italic_ type,
-and literal words and characters in <code>__boldface constant width__</code> type.</br>
+and literal words and characters in <code>__boldface constant width__</code> type.</br></br>
 Alternatives are listed on separate lines except in a few cases
-where a long set of alternatives is presented on one line, marked by the phrase "one of."</br>
+where a long set of alternatives is presented on one line, with the help of "one of", "through" and "or". For example:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;one of <code>__a__</code> through  <code>__z__</code> or <code>__A__</code> through  <code>__Z__</code></br>
+indicates any lowercase or uppercase alphabetic character.</br></br>
 An optional terminal or non-terminal symbol is indicated by the subscript "<sub>opt</sub>", so</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<code>__{__</code> expression<sub>opt</sub> <code>__}__</code></br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>__{__</code> _expression<sub>opt</sub>_ <code>__}__</code></br>
 indicates an optional expression enclosed in braces.
 
 2. Names for syntactic categories have generally been chosen according to the following rules:
