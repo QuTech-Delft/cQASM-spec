@@ -1,2 +1,2 @@
-There are six kinds of tokens: newlines, identifiers, keywords, literals, operators, and other separators.</br>
+There are the following kinds of tokens: newlines, identifiers, keywords, literals, operators, and other separators.</br>
 Blanks, tabs, and comments (collectively, "white space") are ignored except as they serve to separate tokens.
