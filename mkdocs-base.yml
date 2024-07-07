@@ -18,6 +18,7 @@ nav:
     - Tokens:
       - Tokens: ./language_specification/tokens/tokens.md
       - White space: ./language_specification/tokens/white_space.md
+      - Newlines: ./language_specification/tokens/newlines.md
       - Literals: ./language_specification/tokens/literals.md
       - Identifiers: ./language_specification/tokens/identifiers.md
       - Keywords: ./language_specification/tokens/keywords.md
