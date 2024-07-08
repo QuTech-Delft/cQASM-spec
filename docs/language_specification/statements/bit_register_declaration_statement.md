@@ -54,5 +54,5 @@ Find below examples, respectively, of a single qubit declaration and qubit regis
         b[1] = measure q[1]
         ```
 
-The individual bits of a bit register can be referred to by their register index, _e.g._ in the example of the _Bit register declaration_, the statement `breg[0] = measure q[0]` indicates that the measurement outcome is stored at the bit located at index `0` of the bit register `breg`. 
+The individual bits of a bit register can be referred to by their register index, _e.g._ in the example of the _Bit register declaration_, the statement `b[0] = measure q[0]` indicates that the measurement outcome is stored at the bit located at index `0` of the bit register `b`. 
 Note that in the case of a single bit, the bit is referred to through its identifier, not through a register index.
