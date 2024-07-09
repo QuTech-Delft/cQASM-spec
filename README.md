@@ -2,11 +2,9 @@
 
 This repository contains the specification documents of the cQASM quantum programming language. 
 
-
 ## Documentation
 
 The cQASM language specification documentation is hosted through GitHub Pages [here](https://qutech-delft.github.io/cQASM-spec/).
-
 
 ## Deployment
 
@@ -44,7 +42,6 @@ docker compose up -d
 ```
 
 The documentation can now be viewed at <http://localhost:8106>.
-
 
 ## Authors
 
