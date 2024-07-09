@@ -43,6 +43,12 @@ docker compose up -d
 
 The documentation can now be viewed at <http://localhost:8106>.
 
+## Licensing
+
+The cQASM language specification is licensed under the Apache License, Version 2.0. See
+[LICENSE](https://github.com/QuTech-Delft/cQASM-spec/blob/master/LICENSE.md) for the full
+license text.
+
 ## Authors
 
 Quantum Inspire: [support@quantum-inspire.com](mailto:"support@quantum-inspire.com")
