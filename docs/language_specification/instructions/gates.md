@@ -11,7 +11,7 @@ which in turn is followed by the (comma-separated list of) qubit operand(s), _e.
 `gate(parameters) qubit-arguments`
 
 Note that the parameters, either single or a list of multiple parameters, appear within parentheses directly following the gate name.
-We distinguish between the _parameters_ of a parameterized gate, in terms of [number literals](../tokens/literals),
+We distinguish between the _parameters_ of a parameterized gate, in terms of [number literals](../tokens/literals.md),
 and the _qubit arguments_ a (parameterized) gate instruction acts on.
 
 ??? info "Grammar for gates"
