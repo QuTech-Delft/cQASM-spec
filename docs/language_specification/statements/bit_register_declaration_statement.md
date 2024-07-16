@@ -11,7 +11,7 @@ The general form is given as follows:
     &nbsp;&nbsp;&nbsp;&nbsp;<code>__[__</code> _integer-literal_ <code>__]__</code></br>
 
 Its form is similar to the declaration of an arbitrary variable,
-whereby the type of the variable is specified first, _i.e._ [`bit`](../type_system/types.md
+whereby the type of the variable is specified first, _i.e._ [`bit`](../type_system/types.md)
 denotes that the declared variable is of type _bit_.
 The size of the bit register is declared by an integer value between square brackets `[size]`, directly following the type.
 A single bit can also be declared by omitting the size.
