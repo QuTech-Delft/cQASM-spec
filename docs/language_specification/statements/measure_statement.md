@@ -1,25 +1,25 @@
-The general form of a measurement instruction statement is as follows:
+The general form of a measurement statement is as follows:
 
 `bit-argument = measure qubit-argument`
 
-??? info "Grammar for measure"
+??? info "Grammar for measure statement"
     
-    _measure_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_bit-argument_ <code>__=__</code> _measure_ _qubit-argument_</br>
-    _bit-argument_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_bit-variable_</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_bit-index_</br>
-    _bit-variable_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_</br>
-    _bit-index_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_index_</br>
-    _qubit-argument_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-variable_</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-index_</br>
-    _qubit-variable_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_</br>
-    _qubit-index_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_index_</br>
+    _measure_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_bit-argument_ <code>__=__</code> _measure_ _qubit-argument_  
+    _bit-argument_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_bit-variable_  
+    &nbsp;&nbsp;&nbsp;&nbsp;_bit-index_  
+    _bit-variable_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_  
+    _bit-index_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_index_  
+    _qubit-argument_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-variable_  
+    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-index_  
+    _qubit-variable_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_  
+    _qubit-index_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_index_  
 
 !!! example
     

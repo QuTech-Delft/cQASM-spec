@@ -7,4 +7,4 @@ The table below lists the available variable types in cQASM.
 
 !!! note
 
-    Type keywords are [reserved](../structure/reserved_keywords.md) and, therefore, cannot be used as [identifiers](../structure/identifiers.md).
+    Type keywords are [reserved](../tokens/keywords.md) and, therefore, cannot be used as [identifiers](../tokens/identifiers.md).

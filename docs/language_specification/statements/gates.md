@@ -1,6 +1,6 @@
 Gates define single-qubit or multi-qubit unitary operations that change the state of a qubit register in a deterministic fashion.
-In essence, a quantum algorithm consists of a sequence of gates and non-unitary quantum instructions, _e.g._, the [measurement instruction](measure.md).
-The general form of a gate instruction statement is given by the gate name followed by the (comma-separated list of) qubit operand(s), _e.g._, `X q[0]`:
+In essence, a quantum algorithm consists of a sequence of gates and non-unitary quantum statements, _e.g._, the [measurement statement](measure_statement).
+The general form of a gate statement is given by the gate name followed by the (comma-separated list of) qubit operand(s), _e.g._, `X q[0]`:
 
 `gate qubit-arguments`
 
@@ -11,32 +11,32 @@ which in turn is followed by the (comma-separated list of) qubit operand(s), _e.
 `gate(parameters) qubit-arguments`
 
 Note that the parameters, either single or a list of multiple parameters, appear within parentheses directly following the gate name.
-We distinguish between the _parameters_ of a parameterized gate, in terms of [number literals](../tokens/literals.md),
+We distinguish between the _parameters_ of a parameterized gate, in terms of number [literals](../tokens/literals.md),
 and the _qubit arguments_ a (parameterized) gate instruction acts on.
 
 ??? info "Grammar for gates"
     
-    _gate_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_ _parameters<sub>opt</sub>_ _qubit-arguments_</br>
-    _parameters_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;<code>__(__</code> _parameter-list_ <code>__)__</code></br>
-    _parameter-list_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_parameter_</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_parameter-list_ <code>__,__</code> _parameter_</br>
-    _parameter_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_integer-literal_</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_floating-literal_</br>
-    _qubit-arguments_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-argument-list_</br>
-    _qubit-argument-list_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-argument_</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-argument-list_ <code>__,__</code> _qubit-argument_</br>
-    _qubit-argument_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-variable_</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-index_</br>
-    _qubit-variable_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_</br>
-    _qubit-index_:</br>
+    _gate_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_ _parameters<sub>opt</sub>_ _qubit-arguments_  
+    _parameters_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;<code>__(__</code> _parameter-list_ <code>__)__</code>  
+    _parameter-list_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_parameter_  
+    &nbsp;&nbsp;&nbsp;&nbsp;_parameter-list_ <code>__,__</code> _parameter_  
+    _parameter_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_integer-literal_  
+    &nbsp;&nbsp;&nbsp;&nbsp;_floating-literal_  
+    _qubit-arguments_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-argument-list_  
+    _qubit-argument-list_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-argument_  
+    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-argument-list_ <code>__,__</code> _qubit-argument_  
+    _qubit-argument_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-variable_  
+    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-index_  
+    _qubit-variable_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_  
+    _qubit-index_:  
     &nbsp;&nbsp;&nbsp;&nbsp;_index_
 
 A few examples of gate instruction statements are shown below.
@@ -50,7 +50,7 @@ A few examples of gate instruction statements are shown below.
     // A two-qubit controlled-Z gate (control: q[0], target: q[1])
     CZ q[0], q[1]
     
-    // A paramterized single-qubit Rx gate (with π/2 rotation around the x-axis)
+    // A parameterized single-qubit Rx gate (with π/2 rotation around the x-axis)
     Rx(pi/2) q[0]
     
     // A parametrized two-qubit controlled phase-shift gate (control: q[1], target: q[0])

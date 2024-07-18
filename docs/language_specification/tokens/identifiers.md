@@ -5,7 +5,7 @@ with the constraint that the first (or singular) character cannot be a digit.
 For now, they are used to define the names of (qu)bits or (qu)bit registers by the user,
 and predefine the names of useful [mathematical constants](../expressions/predefined_constants.md),
 [built-in functions](../expressions/builtin_functions.md),
-and [gates](../instructions/gates.md).
+and [gates](../statements/gates.md).
 Note that identifiers are not protected, _i.e._ they can be reused. 
 For example, it is permissible, however discouraged, to name a (qu)bit or (qu)bit register`pi`, `cos`, or `X`.
 
@@ -13,10 +13,12 @@ For example, it is permissible, however discouraged, to name a (qu)bit or (qu)bi
 
 ??? info "Grammar for identifiers"
 
-    _identifier_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_letter_</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_ _letter_</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_ _digit_</br>
+    _identifier_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_letter_  
+    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_ _letter_  
+    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_ _digit_  
+    _letter_: one of  
+    &nbsp;&nbsp;&nbsp;&nbsp;<code>__a__</code> through <code>__z__</code> or <code>__A__</code> through <code>__Z__</code> or <code>**_**</code>  
 
 !!! example "Examples"
 

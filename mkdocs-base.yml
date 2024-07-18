@@ -12,12 +12,11 @@ nav:
   - Language specification:
     - About the grammar sections: ./language_specification/about_the_grammar_sections.md
     - Structure:
-      - General structure: ./language_specification/structure/general_structure.md
+      - Structure: ./language_specification/structure/structure.md
       - File extension: ./language_specification/structure/file_extension.md
       - Case sensitivity: ./language_specification/structure/case_sensitivity.md
     - Tokens:
-      - Tokens: ./language_specification/tokens/tokens.md
-      - White space: ./language_specification/tokens/white_space.md
+      - Whitespace: ./language_specification/tokens/whitespace.md
       - Newlines: ./language_specification/tokens/newlines.md
       - Literals: ./language_specification/tokens/literals.md
       - Identifiers: ./language_specification/tokens/identifiers.md
@@ -25,17 +24,14 @@ nav:
       - Operators and punctuators: ./language_specification/tokens/operators_and_punctuators.md
     - Statements:
       - Version statement: ./language_specification/statements/version_statement.md
-      - Qubit (register) declaration statement: ./language_specification/statements/qubit_register_declaration_statement.md
-      - Bit (register) declaration statement: ./language_specification/statements/bit_register_declaration_statement.md
-      - Instruction statement: ./language_specification/statements/instruction_statement.md
-    - Instructions:
-      - Indices: ./language_specification/instructions/indices.md
-      - Gates: ./language_specification/instructions/gates.md
-      - Measure: ./language_specification/instructions/measure.md
+      - Qubit (register) declaration: ./language_specification/statements/qubit_register_declaration.md
+      - Bit (register) declaration: ./language_specification/statements/bit_register_declaration.md
+      - Gates: ./language_specification/statements/gates.md
+      - Measure statement: ./language_specification/statements/measure_statement.md
     - Type system:
       - Types: ./language_specification/type_system/types.md
     - Expressions:
-      - Indexing and slicing: ./language_specification/expressions/indexing_and_slicing.md
+      - Indices: ./language_specification/expressions/indices.md
       - Predefined constants: ./language_specification/expressions/predefined_constants.md
       - Built-in functions: ./language_specification/expressions/builtin_functions.md
   - Appendices:

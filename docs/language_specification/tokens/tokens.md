@@ -1,2 +1,0 @@
-There are the following kinds of tokens: newlines, literals, keywords, identifiers, operators, and other separators.</br>
-Blanks, tabs, and comments (collectively, "white space") are ignored except as they serve to separate tokens.

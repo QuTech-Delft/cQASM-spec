@@ -5,10 +5,10 @@ The general form is given as follows:
 
 ??? info "Grammar for bit (register) declaration"
     
-    _qubit-declaration_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;<code>__qubit__</code> _array-size-declaration<sub>opt</sub>_ _identifier_</br>
-    _array-size-declaration_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;<code>__[__</code> _integer-literal_ <code>__]__</code></br>
+    _qubit-declaration_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;<code>__qubit__</code> _array-size-declaration<sub>opt</sub>_ _identifier_  
+    _array-size-declaration_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;<code>__[__</code> _integer-literal_ <code>__]__</code>  
 
 Its form is similar to the declaration of an arbitrary variable,
 whereby the type of the variable is specified first, _i.e._ [`qubit`](../type_system/types.md)

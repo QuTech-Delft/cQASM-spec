@@ -4,15 +4,15 @@ It has the following general form:
 
 `version M.m`
 
-??? info "Grammar for version"
+??? info "Grammar for version statement"
 
-    _version_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_major-version_ _minor-version-suffix<sub>opt<sub>_</br>
-    _major-version_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;_digit-sequence_</br>
-    _minor-version-suffix_:</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;<code>__.__</code> _minor-version_</br>
-    _minor-version_:</br>
+    _version_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_major-version_ _minor-version-suffix<sub>opt<sub>_  
+    _major-version_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;_digit-sequence_  
+    _minor-version-suffix_:  
+    &nbsp;&nbsp;&nbsp;&nbsp;<code>__.__</code> _minor-version_  
+    _minor-version_:  
     &nbsp;&nbsp;&nbsp;&nbsp;_digit-sequence_
 
 where the version number is to be given as two period separated integers, respectively indicating the major `M` and minor `m` version of the cQASM language.
