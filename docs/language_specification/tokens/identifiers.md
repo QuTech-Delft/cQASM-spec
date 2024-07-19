@@ -9,7 +9,7 @@ and [gates](../statements/gates.md).
 Note that identifiers are not protected, _i.e._ they can be reused. 
 For example, it is permissible, however discouraged, to name a (qu)bit or (qu)bit register`pi`, `cos`, or `X`.
 
-[Reserved keywords](keywords) cannot be used as an identifier.
+Reserved [keywords](keywords.md) cannot be used as an identifier.
 
 ??? info "Grammar for identifiers"
 

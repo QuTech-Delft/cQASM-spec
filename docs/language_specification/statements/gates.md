@@ -1,16 +1,21 @@
-Gates define single-qubit or multi-qubit unitary operations that change the state of a qubit register in a deterministic fashion.
-In essence, a quantum algorithm consists of a sequence of gates and non-unitary quantum statements, _e.g._, the [measurement statement](measure_statement).
-The general form of a gate statement is given by the gate name followed by the (comma-separated list of) qubit operand(s), _e.g._, `X q[0]`:
+Gates define single-qubit or multi-qubit unitary operations
+that change the state of a qubit register in a deterministic fashion.
+In essence, a quantum algorithm consists of a sequence of gates and non-unitary quantum statements,
+_e.g._, the [measurement statement](measure_statement.md).
+The general form of a gate statement is given by the gate name
+followed by the (comma-separated list of) qubit operand(s), _e.g._, `X q[0]`:
 
 `gate qubit-arguments`
 
 Parameterized unitary operations are represented by parameterized gates.
-The general form of a parameterized gate instruction statement is given by the gate name followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses,
+The general form of a parameterized gate instruction statement is given by the gate name
+followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses,
 which in turn is followed by the (comma-separated list of) qubit operand(s), _e.g._ `CRk(2) q[0], q[1]`:
 
 `gate(parameters) qubit-arguments`
 
-Note that the parameters, either single or a list of multiple parameters, appear within parentheses directly following the gate name.
+Note that the parameters, either single or a list of multiple parameters,
+appear within parentheses directly following the gate name.
 We distinguish between the _parameters_ of a parameterized gate, in terms of number [literals](../tokens/literals.md),
 and the _qubit arguments_ a (parameterized) gate instruction acts on.
 
