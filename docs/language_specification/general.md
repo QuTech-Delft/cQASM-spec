@@ -8,7 +8,7 @@ A cQASM program can contain the following type of tokens:
 - [Identifiers](tokens/identifiers.md)
 - [Operators and other separators](tokens/operators_and_punctuators.md)  
 
-Blanks, tabs, and comments (collectively, "[whitespace](tokens/whitespace.md)") are ignored except as they serve to separate tokens.
+[Whitespace and comments](tokens/whitespace_and_comments.md) are ignored except as they serve to separate tokens.
 
 ## Statements
 

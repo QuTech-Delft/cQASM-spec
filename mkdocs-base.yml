@@ -12,7 +12,7 @@ nav:
   - Language specification:
     - General: ./language_specification/general.md
     - Tokens:
-      - Whitespace: ./language_specification/tokens/whitespace.md
+      - Whitespace and comments: ./language_specification/tokens/whitespace_and_comments.md
       - Newlines: ./language_specification/tokens/newlines.md
       - Literals: ./language_specification/tokens/literals.md
       - Identifiers: ./language_specification/tokens/identifiers.md
