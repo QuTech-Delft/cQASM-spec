@@ -21,7 +21,7 @@ The last position is also part of the range, i.e., it doesn't point to the first
 
 !!! example "Indices, index entries, and index ranges"
 
-    ```
+    ```hl_lines="6"
     // Qubit register containing 7 qubits, numbered from 0 to 6
     qubit[7] q 
     
