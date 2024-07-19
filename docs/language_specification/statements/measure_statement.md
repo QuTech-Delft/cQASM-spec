@@ -5,21 +5,27 @@ The general form of a measurement statement is as follows:
 ??? info "Grammar for measure statement"
     
     _measure_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_bit-argument_ <code>__=__</code> _measure_ _qubit-argument_  
+    &emsp; _bit-argument_ __`= measure`__ _qubit-argument_
+
     _bit-argument_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_bit-variable_  
-    &nbsp;&nbsp;&nbsp;&nbsp;_bit-index_  
+    &emsp; _bit-variable_  
+    &emsp; _bit-index_
+
     _bit-variable_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_  
+    &emsp; _identifier_
+
     _bit-index_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_index_  
+    &emsp; _index_
+
     _qubit-argument_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-variable_  
-    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-index_  
+    &emsp; _qubit-variable_  
+    &emsp; _qubit-index_
+
     _qubit-variable_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_  
+    &emsp; _identifier_
+
     _qubit-index_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_index_  
+    &emsp; _index_  
 
 !!! example
     

@@ -7,13 +7,16 @@ It has the following general form:
 ??? info "Grammar for version statement"
 
     _version_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_major-version_ _minor-version-suffix<sub>opt<sub>_  
+    &emsp; _major-version_ _minor-version-suffix_~opt~
+
     _major-version_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_digit-sequence_  
+    &emsp; _digit-sequence_
+
     _minor-version-suffix_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;<code>__.__</code> _minor-version_  
+    &emsp; __`.`__ _minor-version_
+
     _minor-version_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_digit-sequence_
+    &emsp; _digit-sequence_
 
 where the version number is to be given as two period separated integers, respectively indicating the major `M` and minor `m` version of the cQASM language.
 It is permitted to only specify the major version number `M`, _i.e._, the specification of the minor version number `.m` is optional. In that case, `m` will be interpreted as `0`.

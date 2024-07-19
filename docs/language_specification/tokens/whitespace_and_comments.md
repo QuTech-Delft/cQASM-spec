@@ -7,7 +7,8 @@ Whitespace before a single-line or multi-line comment is permitted.
 
 ## Single-line comment
 
-A single-line comment is prefixed by two forward slashes `//` and finishes with the new line, equal to the syntax of C-like languages.
+A single-line comment is prefixed by two forward slashes `//` and finishes with the new line, 
+equal to the syntax of C-like languages.
 
 The general form of single-line comments is as follows
 

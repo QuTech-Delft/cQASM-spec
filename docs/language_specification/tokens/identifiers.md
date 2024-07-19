@@ -7,18 +7,19 @@ and predefine the names of useful [mathematical constants](../expressions/predef
 [built-in functions](../expressions/builtin_functions.md),
 and [gates](../statements/gates.md).
 Note that identifiers are not protected, _i.e._ they can be reused. 
-For example, it is permissible, however discouraged, to name a (qu)bit or (qu)bit register`pi`, `cos`, or `X`.
+For example, it is permissible, however discouraged, to name a (qu)bit (register) `pi`, `cos`, or `X`.
 
 Reserved [keywords](keywords.md) cannot be used as an identifier.
 
 ??? info "Grammar for identifiers"
 
     _identifier_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_letter_  
-    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_ _letter_  
-    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_ _digit_  
-    _letter_: one of  
-    &nbsp;&nbsp;&nbsp;&nbsp;<code>__a__</code> through <code>__z__</code> or <code>__A__</code> through <code>__Z__</code> or <code>**_**</code>  
+    &emsp; _letter_  
+    &emsp; _identifier_ _letter_  
+    &emsp; _identifier_ _digit_
+
+    _letter_:  one of  
+    &emsp; __`a`__ through __`z`__ or __`A`__ through __`Z`__ or __`_`__  
 
 !!! example "Examples"
 

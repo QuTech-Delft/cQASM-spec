@@ -6,9 +6,10 @@ The general form is given as follows:
 ??? info "Grammar for bit (register) declaration"
     
     _qubit-declaration_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;<code>__qubit__</code> _array-size-declaration<sub>opt</sub>_ _identifier_  
+    &emsp; __`qubit` _array-size-declaration_~opt~ _identifier_
+
     _array-size-declaration_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;<code>__[__</code> _integer-literal_ <code>__]__</code>  
+    &emsp; __`[`__ _integer-literal_ __`]`__  
 
 Its form is similar to the declaration of an arbitrary variable,
 whereby the type of the variable is specified first, _i.e._ [`qubit[size]`](../types.md)

@@ -3,17 +3,19 @@ The general form is given as follows:
 
 `bit[size] identifier`
 
-??? info "Grammar for bit (register) declaration"
+!!! info "Grammar for bit (register) declaration"
     
     _bit-declaration_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;<code>__bit__</code> _array-size-declaration<sub>opt</sub>_ _identifier_  
+    &emsp; __`bit`__ _array-size-declaration~opt~_ _identifier_
+
     _array-size-declaration_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;<code>__[__</code> _integer-literal_ <code>__]__</code>  
+    &emsp; __`[`__ _integer-literal_ __`]`__  
 
 Its form is similar to the declaration of an arbitrary variable,
 whereby the type of the variable is specified first, _i.e._ [`bit[size]`](../types.md)
 denotes that the declared variable is of type _BitArray_.
-The size of the bit register is declared by an integer value between square brackets `[size]`, directly following the type.
+The size of the bit register is declared by an integer value between square brackets `[size]`,
+directly following the type.
 A single bit can also be declared by omitting the size.
 The name of the bit (register) is defined through an [identifier](../tokens/identifiers.md). 
 

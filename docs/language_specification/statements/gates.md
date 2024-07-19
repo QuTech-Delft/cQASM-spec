@@ -19,30 +19,38 @@ appear within parentheses directly following the gate name.
 We distinguish between the _parameters_ of a parameterized gate, in terms of number [literals](../tokens/literals.md),
 and the _qubit arguments_ a (parameterized) gate instruction acts on.
 
-??? info "Grammar for gates"
+!!! info "Grammar for gates"
     
     _gate_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_ _parameters<sub>opt</sub>_ _qubit-arguments_  
+    &emsp; _identifier_ _parameters_~opt~ _qubit-arguments_
+
     _parameters_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;<code>__(__</code> _parameter-list_ <code>__)__</code>  
+    &emsp; __`(`__ _parameter-list_ __`)`__
+
     _parameter-list_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_parameter_  
-    &nbsp;&nbsp;&nbsp;&nbsp;_parameter-list_ <code>__,__</code> _parameter_  
+    &emsp; _parameter_  
+    &emsp; _parameter-list_ __`,`__ _parameter_
+
     _parameter_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_integer-literal_  
-    &nbsp;&nbsp;&nbsp;&nbsp;_floating-literal_  
+    &emsp; _integer-literal_  
+    &emsp; _floating-literal_
+
     _qubit-arguments_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-argument-list_  
+    &emsp; _qubit-argument-list_
+
     _qubit-argument-list_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-argument_  
-    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-argument-list_ <code>__,__</code> _qubit-argument_  
+    &emsp; _qubit-argument_  
+    &emsp; _qubit-argument-list_ __`,`__ _qubit-argument_
+
     _qubit-argument_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-variable_  
-    &nbsp;&nbsp;&nbsp;&nbsp;_qubit-index_  
+    &emsp; _qubit-variable_  
+    &emsp; _qubit-index_
+
     _qubit-variable_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_identifier_  
+    &emsp; _identifier_
+
     _qubit-index_:  
-    &nbsp;&nbsp;&nbsp;&nbsp;_index_
+    &emsp; _index_
 
 A few examples of gate instruction statements are shown below.
 
