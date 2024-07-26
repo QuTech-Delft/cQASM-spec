@@ -1,12 +1,13 @@
 The table below lists the available types in a cQASM program.
 
-| Type       | Keyword | Form                            | 
-|:-----------|:--------|:--------------------------------|
-| Qubit      | `qubit` | qubit VARIABLE_NAME             | 
-| QubitArray | `qubit` | qubit[ARRAY_SIZE] VARIABLE_NAME | 
-| Bit        | `bit`   | bit VARIABLE_NAME               | 
-| BitArray   | `bit`   | bit[ARRAY_SIZE] VARIABLE_NAME   | 
+| Type       | Keyword     | Form                                   | 
+|:-----------|:------------|:---------------------------------------|
+| Qubit      | **`qubit`** | **`qubit`** _identifier_               | 
+| QubitArray | **`qubit`** | **`qubit[`**_size_**`] `**_identifier_ | 
+| Bit        | **`bit`**   | **`bit`** _identifier_                 | 
+| BitArray   | **`bit`**   | **`qubit[`**_size_**`] `**_identifier_ | 
 
 !!! note
 
-    Type keywords are [reserved](tokens/keywords.md) and, therefore, cannot be used as [identifiers](tokens/identifiers.md).
+    Type keywords are [reserved](tokens/keywords.md) and, therefore,
+    cannot be used as [identifiers](tokens/identifiers.md).

@@ -4,9 +4,9 @@ _e.g._, as the name of the (qu)bit register.
 
 The table below lists the reserved keywords in cQASM:
 
-| Keyword        | Use                     |
-|:---------------|:------------------------|
-| __`version`__  | Version statement       |
-| __`qubit`__    | Qubit type              |
-| __`bit`__      | Bit type                |
-| __`measure`__  | Measurement instruction |
+| Keyword        | Use                 |
+|:---------------|:--------------------|
+| __`version`__  | Version statement   |
+| __`qubit`__    | Qubit type          |
+| __`bit`__      | Bit type            |
+| __`measure`__  | Measure instruction |    

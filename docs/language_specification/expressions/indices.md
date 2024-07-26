@@ -1,7 +1,7 @@
 An index is a reference to one or more positions within a register. The first position of a register is 0.
 Positions are expressed as a list of comma-separated entries. Each entry can be a single integer or a range.
 A range is written as two integers separated by a colon, pointing to a first and to a last element within a register.
-The last position is also part of the range, i.e., it doesn't point to the first element out of the range.
+The last position is also part of the range, _i.e._, it does not point to the first element out of the range.
 
 !!! info "Grammar for indices"
 

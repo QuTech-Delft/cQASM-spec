@@ -10,7 +10,7 @@ nav:
     - Context: ./introduction/context.md
     - Acknowledgements: ./introduction/acknowledgements.md
   - Language specification:
-    - General: ./language_specification/general.md
+    - General overview: ./language_specification/general_overview.md
     - Tokens:
       - Whitespace and comments: ./language_specification/tokens/whitespace_and_comments.md
       - Newlines: ./language_specification/tokens/newlines.md
@@ -23,14 +23,12 @@ nav:
       - Qubit (register) declaration: ./language_specification/statements/qubit_register_declaration.md
       - Bit (register) declaration: ./language_specification/statements/bit_register_declaration.md
       - Gates: ./language_specification/statements/gates.md
-      - Measure statement: ./language_specification/statements/measure_statement.md
+      - Measurement statement: ./language_specification/statements/measurement_statement.md
     - Types: ./language_specification/types.md
     - Expressions:
       - Indices: ./language_specification/expressions/indices.md
       - Predefined constants: ./language_specification/expressions/predefined_constants.md
       - Built-in functions: ./language_specification/expressions/builtin_functions.md
-    - Case sensitivity: ./language_specification/case_sensitivity.md
-    - About the grammar sections: ./language_specification/about_the_grammar_sections.md
   - Appendices:
       - Spin-2: appendices/spin.md
 

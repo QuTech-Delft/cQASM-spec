@@ -2,7 +2,7 @@ In general, cQASM is not whitespace-sensitive, apart from newlines.
 Spaces and tabs can be placed in between tokens.
 
 Comments can be written as single-line comments or as multi-line comments within a comment block.
-Only comments can appear before the [`version` statement](../statements/version_statement.md).
+Only comments can appear before the [version statement](../statements/version_statement.md).
 Whitespace before a single-line or multi-line comment is permitted.
 
 ## Single-line comment
@@ -12,11 +12,12 @@ equal to the syntax of C-like languages.
 
 The general form of single-line comments is as follows
 
-```
-// <single-line-comment>
-<statement>
-<statement>  // <single-line-comment>
-```
+!!! info ""
+
+    &emsp;**`//`** _single-line-comment_  
+    &emsp;_statement_  
+    &emsp;_statement_  **`//`** _single-line-comment_
+
 
 !!! example
 
@@ -33,12 +34,14 @@ A comment block starts with the combination of a forward slash and an asterisk `
 
 The general structure of a multi-line comment is given by
 
-```
-/* <multi-line
-comment-block> */
-<statement>  /* <multi-line
-comment-block> */ <statement>
-```
+!!! info ""
+
+    &emsp;**`/*`** _multi-line_  
+    &emsp;_comment-block_ **`*/`**  
+
+    &emsp;_statement_  **`/*`** _multi-line_  
+    &emsp;_comment-block_ **`*/`** _statement_
+
 
 An example of multi-line commenting is given by the following:
 

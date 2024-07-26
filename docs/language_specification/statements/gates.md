@@ -1,25 +1,29 @@
 Gates define single-qubit or multi-qubit unitary operations
 that change the state of a qubit register in a deterministic fashion.
 In essence, a quantum algorithm consists of a sequence of gates and non-unitary quantum statements,
-_e.g._, the [measurement statement](measure_statement.md).
+_e.g._, the [measurement statement](measurement_statement.md).
 The general form of a gate statement is given by the gate name
-followed by the (comma-separated list of) qubit operand(s), _e.g._, `X q[0]`:
+followed by the (comma-separated list of) qubit operand(s), _e.g._, **`X q[0]`**:
 
-`gate qubit-arguments`
+!!! info ""
+    
+    &emsp;_gate qubit-arguments_
 
 Parameterized unitary operations are represented by parameterized gates.
 The general form of a parameterized gate instruction statement is given by the gate name
 followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses,
-which in turn is followed by the (comma-separated list of) qubit operand(s), _e.g._ `CRk(2) q[0], q[1]`:
+which in turn is followed by the (comma-separated list of) qubit operand(s), _e.g._, **`CRk(2) q[0], q[1]`**:
 
-`gate(parameters) qubit-arguments`
+!!! info ""
+    
+    &emsp;_gate_**`(`**_parameters_**`)`**_ qubit-arguments_
 
 Note that the parameters, either single or a list of multiple parameters,
 appear within parentheses directly following the gate name.
 We distinguish between the _parameters_ of a parameterized gate, in terms of number [literals](../tokens/literals.md),
-and the _qubit arguments_ a (parameterized) gate instruction acts on.
+and the _qubit arguments_ that a (parameterized) gate acts on.
 
-!!! info "Grammar for gates"
+??? info "Grammar for gates"
     
     _gate_:  
     &emsp; _identifier_ _parameters_~opt~ _qubit-arguments_
@@ -70,7 +74,8 @@ A few examples of gate instruction statements are shown below.
     CRk(2) q[1], q[0]
     ```
 
-The gates that are supported by the language are listed below in the [standard gate set](gates.md#standard-gate-set).
+The gates that are supported by the cQASM language
+are listed below in the [standard gate set](gates.md#standard-gate-set).
 
 ## Single-gate-multi-qubit (SGMQ) notation
 
@@ -81,22 +86,25 @@ The single-qubit gate will then be applied to each qubit, respectively.
 !!! note
 
     SGMQ notation does not imply that the gates are, necessarily, executed in parallel on the target device. 
-    SGMQ notation is nothing other than _syntactic sugar_, whereby a series of instruction statements can be written as one.
-    Moreover, SGMQ notation should not be confused with multiple-qubit gates, _e.g._, `X q[0,1]` means `X q[0]; X q[1]`,
-    and does not represent the 2-qubit gate statement `XX q[0], q[1]`.
-    Note that the latter 2-qubit gate `XX` is currently not supported by the cQASM language,
+    SGMQ notation is nothing other than _syntactic sugar_,
+    whereby a series of instruction statements can be written as one.
+    Moreover, SGMQ notation should not be confused with multiple-qubit gates, _e.g._, 
+    **`X q[0,1]`** means **`X q[0]; X q[1]`**,
+    and does not represent the 2-qubit gate statement **`XX q[0], q[1]`**.
+    Note that the latter 2-qubit gate **`XX`** is currently not supported by the cQASM language,
     see the [standard gate set](gates.md#standard-gate-set) below.
 
-If the name of the qubit register is `q`, then the following can be passed as an argument to the single-qubit gate:
+If the name of the qubit register is **`q`**,
+then the following can be passed as an argument to the single-qubit gate:
 
-- the whole qubit register `q`;
+- the whole qubit register **`q`**;
 
-- a slice thereof `q[i:j]`, where $0 \leq i < j < N$;
+- a slice thereof **`q[i:j]`**, where $0 \leq i < j < N$;
 
-- or a list of indices can be passed `q[i,]`, where $0 \leq i < N$,
+- or a list of indices can be passed **`q[i,]`**, where $0 \leq i < N$,
 
 with $N$ the size of the qubit register.
-The following slicing convention is adopted: a slice `q[i:j]` includes qubits `q[i]`, `q[j]`,
+The following slicing convention is adopted: a slice **`q[i:j]`** includes qubits **`q[i]`**, **`q[j]`**,
 and all qubits in between. The code block below demonstrates some examples.
 
 !!! example
@@ -128,29 +136,29 @@ and all qubits in between. The code block below demonstrates some examples.
         X q[0]; X q[2]; X q[4] 
         ```
 
-In the above examples we have used the semicolon `;` to separate statements occurring on the same line.
+In the above examples we have used the semicolon **`;`** to separate statements occurring on the same line.
 
 ## Standard gate set
 
-| Name | Description                              | Example of use      |
-|------|------------------------------------------|---------------------|
-| I    | Identity gate                            | `I q[0]`            |
-| H    | Hadamard gate                            | `H q[0]`            |
-| X    | Pauli-X                                  | `X q[0]`            |
-| X90  | Rotation around the _x_-axis of $\pi/2$  | `X90 q[0]`          |
-| mX90 | Rotation around the _x_-axis of $-\pi/2$ | `mX90 q[0]`         |
-| Y    | Pauli-Y                                  | `Y q[0]`            |
-| Y90  | Rotation around the _y_-axis of $\pi/2$  | `Y90 q[0]`          |
-| mY90 | Rotation around the _y_-axis of $-\pi/2$ | `mY90 q[0]`         |
-| Z    | Pauli-Z                                  | `Z q[0]`            |
-| S    | Phase gate                               | `S q[0]`            |
-| Sdag | S dagger gate                            | `Sdag q[0]`         |
-| T    | T                                        | `T q[0]`            |
-| Tdag | T dagger gate                            | `Tdag q[0]`         |
-| Rx   | Arbitrary rotation around _x_-axis       | `Rx(pi) q[0]`       |
-| Ry   | Arbitrary rotation around _y_-axis       | `Ry(pi) q[0]`       |
-| Rz   | Arbitrary rotation around _z_-axis       | `Rz(pi) q[0]`       |
-| CNOT | Controlled-NOT gate                      | `CNOT q[0], q[1]`   |
-| CZ   | Controlled-Z, Controlled-Phase           | `CZ q[0], q[1]`     |
-| CR   | Controlled phase shift (arbitrary angle) | `CR(pi) q[0], q[1]` |
-| CRk  | Controlled phase shift ($\pi/2^k$)       | `CRk(2) q[0], q[1]` |
+| Name | Description                              | Example of use          |
+|------|------------------------------------------|-------------------------|
+| I    | Identity gate                            | **`I q[0]`**            |
+| H    | Hadamard gate                            | **`H q[0]`**            |
+| X    | Pauli-X                                  | **`X q[0]`**            |
+| X90  | Rotation around the _x_-axis of $\pi/2$  | **`X90 q[0]`**          |
+| mX90 | Rotation around the _x_-axis of $-\pi/2$ | **`mX90 q[0]`**         |
+| Y    | Pauli-Y                                  | **`Y q[0]`**            |
+| Y90  | Rotation around the _y_-axis of $\pi/2$  | **`Y90 q[0]`**          |
+| mY90 | Rotation around the _y_-axis of $-\pi/2$ | **`mY90 q[0]`**         |
+| Z    | Pauli-Z                                  | **`Z q[0]`**            |
+| S    | Phase gate                               | **`S q[0]`**            |
+| Sdag | S dagger gate                            | **`Sdag q[0]`**         |
+| T    | T                                        | **`T q[0]`**            |
+| Tdag | T dagger gate                            | **`Tdag q[0]`**         |
+| Rx   | Arbitrary rotation around _x_-axis       | **`Rx(pi) q[0]`**       |
+| Ry   | Arbitrary rotation around _y_-axis       | **`Ry(pi) q[0]`**       |
+| Rz   | Arbitrary rotation around _z_-axis       | **`Rz(pi) q[0]`**       |
+| CNOT | Controlled-NOT gate                      | **`CNOT q[0], q[1]`**   |
+| CZ   | Controlled-Z, Controlled-Phase           | **`CZ q[0], q[1]`**     |
+| CR   | Controlled phase shift (arbitrary angle) | **`CR(pi) q[0], q[1]`** |
+| CRk  | Controlled phase shift ($\pi/2^k$)       | **`CRk(2) q[0], q[1]`** |

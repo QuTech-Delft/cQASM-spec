@@ -1,6 +1,8 @@
 The general form of a measurement statement is as follows:
 
-`bit-argument = measure qubit-argument`
+!!! info ""
+
+    &emsp;_bit-argument_ **`= measure`** _qubit-argument_
 
 ??? info "Grammar for measure statement"
     
