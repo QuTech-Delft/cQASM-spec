@@ -28,5 +28,6 @@ jobs:
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git fetch origin gh-pages:gh-pages
           mike deploy --push --deploy-prefix "public" latest
           mike set-default --push --deploy-prefix "public" latest
