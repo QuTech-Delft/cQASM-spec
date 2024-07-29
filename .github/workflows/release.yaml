@@ -26,5 +26,5 @@ jobs:
 
       - name: Build MkDocs
         run: |
-          mike deploy --push --deploy-prefix "public" ${VERSION_NAME}
+          mike deploy --push --deploy-prefix "public" latest
           mike set-default --push --deploy-prefix "public" latest
