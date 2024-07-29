@@ -24,10 +24,25 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Build MkDocs
+      - name: Configure Git
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
           git fetch origin gh-pages:gh-pages
-          mike deploy --push latest
+
+      - name: Dry run
+        if: github.event_name == 'pull_request'
+        run: |  
+            mkdocs build
+
+      - name: Upload and tag as latest
+        if: github.ref == 'refs/heads/${{ github.event.repository.default_branch }}'
+        run: |  
+            mike deploy --push latest
+            mike set-default --push latest
+
+      - name: Upload and tag as git tag
+        if: startsWith(github.head_ref, 'releases/')
+        run: |  
+          mike deploy --push ${{ github.ref }}
           mike set-default --push latest
