@@ -3,14 +3,13 @@ name: Publish MkDocs
 on:
   push:
     branches:
-      - master
       - '*'
-  workflow_dispatch:
+  pull_request:
 
 jobs:
   build:
+    name: Publish documentation
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
