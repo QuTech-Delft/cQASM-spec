@@ -3,7 +3,8 @@ The cQASM language specification consists of a description of its [Tokens](gener
 and [Expressions](general_overview.md#expressions).
 Additional information is provided on the [case sensitivity](general_overview.md#case-sensitivity) of the language,
 the preferred [file extension](general_overview.md#file-extension) of a cQASM program,
-and a brief explanation on how to interpret the [grammar sections](general_overview.md#about-the-grammar-sections).
+and a brief explanation on how to interpret the [grammar sections](general_overview.md#about-the-grammar-sections)
+of this specification.
 
 ## Tokens
 
@@ -47,7 +48,7 @@ A cQASM program consists of a sequence of statements:
         H q[0]
         CNOT q[0], q[1]
         
-        // Measure statement
+        // Measurement statement
         b[0, 1] = measure q[0, 1]
         ```
 
@@ -82,9 +83,10 @@ The following lines of code are all semantically distinct
     ```
 
 In the first line of the example above,
-the Hadamard gate `H` is applied to the qubit at index `0` of the qubit register `q`.
-The next line starts with an undefined gate `h` that operates on the qubit at index `0` of the qubit register `Q`,
-which in turn does _not_ refer to the qubit register `q`.
+the Hadamard gate **`H`** is applied to the qubit at index **`0`** of the qubit register **`q`**.
+The next line starts with an undefined gate **`h`** 
+that operates on the qubit at index **`0`** of the qubit register **`Q`**,
+which in turn does _not_ refer to the qubit register **`q`**.
 
 Take care that case sensitivity not only applies to [identifiers](tokens/identifiers.md),
 but also to all other lexical components of the language,

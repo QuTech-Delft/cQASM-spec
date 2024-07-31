@@ -1,6 +1,7 @@
 Gates define single-qubit or multi-qubit unitary operations
 that change the state of a qubit register in a deterministic fashion.
-In essence, a quantum algorithm consists of a sequence of gates and non-unitary quantum statements,
+In essence, a quantum algorithm is a sequence of gates
+and non-unitary quantum instructions applied to qubit arguments,
 _e.g._, the [measurement statement](measurement_statement.md).
 The general form of a gate statement is given by the gate name
 followed by the (comma-separated list of) qubit operand(s), _e.g._, **`X q[0]`**:
@@ -10,7 +11,7 @@ followed by the (comma-separated list of) qubit operand(s), _e.g._, **`X q[0]`**
     &emsp;_gate qubit-arguments_
 
 Parameterized unitary operations are represented by parameterized gates.
-The general form of a parameterized gate instruction statement is given by the gate name
+The general form of a parameterized gate statement is given by the gate name
 followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses,
 which in turn is followed by the (comma-separated list of) qubit operand(s), _e.g._, **`CRk(2) q[0], q[1]`**:
 
@@ -20,7 +21,8 @@ which in turn is followed by the (comma-separated list of) qubit operand(s), _e.
 
 Note that the parameters, either single or a list of multiple parameters,
 appear within parentheses directly following the gate name.
-We distinguish between the _parameters_ of a parameterized gate, in terms of number [literals](../tokens/literals.md),
+We distinguish between the _parameters_ of a parameterized gate,
+in terms of number [literals](../tokens/literals.md),
 and the _qubit arguments_ that a (parameterized) gate acts on.
 
 ??? info "Grammar for gates"
@@ -56,7 +58,7 @@ and the _qubit arguments_ that a (parameterized) gate acts on.
     _qubit-index_:  
     &emsp; _index_
 
-A few examples of gate instruction statements are shown below.
+A few examples of gate statements are shown below.
 
 !!! example ""
 
@@ -75,7 +77,7 @@ A few examples of gate instruction statements are shown below.
     ```
 
 The gates that are supported by the cQASM language
-are listed below in the [standard gate set](gates.md#standard-gate-set).
+are listed in the [standard gate set](gates.md#standard-gate-set).
 
 ## Single-gate-multi-qubit (SGMQ) notation
 
@@ -140,7 +142,7 @@ In the above examples we have used the semicolon **`;`** to separate statements 
 
 ## Standard gate set
 
-| Name | Description                              | Example of use          |
+| Name | Description                              | Example statement       |
 |------|------------------------------------------|-------------------------|
 | I    | Identity gate                            | **`I q[0]`**            |
 | H    | Hadamard gate                            | **`H q[0]`**            |

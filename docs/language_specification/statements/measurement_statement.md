@@ -1,3 +1,6 @@
+A measurement statement consists of the application of
+the **`measure`** instruction to its qubit argument and
+the assignment of the resulting measurement outcome to a bit variable.
 The general form of a measurement statement is as follows:
 
 !!! info ""
@@ -27,13 +30,13 @@ The general form of a measurement statement is as follows:
     &emsp; _identifier_
 
     _qubit-index_:  
-    &emsp; _index_  
+    &emsp; _index_
 
 !!! example
     
     === "Measurement of a single qubit"
     
-        ```hl_lines="3"
+        ```linenums="1", hl_lines="3"
         qubit q
         bit b
         b = measure q
@@ -41,7 +44,7 @@ The general form of a measurement statement is as follows:
     
     === "Measurement of multiple qubits through their register index"
     
-        ```hl_lines="3"
+        ```linenums="1", hl_lines="3"
         qubit[5] qreg
         bit[2] breg
         breg[0, 1] = measure qreg[2, 4]
@@ -51,7 +54,7 @@ The general form of a measurement statement is as follows:
 
     The measure instruction accepts [SGMQ notation](gates.md#single-gate-multi-qubit-sgmq-notation), similar to gates.
 
-The following code snippet shows how the measure instruction might be used in context
+The following code snippet shows how the measure statement might be used in context
 
 ```linenums="1" hl_lines="9"
 version 3.0
