@@ -1,9 +1,6 @@
 Gates define single-qubit or multi-qubit unitary operations
 that change the state of a qubit register in a deterministic fashion.
-In essence, a quantum algorithm is a sequence of gates
-and non-unitary quantum instructions applied to qubit arguments,
-_e.g._, the [measurement statement](measurement_statement.md).
-The general form of a gate statement is given by the gate name
+The general form of a gate is given by the gate name
 followed by the (comma-separated list of) qubit operand(s), _e.g._, **`X q[0]`**:
 
 !!! info ""
@@ -11,7 +8,7 @@ followed by the (comma-separated list of) qubit operand(s), _e.g._, **`X q[0]`**
     &emsp;_gate qubit-arguments_
 
 Parameterized unitary operations are represented by parameterized gates.
-The general form of a parameterized gate statement is given by the gate name
+The general form of a parameterized gate is given by the gate name
 followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses,
 which in turn is followed by the (comma-separated list of) qubit operand(s), _e.g._, **`CRk(2) q[0], q[1]`**:
 
@@ -58,7 +55,7 @@ and the _qubit arguments_ that a (parameterized) gate acts on.
     _qubit-index_:  
     &emsp; _index_
 
-A few examples of gate statements are shown below.
+A few examples of gates are shown below.
 
 !!! example ""
 
@@ -92,7 +89,7 @@ The single-qubit gate will then be applied to each qubit, respectively.
     whereby a series of instruction statements can be written as one.
     Moreover, SGMQ notation should not be confused with multiple-qubit gates, _e.g._, 
     **`X q[0,1]`** means **`X q[0]; X q[1]`**,
-    and does not represent the 2-qubit gate statement **`XX q[0], q[1]`**.
+    and does not represent the 2-qubit gate **`XX q[0], q[1]`**.
     Note that the latter 2-qubit gate **`XX`** is currently not supported by the cQASM language,
     see the [standard gate set](gates.md#standard-gate-set) below.
 

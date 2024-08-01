@@ -1,16 +1,15 @@
-A measurement statement consists of the application of
-the **`measure`** instruction to its qubit argument and
-the assignment of the resulting measurement outcome to a bit variable.
-The general form of a measurement statement is as follows:
+A **`measure`** instruction performs a measurement to its qubit argument and
+assigns the outcome to a bit variable.
+The general form of a measure instruction is as follows:
 
 !!! info ""
 
-    &emsp;_bit-argument_ **`= measure`** _qubit-argument_
+    &emsp;_bit-argument_ **`=`** **`measure`** _qubit-argument_
 
-??? info "Grammar for measure statement"
+??? info "Grammar for measure instruction"
     
     _measure_:  
-    &emsp; _bit-argument_ __`= measure`__ _qubit-argument_
+    &emsp; _bit-argument_ __`=`__ __`measure`__ _qubit-argument_
 
     _bit-argument_:  
     &emsp; _bit-variable_  
@@ -54,7 +53,7 @@ The general form of a measurement statement is as follows:
 
     The measure instruction accepts [SGMQ notation](gates.md#single-gate-multi-qubit-sgmq-notation), similar to gates.
 
-The following code snippet shows how the measure statement might be used in context
+The following code snippet shows how the measure instruction might be used in context
 
 ```linenums="1" hl_lines="9"
 version 3.0

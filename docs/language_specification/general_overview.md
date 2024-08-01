@@ -20,13 +20,17 @@ A cQASM program can contain the following types of tokens:
 
 ## Statements
 
-A cQASM program consists of a sequence of statements:
+A cQASM program consists of a sequence of *statements*.
+Among those, a quantum algorithm is in essence a sequence of *instructions*:
+*gates* and non-unitary quantum operations applied to qubit arguments
+(_e.g._, the [*measure instruction*](measure_instruction.md)).
+
 
 - [Version statement](statements/version_statement.md) (_mandatory_)
 - [Qubit (register) declaration](statements/qubit_register_declaration.md)
 - [Bit (register) declaration](statements/bit_register_declaration.md)
 - [Gates](statements/gates.md)
-- [Measurement statement](statements/measurement_statement.md)
+- [Measure instruction](statements/measure_instruction.md)
 
 !!! example ""
 

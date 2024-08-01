@@ -23,7 +23,7 @@ The name of the bit (register) is defined through an [identifier](../tokens/iden
 
 The declaration of a bit (register) is _optional_,
 Nevertheless, since measurement outcomes are stored as bits,
-[measurement statements](measurement_statement.md) require a previously declared bit (register).
+[measure instructions](measure_instructions.md) require a previously declared bit (register).
 
 Find below examples, respectively, of a single bit declaration and bit register declaration.
 
