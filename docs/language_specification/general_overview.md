@@ -31,6 +31,7 @@ Among those, a quantum algorithm is in essence a sequence of *instructions*:
 - [Bit (register) declaration](statements/bit_register_declaration.md)
 - [Gates](statements/gates.md)
 - [Measure instruction](statements/measure_instruction.md)
+- [Reset instruction](statements/reset_instruction.md)
 
 !!! example ""
 
