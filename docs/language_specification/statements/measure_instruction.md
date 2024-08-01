@@ -44,16 +44,16 @@ The general form of a measure instruction is as follows:
     === "Measurement of multiple qubits through their register index"
     
         ```linenums="1", hl_lines="3"
-        qubit[5] qreg
-        bit[2] breg
-        breg[0, 1] = measure qreg[2, 4]
+        qubit[5] q
+        bit[2] b
+        b[0, 1] = measure q[2, 4]
         ```
 
 !!! note
 
     The measure instruction accepts [SGMQ notation](gates.md#single-gate-multi-qubit-sgmq-notation), similar to gates.
 
-The following code snippet shows how the measure instruction might be used in context
+The following code snippet shows how the measure instruction might be used in context.
 
 ```linenums="1" hl_lines="9"
 version 3.0
