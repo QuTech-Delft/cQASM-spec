@@ -1,0 +1,51 @@
+name: Publish MkDocs
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    name: Publish documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git fetch origin gh-pages:gh-pages
+
+      - name: Dry run
+        if: github.event_name == 'pull_request'
+        run: |  
+            mkdocs build
+
+      - name: Upload and tag as latest
+        if: github.ref == 'master'
+        run: |  
+            mike deploy --push latest
+            mike set-default --push latest
+
+      - name: Upload and tag as git tag
+        if: startsWith(github.head_ref, 'releases/')
+        run: |  
+          mike deploy --push ${{ github.ref }}
+          mike set-default --push latest
