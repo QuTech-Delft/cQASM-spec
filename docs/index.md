@@ -1,5 +1,5 @@
-This document describes the language specification of the cQASM quantum programming language, version 3.0-beta1.
-cQASM stands for common Quantum ASseMbly language.
+This documentation describes the language specification of the cQASM quantum programming language, version 3.0-beta1.
+cQASM stands for common Quantum ASseMbly language, and is pronounced _c-kazem_.
 
 cQASM 3.0-beta1 supersedes the [cQASM 1.[012] languages](https://libqasm.readthedocs.io/en/latest/) and [cQASM 2.0 language specification](https://github.com/QuTech-Delft/cQASM-spec/tree/2.0-draft-2), the latter of which remains incomplete.
 
