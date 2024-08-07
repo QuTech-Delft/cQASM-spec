@@ -1,0 +1,1 @@
+The update of cQASM was motivated by, and developed within the context of, the overhaul of [Quantum Inspire](https://www.quantum-inspire.com/).

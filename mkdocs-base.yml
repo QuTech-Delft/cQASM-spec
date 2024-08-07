@@ -1,11 +1,34 @@
 site_name: cQASM specification
 site_dir: public
-repo_url: https://gitub.com/qutech-delft/cqasm-spec
+repo_url: https://github.com/qutech-delft/cqasm-spec
 use_directory_urls: false
 
 nav:
-  - Home:
-      - index.md
+  - Introduction:
+    - Home: ./index.md
+    - History: ./introduction/history.md
+    - Context: ./introduction/context.md
+    - Acknowledgements: ./introduction/acknowledgements.md
+  - Language specification:
+    - General overview: ./language_specification/general_overview.md
+    - Tokens:
+      - Whitespace and comments: ./language_specification/tokens/whitespace_and_comments.md
+      - Newlines: ./language_specification/tokens/newlines.md
+      - Literals: ./language_specification/tokens/literals.md
+      - Identifiers: ./language_specification/tokens/identifiers.md
+      - Keywords: ./language_specification/tokens/keywords.md
+      - Operators and punctuators: ./language_specification/tokens/operators_and_punctuators.md
+    - Statements:
+      - Version statement: ./language_specification/statements/version_statement.md
+      - Qubit (register) declaration: ./language_specification/statements/qubit_register_declaration.md
+      - Bit (register) declaration: ./language_specification/statements/bit_register_declaration.md
+      - Gates: ./language_specification/statements/gates.md
+      - Measure instruction: ./language_specification/statements/measure_instruction.md
+    - Types: ./language_specification/types.md
+    - Expressions:
+      - Indices: ./language_specification/expressions/indices.md
+      - Predefined constants: ./language_specification/expressions/predefined_constants.md
+      - Built-in functions: ./language_specification/expressions/builtin_functions.md
   - Appendices:
       - Spin-2: appendices/spin.md
 
@@ -15,6 +38,7 @@ theme:
     - navigation.indexes
     - navigation.tabs
     - navigation.tracking
+    - navigation.footer
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
@@ -41,6 +65,8 @@ markdown_extensions:
   - def_list
   - footnotes
   - md_in_html
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.caret
   - pymdownx.critic
   - pymdownx.details
@@ -60,6 +86,11 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tilde
   - tables
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 plugins:
   - glightbox
