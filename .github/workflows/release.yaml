@@ -39,7 +39,8 @@ jobs:
             mkdocs build
 
       - name: Upload and tag as latest
-        if: github.ref == 'master'
+      
+        if: github.ref == 'refs/heads/master'
         run: |  
             mike deploy --push latest
             mike set-default --push latest
