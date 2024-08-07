@@ -23,7 +23,7 @@ nav:
       - Qubit (register) declaration: ./language_specification/statements/qubit_register_declaration.md
       - Bit (register) declaration: ./language_specification/statements/bit_register_declaration.md
       - Gates: ./language_specification/statements/gates.md
-      - Measurement statement: ./language_specification/statements/measurement_statement.md
+      - Measure instruction: ./language_specification/statements/measure_instruction.md
     - Types: ./language_specification/types.md
     - Expressions:
       - Indices: ./language_specification/expressions/indices.md

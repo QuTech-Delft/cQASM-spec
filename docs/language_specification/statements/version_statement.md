@@ -9,7 +9,7 @@ It has the following general form:
 ??? info "Grammar for version statement"
 
     _version_:  
-    &emsp; _major-version_ _minor-version-suffix_~opt~
+    &emsp;**`version`** _major-version_ _minor-version-suffix_~opt~
 
     _major-version_:  
     &emsp; _digit-sequence_
