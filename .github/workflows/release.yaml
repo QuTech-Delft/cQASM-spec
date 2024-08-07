@@ -39,13 +39,13 @@ jobs:
             mkdocs build
 
       - name: Upload and tag as latest
-        if: github.ref == 'master'
+        if: github.ref == 'refs/heads/master'
         run: |  
             mike deploy --push latest
             mike set-default --push latest
 
       - name: Upload and tag as git tag
-        if: startsWith(github.head_ref, 'releases/')
+        if: github.event_name == 'release' && github.event.action == 'created'
         run: |  
           mike deploy --push ${{ github.ref }}
           mike set-default --push latest
