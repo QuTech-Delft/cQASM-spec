@@ -9,25 +9,25 @@
       
       
       
-        <link rel="prev" href="builtin_functions.html">
+        <link rel="prev" href="../introduction/acknowledgements.html">
       
       
-        <link rel="next" href="../../appendices/spin.html">
+        <link rel="next" href="tokens/whitespace_and_comments.html">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.22">
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
     
     
       
-        <title>Operators - cQASM specification</title>
+        <title>General overview - cQASM specification</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.732c4fb1.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.3cba04c6.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,14 +46,14 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
     
-   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -62,7 +62,7 @@
     .gdesc-inner { font-size: 0.75rem; }
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -80,6 +80,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#tokens" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -94,7 +99,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="cQASM specification" class="md-header__button md-logo" aria-label="cQASM specification" data-md-component="logo">
+    <a href=".." title="cQASM specification" class="md-header__button md-logo" aria-label="cQASM specification" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -114,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Operators
+              General overview
             
           </span>
         </div>
@@ -187,7 +192,7 @@
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -204,7 +209,7 @@
         <a href="https://github.com/qutech-delft/cqasm-spec" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -233,7 +238,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../index.html" class="md-tabs__link">
+        <a href="../index.html" class="md-tabs__link">
           
   
     
@@ -254,16 +259,8 @@
   
     
     
-      
-  
-  
-    
-  
-  
-    
-    
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../structure/general_structure.html" class="md-tabs__link">
+        <a href="general_overview.html" class="md-tabs__link">
           
   
     
@@ -275,9 +272,6 @@
     
   
 
-    
-  
-
       
         
   
@@ -286,7 +280,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../appendices/spin.html" class="md-tabs__link">
+        <a href="../appendices/spin.html" class="md-tabs__link">
           
   
     
@@ -321,7 +315,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="cQASM specification" class="md-nav__button md-logo" aria-label="cQASM specification" data-md-component="logo">
+    <a href=".." title="cQASM specification" class="md-nav__button md-logo" aria-label="cQASM specification" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -334,7 +328,7 @@
       <a href="https://github.com/qutech-delft/cqasm-spec" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -378,7 +372,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../index.html" class="md-nav__link ">
+            <a href="../index.html" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -411,7 +405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../introduction/history.html" class="md-nav__link">
+      <a href="../introduction/history.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -432,7 +426,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../introduction/context.html" class="md-nav__link">
+      <a href="../introduction/context.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -453,7 +447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../introduction/acknowledgements.html" class="md-nav__link">
+      <a href="../introduction/acknowledgements.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -533,182 +527,116 @@
                 
   
   
+    
   
   
-    
-    
+  
+    <li class="md-nav__item md-nav__item--active">
       
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
-        
+        <label class="md-nav__link md-nav__link--active" for="__toc">
           
-          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
-            
   
   <span class="md-ellipsis">
-    Structure
+    General overview
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_1">
-            <span class="md-nav__icon md-icon"></span>
-            Structure
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../structure/general_structure.html" class="md-nav__link">
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="general_overview.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    General structure
+    General overview
   </span>
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../structure/file_extension.html" class="md-nav__link">
+      
         
-  
-  <span class="md-ellipsis">
-    File extension
-  </span>
-  
 
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
   
-    <li class="md-nav__item">
-      <a href="../structure/case_sensitivity.html" class="md-nav__link">
-        
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tokens
+    </span>
+  </a>
   
-  <span class="md-ellipsis">
-    Case sensitivity
-  </span>
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statements
+    </span>
+  </a>
   
-
-      </a>
-    </li>
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types
+    </span>
+  </a>
   
-
-              
-            
-              
-                
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expressions
+    </span>
+  </a>
   
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#case-sensitivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Case sensitivity
+    </span>
+  </a>
   
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      File extension
+    </span>
+  </a>
   
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#about-the-grammar-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      About the grammar sections
+    </span>
+  </a>
   
-    <li class="md-nav__item">
-      <a href="../structure/whitespace_comments.html" class="md-nav__link">
-        
+</li>
+      
+    </ul>
   
-  <span class="md-ellipsis">
-    Whitespace & Comments
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../structure/identifiers.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Identifiers
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../structure/reserved_keywords.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Reserved keywords
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
+</nav>
       
     </li>
   
@@ -723,6 +651,10 @@
   
     
     
+      
+        
+      
+        
       
         
       
@@ -749,7 +681,7 @@
             
   
   <span class="md-ellipsis">
-    Statements
+    Tokens
   </span>
   
 
@@ -759,7 +691,7 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
-            Statements
+            Tokens
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -770,11 +702,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../statements/version_statement.html" class="md-nav__link">
+      <a href="tokens/whitespace_and_comments.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Version statement
+    Whitespace and comments
   </span>
   
 
@@ -791,11 +723,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../statements/qubit_register_declaration_statement.html" class="md-nav__link">
+      <a href="tokens/newlines.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Qubit (register) declaration statement
+    Newlines
   </span>
   
 
@@ -812,11 +744,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../statements/bit_register_declaration_statement.html" class="md-nav__link">
+      <a href="tokens/literals.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Bit (register) declaration statement
+    Literals
   </span>
   
 
@@ -833,11 +765,53 @@
   
   
     <li class="md-nav__item">
-      <a href="../statements/instruction_statement.html" class="md-nav__link">
+      <a href="tokens/identifiers.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Instruction statement
+    Identifiers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tokens/keywords.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Keywords
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tokens/operators_and_punctuators.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Operators and punctuators
   </span>
   
 
@@ -863,6 +837,12 @@
   
     
     
+      
+        
+      
+        
+      
+        
       
         
       
@@ -885,7 +865,7 @@
             
   
   <span class="md-ellipsis">
-    Instructions
+    Statements
   </span>
   
 
@@ -895,7 +875,7 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
-            Instructions
+            Statements
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -906,7 +886,70 @@
   
   
     <li class="md-nav__item">
-      <a href="../instructions/gates.html" class="md-nav__link">
+      <a href="statements/version_statement.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Version statement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="statements/qubit_register_declaration.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Qubit (register) declaration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="statements/bit_register_declaration.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bit (register) declaration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="statements/gates.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -927,11 +970,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../instructions/measure.html" class="md-nav__link">
+      <a href="statements/measure_instruction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Measure
+    Measure instruction
   </span>
   
 
@@ -955,50 +998,8 @@
   
   
   
-    
-    
-      
-        
-      
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    Type system
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4">
-            <span class="md-nav__icon md-icon"></span>
-            Type system
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
-      <a href="../type_system/types.html" class="md-nav__link">
+      <a href="types.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1012,28 +1013,14 @@
 
               
             
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
               
                 
   
   
-    
   
   
-  
     
     
-      
-        
-      
-        
       
         
       
@@ -1047,11 +1034,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
         
           
           <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
@@ -1065,7 +1052,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_5">
             <span class="md-nav__icon md-icon"></span>
             Expressions
@@ -1079,11 +1066,11 @@
   
   
     <li class="md-nav__item">
-      <a href="number_literals.html" class="md-nav__link">
+      <a href="expressions/indices.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Number literals
+    Indices
   </span>
   
 
@@ -1100,28 +1087,7 @@
   
   
     <li class="md-nav__item">
-      <a href="indexing_and_slicing.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Indexing and slicing
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="predefined_constants.html" class="md-nav__link">
+      <a href="expressions/predefined_constants.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1142,7 +1108,7 @@
   
   
     <li class="md-nav__item">
-      <a href="builtin_functions.html" class="md-nav__link">
+      <a href="expressions/builtin_functions.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1151,35 +1117,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="operators.html" class="md-nav__link md-nav__link--active">
-        
-  
-  <span class="md-ellipsis">
-    Operators
-  </span>
-  
-
-      </a>
-      
     </li>
   
 
@@ -1249,7 +1186,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendices/spin.html" class="md-nav__link">
+      <a href="../appendices/spin.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1288,6 +1225,77 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tokens
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expressions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#case-sensitivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Case sensitivity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      File extension
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#about-the-grammar-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      About the grammar sections
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1304,11 +1312,142 @@
   
 
 
-  <h1>Operators</h1>
+  <h1>General overview</h1>
 
-<div class="admonition info">
-<p class="admonition-title">Coming soon</p>
+<p>The cQASM language specification consists of a description of its <a href="general_overview.html#tokens">Tokens</a>,
+<a href="general_overview.html#statements">Statements</a>, <a href="general_overview.html#types">Types</a>,
+and <a href="general_overview.html#expressions">Expressions</a>.
+Additional information is provided on the <a href="general_overview.html#case-sensitivity">case sensitivity</a> of the language,
+the preferred <a href="general_overview.html#file-extension">file extension</a> of a cQASM program,
+and a brief explanation on how to interpret the <a href="general_overview.html#about-the-grammar-sections">grammar sections</a>
+of this specification.</p>
+<h2 id="tokens">Tokens</h2>
+<p>A cQASM program can contain the following types of tokens:</p>
+<ul>
+<li><a href="tokens/newlines.html">Newlines</a></li>
+<li><a href="tokens/literals.html">Literals</a></li>
+<li><a href="tokens/identifiers.html">Identifiers</a></li>
+<li><a href="tokens/keywords.html">Keywords</a></li>
+<li><a href="tokens/operators_and_punctuators.html">Operators and punctuators</a>  </li>
+</ul>
+<p><a href="tokens/whitespace_and_comments.html">Whitespace and comments</a> are ignored except as they serve to separate tokens.</p>
+<h2 id="statements">Statements</h2>
+<p>A cQASM program consists of a sequence of <em>statements</em>.
+Among those, a quantum algorithm is in essence a sequence of <em>instructions</em>:
+<em>gates</em> and non-unitary quantum operations applied to qubit arguments
+(<em>e.g.</em>, the <a href="measure_instruction.md"><em>measure instruction</em></a>).</p>
+<ul>
+<li><a href="statements/version_statement.html">Version statement</a> (<em>mandatory</em>)</li>
+<li><a href="statements/qubit_register_declaration.html">Qubit (register) declaration</a></li>
+<li><a href="statements/bit_register_declaration.html">Bit (register) declaration</a></li>
+<li><a href="statements/gates.html">Gates</a></li>
+<li><a href="statements/measure_instruction.html">Measure instruction</a></li>
+</ul>
+<div class="admonition example">
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Example cQASM program</label><label for="__tabbed_1_2">Smallest valid cQASM program</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>// Example program according to the cQASM language specification
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>// Version statement
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>version 3.0
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>// Qubit register declaration
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>qubit[2] q
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>// Bit register declaration
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>bit[2] b
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>// Gates
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>H q[0]
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>CNOT q[0], q[1]
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a>// Measurement statement
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a>b[0, 1] = measure q[0, 1]
+</code></pre></div></td></tr></table></div>
 </div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>version 3
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+</div>
+<h2 id="types">Types</h2>
+<p>The set of types supported by cQASM can be found in the section <a href="types.html">Types</a>. </p>
+<h2 id="expressions">Expressions</h2>
+<p>The following expressions can appear in a statement:</p>
+<ul>
+<li><a href="expressions/indices.html">Indices</a></li>
+<li><a href="expressions/predefined_constants.html">Predefined constants</a></li>
+<li><a href="expressions/builtin_functions.html">Built-in functions</a></li>
+</ul>
+<h2 id="case-sensitivity">Case sensitivity</h2>
+<p>cQASM is now a case-sensitive language, in contrast to previous versions. 
+The following lines of code are all semantically distinct</p>
+<div class="admonition example">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>H q[0]
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>h Q[0]
+</code></pre></div>
+</div>
+<p>In the first line of the example above,
+the Hadamard gate <strong><code>H</code></strong> is applied to the qubit at index <strong><code>0</code></strong> of the qubit register <strong><code>q</code></strong>.
+The next line starts with an undefined gate <strong><code>h</code></strong> 
+that operates on the qubit at index <strong><code>0</code></strong> of the qubit register <strong><code>Q</code></strong>,
+which in turn does <em>not</em> refer to the qubit register <strong><code>q</code></strong>.</p>
+<p>Take care that case sensitivity not only applies to <a href="tokens/identifiers.html">identifiers</a>,
+but also to all other lexical components of the language,
+like <a href="tokens/keywords.html">keywords</a>, <a href="types.html">types</a>,
+<a href="expressions/predefined_constants.html">predefined constants</a>,
+and <a href="expressions/builtin_functions.html">built-in functions</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Gate names are identifiers and are therefore case-sensitive.
+The syntax of the gates defined in cQASM are listed in the <a href="statements/gates.html#standard-gate-set">cQASM standard gate set</a>.
+Even though it is common practice to write variable names or function identifiers in lowercase,
+we choose to define the gate names in the predefined cQASM standard gate set in UPPERCASE or CamelCase,
+as this is more in line with how these gates are represented in the field of quantum information processing (QIP). </p>
+</div>
+<h2 id="file-extension">File extension</h2>
+<p>The preferred file extension for a cQASM file is <code>*.cq</code>.</p>
+<h2 id="about-the-grammar-sections"><em>About the grammar sections</em></h2>
+<p>In the notation and grammar descriptions appearing throughout this language specification, 
+syntactic categories are indicated by <em>italic</em> type,
+and literal words and characters in <strong><code>bold constant width</code></strong> type.
+Alternatives are listed on separate lines except in a few cases
+where a long set of alternatives is presented on one line, with the quantifiers 'one of', 'through', or 'or'.
+For example,</p>
+<div class="admonition info">
+<p>&emsp;one of <strong><code>a</code></strong> through <strong><code>z</code></strong> or <strong><code>A</code></strong> through <strong><code>Z</code></strong></p>
+</div>
+<p>indicates any lowercase or uppercase alphabetic character.</p>
+<p>An optional terminal or non-terminal symbol is indicated by the subscript <sub>opt</sub>, so</p>
+<div class="admonition info">
+<p>&emsp;<strong><code>{</code></strong> <em>expression</em><sub>opt</sub><strong><code>}</code></strong></p>
+</div>
+<p>indicates an optional expression enclosed in curly braces.</p>
+<p>Names for syntactic categories have generally been chosen according to the following rules:</p>
+<ul>
+<li><em>X-sequence</em> is one or more <em>X</em>’s without intervening delimiters, <em>e.g.</em>, <em>digit-sequence</em> is a sequence of digits.</li>
+<li><em>X-list</em> is one or more <em>X</em>’s separated by intervening commas, <em>e.g.</em>, <em>index-list</em> is a sequence of 
+indices separated by commas.</li>
+</ul>
 
 
 
@@ -1338,7 +1477,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="builtin_functions.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Built-in functions">
+          <a href="../introduction/acknowledgements.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Acknowledgements">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1348,20 +1487,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Built-in functions
+                Acknowledgements
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../appendices/spin.html" class="md-footer__link md-footer__link--next" aria-label="Next: Spin-2">
+          <a href="tokens/whitespace_and_comments.html" class="md-footer__link md-footer__link--next" aria-label="Next: Whitespace and comments">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Spin-2
+                Whitespace and comments
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1395,12 +1534,12 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes", "navigation.tabs", "navigation.tracking", "navigation.footer"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.tabs", "navigation.tracking", "navigation.footer"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.5cfa9459.min.js"></script>
+      <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
       
-        <script src="../../javascripts/mathjax.js"></script>
+        <script src="../javascripts/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
