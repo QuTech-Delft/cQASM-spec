@@ -2,11 +2,52 @@
 
 This repository contains the specification documents of the cQASM quantum programming language. 
 
-_The specification hosted through GitHub Pages under the following link:_ 
+## Documentation
 
-### [<img src="./docs/_static/book.svg"> cQASM language specification](https://qutech-delft.github.io/cQASM-spec/) 
+The cQASM language specification documentation is hosted through GitHub Pages [here](https://qutech-delft.github.io/cQASM-spec/).
 
-Documentation on development and deployment can be found in the [Wiki](https://github.com/QuTech-Delft/cQASM-spec/wiki).
+## Deployment
+
+### MkDocs
+
+The cQASM language specification documentation is generated using [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/),
+a documentation framework on top of [MkDocs](https://www.mkdocs.org).
+
+    mkdocs.yml                   # The configuration file
+    mkdocs-base.yml              # Base configuration file
+    docs/
+        javascripts/             # JS configuration files for extensions
+        language-specification   # The cQASM language specification
+        index.md                 # The documentation homepage
+
+You can serve the documentation locally at <http://localhost:8000> by running:
+
+```shell
+mkdocs serve
+```
+
+The documentation is hosted through GitHub Pages. To deploy the docs run:
+
+```shell
+mkdocs gh-deploy
+```
+
+### Using the Docker Container
+
+The documentation can also be viewed via the provisioned Docker container.
+Run the docker container with the following command
+
+```shell
+docker compose up -d
+```
+
+The documentation can now be viewed at <http://localhost:8106>.
+
+## Licensing
+
+The cQASM language specification is licensed under the Apache License, Version 2.0. See
+[LICENSE](https://github.com/QuTech-Delft/cQASM-spec/blob/master/LICENSE.md) for the full
+license text.
 
 ## Authors
 
