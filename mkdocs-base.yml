@@ -24,6 +24,7 @@ nav:
       - Bit (register) declaration: ./language_specification/statements/bit_register_declaration.md
       - Gates: ./language_specification/statements/gates.md
       - Measure instruction: ./language_specification/statements/measure_instruction.md
+      - Reset instruction: ./language_specification/statements/reset_instruction.md
     - Types: ./language_specification/types.md
     - Expressions:
       - Indices: ./language_specification/expressions/indices.md
