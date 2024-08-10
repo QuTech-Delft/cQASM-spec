@@ -1,4 +1,5 @@
-A **`reset`** instruction performs a measurement plus a Pauli X on the qubit argument.
+A **`reset`** instruction resets the state of the qubit to $|0\rangle$.
+It does this by first measuring the qubit and, conditioned on the outcome being 1, applying a Pauli X gate.
 The general form of a reset instruction is as follows:
 
 !!! info ""
@@ -51,17 +52,23 @@ The general form of a reset instruction is as follows:
 
 The following code snippet shows how the reset instruction might be used in context.
 
-```linenums="1" hl_lines="8"
+```linenums="1" hl_lines="9"
 version 3.0
 
 qubit[2] q
+bit[2] b
 
 H q[0]
 CNOT q[0], q[1]
 
-reset q  // Measurement in the standard basis, plus a Pauli X on q
+reset q[0]  // Resets the state of qubit q[0] to |0>
+
+b = measure q
 ```
 
-On the last line of this simple cQASM program,
-the respective states of both qubits in the qubit register are measured along the standard/computational basis.
-Then a Pauli X is performed on both qubits.
+The `reset` instruction is performed by measuring `q[0]` along the computational basis.
+Based on the measurement outcome, either no operation is performed (in case the outcome is 0) or
+a Pauli X gate is applied (in case the outcome is 1).
+
+The `measure` instruction should report $|00\rangle$ in 50% of the cases and $|10\rangle$ in the other 50% of the cases
+(where lower qubit indices are shown here at the right of the string and higher indices at the left).
