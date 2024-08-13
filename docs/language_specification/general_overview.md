@@ -111,7 +111,9 @@ and [built-in functions](expressions/builtin_functions.md).
 
 The preferred file extension for a cQASM file is `*.cq`.
 
-## *About the grammar sections*
+## How to read the...
+
+### Grammar sections
 
 In the notation and grammar descriptions appearing throughout this language specification, 
 syntactic categories are indicated by _italic_ type,
@@ -139,3 +141,18 @@ Names for syntactic categories have generally been chosen according to the follo
 - _X-sequence_ is one or more _X_’s without intervening delimiters, _e.g._, _digit-sequence_ is a sequence of digits.
 - _X-list_ is one or more _X_’s separated by intervening commas, _e.g._, _index-list_ is a sequence of 
 indices separated by commas.
+
+### State strings
+
+State strings are binary strings where each value corresponds to a given qubit.
+
+In this documentation, lower qubit indices are shown at the right of these strings and higher qubit indices at the left.
+
+For example: given a qubit register of size 3 such as `qubit[3] q`,
+we can refer to each qubit individually as `q[0]`, `q[1]`, and `q[2]`,
+where `0`, `1`, and `2` are the indices of each individual qubit.
+A state string for this qubit register would be displayed as:
+
+| q[2] | q[1] | q[0] |
+|:----:|:----:|:----:|
+|  1   |  1   |  0   |
