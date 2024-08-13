@@ -1,5 +1,5 @@
 A **`reset`** instruction resets the state of the qubit to $|0\rangle$.
-It does this by first measuring the qubit and, conditioned on the outcome being 1, applying a Pauli X gate.
+It does this by first measuring the qubit and then, conditioned on the outcome being 1, applying a Pauli X gate.
 The general form of a reset instruction is as follows:
 
 !!! info ""
