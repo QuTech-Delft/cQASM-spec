@@ -5,7 +5,7 @@ The table below lists the available types in a cQASM program.
 | Qubit      | **`qubit`** | **`qubit`** _identifier_               | 
 | QubitArray | **`qubit`** | **`qubit[`**_size_**`] `**_identifier_ | 
 | Bit        | **`bit`**   | **`bit`** _identifier_                 | 
-| BitArray   | **`bit`**   | **`qubit[`**_size_**`] `**_identifier_ | 
+| BitArray   | **`bit`**   | **`bit[`**_size_**`] `**_identifier_ | 
 
 !!! note
 
