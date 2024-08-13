@@ -113,7 +113,7 @@ The preferred file extension for a cQASM file is `*.cq`.
 
 ## *How to read*
 
-### Grammar sections
+### *Grammar sections*
 
 In the notation and grammar descriptions appearing throughout this language specification, 
 syntactic categories are indicated by _italic_ type,
