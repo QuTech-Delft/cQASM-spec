@@ -111,7 +111,7 @@ and [built-in functions](expressions/builtin_functions.md).
 
 The preferred file extension for a cQASM file is `*.cq`.
 
-## How to read the...
+## *How to read*
 
 ### Grammar sections
 
