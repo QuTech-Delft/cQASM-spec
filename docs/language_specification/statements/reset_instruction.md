@@ -70,5 +70,6 @@ The `reset` instruction is performed by measuring `q[0]` along the computational
 Based on the measurement outcome, either no operation is performed (in case the outcome is 0) or
 a Pauli X gate is applied (in case the outcome is 1).
 
-The `measure` instruction should report $|00\rangle$ in 50% of the cases and $|10\rangle$ in the other 50% of the cases
-(where lower qubit indices are shown here at the right of the string and higher indices at the left).
+The result of the subsequent `measure` instruction will be `00` in 50% of the cases
+and `10` in the other 50% of the cases,
+with the qubit register indices decreasing from left to right, _i.e._, `q[n] ... q[0]`.
