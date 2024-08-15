@@ -155,7 +155,7 @@ and $q_1$ is in state $|0\rangle$.
 
 Measurement outcomes are represented by a bit string,
 which adheres to the same ordering convention as qubit states,
-_i.e._ the with the (qu)bit index decreasing from left to right.    
+_i.e._ with the (qu)bit indices decreasing from left to right.    
 
 Consider a qubit register of size 3, `qubit[3] q`,
 where each individual qubit can be referred to by its index as `q[0]`, `q[1]`, and `q[2]`.
