@@ -160,7 +160,7 @@ _i.e._ the with the (qu)bit index decreasing from left to right.
 Consider a qubit register of size 3, `qubit[3] q`,
 where each individual qubit can be referred to by its index as `q[0]`, `q[1]`, and `q[2]`.
 If the state of this qubit register is $|110\rangle$,
-then measuring it will result in the following bit string 
+then measuring it will result in the following bit string:
 
 | `q[2]` | `q[1]` | `q[0]` |
 |:------:|:------:|:------:|
