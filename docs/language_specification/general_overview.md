@@ -142,17 +142,29 @@ Names for syntactic categories have generally been chosen according to the follo
 - _X-list_ is one or more _X_’s separated by intervening commas, _e.g._, _index-list_ is a sequence of 
 indices separated by commas.
 
-### State strings
+### *Qubit state and measurement bit ordering*
 
-State strings are binary strings where each value corresponds to a given qubit.
+In this specification, qubit states are represented using the ket-vector notation $|\Psi\rangle$
+and measurement outcomes are represented as bit strings.
 
-In this documentation, lower qubit indices are shown at the right of these strings and higher qubit indices at the left.
+In the case of the former, the qubits are ordered with qubit index decreasing from left to right, _i.e._,
+$|\Psi\rangle = \sum c_i~(|q_n\rangle\otimes |q_{n-1}\rangle\otimes~...\otimes~|q_1\rangle\otimes |q_0\rangle)_i$
+$=\sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i$.
+For example, given the state $|01\rangle$, the first qubit $q_0$ is in state $|1\rangle$
+and the second qubit $q_1$ is in state $|0\rangle$. 
 
-For example: given a qubit register of size 3 such as `qubit[3] q`,
-we can refer to each qubit individually as `q[0]`, `q[1]`, and `q[2]`,
-where `0`, `1`, and `2` are the indices of each individual qubit.
-A state string for this qubit register would be displayed as:
+Measurement outcomes are represented by a bit string,
+which adheres to the same ordering convention as qubit states,
+_i.e._ the with the (qu)bit index decreasing from left to right.    
 
-| q[2] | q[1] | q[0] |
-|:----:|:----:|:----:|
-|  1   |  1   |  0   |
+Consider a qubit register of size 3, `qubit[3] q`,
+where each individual qubit can be referred to by its index as `q[0]`, `q[1]`, and `q[2]`.
+If the state of this qubit register is $|110\rangle$,
+then measuring it will result in the following bit string 
+
+| `q[2]` | `q[1]` | `q[0]` |
+|:------:|:------:|:------:|
+|  `1`   |  `1`   |  `0`   |
+
+The same ordering applies to bit registers, _i.e._ for the for a bit register `b`,
+the ordering is given by `b[n-1]b[n]...b[1]b[0]`.
