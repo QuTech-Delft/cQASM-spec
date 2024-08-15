@@ -5,7 +5,7 @@ It does this by first measuring the qubit and then, conditioned on the outcome b
     
     Even though the `reset` instruction internally measures the qubit state,
     it does not store the measurement outcome in the measurement register,
-    _i.e._ the measurement register is unaffected by the `reset` instruction.
+    _i.e._, the measurement register is unaffected by the `reset` instruction.
     The measurement outcome is only used to determine whether or not
     a Pauli X gate needs to be performed, in order to bring the qubit
     into the state $|0\rangle$.
