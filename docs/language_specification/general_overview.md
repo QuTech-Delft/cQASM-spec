@@ -147,7 +147,7 @@ indices separated by commas.
 In this specification, qubit states are represented using the ket-vector notation $|\Psi\rangle$
 and measurement outcomes are represented as bit strings.
 
-In the case of the former, the qubits are ordered with qubit index decreasing from left to right, _i.e._,
+Qubits in a ket-vector are ordered with qubit indices decreasing from left to right, _i.e._,
 $|\Psi\rangle = \sum c_i~(|q_n\rangle\otimes |q_{n-1}\rangle\otimes~...\otimes~|q_1\rangle\otimes |q_0\rangle)_i$
 $=\sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i$.
 For example, given the state $|01\rangle$, the first qubit $q_0$ is in state $|1\rangle$
