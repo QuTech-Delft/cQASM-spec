@@ -150,8 +150,8 @@ and measurement outcomes are represented as bit strings.
 Qubits in a ket-vector are ordered with qubit indices decreasing from left to right, _i.e._,
 $|\Psi\rangle = \sum c_i~(|q_n\rangle\otimes |q_{n-1}\rangle\otimes~...\otimes~|q_1\rangle\otimes |q_0\rangle)_i$
 $=\sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i$.
-For example, given the state $|01\rangle$, the first qubit $q_0$ is in state $|1\rangle$
-and the second qubit $q_1$ is in state $|0\rangle$. 
+For example, given the state $|01\rangle$, $q_0$ is in state $|1\rangle$
+and $q_1$ is in state $|0\rangle$. 
 
 Measurement outcomes are represented by a bit string,
 which adheres to the same ordering convention as qubit states,
