@@ -166,5 +166,5 @@ then measuring it will result in the following bit string:
 |:------:|:------:|:------:|
 |  `1`   |  `1`   |  `0`   |
 
-The same ordering applies to bit registers, _i.e._ for the for a bit register `b`,
+The same ordering applies to bit registers, _i.e._, for a bit register `b`,
 the ordering is given by `b[n-1]b[n]...b[1]b[0]`.
