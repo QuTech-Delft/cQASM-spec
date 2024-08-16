@@ -31,6 +31,7 @@ Among those, a quantum algorithm is in essence a sequence of *instructions*:
 - [Bit (register) declaration](statements/bit_register_declaration.md)
 - [Gates](statements/gates.md)
 - [Measure instruction](statements/measure_instruction.md)
+- [Reset instruction](statements/reset_instruction.md)
 
 !!! example ""
 
@@ -110,7 +111,9 @@ and [built-in functions](expressions/builtin_functions.md).
 
 The preferred file extension for a cQASM file is `*.cq`.
 
-## *About the grammar sections*
+## *How to read*
+
+### *Grammar sections*
 
 In the notation and grammar descriptions appearing throughout this language specification, 
 syntactic categories are indicated by _italic_ type,
@@ -138,3 +141,30 @@ Names for syntactic categories have generally been chosen according to the follo
 - _X-sequence_ is one or more _X_’s without intervening delimiters, _e.g._, _digit-sequence_ is a sequence of digits.
 - _X-list_ is one or more _X_’s separated by intervening commas, _e.g._, _index-list_ is a sequence of 
 indices separated by commas.
+
+### *Qubit state and measurement bit ordering*
+
+In this specification, qubit states are represented using the ket-vector notation $|\Psi\rangle$
+and measurement outcomes are represented as bit strings.
+
+Qubits in a ket-vector are ordered with qubit indices decreasing from left to right, _i.e._,
+$|\Psi\rangle = \sum c_i~(|q_n\rangle\otimes |q_{n-1}\rangle\otimes~...\otimes~|q_1\rangle\otimes |q_0\rangle)_i$
+$=\sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i$.
+For example, given the state $|01\rangle$, $q_0$ is in state $|1\rangle$
+and $q_1$ is in state $|0\rangle$. 
+
+Measurement outcomes are represented by a bit string,
+which adheres to the same ordering convention as qubit states,
+_i.e._ with the (qu)bit indices decreasing from left to right.    
+
+Consider a qubit register of size 3, `qubit[3] q`,
+where each individual qubit can be referred to by its index as `q[0]`, `q[1]`, and `q[2]`.
+If the state of this qubit register is $|110\rangle$,
+then measuring it will result in the following bit string:
+
+| `q[2]` | `q[1]` | `q[0]` |
+|:------:|:------:|:------:|
+|  `1`   |  `1`   |  `0`   |
+
+The same ordering applies to bit registers, _i.e._, for a bit register `b`,
+the ordering is given by `b[n-1]b[n]...b[1]b[0]`.
