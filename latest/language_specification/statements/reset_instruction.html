@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="bit_register_declaration.html">
+        <link rel="prev" href="measure_instruction.html">
       
       
-        <link rel="next" href="measure_instruction.html">
+        <link rel="next" href="../types.html">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Gates - cQASM specification</title>
+        <title>Reset instruction - cQASM specification</title>
       
     
     
@@ -80,11 +80,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#single-gate-multi-qubit-sgmq-notation" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -119,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Gates
+              Reset instruction
             
           </span>
         </div>
@@ -851,28 +846,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Gates
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="gates.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="gates.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -881,42 +858,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#single-gate-multi-qubit-sgmq-notation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Single-gate-multi-qubit (SGMQ) notation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#standard-gate-set" class="md-nav__link">
-    <span class="md-ellipsis">
-      Standard gate set
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -947,10 +888,17 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="reset_instruction.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="reset_instruction.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -959,6 +907,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1205,32 +1154,6 @@
   
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#single-gate-multi-qubit-sgmq-notation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Single-gate-multi-qubit (SGMQ) notation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#standard-gate-set" class="md-nav__link">
-    <span class="md-ellipsis">
-      Standard gate set
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1247,44 +1170,28 @@
   
 
 
-  <h1>Gates</h1>
+  <h1>Reset instruction</h1>
 
-<p>Gates define single-qubit or multi-qubit unitary operations
-that change the state of a qubit register in a deterministic fashion.
-The general form of a gate is given by the gate name
-followed by the (comma-separated list of) qubit operand(s), <em>e.g.</em>, <strong><code>X q[0]</code></strong>:</p>
-<div class="admonition info">
-<p>&emsp;<em>gate qubit-arguments</em></p>
+<p>A <strong><code>reset</code></strong> instruction resets the state of the qubit to <span class="arithmatex">\(|0\rangle\)</span>.
+It does this by first measuring the qubit and then, conditioned on the outcome being 1, applying a Pauli X gate.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Even though the <code>reset</code> instruction internally measures the qubit state,
+it does not store the measurement outcome in the measurement register,
+<em>i.e.</em>, the measurement register is unaffected by the <code>reset</code> instruction.
+The measurement outcome is only used to determine whether or not
+a Pauli X gate needs to be performed, in order to bring the qubit
+into the state <span class="arithmatex">\(|0\rangle\)</span>.</p>
 </div>
-<p>Parameterized unitary operations are represented by parameterized gates.
-The general form of a parameterized gate is given by the gate name
-followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses,
-which in turn is followed by the (comma-separated list of) qubit operand(s), <em>e.g.</em>, <strong><code>CRk(2) q[0], q[1]</code></strong>:</p>
+<p>The general form of a reset instruction is as follows:</p>
 <div class="admonition info">
-<p>&emsp;<em>gate</em><strong><code>(</code></strong><em>parameters</em><strong><code>)</code></strong><em> qubit-arguments</em></p>
+<p>&emsp;<strong><code>reset</code></strong> <em>qubit-argument</em></p>
 </div>
-<p>Note that the parameters, either single or a list of multiple parameters,
-appear within parentheses directly following the gate name.
-We distinguish between the <em>parameters</em> of a parameterized gate,
-in terms of number <a href="../tokens/literals.html">literals</a>,
-and the <em>qubit arguments</em> that a (parameterized) gate acts on.</p>
 <details class="info">
-<summary>Grammar for gates</summary>
-<p><em>gate</em>:<br />
-&emsp; <em>identifier</em> <em>parameters</em><sub>opt</sub> <em>qubit-arguments</em></p>
-<p><em>parameters</em>:<br />
-&emsp; <strong><code>(</code></strong> <em>parameter-list</em> <strong><code>)</code></strong></p>
-<p><em>parameter-list</em>:<br />
-&emsp; <em>parameter</em><br />
-&emsp; <em>parameter-list</em> <strong><code>,</code></strong> <em>parameter</em></p>
-<p><em>parameter</em>:<br />
-&emsp; <em>integer-literal</em><br />
-&emsp; <em>floating-literal</em></p>
-<p><em>qubit-arguments</em>:<br />
-&emsp; <em>qubit-argument-list</em></p>
-<p><em>qubit-argument-list</em>:<br />
-&emsp; <em>qubit-argument</em><br />
-&emsp; <em>qubit-argument-list</em> <strong><code>,</code></strong> <em>qubit-argument</em></p>
+<summary>Grammar for reset instruction</summary>
+<p><em>reset</em>:<br />
+&emsp; <strong><code>reset</code></strong><br />
+&emsp; <strong><code>reset</code></strong> <em>qubit-argument</em></p>
 <p><em>qubit-argument</em>:<br />
 &emsp; <em>qubit-variable</em><br />
 &emsp; <em>qubit-index</em></p>
@@ -1293,195 +1200,72 @@ and the <em>qubit arguments</em> that a (parameterized) gate acts on.</p>
 <p><em>qubit-index</em>:<br />
 &emsp; <em>index</em></p>
 </details>
-<p>A few examples of gates are shown below.</p>
-<div class="admonition example">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>// A single-qubit Hadamard gate
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>H q[0]
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>// A two-qubit controlled-Z gate (control: q[0], target: q[1])
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>CZ q[0], q[1]
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>// A parameterized single-qubit Rx gate (with π/2 rotation around the x-axis)
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>Rx(pi/2) q[0]
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>// A parametrized two-qubit controlled phase-shift gate (control: q[1], target: q[0])
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>CRk(2) q[1], q[0]
-</code></pre></div>
-</div>
-<p>The gates that are supported by the cQASM language
-are listed in the <a href="gates.html#standard-gate-set">standard gate set</a>.</p>
-<h2 id="single-gate-multi-qubit-sgmq-notation">Single-gate-multi-qubit (SGMQ) notation</h2>
-<p>It is possible to pass multiple qubits as an argument to a single-qubit gate,
-by making use of the single-gate-multi-qubit (SGMQ) notation.
-The single-qubit gate will then be applied to each qubit, respectively.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>SGMQ notation does not imply that the gates are, necessarily, executed in parallel on the target device. 
-SGMQ notation is nothing other than <em>syntactic sugar</em>,
-whereby a series of instruction statements can be written as one.
-Moreover, SGMQ notation should not be confused with multiple-qubit gates, <em>e.g.</em>, 
-<strong><code>X q[0,1]</code></strong> means <strong><code>X q[0]; X q[1]</code></strong>,
-and does not represent the 2-qubit gate <strong><code>XX q[0], q[1]</code></strong>.
-Note that the latter 2-qubit gate <strong><code>XX</code></strong> is currently not supported by the cQASM language,
-see the <a href="gates.html#standard-gate-set">standard gate set</a> below.</p>
-</div>
-<p>If the name of the qubit register is <strong><code>q</code></strong>,
-then the following can be passed as an argument to the single-qubit gate:</p>
-<ul>
-<li>
-<p>the whole qubit register <strong><code>q</code></strong>;</p>
-</li>
-<li>
-<p>a slice thereof <strong><code>q[i:j]</code></strong>, where <span class="arithmatex">\(0 \leq i &lt; j &lt; N\)</span>;</p>
-</li>
-<li>
-<p>or a list of indices can be passed <strong><code>q[i,]</code></strong>, where <span class="arithmatex">\(0 \leq i &lt; N\)</span>,</p>
-</li>
-</ul>
-<p>with <span class="arithmatex">\(N\)</span> the size of the qubit register.
-The following slicing convention is adopted: a slice <strong><code>q[i:j]</code></strong> includes qubits <strong><code>q[i]</code></strong>, <strong><code>q[j]</code></strong>,
-and all qubits in between. The code block below demonstrates some examples.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">The whole qubit register</label><label for="__tabbed_1_2">A slice of the qubit register</label><label for="__tabbed_1_3">A list of indices of the qubit register</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Reset of all the qubits</label><label for="__tabbed_1_2">Reset of a single qubit</label><label for="__tabbed_1_3">Reset of multiple qubits through their register index</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>qubit[5] q
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>X q  // is semantically equivalent to:
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>X q[0]; X q[1]; X q[2]; X q[3]; X q[4]
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>qubit q
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>qubit[5] qq
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="hll">reset
+</span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>qubit[5] q
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>X q[1:3]  // is semantically equivalent to:
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>X q[1]; X q[2]; X q[3]
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>qubit q
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="hll">reset q
+</span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>qubit[5] q
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>X q[0,2,4]  // is semantically equivalent to:
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>X q[0]; X q[2]; X q[4] 
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>qubit[5] q
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="hll">reset q[2, 4]
+</span></code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 </div>
-<p>In the above examples we have used the semicolon <strong><code>;</code></strong> to separate statements occurring on the same line.</p>
-<h2 id="standard-gate-set">Standard gate set</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-<th>Example statement</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>I</td>
-<td>Identity gate</td>
-<td><strong><code>I q[0]</code></strong></td>
-</tr>
-<tr>
-<td>H</td>
-<td>Hadamard gate</td>
-<td><strong><code>H q[0]</code></strong></td>
-</tr>
-<tr>
-<td>X</td>
-<td>Pauli-X</td>
-<td><strong><code>X q[0]</code></strong></td>
-</tr>
-<tr>
-<td>X90</td>
-<td>Rotation around the <em>x</em>-axis of <span class="arithmatex">\(\pi/2\)</span></td>
-<td><strong><code>X90 q[0]</code></strong></td>
-</tr>
-<tr>
-<td>mX90</td>
-<td>Rotation around the <em>x</em>-axis of <span class="arithmatex">\(-\pi/2\)</span></td>
-<td><strong><code>mX90 q[0]</code></strong></td>
-</tr>
-<tr>
-<td>Y</td>
-<td>Pauli-Y</td>
-<td><strong><code>Y q[0]</code></strong></td>
-</tr>
-<tr>
-<td>Y90</td>
-<td>Rotation around the <em>y</em>-axis of <span class="arithmatex">\(\pi/2\)</span></td>
-<td><strong><code>Y90 q[0]</code></strong></td>
-</tr>
-<tr>
-<td>mY90</td>
-<td>Rotation around the <em>y</em>-axis of <span class="arithmatex">\(-\pi/2\)</span></td>
-<td><strong><code>mY90 q[0]</code></strong></td>
-</tr>
-<tr>
-<td>Z</td>
-<td>Pauli-Z</td>
-<td><strong><code>Z q[0]</code></strong></td>
-</tr>
-<tr>
-<td>S</td>
-<td>Phase gate</td>
-<td><strong><code>S q[0]</code></strong></td>
-</tr>
-<tr>
-<td>Sdag</td>
-<td>S dagger gate</td>
-<td><strong><code>Sdag q[0]</code></strong></td>
-</tr>
-<tr>
-<td>T</td>
-<td>T</td>
-<td><strong><code>T q[0]</code></strong></td>
-</tr>
-<tr>
-<td>Tdag</td>
-<td>T dagger gate</td>
-<td><strong><code>Tdag q[0]</code></strong></td>
-</tr>
-<tr>
-<td>Rx</td>
-<td>Arbitrary rotation around <em>x</em>-axis</td>
-<td><strong><code>Rx(pi) q[0]</code></strong></td>
-</tr>
-<tr>
-<td>Ry</td>
-<td>Arbitrary rotation around <em>y</em>-axis</td>
-<td><strong><code>Ry(pi) q[0]</code></strong></td>
-</tr>
-<tr>
-<td>Rz</td>
-<td>Arbitrary rotation around <em>z</em>-axis</td>
-<td><strong><code>Rz(pi) q[0]</code></strong></td>
-</tr>
-<tr>
-<td>CNOT</td>
-<td>Controlled-NOT gate</td>
-<td><strong><code>CNOT q[0], q[1]</code></strong></td>
-</tr>
-<tr>
-<td>CZ</td>
-<td>Controlled-Z, Controlled-Phase</td>
-<td><strong><code>CZ q[0], q[1]</code></strong></td>
-</tr>
-<tr>
-<td>CR</td>
-<td>Controlled phase shift (arbitrary angle)</td>
-<td><strong><code>CR(pi) q[0], q[1]</code></strong></td>
-</tr>
-<tr>
-<td>CRk</td>
-<td>Controlled phase shift (<span class="arithmatex">\(\pi/2^k\)</span>)</td>
-<td><strong><code>CRk(2) q[0], q[1]</code></strong></td>
-</tr>
-</tbody>
-</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The reset instruction accepts <a href="gates.html#single-gate-multi-qubit-sgmq-notation">SGMQ notation</a>, similar to gates.</p>
+</div>
+<p>The following code snippet shows how the reset instruction might be used in context.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>version 3.0
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>qubit[2] q
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>bit[2] b
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>H q[0]
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a>CNOT q[0], q[1]
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="hll">reset q[0]  // Resets the state of qubit q[0] to |0&gt;
+</span><a id="__codelineno-3-10" name="__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a>b = measure q
+</code></pre></div></td></tr></table></div>
+<p>The <code>reset</code> instruction is performed by measuring <code>q[0]</code> along the computational basis.
+Based on the measurement outcome, either no operation is performed (in case the outcome is 0) or
+a Pauli X gate is applied (in case the outcome is 1).
+The result of the subsequent <code>measure</code> instruction will be <code>00</code> in roughly half of the cases
+and <code>10</code> in the remaining cases,
+with the qubit register indices decreasing from left to right, <em>i.e.</em>, <code>q[n]...q[0]</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Qubits that are part of an entangled state,
+are disentangled from that state,
+when the <code>reset</code> instruction is applied to them.</p>
+</div>
 
 
 
@@ -1511,7 +1295,7 @@ and all qubits in between. The code block below demonstrates some examples.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="bit_register_declaration.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Bit (register) declaration">
+          <a href="measure_instruction.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Measure instruction">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1521,20 +1305,20 @@ and all qubits in between. The code block below demonstrates some examples.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Bit (register) declaration
+                Measure instruction
               </div>
             </div>
           </a>
         
         
           
-          <a href="measure_instruction.html" class="md-footer__link md-footer__link--next" aria-label="Next: Measure instruction">
+          <a href="../types.html" class="md-footer__link md-footer__link--next" aria-label="Next: Types">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Measure instruction
+                Types
               </div>
             </div>
             <div class="md-footer__button md-icon">

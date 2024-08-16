@@ -626,11 +626,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#about-the-grammar-sections" class="md-nav__link">
+  <a href="#how-to-read" class="md-nav__link">
     <span class="md-ellipsis">
-      About the grammar sections
+      How to read
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="How to read">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grammar-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grammar sections
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qubit-state-and-measurement-bit-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qubit state and measurement bit ordering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -848,6 +872,8 @@
       
         
       
+        
+      
     
     
       
@@ -975,6 +1001,27 @@
   
   <span class="md-ellipsis">
     Measure instruction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="statements/reset_instruction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reset instruction
   </span>
   
 
@@ -1286,11 +1333,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#about-the-grammar-sections" class="md-nav__link">
+  <a href="#how-to-read" class="md-nav__link">
     <span class="md-ellipsis">
-      About the grammar sections
+      How to read
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="How to read">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grammar-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grammar sections
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qubit-state-and-measurement-bit-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qubit state and measurement bit ordering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1342,6 +1413,7 @@ Among those, a quantum algorithm is in essence a sequence of <em>instructions</e
 <li><a href="statements/bit_register_declaration.html">Bit (register) declaration</a></li>
 <li><a href="statements/gates.html">Gates</a></li>
 <li><a href="statements/measure_instruction.html">Measure instruction</a></li>
+<li><a href="statements/reset_instruction.html">Reset instruction</a></li>
 </ul>
 <div class="admonition example">
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Example cQASM program</label><label for="__tabbed_1_2">Smallest valid cQASM program</label></div>
@@ -1426,7 +1498,8 @@ as this is more in line with how these gates are represented in the field of qua
 </div>
 <h2 id="file-extension">File extension</h2>
 <p>The preferred file extension for a cQASM file is <code>*.cq</code>.</p>
-<h2 id="about-the-grammar-sections"><em>About the grammar sections</em></h2>
+<h2 id="how-to-read"><em>How to read</em></h2>
+<h3 id="grammar-sections"><em>Grammar sections</em></h3>
 <p>In the notation and grammar descriptions appearing throughout this language specification, 
 syntactic categories are indicated by <em>italic</em> type,
 and literal words and characters in <strong><code>bold constant width</code></strong> type.
@@ -1448,6 +1521,39 @@ For example,</p>
 <li><em>X-list</em> is one or more <em>X</em>’s separated by intervening commas, <em>e.g.</em>, <em>index-list</em> is a sequence of 
 indices separated by commas.</li>
 </ul>
+<h3 id="qubit-state-and-measurement-bit-ordering"><em>Qubit state and measurement bit ordering</em></h3>
+<p>In this specification, qubit states are represented using the ket-vector notation <span class="arithmatex">\(|\Psi\rangle\)</span>
+and measurement outcomes are represented as bit strings.</p>
+<p>Qubits in a ket-vector are ordered with qubit indices decreasing from left to right, <em>i.e.</em>,
+<span class="arithmatex">\(|\Psi\rangle = \sum c_i~(|q_n\rangle\otimes |q_{n-1}\rangle\otimes~...\otimes~|q_1\rangle\otimes |q_0\rangle)_i\)</span>
+<span class="arithmatex">\(=\sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i\)</span>.
+For example, given the state <span class="arithmatex">\(|01\rangle\)</span>, <span class="arithmatex">\(q_0\)</span> is in state <span class="arithmatex">\(|1\rangle\)</span>
+and <span class="arithmatex">\(q_1\)</span> is in state <span class="arithmatex">\(|0\rangle\)</span>. </p>
+<p>Measurement outcomes are represented by a bit string,
+which adheres to the same ordering convention as qubit states,
+<em>i.e.</em> with the (qu)bit indices decreasing from left to right.    </p>
+<p>Consider a qubit register of size 3, <code>qubit[3] q</code>,
+where each individual qubit can be referred to by its index as <code>q[0]</code>, <code>q[1]</code>, and <code>q[2]</code>.
+If the state of this qubit register is <span class="arithmatex">\(|110\rangle\)</span>,
+then measuring it will result in the following bit string:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><code>q[2]</code></th>
+<th style="text-align: center;"><code>q[1]</code></th>
+<th style="text-align: center;"><code>q[0]</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>0</code></td>
+</tr>
+</tbody>
+</table>
+<p>The same ordering applies to bit registers, <em>i.e.</em>, for a bit register <code>b</code>,
+the ordering is given by <code>b[n-1]b[n]...b[1]b[0]</code>.</p>
 
 
 
