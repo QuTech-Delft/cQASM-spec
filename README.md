@@ -2,51 +2,41 @@
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-This repository contains the language specification of the cQASM quantum programming language.
-cQASM stands for *c*ommon *Q*uantum *AS*se*M*bly language.
+This repository contains the language specification of the cQASM quantum programming language
+(*c*ommon *Q*uantum *AS*se*M*bly language).
 
-## Deployment
+The [cQASM language specification](https://qutech-delft.github.io/cQASM-spec/) is hosted through GitHub Pages.
 
-### MkDocs
+## How to generate the cQASM language specification locally
 
-The cQASM language specification documentation is generated using [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/),
-a documentation framework on top of [MkDocs](https://www.mkdocs.org).
+Clone the repository to your local machine:
 
-    mkdocs.yml                   # The configuration file
-    mkdocs-base.yml              # Base configuration file
-    docs/
-        index.md                 # The documentation homepage
-        introduction/            # History, context, acknowledgements
-        language_specification/  # The cQASM language specification
-        appendices/              # Spin-2
-        javascripts/             # JS configuration files for extensions
+```shell
+git clone https://github.com/QuTech-Delft/cQASM-spec.git
+```
 
-You can serve the documentation locally at <http://localhost:8000> by running:
+We recommend to create a virtual environment (_e.g._, [venv](https://docs.python.org/3/library/venv.html)),
+run it, and install the requirements:
+
+```shell
+pip install -r requirements.txt
+```
+
+Once the required dependencies are installed,
+the language specification can be served locally at <http://localhost:8000> by running:
 
 ```shell
 mkdocs serve
 ```
 
-The documentation is hosted through GitHub Pages. To deploy the docs run:
-
-```shell
-mkdocs gh-deploy
-```
-
-### Using the Docker container
-
-The documentation can also be viewed via the provisioned Docker container.
-Run the docker container with the following command:
+The language specification can also be viewed via a provisioned Docker container.
+No virtual environment is required in this case. Run the Docker container with the following command:
 
 ```shell
 docker compose up -d
 ```
 
-The documentation can now be viewed at <http://localhost:8106>.
-
-## Documentation
-
-The [cQASM language specification documentation](https://qutech-delft.github.io/cQASM-spec/) is hosted through GitHub Pages.
+The language specification can now be viewed at <http://localhost:8106>.
 
 ## License
 
