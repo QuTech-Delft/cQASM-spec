@@ -15,9 +15,11 @@ a documentation framework on top of [MkDocs](https://www.mkdocs.org).
     mkdocs.yml                   # The configuration file
     mkdocs-base.yml              # Base configuration file
     docs/
-        javascripts/             # JS configuration files for extensions
-        language-specification   # The cQASM language specification
         index.md                 # The documentation homepage
+        introduction/            # History, context, acknowledgements
+        language_specification/  # The cQASM language specification
+        appendices/              # Spin-2
+        javascripts/             # JS configuration files for extensions
 
 You can serve the documentation locally at <http://localhost:8000> by running:
 
@@ -31,10 +33,10 @@ The documentation is hosted through GitHub Pages. To deploy the docs run:
 mkdocs gh-deploy
 ```
 
-### Using the Docker Container
+### Using the Docker container
 
 The documentation can also be viewed via the provisioned Docker container.
-Run the docker container with the following command
+Run the docker container with the following command:
 
 ```shell
 docker compose up -d

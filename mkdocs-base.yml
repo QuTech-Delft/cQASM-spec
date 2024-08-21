@@ -34,7 +34,7 @@ nav:
       - Built-in functions: ./language_specification/expressions/builtin_functions.md
       - Operators: ./language_specification/expressions/operators.md
   - Appendices:
-      - Spin-2: appendices/spin.md
+      - Spin-2: appendices/spin_2.md
 
 theme:
   name: material
