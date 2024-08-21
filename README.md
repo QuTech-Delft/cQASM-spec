@@ -1,10 +1,9 @@
 # cQASM language specification
 
-This repository contains the specification documents of the cQASM quantum programming language. 
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-## Documentation
-
-The cQASM language specification documentation is hosted through GitHub Pages [here](https://qutech-delft.github.io/cQASM-spec/).
+This repository contains the language specification of the cQASM quantum programming language.
+cQASM stands for *c*ommon *Q*uantum *AS*se*M*bly language.
 
 ## Deployment
 
@@ -43,11 +42,14 @@ docker compose up -d
 
 The documentation can now be viewed at <http://localhost:8106>.
 
-## Licensing
+## Documentation
 
-The cQASM language specification is licensed under the Apache License, Version 2.0. See
-[LICENSE](https://github.com/QuTech-Delft/cQASM-spec/blob/master/LICENSE.md) for the full
-license text.
+The [cQASM language specification documentation](https://qutech-delft.github.io/cQASM-spec/) is hosted through GitHub Pages.
+
+## License
+
+The cQASM language specification is licensed under the Apache License, Version 2.0.
+See [LICENSE](https://github.com/QuTech-Delft/cQASM-spec/blob/master/LICENSE.md) for the full license text.
 
 ## Authors
 
