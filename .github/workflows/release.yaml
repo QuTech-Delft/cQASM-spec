@@ -47,5 +47,5 @@ jobs:
       - name: Upload and tag as git tag
         if: github.event_name == 'release' && github.event.action == 'created'
         run: |  
-          mike deploy --push ${{ github.ref }}
+          mike deploy --push ${{ github.ref_name }}
           mike set-default --push latest
