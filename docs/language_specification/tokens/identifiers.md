@@ -5,7 +5,7 @@ with the constraint that the first (or singular) character cannot be a digit.
 For now, they are used to name a (qu)bit (registers) by the user,
 and predefine the names of useful [mathematical constants](../expressions/predefined_constants.md),
 [built-in functions](../expressions/builtin_functions.md),
-and [gates](../statements/gates.md).
+and [gates](../statements/instructions/unitary_instructions.md#gates).
 Note that identifiers are not protected, _i.e._ they can be reused. 
 For example, it is permissible, however discouraged,
 to name a (qu)bit (register) **`pi`**, **`cos`**, or **`Rx`**.

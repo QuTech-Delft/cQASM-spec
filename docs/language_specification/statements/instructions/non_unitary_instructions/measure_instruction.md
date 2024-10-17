@@ -8,7 +8,7 @@ The general form of a measure instruction is as follows:
 
 ??? info "Grammar for measure instruction"
     
-    _measure_:  
+    _measure-instruction_:  
     &emsp; _bit-argument_ __`=`__ __`measure`__ _qubit-argument_
 
     _bit-argument_:  
@@ -51,7 +51,8 @@ The general form of a measure instruction is as follows:
 
 !!! note
 
-    The measure instruction accepts [SGMQ notation](gates.md#single-gate-multi-qubit-sgmq-notation), similar to gates.
+    The measure instruction accepts
+    [SGMQ notation](../single-gate-multiple-qubit-notation.md), similar to gates.
 
 The following code snippet shows how the measure instruction might be used in context.
 
