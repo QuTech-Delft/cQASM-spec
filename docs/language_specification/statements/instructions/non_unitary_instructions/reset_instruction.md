@@ -18,7 +18,7 @@ The general form of a reset instruction is as follows:
 
 ??? info "Grammar for reset instruction"
     
-    _reset_:  
+    _reset-instruction_:  
     &emsp; __`reset`__  
     &emsp; __`reset`__ _qubit-argument_
 
@@ -58,7 +58,8 @@ The general form of a reset instruction is as follows:
 
 !!! note
 
-    The reset instruction accepts [SGMQ notation](gates.md#single-gate-multi-qubit-sgmq-notation), similar to gates.
+    The reset instruction accepts
+    [SGMQ notation](../single-gate-multiple-qubit-notation.md), similar to gates.
 
 The following code snippet shows how the reset instruction might be used in context.
 

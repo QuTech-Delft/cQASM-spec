@@ -15,15 +15,15 @@ The general form is given as follows:
 
 Its form is similar to the declaration of an arbitrary variable,
 whereby the type of the variable is specified first, _i.e._ 
-**`bit`** denotes that the declared variable is of type [Bit](../types.md).
+**`bit`** denotes that the declared variable is of type [Bit](../../types.md).
 and **`bit[`**_size_**`]`**
-denotes that the declared variable is of type [BitArray](../types.md).
+denotes that the declared variable is of type [BitArray](../../types.md).
 The size of a bit register is declared by an integer value between square brackets **`[`**_size_**`]`**.
-The name of the bit (register) is defined through an [identifier](../tokens/identifiers.md). 
+The name of the bit (register) is defined through an [identifier](../../tokens/identifiers.md). 
 
 The declaration of a bit (register) is _optional_,
 Nevertheless, since measurement outcomes are stored as bits,
-[measure instructions](measure_instruction.md) require a previously declared bit (register).
+[measure instructions](../instructions/non_unitary_instructions/measure_instruction.md) require a previously declared bit (register).
 
 Find below examples, respectively, of a single bit declaration and bit register declaration.
 

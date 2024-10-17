@@ -15,11 +15,11 @@ The general form is given as follows:
 
 Its form is similar to the declaration of an arbitrary variable,
 whereby the type of the variable is specified first, _i.e._ 
-**`qubit`** denotes that the declared variable is of type [Qubit](../types.md).
+**`qubit`** denotes that the declared variable is of type [Qubit](../../types.md).
 and **`qubit[`**_size_**`]`**
-denotes that the declared variable is of type [QubitArray](../types.md).
+denotes that the declared variable is of type [QubitArray](../../types.md).
 The size of a qubit register is declared by an integer value between square brackets **`[`**_size_**`]`**.
-The name of the qubit (register) is defined through an [identifier](../tokens/identifiers.md). 
+The name of the qubit (register) is defined through an [identifier](../../tokens/identifiers.md). 
 
 The declaration of a qubit (register) is _optional_. 
 
