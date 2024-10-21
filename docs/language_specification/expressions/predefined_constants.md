@@ -5,7 +5,5 @@ and can be used in arithmetic expressions with [operators](../tokens/operators_a
 _e.g._, **`pi/2`** equals $\tfrac{\pi}{2}$. 
 
 The latter can be used, for example, as an argument for a
-[parameterized gate](../statements/instructions/unitary_instructions.md#gates),
-_i.e._,
-
-&emsp;**`Rx(pi/2) q[0]`**
+[parameterized named gate](../statements/instructions/unitary_instructions.md#named-gates),
+_i.e._, &emsp;**`Rx(pi/2) q[0]`**.

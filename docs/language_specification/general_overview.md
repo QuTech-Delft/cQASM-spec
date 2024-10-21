@@ -1,8 +1,10 @@
-The cQASM language specification consists of a description of its [Tokens](general_overview.md#tokens),
-[Statements](general_overview.md#statements), [Types](general_overview.md#types), and [Expressions](general_overview.md#expressions).
+The cQASM language specification consists of a description of its [tokens](general_overview.md#tokens),
+[statements](general_overview.md#statements), [types](general_overview.md#types), and
+[expressions](general_overview.md#expressions).
 Additional information is provided on the [case sensitivity](general_overview.md#case-sensitivity) of the language,
 the preferred [file extension](general_overview.md#file-extension) of a cQASM program,
-and a brief explanation on how to interpret the [grammar sections](general_overview.md#about-the-grammar-sections) of this specification.
+and a brief explanation on how to interpret the [grammar sections](general_overview.md#grammar-sections)
+of this specification.
 
 ## Tokens
 
@@ -23,7 +25,9 @@ a *version statement* followed by *variable declarations* and *instructions*.
 In essence, a quantum algorithm is expressed via a sequence of unitary and non-unitary quantum operations
 applied to qubit arguments
 (_e.g._, the [*measure instruction*](statements/instructions/non_unitary_instructions/measure_instruction.md)).
-The unitary operations can be either *named gates* or compositions of *gate modifiers* acting on a named gate.
+The unitary operations, commonly know as gates, can be either
+[*named gates*](statements/instructions/unitary_instructions.md#named-gates) or compositions of
+[*gate modifiers*](statements/instructions/unitary_instructions.md#gate-modifiers) acting on a named gate.
 
 !!! note
 
@@ -37,7 +41,7 @@ The unitary operations can be either *named gates* or compositions of *gate modi
     - [Qubit (register) declaration](statements/variable_declarations/qubit_register_declaration.md)
     - [Bit (register) declaration](statements/variable_declarations/bit_register_declaration.md)
 - Instructions:
-    - [Unitary instructions](statements/instructions/unitary_instructions.md)
+    - [Unitary instructions](statements/instructions/unitary_instructions.md) (i.e., gates)
     - Non-unitary instructions:
         - [Measure instruction](statements/instructions/non_unitary_instructions/measure_instruction.md)
         - [Reset instruction](statements/instructions/non_unitary_instructions/reset_instruction.md)

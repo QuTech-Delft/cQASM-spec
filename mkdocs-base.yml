@@ -25,7 +25,7 @@ nav:
         - Bit (register) declaration: ./language_specification/statements/variable_declarations/bit_register_declaration.md
       - Instructions:
         - Unitary instructions: ./language_specification/statements/instructions/unitary_instructions.md
-        - Non unitary instructions:
+        - Non-unitary instructions:
           - Measure instruction: ./language_specification/statements/instructions/non_unitary_instructions/measure_instruction.md
           - Reset instruction: ./language_specification/statements/instructions/non_unitary_instructions/reset_instruction.md
         - Single-gate-multiple-qubit (SGMQ) notation: ./language_specification/statements/instructions/single-gate-multiple-qubit-notation.md
