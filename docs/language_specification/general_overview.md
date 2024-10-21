@@ -41,7 +41,7 @@ The unitary operations, commonly know as gates, can be either
     - [Qubit (register) declaration](statements/variable_declarations/qubit_register_declaration.md)
     - [Bit (register) declaration](statements/variable_declarations/bit_register_declaration.md)
 - Instructions:
-    - [Unitary instructions](statements/instructions/unitary_instructions.md) (i.e., gates)
+    - [Unitary instructions](statements/instructions/unitary_instructions.md) (_i.e._, gates)
     - Non-unitary instructions:
         - [Measure instruction](statements/instructions/non_unitary_instructions/measure_instruction.md)
         - [Reset instruction](statements/instructions/non_unitary_instructions/reset_instruction.md)

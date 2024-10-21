@@ -1,6 +1,7 @@
-Unitary instructions include:
+Unitary instructions, commonly known as gates, define single-qubit or multi-qubit operations
+that change the state of a qubit register in a reversible and deterministic fashion. They include:
 
-- [named gates](unitary_instructions.md#named-gates), and
+- [named gates](unitary_instructions.md#named-gates), or
 - compositions of [gate modifiers](unitary_instructions.md#gate-modifiers) acting on a named gate.
 
 Note that a composition of gate modifiers acting on a named gate is itself a gate. 
@@ -130,8 +131,8 @@ are listed in the [standard gate set](unitary_instructions.md#standard-gate-set)
 
 ## Gate modifiers
 
-A gate modifier is an operator _Q_ that takes a gate as input and returns a modified gate as output (_Q: gate → gate_).
-_I.e._, it transforms an arbitrary unitary $U$ into $U'$, based on the particular modifier that is applied.
+A gate modifier is an operator _Q_ that takes a gate as input and returns a modified gate as output (_Q: gate → gate_),
+_i.e._, it transforms an arbitrary unitary $U$ into $U'$, based on the particular modifier that is applied.
 We consider the following gate modifiers:
 
 - The _inverse_ modifier **`inv`**, which modifies the gate $U$ into $U^\dagger$, _e.g._, **`inv.X q[0]`**.
@@ -141,8 +142,8 @@ We consider the following gate modifiers:
   **`ctrl.X q[0], q[1]`**, where the control qubit is prepended to the list of qubit operands. 
 
 Since gate modifiers return gates, they can be applied in a nested manner,
-e.g., `inv.pow(2).X`, where a gate modifier `inv` is applied to the modified gate `pow(2).X`,
-which in turn resulted from applying the gate modifier `pow(2)` on the (named) gate `X`.
+_e.g._, **`inv.pow(2).X`**, where a gate modifier **`inv`** is applied to the modified gate **`pow(2).X`**,
+which in turn resulted from applying the gate modifier **`pow(2)`** on the (named) gate **`X`**.
 
 The current version of the language only allows gate modifiers to act on single-qubit gates.
 
