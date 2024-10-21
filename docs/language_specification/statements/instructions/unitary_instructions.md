@@ -59,8 +59,12 @@ Note that a composition of gate modifiers acting on a named gate is itself a gat
 
 ## Named gates
 
-Named gates define single-qubit or multi-qubit unitary operations
-that change the state of a qubit register in a deterministic fashion.
+A named gate is what is commonly referred to simply as a gate.
+We use the term named gate to distinguish them from compositions of gate modifiers acting on a named gate,
+which also results to be a gate.
+Named gates are, thus, the simplest form of unitary instructions.
+They can just be used on their own, or modified multiple times by gate modifiers. 
+
 The general form of a named gate is given by the gate name
 followed by the (comma-separated list of) qubit operand(s), _e.g._, **`X q[0]`**:
 
@@ -75,7 +79,7 @@ which in turn is followed by the (comma-separated list of) qubit operand(s), _e.
 
 !!! info ""
     
-    &emsp;_gate_**`(`**_parameters_**`)`**_ qubit-arguments_
+    &emsp;_gate_**`(`**_parameters_**`)`** _qubit-arguments_
 
 Note that the parameters, either single or a list of multiple parameters,
 appear within parentheses directly following the gate name.
