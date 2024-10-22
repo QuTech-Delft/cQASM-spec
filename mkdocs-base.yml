@@ -12,19 +12,23 @@ nav:
   - Language specification:
     - General overview: ./language_specification/general_overview.md
     - Tokens:
-      - Whitespace and comments: ./language_specification/tokens/whitespace_and_comments.md
       - Newlines: ./language_specification/tokens/newlines.md
       - Literals: ./language_specification/tokens/literals.md
       - Identifiers: ./language_specification/tokens/identifiers.md
       - Keywords: ./language_specification/tokens/keywords.md
       - Operators and punctuators: ./language_specification/tokens/operators_and_punctuators.md
+      - Whitespace and comments: ./language_specification/tokens/whitespace_and_comments.md
     - Statements:
       - Version statement: ./language_specification/statements/version_statement.md
-      - Qubit (register) declaration: ./language_specification/statements/qubit_register_declaration.md
-      - Bit (register) declaration: ./language_specification/statements/bit_register_declaration.md
-      - Gates: ./language_specification/statements/gates.md
-      - Measure instruction: ./language_specification/statements/measure_instruction.md
-      - Reset instruction: ./language_specification/statements/reset_instruction.md
+      - Variable declarations:
+        - Qubit (register) declaration: ./language_specification/statements/variable_declarations/qubit_register_declaration.md
+        - Bit (register) declaration: ./language_specification/statements/variable_declarations/bit_register_declaration.md
+      - Instructions:
+        - Unitary instructions: ./language_specification/statements/instructions/unitary_instructions.md
+        - Non-unitary instructions:
+          - Measure instruction: ./language_specification/statements/instructions/non_unitary_instructions/measure_instruction.md
+          - Reset instruction: ./language_specification/statements/instructions/non_unitary_instructions/reset_instruction.md
+        - Single-gate-multiple-qubit (SGMQ) notation: ./language_specification/statements/instructions/single-gate-multiple-qubit-notation.md
     - Types: ./language_specification/types.md
     - Expressions:
       - Indices: ./language_specification/expressions/indices.md
@@ -48,8 +52,7 @@ theme:
         name: Switch to light mode
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
-      primary: white
-      accent: light blue
+      scheme: default
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode

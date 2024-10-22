@@ -2,10 +2,10 @@ An identifier is a single character or a sequence of characters of the following
 upper or lowercase letters from the ISO basic Latin alphabet, underscore, and digits,
 with the constraint that the first (or singular) character cannot be a digit.
 
-For now, they are used to name a (qu)bit (registers) by the user,
+For now, they are used to name qubits and bits (registers) by the user,
 and predefine the names of useful [mathematical constants](../expressions/predefined_constants.md),
 [built-in functions](../expressions/builtin_functions.md),
-and [gates](../statements/gates.md).
+and [named gates](../statements/instructions/unitary_instructions.md#named-gates).
 Note that identifiers are not protected, _i.e._ they can be reused. 
 For example, it is permissible, however discouraged,
 to name a (qu)bit (register) **`pi`**, **`cos`**, or **`Rx`**.

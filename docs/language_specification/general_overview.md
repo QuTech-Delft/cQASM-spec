@@ -1,9 +1,9 @@
-The cQASM language specification consists of a description of its [Tokens](general_overview.md#tokens),
-[Statements](general_overview.md#statements), [Types](general_overview.md#types),
-and [Expressions](general_overview.md#expressions).
+The cQASM language specification consists of a description of its [tokens](general_overview.md#tokens),
+[statements](general_overview.md#statements), [types](general_overview.md#types), and
+[expressions](general_overview.md#expressions).
 Additional information is provided on the [case sensitivity](general_overview.md#case-sensitivity) of the language,
 the preferred [file extension](general_overview.md#file-extension) of a cQASM program,
-and a brief explanation on how to interpret the [grammar sections](general_overview.md#about-the-grammar-sections)
+and a brief explanation on how to interpret the [grammar sections](general_overview.md#grammar-sections)
 of this specification.
 
 ## Tokens
@@ -20,18 +20,32 @@ A cQASM program can contain the following types of tokens:
 
 ## Statements
 
-A cQASM program consists of a sequence of *statements*.
-Among those, a quantum algorithm is in essence a sequence of *instructions*:
-*gates* and non-unitary quantum operations applied to qubit arguments
-(_e.g._, the [*measure instruction*](measure_instruction.md)).
+A cQASM program consists of a list of *statements*, more concretely,
+a *version statement* followed by *variable declarations* and *instructions*. 
+In essence, a quantum algorithm is expressed via a sequence of unitary and non-unitary quantum operations
+applied to qubit arguments
+(_e.g._, the [*measure instruction*](statements/instructions/non_unitary_instructions/measure_instruction.md)).
+The unitary operations, commonly know as gates, can be either
+[*named gates*](statements/instructions/unitary_instructions.md#named-gates) or compositions of
+[*gate modifiers*](statements/instructions/unitary_instructions.md#gate-modifiers) acting on a named gate.
 
+!!! note
+
+    For simplicity, throughout this documentation, we use the term *gate* to refer to a *named gate*.
+    However, it is important to note that the result of applying a gate modifier is also a gate.
+    When we need to refer explicitely to a named gate such as `H` or `Rz`,
+    and not to a gate resulting from applying a gate modifier, we use the term *named gate*.
 
 - [Version statement](statements/version_statement.md) (_mandatory_)
-- [Qubit (register) declaration](statements/qubit_register_declaration.md)
-- [Bit (register) declaration](statements/bit_register_declaration.md)
-- [Gates](statements/gates.md)
-- [Measure instruction](statements/measure_instruction.md)
-- [Reset instruction](statements/reset_instruction.md)
+- Variable declarations:
+    - [Qubit (register) declaration](statements/variable_declarations/qubit_register_declaration.md)
+    - [Bit (register) declaration](statements/variable_declarations/bit_register_declaration.md)
+- Instructions:
+    - [Unitary instructions](statements/instructions/unitary_instructions.md) (_i.e._, gates)
+    - Non-unitary instructions:
+        - [Measure instruction](statements/instructions/non_unitary_instructions/measure_instruction.md)
+        - [Reset instruction](statements/instructions/non_unitary_instructions/reset_instruction.md)
+   - [Single-gate-multiple-qubit (SGMQ) notation](statements/instructions/single-gate-multiple-qubit-notation.md)
 
 !!! example ""
 
@@ -49,11 +63,13 @@ Among those, a quantum algorithm is in essence a sequence of *instructions*:
         // Bit register declaration
         bit[2] b
         
-        // Gates
+        // Gate
         H q[0]
-        CNOT q[0], q[1]
+
+        // Gate modifier
+        ctrl.X q[0], q[1]
         
-        // Measurement statement
+        // Measure instruction
         b[0, 1] = measure q[0, 1]
         ```
 
@@ -102,7 +118,8 @@ and [built-in functions](expressions/builtin_functions.md).
 !!! note
 
     Gate names are identifiers and are therefore case-sensitive.
-    The syntax of the gates defined in cQASM are listed in the [cQASM standard gate set](statements/gates.md#standard-gate-set).
+    The syntax of the gates defined in cQASM are listed in the
+    [cQASM standard gate set](statements/instructions/unitary_instructions.md#standard-gate-set).
     Even though it is common practice to write variable names or function identifiers in lowercase,
     we choose to define the gate names in the predefined cQASM standard gate set in UPPERCASE or CamelCase,
     as this is more in line with how these gates are represented in the field of quantum information processing (QIP). 
