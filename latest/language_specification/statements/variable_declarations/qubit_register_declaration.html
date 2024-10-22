@@ -9,25 +9,25 @@
       
       
       
-        <link rel="prev" href="measure_instruction.html">
+        <link rel="prev" href="../version_statement.html">
       
       
-        <link rel="next" href="../types.html">
+        <link rel="next" href="bit_register_declaration.html">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.41">
     
     
       
-        <title>Reset instruction - cQASM specification</title>
+        <title>Qubit (register) declaration - cQASM specification</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.0253249f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,14 +46,14 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
     
-   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -62,7 +62,7 @@
     .gdesc-inner { font-size: 0.75rem; }
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -94,7 +94,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="cQASM specification" class="md-header__button md-logo" aria-label="cQASM specification" data-md-component="logo">
+    <a href="../../.." title="cQASM specification" class="md-header__button md-logo" aria-label="cQASM specification" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Reset instruction
+              Qubit (register) declaration
             
           </span>
         </div>
@@ -137,7 +137,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -233,7 +233,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../index.html" class="md-tabs__link">
+        <a href="../../../index.html" class="md-tabs__link">
           
   
     
@@ -255,7 +255,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../general_overview.html" class="md-tabs__link">
+        <a href="../../general_overview.html" class="md-tabs__link">
           
   
     
@@ -275,7 +275,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../appendices/spin_2.html" class="md-tabs__link">
+        <a href="../../../appendices/spin_2.html" class="md-tabs__link">
           
   
     
@@ -310,7 +310,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="cQASM specification" class="md-nav__button md-logo" aria-label="cQASM specification" data-md-component="logo">
+    <a href="../../.." title="cQASM specification" class="md-nav__button md-logo" aria-label="cQASM specification" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -367,7 +367,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../index.html" class="md-nav__link ">
+            <a href="../../../index.html" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -400,7 +400,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../introduction/history.html" class="md-nav__link">
+      <a href="../../../introduction/history.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -421,7 +421,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../introduction/context.html" class="md-nav__link">
+      <a href="../../../introduction/context.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -442,7 +442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../introduction/acknowledgements.html" class="md-nav__link">
+      <a href="../../../introduction/acknowledgements.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -525,7 +525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../general_overview.html" class="md-nav__link">
+      <a href="../../general_overview.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -598,28 +598,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tokens/whitespace_and_comments.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Whitespace and comments
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../tokens/newlines.html" class="md-nav__link">
+      <a href="../../tokens/newlines.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -640,7 +619,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tokens/literals.html" class="md-nav__link">
+      <a href="../../tokens/literals.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -661,7 +640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tokens/identifiers.html" class="md-nav__link">
+      <a href="../../tokens/identifiers.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -682,7 +661,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tokens/keywords.html" class="md-nav__link">
+      <a href="../../tokens/keywords.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -703,11 +682,32 @@
   
   
     <li class="md-nav__item">
-      <a href="../tokens/operators_and_punctuators.html" class="md-nav__link">
+      <a href="../../tokens/operators_and_punctuators.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Operators and punctuators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tokens/whitespace_and_comments.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Whitespace and comments
   </span>
   
 
@@ -735,12 +735,6 @@
   
     
     
-      
-        
-      
-        
-      
-        
       
         
       
@@ -786,7 +780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="version_statement.html" class="md-nav__link">
+      <a href="../version_statement.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -804,10 +798,63 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="qubit_register_declaration.html" class="md-nav__link">
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_2" id="__nav_2_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Variable declarations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Variable declarations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="qubit_register_declaration.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -816,6 +863,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -842,6 +890,60 @@
 
               
             
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_3" id="__nav_2_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Instructions
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Instructions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
               
                 
   
@@ -849,11 +951,11 @@
   
   
     <li class="md-nav__item">
-      <a href="gates.html" class="md-nav__link">
+      <a href="../instructions/unitary_instructions.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Gates
+    Unitary instructions
   </span>
   
 
@@ -869,8 +971,52 @@
   
   
   
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_3_2" id="__nav_2_3_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Non-unitary instructions
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Non-unitary instructions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href="measure_instruction.html" class="md-nav__link">
+      <a href="../instructions/non_unitary_instructions/measure_instruction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -888,17 +1034,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="reset_instruction.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../instructions/non_unitary_instructions/reset_instruction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -907,6 +1046,42 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../instructions/single-gate-multiple-qubit-notation.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Single-gate-multiple-qubit (SGMQ) notation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -928,7 +1103,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../types.html" class="md-nav__link">
+      <a href="../../types.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -995,7 +1170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../expressions/indices.html" class="md-nav__link">
+      <a href="../../expressions/indices.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1016,7 +1191,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../expressions/predefined_constants.html" class="md-nav__link">
+      <a href="../../expressions/predefined_constants.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1037,7 +1212,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../expressions/builtin_functions.html" class="md-nav__link">
+      <a href="../../expressions/builtin_functions.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1115,7 +1290,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendices/spin_2.html" class="md-nav__link">
+      <a href="../../../appendices/spin_2.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1170,102 +1345,88 @@
   
 
 
-  <h1>Reset instruction</h1>
+  <h1>Qubit (register) declaration</h1>
 
-<p>A <strong><code>reset</code></strong> instruction resets the state of the qubit to <span class="arithmatex">\(|0\rangle\)</span>.
-It does this by first measuring the qubit and then, conditioned on the outcome being 1, applying a Pauli X gate.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Even though the <code>reset</code> instruction internally measures the qubit state,
-it does not store the measurement outcome in the measurement register,
-<em>i.e.</em>, the measurement register is unaffected by the <code>reset</code> instruction.
-The measurement outcome is only used to determine whether or not
-a Pauli X gate needs to be performed, in order to bring the qubit
-into the state <span class="arithmatex">\(|0\rangle\)</span>.</p>
-</div>
-<p>The general form of a reset instruction is as follows:</p>
+<p>A qubit (register) must be declared before it can be used.
+The general form is given as follows:</p>
 <div class="admonition info">
-<p>&emsp;<strong><code>reset</code></strong> <em>qubit-argument</em></p>
+<p>&emsp;<strong><code>qubit[</code></strong><em>size</em><strong><code>]</code></strong><em>identifier</em></p>
 </div>
 <details class="info">
-<summary>Grammar for reset instruction</summary>
-<p><em>reset</em>:<br />
-&emsp; <strong><code>reset</code></strong><br />
-&emsp; <strong><code>reset</code></strong> <em>qubit-argument</em></p>
-<p><em>qubit-argument</em>:<br />
-&emsp; <em>qubit-variable</em><br />
-&emsp; <em>qubit-index</em></p>
-<p><em>qubit-variable</em>:<br />
-&emsp; <em>identifier</em></p>
-<p><em>qubit-index</em>:<br />
-&emsp; <em>index</em></p>
+<summary>Grammar for bit (register) declaration</summary>
+<p><em>qubit-declaration</em>:<br />
+&emsp; <strong><code>qubit</code></strong> <em>array-size-declaration</em><sub>opt</sub> <em>identifier</em></p>
+<p><em>array-size-declaration</em>:<br />
+&emsp; <strong><code>[</code></strong> <em>integer-literal</em> <strong><code>]</code></strong>  </p>
 </details>
+<p>Its form is similar to the declaration of an arbitrary variable,
+whereby the type of the variable is specified first, <em>i.e.</em> 
+<strong><code>qubit</code></strong> denotes that the declared variable is of type <a href="../../types.html">Qubit</a>.
+and <strong><code>qubit[</code></strong><em>size</em><strong><code>]</code></strong>
+denotes that the declared variable is of type <a href="../../types.html">QubitArray</a>.
+The size of a qubit register is declared by an integer value between square brackets <strong><code>[</code></strong><em>size</em><strong><code>]</code></strong>.
+The name of the qubit (register) is defined through an <a href="../../tokens/identifiers.html">identifier</a>. </p>
+<p>The declaration of a qubit (register) is <em>optional</em>. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The qubit (register) declaration replaces the qubit statement, <em>i.e.</em>, </p>
+<p>&emsp;<strong><code>qubits</code></strong> <em>size</em></p>
+<p>of previous versions of the cQASM language.</p>
+</div>
+<p>Find below examples, respectively, of a single qubit declaration and qubit register declaration.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Reset of all the qubits</label><label for="__tabbed_1_2">Reset of a single qubit</label><label for="__tabbed_1_3">Reset of multiple qubits through their register index</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Single qubit declaration</label><label for="__tabbed_1_2">Qubit register declaration</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
-<span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>qubit q
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a>qubit[5] qq
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="hll">reset
-</span></code></pre></div></td></tr></table></div>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span>
+<span class="normal"><a href="#__codelineno-0-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>version 3
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="hll">qubit q  // Single qubit declaration of a qubit named &#39;q&#39;.
+</span><a id="__codelineno-0-4" name="__codelineno-0-4"></a>qubit b
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>H q
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>b = measure q
+</code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
-<span class="normal"><a href="#__codelineno-1-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>qubit q
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="hll">reset q
-</span></code></pre></div></td></tr></table></div>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
-<span class="normal"><a href="#__codelineno-2-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>qubit[5] q
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="hll">reset q[2, 4]
-</span></code></pre></div></td></tr></table></div>
-</div>
-</div>
-</div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The reset instruction accepts <a href="gates.html#single-gate-multi-qubit-sgmq-notation">SGMQ notation</a>, similar to gates.</p>
-</div>
-<p>The following code snippet shows how the reset instruction might be used in context.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-3-10">10</a></span>
-<span class="normal"><a href="#__codelineno-3-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>version 3.0
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a>qubit[2] q
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a>bit[2] b
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a>H q[0]
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a>CNOT q[0], q[1]
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a>
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="hll">reset q[0]  // Resets the state of qubit q[0] to |0&gt;
-</span><a id="__codelineno-3-10" name="__codelineno-3-10"></a>
-<a id="__codelineno-3-11" name="__codelineno-3-11"></a>b = measure q
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#__codelineno-1-7">7</a></span>
+<span class="normal"><a href="#__codelineno-1-8">8</a></span>
+<span class="normal"><a href="#__codelineno-1-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>version 3
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="hll">qubit[5] q  // Qubit register declaration of a register containing 5 qubits, named &#39;q&#39;.
+</span><a id="__codelineno-1-4" name="__codelineno-1-4"></a>bit[2] b
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a>H q[0]
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a>CNOT q[0], q[1]
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a>b[0, 1] = measure q[0, 1]
 </code></pre></div></td></tr></table></div>
-<p>The <code>reset</code> instruction is performed by measuring <code>q[0]</code> along the computational basis.
-Based on the measurement outcome, either no operation is performed (in case the outcome is 0) or
-a Pauli X gate is applied (in case the outcome is 1).
-The result of the subsequent <code>measure</code> instruction will be <code>00</code> in roughly half of the cases
-and <code>10</code> in the remaining cases,
-with the qubit register indices decreasing from left to right, <em>i.e.</em>, <code>q[n]...q[0]</code>.</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>Qubits that are part of an entangled state,
-are disentangled from that state,
-when the <code>reset</code> instruction is applied to them.</p>
 </div>
+</div>
+</div>
+</div>
+<p>The individual qubits of a qubit register can be referred to by their register index,
+<em>e.g.</em>, in the example of the <em>Qubit register declaration</em>,
+the statement <strong><code>H q[0]</code></strong> indicates the application of a Hadamard gate <strong><code>H</code></strong> on the qubit located at index <strong><code>0</code></strong>
+of the qubit register <strong><code>q</code></strong>. 
+Note that in the case of a single qubit, 
+the qubit is referred to through its identifier, not through a register index.</p>
+<p>Qubits, either declared as a single qubit or as elements of a register,
+are presumed to be initialized in the state <span class="arithmatex">\(|0\rangle\)</span> of the standard/computational basis.</p>
 
 
 
@@ -1295,7 +1456,7 @@ when the <code>reset</code> instruction is applied to them.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="measure_instruction.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Measure instruction">
+          <a href="../version_statement.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Version statement">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1305,20 +1466,20 @@ when the <code>reset</code> instruction is applied to them.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Measure instruction
+                Version statement
               </div>
             </div>
           </a>
         
         
           
-          <a href="../types.html" class="md-footer__link md-footer__link--next" aria-label="Next: Types">
+          <a href="bit_register_declaration.html" class="md-footer__link md-footer__link--next" aria-label="Next: Bit (register) declaration">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Types
+                Bit (register) declaration
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1352,12 +1513,12 @@ when the <code>reset</code> instruction is applied to them.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes", "navigation.tabs", "navigation.tracking", "navigation.footer"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.indexes", "navigation.tabs", "navigation.tracking", "navigation.footer"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
-        <script src="../../javascripts/mathjax.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       

@@ -9,25 +9,25 @@
       
       
       
-        <link rel="prev" href="version_statement.html">
+        <link rel="prev" href="../variable_declarations/bit_register_declaration.html">
       
       
-        <link rel="next" href="bit_register_declaration.html">
+        <link rel="next" href="non_unitary_instructions/measure_instruction.html">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.41">
     
     
       
-        <title>Qubit (register) declaration - cQASM specification</title>
+        <title>Unitary instructions - cQASM specification</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.0253249f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,14 +46,14 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
     
-   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -62,7 +62,7 @@
     .gdesc-inner { font-size: 0.75rem; }
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -80,6 +80,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#named-gates" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -94,7 +99,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="cQASM specification" class="md-header__button md-logo" aria-label="cQASM specification" data-md-component="logo">
+    <a href="../../.." title="cQASM specification" class="md-header__button md-logo" aria-label="cQASM specification" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Qubit (register) declaration
+              Unitary instructions
             
           </span>
         </div>
@@ -137,7 +142,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -233,7 +238,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../index.html" class="md-tabs__link">
+        <a href="../../../index.html" class="md-tabs__link">
           
   
     
@@ -255,7 +260,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../general_overview.html" class="md-tabs__link">
+        <a href="../../general_overview.html" class="md-tabs__link">
           
   
     
@@ -275,7 +280,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../appendices/spin_2.html" class="md-tabs__link">
+        <a href="../../../appendices/spin_2.html" class="md-tabs__link">
           
   
     
@@ -310,7 +315,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="cQASM specification" class="md-nav__button md-logo" aria-label="cQASM specification" data-md-component="logo">
+    <a href="../../.." title="cQASM specification" class="md-nav__button md-logo" aria-label="cQASM specification" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -367,7 +372,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../index.html" class="md-nav__link ">
+            <a href="../../../index.html" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -400,7 +405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../introduction/history.html" class="md-nav__link">
+      <a href="../../../introduction/history.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -421,7 +426,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../introduction/context.html" class="md-nav__link">
+      <a href="../../../introduction/context.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -442,7 +447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../introduction/acknowledgements.html" class="md-nav__link">
+      <a href="../../../introduction/acknowledgements.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -525,7 +530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../general_overview.html" class="md-nav__link">
+      <a href="../../general_overview.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -598,28 +603,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tokens/whitespace_and_comments.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Whitespace and comments
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../tokens/newlines.html" class="md-nav__link">
+      <a href="../../tokens/newlines.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -640,7 +624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tokens/literals.html" class="md-nav__link">
+      <a href="../../tokens/literals.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -661,7 +645,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tokens/identifiers.html" class="md-nav__link">
+      <a href="../../tokens/identifiers.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -682,7 +666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tokens/keywords.html" class="md-nav__link">
+      <a href="../../tokens/keywords.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -703,11 +687,32 @@
   
   
     <li class="md-nav__item">
-      <a href="../tokens/operators_and_punctuators.html" class="md-nav__link">
+      <a href="../../tokens/operators_and_punctuators.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Operators and punctuators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tokens/whitespace_and_comments.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Whitespace and comments
   </span>
   
 
@@ -735,12 +740,6 @@
   
     
     
-      
-        
-      
-        
-      
-        
       
         
       
@@ -786,7 +785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="version_statement.html" class="md-nav__link">
+      <a href="../version_statement.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -804,17 +803,54 @@
                 
   
   
+  
+  
     
+    
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_2" id="__nav_2_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Variable declarations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Variable declarations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="qubit_register_declaration.html" class="md-nav__link md-nav__link--active">
+  
+    <li class="md-nav__item">
+      <a href="../variable_declarations/qubit_register_declaration.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -823,7 +859,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -836,7 +871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="bit_register_declaration.html" class="md-nav__link">
+      <a href="../variable_declarations/bit_register_declaration.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -850,22 +885,147 @@
 
               
             
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
               
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="gates.html" class="md-nav__link">
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_3" id="__nav_2_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Instructions
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Instructions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Unitary instructions
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="unitary_instructions.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Gates
+    Unitary instructions
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#named-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Named gates
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Named gates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#standard-gate-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      Standard gate set
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gate-modifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gate modifiers
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -877,8 +1037,52 @@
   
   
   
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_3_2" id="__nav_2_3_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Non-unitary instructions
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Non-unitary instructions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href="measure_instruction.html" class="md-nav__link">
+      <a href="non_unitary_instructions/measure_instruction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -899,7 +1103,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reset_instruction.html" class="md-nav__link">
+      <a href="non_unitary_instructions/reset_instruction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -928,7 +1132,44 @@
   
   
     <li class="md-nav__item">
-      <a href="../types.html" class="md-nav__link">
+      <a href="single-gate-multiple-qubit-notation.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Single-gate-multiple-qubit (SGMQ) notation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -995,7 +1236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../expressions/indices.html" class="md-nav__link">
+      <a href="../../expressions/indices.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1016,7 +1257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../expressions/predefined_constants.html" class="md-nav__link">
+      <a href="../../expressions/predefined_constants.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1037,7 +1278,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../expressions/builtin_functions.html" class="md-nav__link">
+      <a href="../../expressions/builtin_functions.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1115,7 +1356,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendices/spin_2.html" class="md-nav__link">
+      <a href="../../../appendices/spin_2.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1154,6 +1395,47 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#named-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Named gates
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Named gates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#standard-gate-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      Standard gate set
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gate-modifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gate modifiers
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1170,88 +1452,258 @@
   
 
 
-  <h1>Qubit (register) declaration</h1>
+  <h1>Unitary instructions</h1>
 
-<p>A qubit (register) must be declared before it can be used.
-The general form is given as follows:</p>
-<div class="admonition info">
-<p>&emsp;<strong><code>qubit[</code></strong><em>size</em><strong><code>]</code></strong><em>identifier</em></p>
-</div>
+<p>Unitary instructions, commonly known as gates, define single-qubit or multi-qubit operations
+that change the state of a qubit register in a reversible and deterministic fashion. They include:</p>
+<ul>
+<li><a href="unitary_instructions.html#named-gates">named gates</a>, or</li>
+<li>compositions of <a href="unitary_instructions.html#gate-modifiers">gate modifiers</a> acting on a named gate.</li>
+</ul>
+<p>Note that a composition of gate modifiers acting on a named gate is itself a gate. </p>
 <details class="info">
-<summary>Grammar for bit (register) declaration</summary>
-<p><em>qubit-declaration</em>:<br />
-&emsp; <strong><code>qubit</code></strong> <em>array-size-declaration</em><sub>opt</sub> <em>identifier</em></p>
-<p><em>array-size-declaration</em>:<br />
-&emsp; <strong><code>[</code></strong> <em>integer-literal</em> <strong><code>]</code></strong>  </p>
+<summary>Grammar for unitary instructions</summary>
+<p><em>unitary-instruction</em>:<br />
+&emsp; <em>gate</em> <em>qubit-arguments</em>  </p>
+<p><em>gate</em>:<br />
+&emsp; <em>inv-gate</em><br />
+&emsp; <em>pow-gate</em><br />
+&emsp; <em>ctrl-gate</em><br />
+&emsp; <em>named-gate</em>  </p>
+<p><em>inv-gate</em>:<br />
+&emsp; <code>inv.</code>gate</p>
+<p><em>pow-gate</em>:<br />
+&emsp; <code>pow(</code><em>parameter</em><code>).</code><em>gate</em></p>
+<p><em>ctrl-gate</em>:<br />
+&emsp; <code>ctrl.</code><em>gate</em></p>
+<p><em>named-gate</em>:<br />
+&emsp; <em>identifier</em> <em>parameters</em><sub>opt</sub>  </p>
+<p><em>parameters</em>:<br />
+&emsp; <strong><code>(</code></strong> <em>parameter-list</em> <strong><code>)</code></strong></p>
+<p><em>parameter-list</em>:<br />
+&emsp; <em>parameter</em><br />
+&emsp; <em>parameter-list</em> <strong><code>,</code></strong> <em>parameter</em></p>
+<p><em>parameter</em>:<br />
+&emsp; <em>integer-literal</em><br />
+&emsp; <em>floating-literal</em></p>
+<p><em>qubit-arguments</em>:<br />
+&emsp; <em>qubit-argument-list</em></p>
+<p><em>qubit-argument-list</em>:<br />
+&emsp; <em>qubit-argument</em><br />
+&emsp; <em>qubit-argument-list</em> <strong><code>,</code></strong> <em>qubit-argument</em></p>
+<p><em>qubit-argument</em>:<br />
+&emsp; <em>qubit-variable</em><br />
+&emsp; <em>qubit-index</em></p>
+<p><em>qubit-variable</em>:<br />
+&emsp; <em>identifier</em></p>
+<p><em>qubit-index</em>:<br />
+&emsp; <em>index</em></p>
 </details>
-<p>Its form is similar to the declaration of an arbitrary variable,
-whereby the type of the variable is specified first, <em>i.e.</em> 
-<strong><code>qubit</code></strong> denotes that the declared variable is of type <a href="../types.html">Qubit</a>.
-and <strong><code>qubit[</code></strong><em>size</em><strong><code>]</code></strong>
-denotes that the declared variable is of type <a href="../types.html">QubitArray</a>.
-The size of a qubit register is declared by an integer value between square brackets <strong><code>[</code></strong><em>size</em><strong><code>]</code></strong>.
-The name of the qubit (register) is defined through an <a href="../tokens/identifiers.html">identifier</a>. </p>
-<p>The declaration of a qubit (register) is <em>optional</em>. </p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The qubit (register) declaration replaces the qubit statement, <em>i.e.</em>, </p>
-<p>&emsp;<strong><code>qubits</code></strong> <em>size</em></p>
-<p>of previous versions of the cQASM language.</p>
+<h2 id="named-gates">Named gates</h2>
+<p>Named gates comprise particular unitary operations that have been given their own unique label,
+<em>e.g.</em>, the Hadamard gate <strong><code>H</code></strong> or the controlled-not gate <strong><code>CNOT</code></strong>.
+In general, we simply refer to them as gates.
+All recognized (named) gates are listed in the <a href="unitary_instructions.html#standard-gate-set">standard gate set</a>.
+Moreover, we use the term <em>named gate</em> to distinguish them from unitary operations consisting of
+compositions of gate modifiers acting on a named gate, <em>i.e.</em>, modified gates.
+Named gates are, thus, unmodified gates and can simply be used on their own
+or modified (multiple times) through gate modifiers. </p>
+<p>The general form of a named gate is given by the gate name
+followed by the (comma-separated list of) qubit operand(s), <em>e.g.</em>, <strong><code>X q[0]</code></strong>:</p>
+<div class="admonition info">
+<p>&emsp;<em>gate</em> <em>qubit-arguments</em></p>
 </div>
-<p>Find below examples, respectively, of a single qubit declaration and qubit register declaration.</p>
+<p>A named gate can be parameterized.
+The general form of a parameterized gate is given by the gate name
+followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses,
+which in turn is followed by the (comma-separated list of) qubit operand(s), <em>e.g.</em>, <strong><code>CRk(2) q[0], q[1]</code></strong>:</p>
+<div class="admonition info">
+<p>&emsp;<em>gate</em><strong><code>(</code></strong><em>parameters</em><strong><code>)</code></strong> <em>qubit-arguments</em></p>
+</div>
+<p>Note that the parameters, either single or a list of multiple parameters,
+appear within parentheses directly following the gate name.
+We distinguish between the <em>parameters</em> of a parameterized gate,
+in terms of number <a href="../../tokens/literals.html">literals</a>,
+and the <em>qubit arguments</em> that a (parameterized) gate acts on.</p>
+<p>A few examples of gates are shown below.</p>
 <div class="admonition example">
-<p class="admonition-title">Example</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Single qubit declaration</label><label for="__tabbed_1_2">Qubit register declaration</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
-<span class="normal"><a href="#__codelineno-0-2">2</a></span>
-<span class="normal"><a href="#__codelineno-0-3">3</a></span>
-<span class="normal"><a href="#__codelineno-0-4">4</a></span>
-<span class="normal"><a href="#__codelineno-0-5">5</a></span>
-<span class="normal"><a href="#__codelineno-0-6">6</a></span>
-<span class="normal"><a href="#__codelineno-0-7">7</a></span>
-<span class="normal"><a href="#__codelineno-0-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>version 3
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="hll">qubit q  // Single qubit declaration of a qubit named &#39;q&#39;.
-</span><a id="__codelineno-0-4" name="__codelineno-0-4"></a>qubit b
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a>H q
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8"></a>b = measure q
-</code></pre></div></td></tr></table></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>// A single-qubit Hadamard gate
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>H q[0]
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>// A two-qubit controlled-Z gate (control: q[0], target: q[1])
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>CZ q[0], q[1]
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>// A parameterized single-qubit Rx gate (with π/2 rotation around the x-axis)
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>Rx(pi/2) q[0]
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>// A parametrized two-qubit controlled phase-shift gate (control: q[1], target: q[0])
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>CRk(2) q[1], q[0]
+</code></pre></div>
 </div>
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
-<span class="normal"><a href="#__codelineno-1-2">2</a></span>
-<span class="normal"><a href="#__codelineno-1-3">3</a></span>
-<span class="normal"><a href="#__codelineno-1-4">4</a></span>
-<span class="normal"><a href="#__codelineno-1-5">5</a></span>
-<span class="normal"><a href="#__codelineno-1-6">6</a></span>
-<span class="normal"><a href="#__codelineno-1-7">7</a></span>
-<span class="normal"><a href="#__codelineno-1-8">8</a></span>
-<span class="normal"><a href="#__codelineno-1-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>version 3
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="hll">qubit[5] q  // Qubit register declaration of a register containing 5 qubits, named &#39;q&#39;.
-</span><a id="__codelineno-1-4" name="__codelineno-1-4"></a>bit[2] b
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a>H q[0]
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a>CNOT q[0], q[1]
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a>b[0, 1] = measure q[0, 1]
-</code></pre></div></td></tr></table></div>
+<h3 id="standard-gate-set">Standard gate set</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Example statement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>Identity gate</td>
+<td><strong><code>I q[0]</code></strong></td>
+</tr>
+<tr>
+<td>H</td>
+<td>Hadamard gate</td>
+<td><strong><code>H q[0]</code></strong></td>
+</tr>
+<tr>
+<td>X</td>
+<td>Pauli-X</td>
+<td><strong><code>X q[0]</code></strong></td>
+</tr>
+<tr>
+<td>X90</td>
+<td>Rotation around the <em>x</em>-axis of <span class="arithmatex">\(\pi/2\)</span></td>
+<td><strong><code>X90 q[0]</code></strong></td>
+</tr>
+<tr>
+<td>mX90</td>
+<td>Rotation around the <em>x</em>-axis of <span class="arithmatex">\(-\pi/2\)</span></td>
+<td><strong><code>mX90 q[0]</code></strong></td>
+</tr>
+<tr>
+<td>Y</td>
+<td>Pauli-Y</td>
+<td><strong><code>Y q[0]</code></strong></td>
+</tr>
+<tr>
+<td>Y90</td>
+<td>Rotation around the <em>y</em>-axis of <span class="arithmatex">\(\pi/2\)</span></td>
+<td><strong><code>Y90 q[0]</code></strong></td>
+</tr>
+<tr>
+<td>mY90</td>
+<td>Rotation around the <em>y</em>-axis of <span class="arithmatex">\(-\pi/2\)</span></td>
+<td><strong><code>mY90 q[0]</code></strong></td>
+</tr>
+<tr>
+<td>Z</td>
+<td>Pauli-Z</td>
+<td><strong><code>Z q[0]</code></strong></td>
+</tr>
+<tr>
+<td>S</td>
+<td>Phase gate</td>
+<td><strong><code>S q[0]</code></strong></td>
+</tr>
+<tr>
+<td>Sdag</td>
+<td>S dagger gate</td>
+<td><strong><code>Sdag q[0]</code></strong></td>
+</tr>
+<tr>
+<td>T</td>
+<td>T</td>
+<td><strong><code>T q[0]</code></strong></td>
+</tr>
+<tr>
+<td>Tdag</td>
+<td>T dagger gate</td>
+<td><strong><code>Tdag q[0]</code></strong></td>
+</tr>
+<tr>
+<td>Rx</td>
+<td>Arbitrary rotation around <em>x</em>-axis</td>
+<td><strong><code>Rx(pi) q[0]</code></strong></td>
+</tr>
+<tr>
+<td>Ry</td>
+<td>Arbitrary rotation around <em>y</em>-axis</td>
+<td><strong><code>Ry(pi) q[0]</code></strong></td>
+</tr>
+<tr>
+<td>Rz</td>
+<td>Arbitrary rotation around <em>z</em>-axis</td>
+<td><strong><code>Rz(pi) q[0]</code></strong></td>
+</tr>
+<tr>
+<td>CNOT</td>
+<td>Controlled-NOT gate</td>
+<td><strong><code>CNOT q[0], q[1]</code></strong></td>
+</tr>
+<tr>
+<td>CZ</td>
+<td>Controlled-Z, Controlled-Phase</td>
+<td><strong><code>CZ q[0], q[1]</code></strong></td>
+</tr>
+<tr>
+<td>CR</td>
+<td>Controlled phase shift (arbitrary angle)</td>
+<td><strong><code>CR(pi) q[0], q[1]</code></strong></td>
+</tr>
+<tr>
+<td>CRk</td>
+<td>Controlled phase shift (<span class="arithmatex">\(\pi/2^k\)</span>)</td>
+<td><strong><code>CRk(2) q[0], q[1]</code></strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="gate-modifiers">Gate modifiers</h2>
+<p>A gate modifier is an operator <em>Q</em> that takes a gate as input and returns a modified gate as output (<em>Q: gate → gate</em>),
+<em>i.e.</em>, it transforms an arbitrary unitary <span class="arithmatex">\(U\)</span> into <span class="arithmatex">\(U'\)</span>, based on the particular modifier that is applied.
+We consider the following gate modifiers:</p>
+<ul>
+<li>The <em>inverse</em> modifier <strong><code>inv</code></strong>, which modifies the gate <span class="arithmatex">\(U\)</span> into <span class="arithmatex">\(U^\dagger\)</span>, <em>e.g.</em>, <strong><code>inv.X q[0]</code></strong>.</li>
+<li>The <em>power</em> modifier <strong><code>pow</code></strong>, which raises the gate <span class="arithmatex">\(U\)</span> to the specified power <span class="arithmatex">\(a\)</span>, <em>i.e.</em>, <span class="arithmatex">\(U^a\)</span>,
+  where <span class="arithmatex">\(a\)</span> is a float, <em>e.g.</em>, <strong><code>pow(pi/2).X q[0]</code></strong>.</li>
+<li>The <em>control</em> modifier <strong><code>ctrl</code></strong>, which changes the gate <span class="arithmatex">\(U\)</span> into the controlled-<span class="arithmatex">\(U\)</span> gate, <em>e.g.</em>,
+  <strong><code>ctrl.X q[0], q[1]</code></strong>, where the control qubit is prepended to the list of qubit operands. </li>
+</ul>
+<p>Since gate modifiers return gates, they can be applied in a nested manner,
+<em>e.g.</em>, <strong><code>inv.pow(2).X</code></strong>, where a gate modifier <strong><code>inv</code></strong> is applied to the modified gate <strong><code>pow(2).X</code></strong>,
+which in turn resulted from applying the gate modifier <strong><code>pow(2)</code></strong> on the (named) gate <strong><code>X</code></strong>.</p>
+<p>The current version of the language only allows gate modifiers to act on single-qubit gates.</p>
+<div class="admonition info">
+<p>&emsp;<strong><code>inv.</code></strong><em>gate</em> <em>qubit-argument</em><br />
+&emsp;<strong><code>pow(</code></strong><em>exponent</em><strong><code>).</code></strong><em>gate</em> <em>qubit-argument</em><br />
+&emsp;<strong><code>ctrl.</code></strong><em>gate</em> <em>qubit-arguments</em></p>
 </div>
+<p>A few examples of gates are shown below.</p>
+<div class="admonition example">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>// Inverse of X
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>inv.X q
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>// S gate implemented as a power of T
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>pow(2).T q
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>// CZ implemented as a controlled-Z
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>ctrl.Z q[0], q[1]
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>// Composition of gate modifiers (modifiers are applied from right to left)
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>ctrl.pow(1/2).inv.X q[0], q[1]
+</code></pre></div>
 </div>
+<p>Notice that, <strong><code>inv</code></strong> and <strong><code>pow</code></strong> map an <em>n</em>-qubit gate to an <em>n</em>-qubit gate,
+and <strong><code>ctrl</code></strong> maps an <em>n</em>-qubit gate to a (<em>n</em>+1)-qubit gate.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The current version of the language does not support the use of gate modifiers on multi-qubit gates.
+For example, the following instructions are <em>not</em> supported:</p>
+<ul>
+<li><strong><code>inv.CRk(2) q[0], q[1]</code></strong>, where the <em>inverse</em> modifier is applied to a two-qubit named gate.</li>
+<li><strong><code>inv.ctrl.X q[0], q[1]</code></strong>, where the <em>inverse</em> modifier is applied to a two-qubit modified gate.</li>
+</ul>
+<p>Considering the latter example, note that the following use of gate modifiers <em>is</em> permitted:</p>
+<ul>
+<li><strong><code>ctrl.inv.X q[0], q[1]</code></strong>, since the <em>inverse</em> modifier is first applied to the single-qubit named gate <strong><code>X</code></strong>,
+resulting in a single-qubit modified gate, which only then is modified through the <em>control</em> modifier
+into a two-qubit modified gate.</li>
+</ul>
 </div>
-</div>
-<p>The individual qubits of a qubit register can be referred to by their register index,
-<em>e.g.</em>, in the example of the <em>Qubit register declaration</em>,
-the statement <strong><code>H q[0]</code></strong> indicates the application of a Hadamard gate <strong><code>H</code></strong> on the qubit located at index <strong><code>0</code></strong>
-of the qubit register <strong><code>q</code></strong>. 
-Note that in the case of a single qubit, 
-the qubit is referred to through its identifier, not through a register index.</p>
-<p>Qubits, either declared as a single qubit or as elements of a register,
-are presumed to be initialized in the state <span class="arithmatex">\(|0\rangle\)</span> of the standard/computational basis.</p>
 
 
 
@@ -1281,7 +1733,7 @@ are presumed to be initialized in the state <span class="arithmatex">\(|0\rangle
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="version_statement.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Version statement">
+          <a href="../variable_declarations/bit_register_declaration.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Bit (register) declaration">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1291,20 +1743,20 @@ are presumed to be initialized in the state <span class="arithmatex">\(|0\rangle
                 Previous
               </span>
               <div class="md-ellipsis">
-                Version statement
+                Bit (register) declaration
               </div>
             </div>
           </a>
         
         
           
-          <a href="bit_register_declaration.html" class="md-footer__link md-footer__link--next" aria-label="Next: Bit (register) declaration">
+          <a href="non_unitary_instructions/measure_instruction.html" class="md-footer__link md-footer__link--next" aria-label="Next: Measure instruction">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Bit (register) declaration
+                Measure instruction
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1338,12 +1790,12 @@ are presumed to be initialized in the state <span class="arithmatex">\(|0\rangle
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes", "navigation.tabs", "navigation.tracking", "navigation.footer"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.indexes", "navigation.tabs", "navigation.tracking", "navigation.footer"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
-        <script src="../../javascripts/mathjax.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
