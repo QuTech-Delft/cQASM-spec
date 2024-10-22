@@ -59,11 +59,14 @@ Note that a composition of gate modifiers acting on a named gate is itself a gat
 
 ## Named gates
 
-A named gate is what is commonly referred to simply as a gate.
-We use the term named gate to distinguish them from compositions of gate modifiers acting on a named gate,
-which also results to be a gate.
-Named gates are, thus, the simplest form of unitary instructions.
-They can just be used on their own, or modified multiple times by gate modifiers. 
+Named gates comprise particular unitary operations that have been given their own unique label,
+_e.g._, the Hadamard gate **`H`** or the controlled-not gate **`CNOT`**.
+In general, we simply refer to them as gates.
+All recognized (named) gates are listed in the [standard gate set](unitary_instructions.md#standard-gate-set).
+Moreover, we use the term _named gate_ to distinguish them from unitary operations consisting of
+compositions of gate modifiers acting on a named gate, _i.e._, modified gates.
+Named gates are, thus, unmodified gates and can simply be used on their own
+or modified (multiple times) through gate modifiers. 
 
 The general form of a named gate is given by the gate name
 followed by the (comma-separated list of) qubit operand(s), _e.g._, **`X q[0]`**:
@@ -104,9 +107,6 @@ A few examples of gates are shown below.
     // A parametrized two-qubit controlled phase-shift gate (control: q[1], target: q[0])
     CRk(2) q[1], q[0]
     ```
-
-The named gates that are supported by the cQASM language
-are listed in the [standard gate set](unitary_instructions.md#standard-gate-set).
 
 ### Standard gate set
 
