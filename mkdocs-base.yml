@@ -26,8 +26,12 @@ nav:
       - Instructions:
         - Unitary instructions: ./language_specification/statements/instructions/unitary_instructions.md
         - Non-unitary instructions:
+          - Init instruction: ./language_specification/statements/instructions/non_unitary_instructions/init_instruction.md
           - Measure instruction: ./language_specification/statements/instructions/non_unitary_instructions/measure_instruction.md
           - Reset instruction: ./language_specification/statements/instructions/non_unitary_instructions/reset_instruction.md
+        - Control instructions:
+          - Barrier instruction: ./language_specification/statements/instructions/control_instructions/barrier_instruction.md
+          - Wait instruction: ./language_specification/statements/instructions/control_instructions/wait_instruction.md
         - Single-gate-multiple-qubit (SGMQ) notation: ./language_specification/statements/instructions/single-gate-multiple-qubit-notation.md
     - Types: ./language_specification/types.md
     - Expressions:
@@ -35,7 +39,7 @@ nav:
       - Predefined constants: ./language_specification/expressions/predefined_constants.md
       - Built-in functions: ./language_specification/expressions/builtin_functions.md
   - Appendices:
-      - Spin-2: appendices/spin_2.md
+      - Spin-2+: appendices/spin_2plus.md
 
 theme:
   name: material

@@ -19,7 +19,6 @@ The general form of a reset instruction is as follows:
 ??? info "Grammar for reset instruction"
     
     _reset-instruction_:  
-    &emsp; __`reset`__  
     &emsp; __`reset`__ _qubit-argument_
 
     _qubit-argument_:  
@@ -33,14 +32,6 @@ The general form of a reset instruction is as follows:
     &emsp; _index_
 
 !!! example
-    
-    === "Reset of all the qubits"
-    
-        ```linenums="1", hl_lines="3"
-        qubit q
-        qubit[5] qq
-        reset
-        ```
     
     === "Reset of a single qubit"
     
