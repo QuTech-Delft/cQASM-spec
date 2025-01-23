@@ -131,7 +131,7 @@ A few examples of gates are shown below.
 | CNOT | Controlled-NOT gate                      | **`CNOT q[0], q[1]`**   |
 | CZ   | Controlled-Z, Controlled-Phase           | **`CZ q[0], q[1]`**     |
 | CR   | Controlled phase shift (arbitrary angle) | **`CR(pi) q[0], q[1]`** |
-| CRk  | Controlled phase shift ($\pi/2^k$)       | **`CRk(2) q[0], q[1]`** |
+| CRk  | Controlled phase shift ($\pi/2^{k-1}$)   | **`CRk(2) q[0], q[1]`** |
 | SWAP | Swap gate                                | **`SWAP q[0], q[1]`**   |
 
 ## Gate modifiers
