@@ -43,8 +43,12 @@ The unitary operations, commonly know as gates, can be either
 - Instructions:
     - [Unitary instructions](statements/instructions/unitary_instructions.md) (_i.e._, gates)
     - Non-unitary instructions:
+        - [Init instruction](statements/instructions/non_unitary_instructions/init_instruction.md)
         - [Measure instruction](statements/instructions/non_unitary_instructions/measure_instruction.md)
         - [Reset instruction](statements/instructions/non_unitary_instructions/reset_instruction.md)
+    - Control instructions:
+        - [Barrier instruction](statements/instructions/control_instructions/barrier_instruction.md)
+        - [Wait instruction](statements/instructions/control_instructions/wait_instruction.md)
    - [Single-gate-multiple-qubit (SGMQ) notation](statements/instructions/single-gate-multiple-qubit-notation.md)
 
 !!! example ""

@@ -1,10 +1,10 @@
-The general form of the wait instruction is as follows:
+The general form of the **`wait`** instruction is as follows:
 
 !!! info ""
 
     &emsp;__`wait(`__ _parameter_ __`)`__ _qubit-argument_
 
-??? info "Grammar for wait instruction"
+??? info "Grammar for **`wait`** instruction"
     
     _wait-instruction_:  
     &emsp;__`wait(`__ _parameter_ __`)`__ _qubit-argument_
@@ -21,3 +21,8 @@ The general form of the wait instruction is as follows:
 
     _qubit-index_:  
     &emsp; _index_
+
+!!! note
+
+    The **`wait`** instruction accepts
+    [SGMQ notation](../single-gate-multiple-qubit-notation.md), similar to gates.
