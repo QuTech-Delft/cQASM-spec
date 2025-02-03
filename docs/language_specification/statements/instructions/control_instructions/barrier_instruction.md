@@ -1,6 +1,7 @@
 The **`barrier`** instruction is a single-qubit control instruction
 that is used to constrain the optimization of a scheduler.
-It tells a scheduler that instructions on particular qubit(s) cannot be scheduled across the barrier.
+It tells a scheduler that instructions on the specified qubit(s) cannot be scheduled across the barrier.
+See the [**`wait`** instruction](wait_instruction.md), to impose a time delay following a barrier.
 
 The general form of the **`barrier`** instruction is as follows:
 
@@ -34,6 +35,11 @@ The general form of the **`barrier`** instruction is as follows:
     SGMQ notation does not guarantee simultaneity.
     This will depend on the scheduling optimization that is applied during the compilation process.
 
+    For certain backends, groups of consecutive **`barrier`** instructions are linked together to form a _uniform_
+    barrier, across which no instructions on the specified qubits can be scheduled.
+    Note that one can create a group of consecutive **`barrier`** instructions, _i.e._ a uniform barrier, using SGMQ
+    notation.
+
 !!! example
 
     === "Single qubit"
@@ -63,7 +69,7 @@ However, because of the presence of the **`barrier`** instruction the user expli
 **`q`** are not permitted to be optimized across the barrier.
 The second example shows that a barrier can be placed for multiple qubits.
 Note that the **`barrier`** instruction is applied to qubits **`q[0]`** and **`q[1]`**.
-Qubit **`q[2]`** can be optimized freely across the circuit, _i.e._, be scheduled before or after the barrier. 
+Qubit **`q[2]`** can be optimized freely across this circuit, _i.e._, be scheduled before or after the barrier. 
 
 The following code snippet illustrates how the **`barrier`** instruction might be used in context.
 
@@ -91,6 +97,7 @@ b[2, 3] = measure q
 ```
 
 In the above code snippet, the $\Phi_{+}$ and $\Psi_{+}$ Bell states are generated and measured, successively.
-The **`barrier`** instruction is used to guarantee that the **`measure`** instruction is scheduled _after_ the
-respective states have been generated. 
+The **`barrier`** instruction is used to guarantee that the
+[**`measure`** instruction](../non_unitary_instructions/measure_instruction.md) is scheduled _after_ the respective
+states have been generated. 
 Moreover, an extra **`barrier`** instruction is used to separate the generation and measurement of the two Bell states.
