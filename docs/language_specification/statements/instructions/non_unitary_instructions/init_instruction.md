@@ -59,7 +59,7 @@ CNOT q[0], q[1]
 b = measure q
 ```
 
-The code example above, the qubits are first declared and subsequently initialized.
+In the code example above, the qubits are first declared and subsequently initialized.
 Note that the initialization of qubits needs to be done before any instructions
 (excluding the [**`barrier`**](../control_instructions/barrier_instruction.md)
 and [**`wait`**](../control_instructions/wait_instruction.md) control instructions)
