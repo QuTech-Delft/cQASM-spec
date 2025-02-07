@@ -60,10 +60,9 @@ b = measure q
 ```
 
 In the code example above, the qubits are first declared and subsequently initialized.
-Note that the initialization of qubits needs to be done before any instructions
-(excluding the [**`barrier`**](../control_instructions/barrier_instruction.md)
-and [**`wait`**](../control_instructions/wait_instruction.md) control instructions)
-are applied to them (see warning below).
+Note that the initialization of qubits needs to be done before any instruction
+(excluding a control instruction)
+is applied to them (see warning below).
 If one wishes to _reset_ the state of the qubit to $|0\rangle$ mid-circuit,
 one should use the [**`reset`**](../non_unitary_instructions/reset_instruction.md) instruction.
 
