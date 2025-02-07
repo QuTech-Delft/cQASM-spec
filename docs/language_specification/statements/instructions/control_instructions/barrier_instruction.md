@@ -27,12 +27,11 @@ The general form of the **`barrier`** instruction is as follows:
 !!! note
 
     The **`barrier`** instruction accepts
-    [SGMQ notation](../single-gate-multiple-qubit-notation.md), similar to gates.
-    Note, however, that SGMQ notation is _syntactic sugar_ to write a on a single line
-    the application of a single instruction to multiple qubits.
-    In general, a compiler will unpack this notation to separate consectutive
-    single-qubit instructions on the respective qubits.
-    SGMQ notation does not guarantee simultaneity.
+    [SGMQ notation](../single-gate-multiple-qubit-notation.md).
+    SGMQ notation allows you to express the application of an instruction to multiple qubits.
+    However, SGMQ notation does not guarantee simultaneity.
+    In general, a compiler will unpack this notation to separate consecutive
+    single-qubit instructions on each respective qubit.
     This will depend on the scheduling optimization that is applied during the compilation process.
 
     For certain backends, groups of consecutive **`barrier`** instructions are linked together to form a _uniform_
