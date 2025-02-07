@@ -34,10 +34,11 @@ The general form of the **`barrier`** instruction is as follows:
     single-qubit instructions on each respective qubit.
     This will depend on the scheduling optimization that is applied during the compilation process.
 
-    For certain backends, groups of consecutive **`barrier`** instructions are linked together to form a _uniform_
-    barrier, across which no instructions on the specified qubits can be scheduled.
-    Note that one can create a group of consecutive **`barrier`** instructions, _i.e._ a uniform barrier, using SGMQ
-    notation.
+    For certain backends,
+    groups of consecutive **`barrier`** instructions are linked together to form a _uniform_ barrier,
+    across which no instructions on the specified qubits can be scheduled.
+    Note that one can create a group of consecutive **`barrier`** instructions, _i.e._ a _uniform_ barrier,
+    using SGMQ notation.
 
 !!! example
 
