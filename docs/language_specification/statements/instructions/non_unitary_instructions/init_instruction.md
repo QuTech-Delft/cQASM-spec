@@ -71,8 +71,7 @@ one should use the [**`reset`**](../non_unitary_instructions/reset_instruction.m
     
     Initialization of a qubit can only be done immediately after declaration of the qubit, _i.e._, 
     it is not possible to initialize a qubit, if prior to that an instruction was applied to the qubit
-    (excluding the [barrier](../control_instructions/barrier_instruction.md)
-    and [wait](../control_instructions/wait_instruction.md) control instructions).
+    (excluding a control instruction).
 
     === "Invalid initialization"
         
