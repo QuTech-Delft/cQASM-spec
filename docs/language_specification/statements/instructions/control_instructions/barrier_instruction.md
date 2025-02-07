@@ -65,7 +65,7 @@ The general form of the **`barrier`** instruction is as follows:
 In the examples above it is shown how the **`barrier`** instruction can be used with a single qubit and multiple qubits.
 In the case of the single qubit,
 an optimizer would generally fuse the two **`X`** gates into a single identity gate, **`I`**.
-However, because of the presence of the **`barrier`** instruction the user explicitly states that the instructions on
+However, because of the presence of the **`barrier`** instruction, the user explicitly states that the instructions on
 **`q`** are not permitted to be optimized across the barrier.
 The second example shows that a barrier can be placed for multiple qubits.
 Note that the **`barrier`** instruction is applied to qubits **`q[0]`** and **`q[1]`**.
