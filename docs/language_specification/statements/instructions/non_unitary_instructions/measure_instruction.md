@@ -1,12 +1,12 @@
 A **`measure`** instruction performs a measurement to its qubit argument and
 assigns the outcome to a bit variable.
-The general form of a measure instruction is as follows:
+The general form of a **`measure`** instruction is as follows:
 
 !!! info ""
 
     &emsp;_bit-argument_ **`=`** **`measure`** _qubit-argument_
 
-??? info "Grammar for measure instruction"
+??? info "Grammar for **`measure`** instruction"
     
     _measure-instruction_:  
     &emsp; _bit-argument_ __`=`__ __`measure`__ _qubit-argument_
@@ -51,10 +51,10 @@ The general form of a measure instruction is as follows:
 
 !!! note
 
-    The measure instruction accepts
+    The **`measure`** instruction accepts
     [SGMQ notation](../single-gate-multiple-qubit-notation.md), similar to gates.
 
-The following code snippet shows how the measure instruction might be used in context.
+The following code snippet shows how the **`measure`** instruction might be used in context.
 
 ```linenums="1" hl_lines="9"
 version 3.0
