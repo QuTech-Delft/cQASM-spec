@@ -20,14 +20,15 @@ telling the scheduler that instructions on the specified qubit(s) cannot be sche
     Multiple successive **`wait`** instructions on the _same_ qubit,
     however, may be fused into a single **`wait`** instruction,
     where the delay time is set to the sum of the delay times of the separate instructions.
-    For example, 
+    For example,
+    
     ```hl_lines="1 3"
     wait(3) q[0]
     wait(4) q[1]
     wait(2) q[0]
     ```
 
-    couble be optimized to
+    could be optimized to:
     
     ```hl_lines="1"
     wait(5) q[0]
