@@ -14,8 +14,25 @@ telling the scheduler that instructions on the specified qubit(s) cannot be sche
     time delay set to 0.
     Note however that for certain backends, groups of consecutive **`barrier`** instructions are linked together to
     form a _uniform_ barrier, across which no instructions on the specified qubits can be scheduled.
-    This is **not** the case for the **`wait`** instruction; consecutive **`wait`** instructions are always considered
-    to be independent instructions.
+    This is **not** the case for the **`wait`** instruction; consecutive **`wait`** instructions on different qubits
+    are considered to be independent instructions.
+
+    Multiple successive **`wait`** instructions on the _same_ qubit,
+    however, may be fused into a single **`wait`** instruction,
+    where the delay time is set to the sum of the delay times of the separate instructions.
+    For example, 
+    ```hl_lines="1 3"
+    wait(3) q[0]
+    wait(4) q[1]
+    wait(2) q[0]
+    ```
+
+    couble be optimized to
+    
+    ```hl_lines="1"
+    wait(5) q[0]
+    wait(4) q[1]
+    ```
 
 The general form of the **`wait`** instruction is as follows:
 
