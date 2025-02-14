@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../unitary_instructions.html">
+        <link rel="prev" href="init_instruction.html">
       
       
         <link rel="next" href="reset_instruction.html">
@@ -275,7 +275,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../appendices/spin_2.html" class="md-tabs__link">
+        <a href="../../../../appendices/spin_2plus.html" class="md-tabs__link">
           
   
     
@@ -923,6 +923,8 @@
       
         
       
+        
+      
     
     
       
@@ -992,6 +994,8 @@
       
         
       
+        
+      
     
     
       
@@ -1023,6 +1027,28 @@
             Non-unitary instructions
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="init_instruction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Init instruction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1066,6 +1092,103 @@
   
   <span class="md-ellipsis">
     Reset instruction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_3_3" id="__nav_2_3_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Control instructions
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Control instructions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../control_instructions/barrier_instruction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Barrier instruction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../control_instructions/wait_instruction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wait instruction
     
   </span>
   
@@ -1322,11 +1445,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../appendices/spin_2.html" class="md-nav__link">
+      <a href="../../../../appendices/spin_2plus.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Spin-2
+    Spin-2+
     
   </span>
   
@@ -1383,12 +1506,12 @@
 
 <p>A <strong><code>measure</code></strong> instruction performs a measurement to its qubit argument and
 assigns the outcome to a bit variable.
-The general form of a measure instruction is as follows:</p>
+The general form of a <strong><code>measure</code></strong> instruction is as follows:</p>
 <div class="admonition info">
 <p>&emsp;<em>bit-argument</em> <strong><code>=</code></strong> <strong><code>measure</code></strong> <em>qubit-argument</em></p>
 </div>
 <details class="info">
-<summary>Grammar for measure instruction</summary>
+<summary>Grammar for <strong><code>measure</code></strong> instruction</summary>
 <p><em>measure-instruction</em>:<br />
 &emsp; <em>bit-argument</em> <strong><code>=</code></strong> <strong><code>measure</code></strong> <em>qubit-argument</em></p>
 <p><em>bit-argument</em>:<br />
@@ -1431,10 +1554,10 @@ The general form of a measure instruction is as follows:</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The measure instruction accepts
+<p>The <strong><code>measure</code></strong> instruction accepts
 <a href="../single-gate-multiple-qubit-notation.html">SGMQ notation</a>, similar to gates.</p>
 </div>
-<p>The following code snippet shows how the measure instruction might be used in context.</p>
+<p>The following code snippet shows how the <strong><code>measure</code></strong> instruction might be used in context.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
 <span class="normal"><a href="#__codelineno-2-3">3</a></span>
@@ -1484,7 +1607,7 @@ the respective states of both qubits in the qubit register are measured along th
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../unitary_instructions.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Unitary instructions">
+          <a href="init_instruction.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Init instruction">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1494,7 +1617,7 @@ the respective states of both qubits in the qubit register are measured along th
                 Previous
               </span>
               <div class="md-ellipsis">
-                Unitary instructions
+                Init instruction
               </div>
             </div>
           </a>
