@@ -50,7 +50,7 @@ The unitary operations, commonly know as gates, can be either
         - [Barrier instruction](statements/instructions/control_instructions/barrier_instruction.md)
         - [Wait instruction](statements/instructions/control_instructions/wait_instruction.md)
     - [Single-gate-multiple-qubit (SGMQ) notation](statements/instructions/single-gate-multiple-qubit-notation.md)
-- [Pragmas](statements/pragmas.md)
+- [Language extension](statements/language_extension.md)
 
 !!! example ""
 

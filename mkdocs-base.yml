@@ -33,7 +33,7 @@ nav:
           - Barrier instruction: ./language_specification/statements/instructions/control_instructions/barrier_instruction.md
           - Wait instruction: ./language_specification/statements/instructions/control_instructions/wait_instruction.md
         - Single-gate-multiple-qubit (SGMQ) notation: ./language_specification/statements/instructions/single-gate-multiple-qubit-notation.md
-      - Pragmas: ./language_specification/statements/pragmas.md
+      - Language extension: ./language_specification/statements/language_extension.md
     - Types: ./language_specification/types.md
     - Expressions:
       - Indices: ./language_specification/expressions/indices.md
