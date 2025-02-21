@@ -17,13 +17,10 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- `init` non-unitary instruction
-- `SWAP` two-qubit unitary instruction
-- `barrier` and `wait` control instructions
-- Gate modifiers
-  - inverse `inv`
-  - power `pow()`
-  - control `ctrl`
+- `SWAP` two-qubit unitary instruction.
+- `init` non-unitary instruction.
+- `barrier` and `wait` control instructions.
+- `inv`, `pow`, and `ctrl` gate modifiers.
 
 ## [3.0-beta1] - [ 2024-10-16 ]
 
