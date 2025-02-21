@@ -28,13 +28,12 @@ The first (beta) release of the new cQASM language.
 
 Main changes with respect to previous cQASM versions are:
 
-- Case sensitive syntax
-- Decoupled qubit and bit registers
-- Qubit and bit register variable declarations
-- `q` and `b` are no longer reserved characters
-- Assignment of measurement outcomes to bit variables
-- No component (e.g. translator/compiler/simulator) specific directives (for now)
-- Single-line comments through double-slash notation (`//`), instead of the hashtag notation (`#`)
+- Case sensitive syntax.
+- Decoupled qubit and bit registers.
+- Qubit and bit register variable declarations.
+- `q` and `b` are no longer reserved identifiers.
+- Assignment of measurement outcomes to bit variables.
+- Single-line comments through double-slash notation (`//`), instead of the hashtag notation (`#`).
 
 For a full description of the new language we refer to its [online specification](https://qutech-delft.github.io/cQASM-spec/).
 
