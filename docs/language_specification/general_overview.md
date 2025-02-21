@@ -14,6 +14,7 @@ A cQASM program can contain the following types of tokens:
 - [Literals](tokens/literals.md)
 - [Identifiers](tokens/identifiers.md)
 - [Keywords](tokens/keywords.md)
+- [Backend code](tokens/backend_code.md)
 - [Operators and punctuators](tokens/operators_and_punctuators.md)  
 
 [Whitespace and comments](tokens/whitespace_and_comments.md) are ignored except as they serve to separate tokens.
