@@ -1,11 +1,11 @@
 Assembly declarations can be used to add backend-specific (assembly) code to a cQASM circuit.
-An assembly declaration is realized through an **`asm`** _declaration_ statement.
+They are realized through an **`asm`** _declaration_ statement.
 An **`asm`** declaration statement consists of the keyword **`asm`** with the identifier of the backend in parentheses,
-followed by a code block containing the asembly code enclosed in curly brackets:
+followed by a code block containing the assembly code enclosed in curly brackets:
 
 !!! info "" 
     
-    &emsp;**`asm(`**_backend-identifier_**`) {`** _assembly-code_ **`}`**
+    &emsp;**`asm(`**_backend-identifier_**`) {`** _backend-code_ **`}`**
 
 ??? info "Grammar for assembly declaration"
     
