@@ -1,7 +1,7 @@
-Language extensions can be used to add client-specific (assembly) code to a cQASM circuit.
-A language extension is realized through an **`asm`** _declaration_ statement.
-An **`asm`** declaration statement consists of the keyword **`asm`** with the identifier of the client in parentheses,
-followed by a code block containing the client code enclosed in curly brackets:
+Assembly declarations can be used to add backend-specific (assembly) code to a cQASM circuit.
+An assembly declaration is realized through an **`asm`** _declaration_ statement.
+An **`asm`** declaration statement consists of the keyword **`asm`** with the identifier of the backend in parentheses,
+followed by a code block containing the asembly code enclosed in curly brackets:
 
 !!! info "" 
     
