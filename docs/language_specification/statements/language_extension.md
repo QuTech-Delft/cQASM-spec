@@ -18,15 +18,15 @@ followed by a code block containing the asembly code enclosed in curly brackets:
     _backend-code_:  
     &emsp; _raw-text_
 
-As part of a cQASM circuit, the contents of the client code block will be interpreted by the client
+As part of a cQASM circuit, the contents of the backend code will be passed verbatim to the backend
 and ignored by all other consumers of the circuit.
 
-The location of the **`asm`** declaration statement in the cQASM circuit is preserved,
+The location of the **`asm`** declaration in the cQASM circuit is preserved,
 _i.e._ no cQASM statements can be moved across it by any subsequent processing of the cQASM circuit.
-This allows for the ability to embed client code into cQASM 
-with the guarantee that the relative order between cQASM and client code remains the same.
+This allows for the ability to embed backend code into cQASM 
+with the guarantee that the relative order between cQASM and backend code remains the same.
 
-The following example shows how sections of code, specific to a fictional client called 'Backend',
+The following example shows how sections of code, specific to a fictional backend,
 can be interlaced with cQASM statements:
 
 ```linenums="1", hl_lines="6 17"
