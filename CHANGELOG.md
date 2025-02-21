@@ -9,9 +9,7 @@ All notable changes to this project will be documented in this file.
 * **Removed** for now removed features.
 
 
-## [3.0-beta3] - [ xxxx-yy-zz ]
-
-
+## [<version>] - [ xxxx-yy-zz ]
 
 ## [3.0-beta2] - [ 2025-02-18 ]
 
