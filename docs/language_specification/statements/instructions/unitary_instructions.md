@@ -110,29 +110,30 @@ A few examples of gates are shown below.
 
 ### Standard gate set
 
-| Name | Description                              | Example statement       |
-|------|------------------------------------------|-------------------------|
-| I    | Identity gate                            | **`I q[0]`**            |
-| H    | Hadamard gate                            | **`H q[0]`**            |
-| X    | Pauli-X                                  | **`X q[0]`**            |
-| X90  | Rotation around the _x_-axis of $\pi/2$  | **`X90 q[0]`**          |
-| mX90 | Rotation around the _x_-axis of $-\pi/2$ | **`mX90 q[0]`**         |
-| Y    | Pauli-Y                                  | **`Y q[0]`**            |
-| Y90  | Rotation around the _y_-axis of $\pi/2$  | **`Y90 q[0]`**          |
-| mY90 | Rotation around the _y_-axis of $-\pi/2$ | **`mY90 q[0]`**         |
-| Z    | Pauli-Z                                  | **`Z q[0]`**            |
-| S    | Phase gate                               | **`S q[0]`**            |
-| Sdag | S dagger gate                            | **`Sdag q[0]`**         |
-| T    | T                                        | **`T q[0]`**            |
-| Tdag | T dagger gate                            | **`Tdag q[0]`**         |
-| Rx   | Arbitrary rotation around _x_-axis       | **`Rx(pi) q[0]`**       |
-| Ry   | Arbitrary rotation around _y_-axis       | **`Ry(pi) q[0]`**       |
-| Rz   | Arbitrary rotation around _z_-axis       | **`Rz(pi) q[0]`**       |
-| CNOT | Controlled-NOT gate                      | **`CNOT q[0], q[1]`**   |
-| CZ   | Controlled-Z, Controlled-Phase           | **`CZ q[0], q[1]`**     |
-| CR   | Controlled phase shift (arbitrary angle) | **`CR(pi) q[0], q[1]`** |
-| CRk  | Controlled phase shift ($\pi/2^{k-1}$)   | **`CRk(2) q[0], q[1]`** |
-| SWAP | Swap gate                                | **`SWAP q[0], q[1]`**   |
+| Name | Operator                                      | Description                              | Example statement            |
+|------|-----------------------------------------------|------------------------------------------|------------------------------|
+| I    | $I$                                           | Identity gate                            | **`I q[0]`**                 |
+| H    | $H$                                           | Hadamard gate                            | **`H q[0]`**                 |
+| X    | $X$                                           | Pauli-X                                  | **`X q[0]`**                 |
+| X90  | $X_{90}$                                      | Rotation around the _x_-axis of $\pi/2$  | **`X90 q[0]`**               |
+| mX90 | $X_{-90}$                                     | Rotation around the _x_-axis of $-\pi/2$ | **`mX90 q[0]`**              |
+| Y    | $Y$                                           | Pauli-Y                                  | **`Y q[0]`**                 |
+| Y90  | $Y_{90}$                                      | Rotation around the _y_-axis of $\pi/2$  | **`Y90 q[0]`**               |
+| mY90 | $Y_{-90}$                                     | Rotation around the _y_-axis of $-\pi/2$ | **`mY90 q[0]`**              |
+| Z    | $Z$                                           | Pauli-Z                                  | **`Z q[0]`**                 |
+| S    | $S$                                           | Phase gate                               | **`S q[0]`**                 |
+| Sdag | $S^\dagger$                                   | S dagger gate                            | **`Sdag q[0]`**              |
+| T    | $T$                                           | T                                        | **`T q[0]`**                 |
+| Tdag | $T^\dagger$                                   | T dagger gate                            | **`Tdag q[0]`**              |
+| Rx   | $R_x(\theta)$                                 | Arbitrary rotation around _x_-axis       | **`Rx(pi) q[0]`**            |
+| Ry   | $R_y(\theta)$                                 | Arbitrary rotation around _y_-axis       | **`Ry(pi) q[0]`**            |
+| Rz   | $R_z(\theta)$                                 | Arbitrary rotation around _z_-axis       | **`Rz(pi) q[0]`**            |
+| Rn   | $R_\textbf{n}(n_x, n_y, n_z, \theta, \phi_g)$ | Arbitrary rotation around specified axis | **`Rn(1,0,0,pi,pi/2) q[0]`** |
+| CNOT | $CNOT$                                        | Controlled-NOT gate                      | **`CNOT q[0], q[1]`**        |
+| CZ   | $CZ$                                          | Controlled-Z, Controlled-Phase           | **`CZ q[0], q[1]`**          |
+| CR   | $CR(\theta)$                                  | Controlled phase shift (arbitrary angle) | **`CR(pi) q[0], q[1]`**      |
+| CRk  | $CR_k(k)$                                     | Controlled phase shift ($\pi/2^{k-1}$)   | **`CRk(2) q[0], q[1]`**      |
+| SWAP | $SWAP$                                        | Swap gate                                | **`SWAP q[0], q[1]`**        |
 
 ## Gate modifiers
 
