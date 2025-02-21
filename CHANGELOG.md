@@ -35,6 +35,4 @@ Main changes with respect to previous cQASM versions are:
 - Assignment of measurement outcomes to bit variables.
 - Single-line comments through double-slash notation (`//`), instead of the hashtag notation (`#`).
 
-For a full description of the new language we refer to its [online specification](https://qutech-delft.github.io/cQASM-spec/).
-
-> **Note**: that this version of cQASM is not backwards compatible with previous versions of the language.
+> **Note**: this version of cQASM is not backwards compatible with previous versions of the language.
