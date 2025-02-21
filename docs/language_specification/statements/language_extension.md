@@ -5,18 +5,18 @@ followed by a code block containing the asembly code enclosed in curly brackets:
 
 !!! info "" 
     
-    &emsp;**`asm(`**_client-identifier_**`) {`** _client-code_ **`}`**
+    &emsp;**`asm(`**_backend-identifier_**`) {`** _assembly-code_ **`}`**
 
-??? info "Grammar for language extension"
+??? info "Grammar for assembly declaration"
     
-    _language extension_:  
-    &emsp;**`asm(`**_client-identifier_**`)`** _client-code-block_
+    _assembly-declaration_:  
+    &emsp;**`asm(`**_backend-identifier_**`)`** **`{`** _backend-code_ **`}`**
 
-    _client-identifier_:  
+    _backend-identifier_:  
     &emsp; _identifier_
 
-    _client-code-block_:  
-    &emsp; **`{`** _client-code_ **`}`**
+    _backend-code_:  
+    &emsp; _raw-text_
 
 As part of a cQASM circuit, the contents of the client code block will be interpreted by the client
 and ignored by all other consumers of the circuit.
