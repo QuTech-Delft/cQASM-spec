@@ -2,8 +2,8 @@ Assembly declarations can be used to add backend-specific (assembly) code to a c
 They are realized through an **`asm`** _declaration_ statement.
 An **`asm`** declaration statement consists of the keyword **`asm`** with the identifier of the backend in parentheses,
 followed by the backend code.
-The latter is to be provided as a _raw text string_,
-which consists of [_raw text_](../tokens/raw_text.md) delimited by opening and closing triple quotes (**`'''`**):
+The latter is to be provided as a [_raw text string_](../tokens/raw_text_string.md),
+which consists of _raw text_ delimited by opening and closing triple quotes (**`'''`**):
 
 !!! info "" 
     
@@ -20,6 +20,16 @@ which consists of [_raw text_](../tokens/raw_text.md) delimited by opening and c
     _backend-code_:  
     &emsp; _raw-text-string_
 
+    _raw-text-string_:  
+        &emsp; **`'''`** raw-text~opt~ **`'''`**
+
+    _raw-text_:  
+    &emsp; raw-char  
+    &emsp; raw-text raw-char
+
+    _raw-char_:  
+    &emsp; any character
+
 As part of a cQASM circuit, the contents of the raw text string will be passed verbatim to the backend
 and ignored by all other consumers of the circuit.
 
@@ -31,7 +41,7 @@ with the guarantee that the relative order between cQASM and backend code remain
 The following example shows how sections of code, specific to the example `Backend`,
 can be interlaced with cQASM statements:
 
-```linenums="1", hl_lines="6 17"
+```linenums="1", hl_lines="6-11 17-22"
 version 3.0
 
 qubit[4] q
