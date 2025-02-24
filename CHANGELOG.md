@@ -11,6 +11,11 @@ All notable changes to this project will be documented in this file.
 
 ## [<version>] - [ xxxx-yy-zz ]
 
+### Added
+
+- Assembly declaration statement
+- Raw text as language token
+
 ## [3.0-beta2] - [ 2025-02-18 ]
 
 ### Added
