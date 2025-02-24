@@ -7,23 +7,20 @@ which consists of [_raw text_](../tokens/raw_text.md) delimited by opening and c
 
 !!! info "" 
     
-    &emsp;**`asm(`**_backend-identifier_**`) '''`** _raw-text_ **`'''`**
+    &emsp; **`asm(`**_backend-identifier_**`)`** _backend-code_
 
 ??? info "Grammar for assembly declaration"
     
     _assembly-declaration_:  
-    &emsp;**`asm(`**_backend-identifier_**`)`** _raw-text-string_
+    &emsp; **`asm(`**_backend-identifier_**`)`** _backend-code_
 
     _backend-identifier_:  
     &emsp; _identifier_
 
-    _raw-text-string_:  
-    &emsp; **`'''`** _raw-text_ **`'''`**
+    _backend-code_:  
+    &emsp; _raw-text-string_
 
-    _raw-text_:  
-    &emsp; `(.)*?`
-
-As part of a cQASM circuit, the contents of the raw text will be passed verbatim to the backend
+As part of a cQASM circuit, the contents of the raw text string will be passed verbatim to the backend
 and ignored by all other consumers of the circuit.
 
 The location of the **`asm`** declaration in the cQASM circuit is preserved,

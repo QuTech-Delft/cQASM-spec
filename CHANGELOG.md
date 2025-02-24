@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Assembly declaration statement
-- Raw text as language token
+- Raw text string token
 
 ## [3.0-beta2] - [ 2025-02-18 ]
 
