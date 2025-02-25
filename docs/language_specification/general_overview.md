@@ -14,6 +14,7 @@ A cQASM program can contain the following types of tokens:
 - [Literals](tokens/literals.md)
 - [Identifiers](tokens/identifiers.md)
 - [Keywords](tokens/keywords.md)
+- [Raw text string](tokens/raw_text_string.md)
 - [Operators and punctuators](tokens/operators_and_punctuators.md)  
 
 [Whitespace and comments](tokens/whitespace_and_comments.md) are ignored except as they serve to separate tokens.
@@ -49,7 +50,8 @@ The unitary operations, commonly know as gates, can be either
     - Control instructions:
         - [Barrier instruction](statements/instructions/control_instructions/barrier_instruction.md)
         - [Wait instruction](statements/instructions/control_instructions/wait_instruction.md)
-   - [Single-gate-multiple-qubit (SGMQ) notation](statements/instructions/single-gate-multiple-qubit-notation.md)
+    - [Single-gate-multiple-qubit (SGMQ) notation](statements/instructions/single-gate-multiple-qubit-notation.md)
+- [Assembly declaration](statements/assembly_declaration.md)
 
 !!! example ""
 
