@@ -18,5 +18,3 @@ Any character, including whitespaces, comments, and newlines, can be part of a r
     Even though any sequence of characters could be raw text,
     one should avoid using triple qoutes (**`'''`**)
     as they will be interpreted as the delimiters of the raw text string.
-
-A raw text string is used in an [assembly declaration](../statements/assembly_declaration.md) to describe backend code.
