@@ -16,6 +16,7 @@ nav:
       - Literals: ./language_specification/tokens/literals.md
       - Identifiers: ./language_specification/tokens/identifiers.md
       - Keywords: ./language_specification/tokens/keywords.md
+      - Raw text string: ./language_specification/tokens/raw_text_string.md
       - Operators and punctuators: ./language_specification/tokens/operators_and_punctuators.md
       - Whitespace and comments: ./language_specification/tokens/whitespace_and_comments.md
     - Statements:
@@ -33,6 +34,7 @@ nav:
           - Barrier instruction: ./language_specification/statements/instructions/control_instructions/barrier_instruction.md
           - Wait instruction: ./language_specification/statements/instructions/control_instructions/wait_instruction.md
         - Single-gate-multiple-qubit (SGMQ) notation: ./language_specification/statements/instructions/single-gate-multiple-qubit-notation.md
+      - Assembly declaration: ./language_specification/statements/assembly_declaration.md
     - Types: ./language_specification/types.md
     - Expressions:
       - Indices: ./language_specification/expressions/indices.md
