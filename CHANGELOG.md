@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- `Rn` single-qubit unitary instruction
 - Assembly declaration statement
 - Raw text string token
 
