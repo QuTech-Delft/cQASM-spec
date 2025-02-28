@@ -1749,6 +1749,7 @@ and the <em>qubit arguments</em> that a (parameterized) gate acts on.</p>
 <thead>
 <tr>
 <th>Name</th>
+<th>Operator</th>
 <th>Description</th>
 <th>Example statement</th>
 </tr>
@@ -1756,106 +1757,133 @@ and the <em>qubit arguments</em> that a (parameterized) gate acts on.</p>
 <tbody>
 <tr>
 <td>I</td>
+<td><span class="arithmatex">\(I\)</span></td>
 <td>Identity gate</td>
 <td><strong><code>I q[0]</code></strong></td>
 </tr>
 <tr>
 <td>H</td>
+<td><span class="arithmatex">\(H\)</span></td>
 <td>Hadamard gate</td>
 <td><strong><code>H q[0]</code></strong></td>
 </tr>
 <tr>
 <td>X</td>
+<td><span class="arithmatex">\(X\)</span></td>
 <td>Pauli-X</td>
 <td><strong><code>X q[0]</code></strong></td>
 </tr>
 <tr>
 <td>X90</td>
+<td><span class="arithmatex">\(X_{90}\)</span></td>
 <td>Rotation around the <em>x</em>-axis of <span class="arithmatex">\(\pi/2\)</span></td>
 <td><strong><code>X90 q[0]</code></strong></td>
 </tr>
 <tr>
 <td>mX90</td>
+<td><span class="arithmatex">\(X_{-90}\)</span></td>
 <td>Rotation around the <em>x</em>-axis of <span class="arithmatex">\(-\pi/2\)</span></td>
 <td><strong><code>mX90 q[0]</code></strong></td>
 </tr>
 <tr>
 <td>Y</td>
+<td><span class="arithmatex">\(Y\)</span></td>
 <td>Pauli-Y</td>
 <td><strong><code>Y q[0]</code></strong></td>
 </tr>
 <tr>
 <td>Y90</td>
+<td><span class="arithmatex">\(Y_{90}\)</span></td>
 <td>Rotation around the <em>y</em>-axis of <span class="arithmatex">\(\pi/2\)</span></td>
 <td><strong><code>Y90 q[0]</code></strong></td>
 </tr>
 <tr>
 <td>mY90</td>
+<td><span class="arithmatex">\(Y_{-90}\)</span></td>
 <td>Rotation around the <em>y</em>-axis of <span class="arithmatex">\(-\pi/2\)</span></td>
 <td><strong><code>mY90 q[0]</code></strong></td>
 </tr>
 <tr>
 <td>Z</td>
+<td><span class="arithmatex">\(Z\)</span></td>
 <td>Pauli-Z</td>
 <td><strong><code>Z q[0]</code></strong></td>
 </tr>
 <tr>
 <td>S</td>
+<td><span class="arithmatex">\(S\)</span></td>
 <td>Phase gate</td>
 <td><strong><code>S q[0]</code></strong></td>
 </tr>
 <tr>
 <td>Sdag</td>
+<td><span class="arithmatex">\(S^\dagger\)</span></td>
 <td>S dagger gate</td>
 <td><strong><code>Sdag q[0]</code></strong></td>
 </tr>
 <tr>
 <td>T</td>
+<td><span class="arithmatex">\(T\)</span></td>
 <td>T</td>
 <td><strong><code>T q[0]</code></strong></td>
 </tr>
 <tr>
 <td>Tdag</td>
+<td><span class="arithmatex">\(T^\dagger\)</span></td>
 <td>T dagger gate</td>
 <td><strong><code>Tdag q[0]</code></strong></td>
 </tr>
 <tr>
 <td>Rx</td>
+<td><span class="arithmatex">\(R_x(\theta)\)</span></td>
 <td>Arbitrary rotation around <em>x</em>-axis</td>
 <td><strong><code>Rx(pi) q[0]</code></strong></td>
 </tr>
 <tr>
 <td>Ry</td>
+<td><span class="arithmatex">\(R_y(\theta)\)</span></td>
 <td>Arbitrary rotation around <em>y</em>-axis</td>
 <td><strong><code>Ry(pi) q[0]</code></strong></td>
 </tr>
 <tr>
 <td>Rz</td>
+<td><span class="arithmatex">\(R_z(\theta)\)</span></td>
 <td>Arbitrary rotation around <em>z</em>-axis</td>
 <td><strong><code>Rz(pi) q[0]</code></strong></td>
 </tr>
 <tr>
+<td>Rn</td>
+<td><span class="arithmatex">\(R_\textbf{n}(n_x, n_y, n_z, \theta, \phi_g)\)</span></td>
+<td>Arbitrary rotation around specified axis</td>
+<td><strong><code>Rn(1,0,0,pi,pi/2) q[0]</code></strong></td>
+</tr>
+<tr>
 <td>CNOT</td>
+<td><span class="arithmatex">\(CNOT\)</span></td>
 <td>Controlled-NOT gate</td>
 <td><strong><code>CNOT q[0], q[1]</code></strong></td>
 </tr>
 <tr>
 <td>CZ</td>
+<td><span class="arithmatex">\(CZ\)</span></td>
 <td>Controlled-Z, Controlled-Phase</td>
 <td><strong><code>CZ q[0], q[1]</code></strong></td>
 </tr>
 <tr>
 <td>CR</td>
+<td><span class="arithmatex">\(CR(\theta)\)</span></td>
 <td>Controlled phase shift (arbitrary angle)</td>
 <td><strong><code>CR(pi) q[0], q[1]</code></strong></td>
 </tr>
 <tr>
 <td>CRk</td>
+<td><span class="arithmatex">\(CR_k(k)\)</span></td>
 <td>Controlled phase shift (<span class="arithmatex">\(\pi/2^{k-1}\)</span>)</td>
 <td><strong><code>CRk(2) q[0], q[1]</code></strong></td>
 </tr>
 <tr>
 <td>SWAP</td>
+<td><span class="arithmatex">\(SWAP\)</span></td>
 <td>Swap gate</td>
 <td><strong><code>SWAP q[0], q[1]</code></strong></td>
 </tr>
