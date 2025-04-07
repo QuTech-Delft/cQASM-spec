@@ -1,8 +1,8 @@
 # Rz gate
 
-| Name | Operator      | Example statement |
-|------|---------------|-------------------|
-| Rz   | $R_z(\theta)$ | **`Rz(pi) q[0]`** |
+| Identifier | Operator      | Example statement |
+|------------|---------------|-------------------|
+| Rz         | $R_z(\theta)$ | **`Rz(pi) q[0]`** |
 
 ## Description
 
@@ -19,10 +19,35 @@ where $\hat{\mathbf{n}}=[n_x, n_y, n_z]^T$ denotes the axis of rotation, $\theta
 The Rz gate is given by:
 
 $$\begin{align}
-R_z &= R_\hat{\mathbf{n}}\left([0, 0, 1]^T, \theta, 0\right) = e^{-i\frac{\theta}{2}\sigma_z}, \\
+R_z(\theta) &= R_\hat{\mathbf{n}}\left([0, 0, 1]^T, \theta, 0\right) = e^{-i\frac{\theta}{2}\sigma_z}, \\
 \\
-R_z &= \left(\begin{matrix}
+R_z(\theta) &= \left(\begin{matrix}
 \cos\left(\theta / 2\right) - i \sin\left(\theta / 2\right) & 0 \\
 0 &  \cos\left(\theta / 2\right) + i \sin\left(\theta / 2\right)
 \end{matrix}\right).
+\end{align}$$
+
+In the Hadamard basis $\{|+\rangle, |-\rangle\}$, the Rz gate $R_{z,H}$ is given by:
+
+$$R_{z,H}(\theta) = HR_z(\theta) H = \left(\begin{matrix}
+\cos\left(\theta / 2\right) & - i \sin\left(\theta / 2\right) \\
+- i \sin\left(\theta / 2\right) &  \cos\left(\theta / 2\right)
+\end{matrix}\right) = R_x(\theta).$$
+
+## Operation examples
+
+### Standard basis
+
+$$\begin{align}
+R_z(\theta)\,|0\rangle &= \left[\cos\left(\theta / 2\right) - i \sin\left(\theta / 2\right)\right]|0\rangle \\
+\\
+R_z(\theta)\,|1\rangle &= \left[\cos\left(\theta / 2\right) + i \sin\left(\theta / 2\right)\right]|1\rangle \\
+\end{align}$$
+
+### Hadamard basis
+
+$$\begin{align}
+R_z(\theta)\,|+\rangle &= \cos\left(\theta / 2\right)|+\rangle - i \sin\left(\theta / 2\right)|-\rangle \\
+\\
+R_z(\theta)\,|-\rangle &= - i \sin\left(\theta / 2\right)|+\rangle + \cos\left(\theta / 2\right)|-\rangle \\
 \end{align}$$

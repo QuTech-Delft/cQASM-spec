@@ -1,8 +1,8 @@
 # Rn gate
 
-| Name | Operator                                      | Example statement            |
-|------|-----------------------------------------------|------------------------------|
-| Rn   | $R_\mathbf{n}(n_x, n_y, n_z, \theta, \phi_g)$ | **`Rn(1,0,0,pi,pi/2) q[0]`** |
+| Identifier | Operator                                      | Example statement            |
+|------------|-----------------------------------------------|------------------------------|
+| Rn         | $R_\mathbf{n}(n_x, n_y, n_z, \theta, \phi_g)$ | **`Rn(1,0,0,pi,pi/2) q[0]`** |
 
 ## Description
 
@@ -19,8 +19,33 @@ where $\hat{\mathbf{n}}=[n_x, n_y, n_z]^T$ denotes the axis of rotation, $\theta
 The Rn gate is given by:
 
 $$
-R_\hat{\mathbf{n}} = \left(\begin{matrix}
+R_\hat{\mathbf{n}}(\theta) = \left(\begin{matrix}
 \cos\left(\theta / 2\right) - i n_z \sin\left(\theta / 2\right) & -n_y \sin\left(\theta / 2\right) - i n_x \sin\left(\theta / 2\right) \\
 n_y \sin\left(\theta / 2\right) - i n_x \sin\left(\theta / 2\right) &  \cos\left(\theta / 2\right) + i n_z \sin\left(\theta / 2\right)
 \end{matrix}\right).
 $$
+
+In the Hadamard basis $\{|+\rangle, |-\rangle\}$, the Rn gate $R_{\hat{\mathbf{n}},H}(\theta)$ is given by:
+
+$$R_{\hat{\mathbf{n}},H}(\theta) = HR_\hat{\mathbf{n}}(\theta) H = \left(\begin{matrix}
+\cos\left(\theta / 2\right) - i n_x \sin\left(\theta / 2\right) & n_y \sin\left(\theta / 2\right) - i n_z \sin\left(\theta / 2\right) \\
+-n_y \sin\left(\theta / 2\right) - i n_z \sin\left(\theta / 2\right) &  \cos\left(\theta / 2\right) + i n_x \sin\left(\theta / 2\right)
+\end{matrix}\right).$$
+
+## Operation examples
+
+### Standard basis
+
+$$\begin{align}
+R_\hat{\mathbf{n}}(\theta)\,|0\rangle &= \left[\cos\left(\theta / 2\right) - i n_z \sin\left(\theta / 2\right)\right]|0\rangle + \left[n_y \sin\left(\theta / 2\right) - i n_x \sin\left(\theta / 2\right)\right]|1\rangle \\
+\\
+R_\hat{\mathbf{n}}(\theta)\,|1\rangle &= \left[-n_y \sin\left(\theta / 2\right) - i n_x \sin\left(\theta / 2\right)\right]|0\rangle + \left[\cos\left(\theta / 2\right) + i n_z \sin\left(\theta / 2\right)\right]|1\rangle \\
+\end{align}$$
+
+### Hadamard basis
+
+$$\begin{align}
+R_\hat{\mathbf{n}}(\theta)\,|+\rangle &= \left[\cos\left(\theta / 2\right) - i n_x \sin\left(\theta / 2\right)\right]|+\rangle + \left[-n_y \sin\left(\theta / 2\right) - i n_z \sin\left(\theta / 2\right)\right]|-\rangle \\
+\\
+R_\hat{\mathbf{n}}(\theta)\,|-\rangle &= \left[n_y \sin\left(\theta / 2\right) - i n_z \sin\left(\theta / 2\right)\right]|+\rangle + \left[\cos\left(\theta / 2\right) + i n_x \sin\left(\theta / 2\right)\right]|-\rangle \\
+\end{align}$$

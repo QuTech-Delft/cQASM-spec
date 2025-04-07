@@ -1,8 +1,8 @@
 # Rx gate
 
-| Name | Operator      | Example statement |
-|------|---------------|-------------------|
-| Rx   | $R_x(\theta)$ | **`Rx(pi) q[0]`** |
+| Identifier | Operator      | Example statement |
+|------------|---------------|-------------------|
+| Rx         | $R_x(\theta)$ | **`Rx(pi) q[0]`** |
 
 ## Description
 
@@ -19,10 +19,35 @@ where $\hat{\mathbf{n}}=[n_x, n_y, n_z]^T$ denotes the axis of rotation, $\theta
 The Rx gate is given by:
 
 $$\begin{align}
-R_x &= R_\hat{\mathbf{n}}\left([1, 0, 0]^T, \theta, 0\right) = e^{-i\frac{\theta}{2}\sigma_x}, \\
+R_x(\theta) &= R_\hat{\mathbf{n}}\left([1, 0, 0]^T, \theta, 0\right) = e^{-i\frac{\theta}{2}\sigma_x}, \\
 \\
-R_x &= \left(\begin{matrix}
+R_x(\theta) &= \left(\begin{matrix}
 \cos\left(\theta / 2\right) & - i \sin\left(\theta / 2\right) \\
 - i \sin\left(\theta / 2\right) &  \cos\left(\theta / 2\right)
 \end{matrix}\right).
+\end{align}$$
+
+In the Hadamard basis $\{|+\rangle, |-\rangle\}$, the Rx gate $R_{x,H}$ is given by:
+
+$$R_{x,H}(\theta) = HR_x(\theta) H = \left(\begin{matrix}
+\cos\left(\theta / 2\right) - i \sin\left(\theta / 2\right) & 0 \\
+0 &  \cos\left(\theta / 2\right) + i \sin\left(\theta / 2\right)
+\end{matrix}\right) = R_z(\theta).$$
+
+## Operation examples
+
+### Standard basis
+
+$$\begin{align}
+R_x(\theta)\,|0\rangle &= \cos\left(\theta / 2\right)|0\rangle - i \sin\left(\theta / 2\right)|1\rangle\\
+\\
+R_x(\theta)\,|1\rangle &= - i \sin\left(\theta / 2\right)|0\rangle + \cos\left(\theta / 2\right)|1\rangle\\
+\end{align}$$
+
+### Hadamard basis
+
+$$\begin{align}
+R_x(\theta)\,|+\rangle &= \left[\cos\left(\theta / 2\right) - i \sin\left(\theta / 2\right)\right]|+\rangle \\
+\\
+R_x(\theta)\,|-\rangle &= \left[\cos\left(\theta / 2\right) + i \sin\left(\theta / 2\right)\right]|-\rangle \\
 \end{align}$$

@@ -1,12 +1,17 @@
 # Pauli-Y gate
 
-| Name | Operator | Example statement |
-|------|----------|-------------------|
-| Y    | $Y$      | **`Y q[0]`**      |
+| Identifier | Operator | Example statement |
+|------------|----------|-------------------|
+| Y          | $Y$      | **`Y q[0]`**      |
 
 ## Description
 
 Pauli-Y gate
+
+$Y = \sigma_y = \sigma_2 \left(\begin{matrix}
+0 & -i \\
+i & 0 
+\end{matrix}\right)$
 
 Rotation of $\pi$ [rad] about the _y_-axis and a global phase of $\pi/2$ [rad].
 

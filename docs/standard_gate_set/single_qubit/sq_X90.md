@@ -1,8 +1,8 @@
 # X90 gate
 
-| Name | Operator  | Example statement |
-|------|-----------|-------------------|
-| X90  | $X^{1/2}$ | **`X90 q[0]`**    |
+| Identifier | Operator  | Example statement |
+|------------|-----------|-------------------|
+| X90        | $X^{1/2}$ | **`X90 q[0]`**    |
 
 ## Description
 

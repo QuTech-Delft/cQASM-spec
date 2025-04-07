@@ -1,14 +1,19 @@
 # Pauli-X gate
 
-| Name | Operator | Example statement |
-|------|----------|-------------------|
-| X    | $X$      | **`X q[0]`**      |
+| Identifier | Operator | Example statement |
+|------------|----------|-------------------|
+| X          | $X$      | **`X q[0]`**      |
 
 ## Description
 
 Pauli-X gate
 
 Bit-flip
+
+$X = \sigma_x = \sigma_1 \left(\begin{matrix}
+0 & 1 \\
+1 & 0 
+\end{matrix}\right)$
 
 Rotation of $\pi$ [rad] about the _x_-axis and a global phase of $\pi/2$ [rad].
 

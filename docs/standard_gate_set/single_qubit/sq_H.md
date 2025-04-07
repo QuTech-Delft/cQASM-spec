@@ -1,12 +1,18 @@
 # Hadamard gate
 
-| Name | Operator | Example statement |
-|------|----------|-------------------|
-| H    | $H$      | **`H q[0]`**      |
+| Identifier | Operator | Example statement |
+|------------|----------|-------------------|
+| H          | $H$      | **`H q[0]`**      |
 
 ## Description
 
 Hadamard gate
+
+$H \simeq Y^{1/2}Z = XY^{1/2}$
+
+$H \simeq ZY^{-1/2} = Y^{-1/2}X$
+
+The _similar-equals_ symbol ($\simeq$) signifies that the decomposition is equal up to a global phase.
 
 Clifford gate
 

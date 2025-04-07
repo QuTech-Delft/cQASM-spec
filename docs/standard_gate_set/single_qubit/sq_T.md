@@ -1,12 +1,14 @@
 # T gate
 
-| Name | Operator | Example statement |
-|------|----------|-------------------|
-| T    | $T$      | **`T q[0]`**      |
+| Identifier | Operator | Example statement |
+|------------|----------|-------------------|
+| T          | $T$      | **`T q[0]`**      |
 
 ## Description
 
 T gate
+
+$T = Z^{1/4}$
 
 Rotation of $\pi/4$ [rad] about the _z_-axis and a global phase of $\pi/8$ [rad].
 

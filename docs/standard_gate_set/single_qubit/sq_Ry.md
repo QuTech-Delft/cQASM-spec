@@ -1,8 +1,8 @@
 # Ry gate
 
-| Name | Operator      | Example statement |
-|------|---------------|-------------------|
-| Ry   | $R_y(\theta)$ | **`Ry(pi) q[0]`** |
+| Identifier | Operator      | Example statement |
+|------------|---------------|-------------------|
+| Ry         | $R_y(\theta)$ | **`Ry(pi) q[0]`** |
 
 ## Description
 
@@ -26,3 +26,29 @@ R_y &= \left(\begin{matrix}
 \sin\left(\theta / 2\right) &  \cos\left(\theta / 2\right)
 \end{matrix}\right).
 \end{align}$$
+
+In the Hadamard basis $\{|+\rangle, |-\rangle\}$, the Ry gate $R_{y,H}$ is given by:
+
+$$R_{y,H}(\theta) = HR_z(\theta) H = \left(\begin{matrix}
+\cos\left(\theta / 2\right) & \sin\left(\theta / 2\right) \\
+-\sin\left(\theta / 2\right) &  \cos\left(\theta / 2\right)
+\end{matrix}\right) = R_y(-\theta) = R_y(\theta)^T.$$
+
+## Operation examples
+
+### Standard basis
+
+$$\begin{align}
+R_y(\theta)\,|0\rangle &= \cos\left(\theta / 2\right)|0\rangle + \sin\left(\theta / 2\right)|1\rangle \\
+\\
+R_y(\theta)\,|1\rangle &= -\sin\left(\theta / 2\right)|0\rangle + \cos\left(\theta / 2\right)|1\rangle \\
+\end{align}$$
+
+### Hadamard basis
+
+$$\begin{align}
+R_y(\theta)\,|+\rangle &= \cos\left(\theta / 2\right)|+\rangle - \sin\left(\theta / 2\right)|-\rangle \\
+\\
+R_y(\theta)\,|-\rangle &= \sin\left(\theta / 2\right)|+\rangle + \cos\left(\theta / 2\right)|-\rangle \\
+\end{align}$$
+

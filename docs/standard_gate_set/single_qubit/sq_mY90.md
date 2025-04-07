@@ -1,8 +1,8 @@
 # Minus Y90 gate
 
-| Name | Operator   | Example statement |
-|------|------------|-------------------|
-| mY90 | $Y^{-1/2}$ | **`mY90 q[0]`**   |
+| Identifier | Operator   | Example statement |
+|------------|------------|-------------------|
+| mY90       | $Y^{-1/2}$ | **`mY90 q[0]`**   |
 
 ## Description
 

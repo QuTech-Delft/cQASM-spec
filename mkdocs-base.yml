@@ -43,26 +43,26 @@ nav:
   - Standard gate set:
       - Overview: ./standard_gate_set/overview.md
       - Single-qubit:
-        - I: ./standard_gate_set/single_qubit/sq_I.md
-        - H: ./standard_gate_set/single_qubit/sq_H.md
-        - X: ./standard_gate_set/single_qubit/sq_X.md
+        - Identity: ./standard_gate_set/single_qubit/sq_I.md
+        - Hadamard: ./standard_gate_set/single_qubit/sq_H.md
+        - Pauli-X: ./standard_gate_set/single_qubit/sq_X.md
         - X90: ./standard_gate_set/single_qubit/sq_X90.md
-        - mX90: ./standard_gate_set/single_qubit/sq_mX90.md
-        - Y: ./standard_gate_set/single_qubit/sq_Y.md
+        - Minus X90: ./standard_gate_set/single_qubit/sq_mX90.md
+        - Pauli-Y: ./standard_gate_set/single_qubit/sq_Y.md
         - Y90: ./standard_gate_set/single_qubit/sq_Y90.md
-        - mY90: ./standard_gate_set/single_qubit/sq_mY90.md
-        - Z: ./standard_gate_set/single_qubit/sq_Z.md
+        - Minus Y90: ./standard_gate_set/single_qubit/sq_mY90.md
+        - Pauli-Z: ./standard_gate_set/single_qubit/sq_Z.md
         - S: ./standard_gate_set/single_qubit/sq_S.md
-        - Sdag: ./standard_gate_set/single_qubit/sq_Sdag.md
+        - S-dagger: ./standard_gate_set/single_qubit/sq_Sdag.md
         - T: ./standard_gate_set/single_qubit/sq_T.md
-        - Tdag: ./standard_gate_set/single_qubit/sq_Tdag.md
+        - T-dagger: ./standard_gate_set/single_qubit/sq_Tdag.md
         - Rx: ./standard_gate_set/single_qubit/sq_Rx.md
         - Ry: ./standard_gate_set/single_qubit/sq_Ry.md
         - Rz: ./standard_gate_set/single_qubit/sq_Rz.md
         - Rn: ./standard_gate_set/single_qubit/sq_Rn.md
       - Multi-qubit:
-        - CNOT: ./standard_gate_set/multi_qubit/mq_CNOT.md
-        - CZ: ./standard_gate_set/multi_qubit/mq_CZ.md
+        - Controlled-NOT: ./standard_gate_set/multi_qubit/mq_CNOT.md
+        - C-Phase: ./standard_gate_set/multi_qubit/mq_CZ.md
         - CR: ./standard_gate_set/multi_qubit/mq_CR.md
         - CRk: ./standard_gate_set/multi_qubit/mq_CRk.md
         - SWAP: ./standard_gate_set/multi_qubit/mq_SWAP.md

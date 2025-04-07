@@ -1,8 +1,8 @@
 # Identity gate
 
-| Name | Operator | Example statement |
-|------|----------|-------------------|
-| I    | $I$      | **`I q[0]`**      |
+| Identifier | Operator | Example statement |
+|------------|----------|-------------------|
+| I          | $I$      | **`I q[0]`**      |
 
 ## Description
 

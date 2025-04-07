@@ -1,14 +1,19 @@
 # Pauli-Z gate
 
-| Name | Operator | Example statement |
-|------|----------|-------------------|
-| Z    | $Z$      | **`Z q[0]`**      |
+| Identifier | Operator | Example statement |
+|------------|----------|-------------------|
+| Z          | $Z$      | **`Z q[0]`**      |
 
 ## Description
 
 Pauli-Z gate
 
 Phase-flip
+
+$Z = \sigma_z = \sigma_3 \left(\begin{matrix}
+1 & 0 \\
+0 & -1 
+\end{matrix}\right)$
 
 Rotation of $\pi$ [rad] about the _z_-axis and a global phase of $\pi/2$ [rad].
 

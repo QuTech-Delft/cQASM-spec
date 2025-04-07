@@ -1,12 +1,14 @@
 # T-dagger gate
 
-| Name | Operator    | Example statement |
-|------|-------------|-------------------|
-| Tdag | $T^\dagger$ | **`Tdag q[0]`**   |
+| Identifier | Operator    | Example statement |
+|------------|-------------|-------------------|
+| Tdag       | $T^\dagger$ | **`Tdag q[0]`**   |
 
 ## Description
 
 T-dagger gate
+
+$T= Z^{-1/4}$
 
 Rotation of $-\pi/4$ [rad] about the _z_-axis and a global phase of $-\pi/8$ [rad].
 

@@ -1,12 +1,14 @@
-# Phase gate
+# S gate
 
-| Name | Operator | Example statement |
-|------|----------|-------------------|
-| S    | $S$      | **`S q[0]`**      |
+| Identifier | Operator | Example statement |
+|------------|----------|-------------------|
+| S          | $S$      | **`S q[0]`**      |
 
 ## Description
 
 Phase gate or S gate
+
+$S = Z^{1/2}$
 
 Rotation of $\pi/2$ [rad] about the _z_-axis and a global phase of $\pi/4$ [rad].
 

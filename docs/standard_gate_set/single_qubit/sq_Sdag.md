@@ -1,12 +1,14 @@
 # S-dagger gate
 
-| Name | Operator    | Example statement |
-|------|-------------|-------------------|
-| Sdag | $S^\dagger$ | **`Sdag q[0]`**   |
+| Identifier | Operator    | Example statement |
+|------------|-------------|-------------------|
+| Sdag       | $S^\dagger$ | **`Sdag q[0]`**   |
 
 ## Description
 
 S-dagger gate
+
+$S = Z^{-1/2}$
 
 Rotation of $-\pi/2$ [rad] about the _z_-axis and a global phase of $-\pi/4$ [rad].
 
