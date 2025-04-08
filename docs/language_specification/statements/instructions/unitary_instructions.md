@@ -60,16 +60,18 @@ Note that a composition of gate modifiers acting on a named gate is itself a gat
 ## Named gates
 
 Named gates comprise particular unitary operations that have been given their own unique label,
-_e.g._, the Hadamard gate **`H`** or the controlled-not gate **`CNOT`**.
+_e.g._, the [Hadamard gate](../../../standard_gate_set/single_qubit/sq_H.md) **`H`**
+or the [controlled-NOT gate](../../../standard_gate_set/multi_qubit/mq_CNOT.md) **`CNOT`**.
 In general, we simply refer to them as gates.
-All recognized (named) gates are listed in the [standard gate set](unitary_instructions.md#standard-gate-set).
+All recognized (named) gates are listed in the [standard gate set](../../../standard_gate_set/overview.md).
 Moreover, we use the term _named gate_ to distinguish them from unitary operations consisting of
 compositions of gate modifiers acting on a named gate, _i.e._, modified gates.
 Named gates are, thus, unmodified gates and can simply be used on their own
 or modified (multiple times) through gate modifiers. 
 
 The general form of a named gate is given by the gate name
-followed by the (comma-separated list of) qubit operand(s), _e.g._, **`X q[0]`**:
+followed by the (comma-separated list of) qubit operand(s), _e.g._,
+[**`X q[0]`**](../../../standard_gate_set/single_qubit/sq_X.md):
 
 !!! info ""
     
@@ -78,7 +80,8 @@ followed by the (comma-separated list of) qubit operand(s), _e.g._, **`X q[0]`**
 A named gate can be parameterized.
 The general form of a parameterized gate is given by the gate name
 followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses,
-which in turn is followed by the (comma-separated list of) qubit operand(s), _e.g._, **`CRk(2) q[0], q[1]`**:
+which in turn is followed by the (comma-separated list of) qubit operand(s), _e.g._,
+[**`CRk(2) q[0], q[1]`**](../../../standard_gate_set/multi_qubit/mq_CRk.md):
 
 !!! info ""
     
@@ -107,9 +110,6 @@ A few examples of gates are shown below.
     // A parametrized two-qubit controlled phase-shift gate (control: q[1], target: q[0])
     CRk(2) q[1], q[0]
     ```
-
-### Standard gate set
-
 
 ## Gate modifiers
 
@@ -161,8 +161,10 @@ and **`ctrl`** maps an _n_-qubit gate to a (_n_+1)-qubit gate.
     The current version of the language does not support the use of gate modifiers on multi-qubit gates.
     For example, the following instructions are _not_ supported:
 
-    - **`inv.CRk(2) q[0], q[1]`**, where the _inverse_ modifier is applied to a two-qubit named gate.
-    - **`inv.ctrl.X q[0], q[1]`**, where the _inverse_ modifier is applied to a two-qubit modified gate.
+    - **`inv.CRk(2) q[0], q[1]`**, where the _inverse_ modifier is applied to a two-qubit
+      [named gate](unitary_instructions.md#named-gates).
+    - **`inv.ctrl.X q[0], q[1]`**, where the _inverse_ modifier is applied to a two-qubit
+      [modified gate](unitary_instructions.md#gate-modifiers).
 
     Considering the latter example, note that the following use of gate modifiers _is_ permitted:
 

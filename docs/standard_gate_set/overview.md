@@ -1,4 +1,10 @@
 
+Find below an overview of
+[unitary instructions](../language_specification/statements/instructions/unitary_instructions.md)
+that are explicitly defined in the language, _i.e._ the _named gates_,
+that comprise the cQASM **_standard gate set_**.
+Click on the _Name_ of the gate for a more detailed description.
+
 | Name                                     | Identifier | Operator                                             | Example statement            |
 |------------------------------------------|------------|------------------------------------------------------|------------------------------|
 | [Identity](single_qubit/sq_I.md)         | I          | $I$                                                  | **`I q[0]`**                 |

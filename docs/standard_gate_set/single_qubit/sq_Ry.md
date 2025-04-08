@@ -6,11 +6,14 @@
 
 ## Description
 
+Ry gate
+
 Rotation of angle $\theta$ about the _y_-axis and a global phase of $0$.
 
 ## Representation
 
-Any single-qubit operation in $U(2)$ (including global phase) can be described with 5 parameters by the following:
+Any single-qubit operation in $U(2)$ (including global phase) can be described with 5 parameters by the following
+[$R_\hat{\mathbf{n}}$ operation](../single_qubit/sq_Rn.md):
 
 $$R_\hat{\mathbf{n}}\left([n_x, n_y, n_z]^T, \theta, \phi\right) = e^{i\phi} \cdot e^{-i\frac{\theta}{2}\left(n_x\cdot\sigma_x + n_y\cdot\sigma_y + n_z\cdot\sigma_z\right)},$$
 
@@ -27,7 +30,7 @@ R_y &= \left(\begin{matrix}
 \end{matrix}\right).
 \end{align}$$
 
-In the Hadamard basis $\{|+\rangle, |-\rangle\}$, the Ry gate $R_{y,H}$ is given by:
+In the [Hadamard](../single_qubit/sq_H.md) basis $\{|+\rangle, |-\rangle\}$, the Ry gate $R_{y,H}$ is given by:
 
 $$R_{y,H}(\theta) = HR_z(\theta) H = \left(\begin{matrix}
 \cos\left(\theta / 2\right) & \sin\left(\theta / 2\right) \\
