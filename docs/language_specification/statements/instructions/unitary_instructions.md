@@ -60,16 +60,18 @@ Note that a composition of gate modifiers acting on a named gate is itself a gat
 ## Named gates
 
 Named gates comprise particular unitary operations that have been given their own unique label,
-_e.g._, the Hadamard gate **`H`** or the controlled-not gate **`CNOT`**.
+_e.g._, the [Hadamard gate](../../../standard_gate_set/single_qubit/sq_H.md) **`H`**
+or the [controlled-NOT gate](../../../standard_gate_set/multi_qubit/mq_CNOT.md) **`CNOT`**.
 In general, we simply refer to them as gates.
-All recognized (named) gates are listed in the [standard gate set](unitary_instructions.md#standard-gate-set).
+All recognized (named) gates are listed in the [standard gate set](../../../standard_gate_set/index).
 Moreover, we use the term _named gate_ to distinguish them from unitary operations consisting of
 compositions of gate modifiers acting on a named gate, _i.e._, modified gates.
 Named gates are, thus, unmodified gates and can simply be used on their own
 or modified (multiple times) through gate modifiers. 
 
 The general form of a named gate is given by the gate name
-followed by the (comma-separated list of) qubit operand(s), _e.g._, **`X q[0]`**:
+followed by the (comma-separated list of) qubit operand(s), _e.g._,
+[**`X q[0]`**](../../../standard_gate_set/single_qubit/sq_X.md):
 
 !!! info ""
     
@@ -78,7 +80,8 @@ followed by the (comma-separated list of) qubit operand(s), _e.g._, **`X q[0]`**
 A named gate can be parameterized.
 The general form of a parameterized gate is given by the gate name
 followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses,
-which in turn is followed by the (comma-separated list of) qubit operand(s), _e.g._, **`CRk(2) q[0], q[1]`**:
+which in turn is followed by the (comma-separated list of) qubit operand(s), _e.g._,
+[**`CRk(2) q[0], q[1]`**](../../../standard_gate_set/multi_qubit/mq_CRk.md):
 
 !!! info ""
     
@@ -107,33 +110,6 @@ A few examples of gates are shown below.
     // A parametrized two-qubit controlled phase-shift gate (control: q[1], target: q[0])
     CRk(2) q[1], q[0]
     ```
-
-### Standard gate set
-
-| Name | Operator                                      | Description                              | Example statement            |
-|------|-----------------------------------------------|------------------------------------------|------------------------------|
-| I    | $I$                                           | Identity gate                            | **`I q[0]`**                 |
-| H    | $H$                                           | Hadamard gate                            | **`H q[0]`**                 |
-| X    | $X$                                           | Pauli-X                                  | **`X q[0]`**                 |
-| X90  | $X_{90}$                                      | Rotation around the _x_-axis of $\pi/2$  | **`X90 q[0]`**               |
-| mX90 | $X_{-90}$                                     | Rotation around the _x_-axis of $-\pi/2$ | **`mX90 q[0]`**              |
-| Y    | $Y$                                           | Pauli-Y                                  | **`Y q[0]`**                 |
-| Y90  | $Y_{90}$                                      | Rotation around the _y_-axis of $\pi/2$  | **`Y90 q[0]`**               |
-| mY90 | $Y_{-90}$                                     | Rotation around the _y_-axis of $-\pi/2$ | **`mY90 q[0]`**              |
-| Z    | $Z$                                           | Pauli-Z                                  | **`Z q[0]`**                 |
-| S    | $S$                                           | Phase gate                               | **`S q[0]`**                 |
-| Sdag | $S^\dagger$                                   | S dagger gate                            | **`Sdag q[0]`**              |
-| T    | $T$                                           | T                                        | **`T q[0]`**                 |
-| Tdag | $T^\dagger$                                   | T dagger gate                            | **`Tdag q[0]`**              |
-| Rx   | $R_x(\theta)$                                 | Arbitrary rotation around _x_-axis       | **`Rx(pi) q[0]`**            |
-| Ry   | $R_y(\theta)$                                 | Arbitrary rotation around _y_-axis       | **`Ry(pi) q[0]`**            |
-| Rz   | $R_z(\theta)$                                 | Arbitrary rotation around _z_-axis       | **`Rz(pi) q[0]`**            |
-| Rn   | $R_\textbf{n}(n_x, n_y, n_z, \theta, \phi_g)$ | Arbitrary rotation around specified axis | **`Rn(1,0,0,pi,pi/2) q[0]`** |
-| CNOT | $CNOT$                                        | Controlled-NOT gate                      | **`CNOT q[0], q[1]`**        |
-| CZ   | $CZ$                                          | Controlled-Z, Controlled-Phase           | **`CZ q[0], q[1]`**          |
-| CR   | $CR(\theta)$                                  | Controlled phase shift (arbitrary angle) | **`CR(pi) q[0], q[1]`**      |
-| CRk  | $CR_k(k)$                                     | Controlled phase shift ($\pi/2^{k-1}$)   | **`CRk(2) q[0], q[1]`**      |
-| SWAP | $SWAP$                                        | Swap gate                                | **`SWAP q[0], q[1]`**        |
 
 ## Gate modifiers
 
@@ -185,8 +161,10 @@ and **`ctrl`** maps an _n_-qubit gate to a (_n_+1)-qubit gate.
     The current version of the language does not support the use of gate modifiers on multi-qubit gates.
     For example, the following instructions are _not_ supported:
 
-    - **`inv.CRk(2) q[0], q[1]`**, where the _inverse_ modifier is applied to a two-qubit named gate.
-    - **`inv.ctrl.X q[0], q[1]`**, where the _inverse_ modifier is applied to a two-qubit modified gate.
+    - **`inv.CRk(2) q[0], q[1]`**, where the _inverse_ modifier is applied to a two-qubit
+      [named gate](unitary_instructions.md#named-gates).
+    - **`inv.ctrl.X q[0], q[1]`**, where the _inverse_ modifier is applied to a two-qubit
+      [modified gate](unitary_instructions.md#gate-modifiers).
 
     Considering the latter example, note that the following use of gate modifiers _is_ permitted:
 

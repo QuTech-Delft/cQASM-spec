@@ -10,7 +10,7 @@ nav:
     - Context: ./introduction/context.md
     - Acknowledgements: ./introduction/acknowledgements.md
   - Language specification:
-    - General overview: ./language_specification/general_overview.md
+    - Language specification: ./language_specification/index.md
     - Tokens:
       - Newlines: ./language_specification/tokens/newlines.md
       - Literals: ./language_specification/tokens/literals.md
@@ -40,6 +40,32 @@ nav:
       - Indices: ./language_specification/expressions/indices.md
       - Predefined constants: ./language_specification/expressions/predefined_constants.md
       - Built-in functions: ./language_specification/expressions/builtin_functions.md
+  - Standard gate set:
+      - Standard gate set: ./standard_gate_set/index.md
+      - Single-qubit:
+        - Hadamard: ./standard_gate_set/single_qubit/sq_H.md
+        - Identity: ./standard_gate_set/single_qubit/sq_I.md
+        - Pauli-X: ./standard_gate_set/single_qubit/sq_X.md
+        - Pauli-Y: ./standard_gate_set/single_qubit/sq_Y.md
+        - Pauli-Z: ./standard_gate_set/single_qubit/sq_Z.md
+        - X90: ./standard_gate_set/single_qubit/sq_X90.md
+        - minus-X90: ./standard_gate_set/single_qubit/sq_mX90.md
+        - Y90: ./standard_gate_set/single_qubit/sq_Y90.md
+        - minus-Y90: ./standard_gate_set/single_qubit/sq_mY90.md
+        - S: ./standard_gate_set/single_qubit/sq_S.md
+        - S-dagger: ./standard_gate_set/single_qubit/sq_Sdag.md
+        - T: ./standard_gate_set/single_qubit/sq_T.md
+        - T-dagger: ./standard_gate_set/single_qubit/sq_Tdag.md
+        - Rx: ./standard_gate_set/single_qubit/sq_Rx.md
+        - Ry: ./standard_gate_set/single_qubit/sq_Ry.md
+        - Rz: ./standard_gate_set/single_qubit/sq_Rz.md
+        - Rn: ./standard_gate_set/single_qubit/sq_Rn.md
+      - Multi-qubit:
+        - Controlled-NOT: ./standard_gate_set/multi_qubit/mq_CNOT.md
+        - C-Phase: ./standard_gate_set/multi_qubit/mq_CZ.md
+        - CR: ./standard_gate_set/multi_qubit/mq_CR.md
+        - CRk: ./standard_gate_set/multi_qubit/mq_CRk.md
+        - SWAP: ./standard_gate_set/multi_qubit/mq_SWAP.md
   - Appendices:
       - Spin-2+: appendices/spin_2plus.md
 
