@@ -9,25 +9,25 @@
       
       
       
-        <link rel="prev" href="barrier_instruction.html">
+        <link rel="prev" href="../introduction/acknowledgements.html">
       
       
-        <link rel="next" href="../single-gate-multiple-qubit-notation.html">
+        <link rel="next" href="tokens/newlines.html">
       
       
-      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
     
     
       
-        <title>Wait instruction - cQASM specification</title>
+        <title>Language specification - cQASM specification</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.4af4bdda.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.4af4bdda.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,14 +46,14 @@
       
     
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
     
-   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -62,7 +62,7 @@
     .gdesc-inner { font-size: 0.75rem; }
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -80,6 +80,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#tokens" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -94,7 +99,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../.." title="cQASM specification" class="md-header__button md-logo" aria-label="cQASM specification" data-md-component="logo">
+    <a href=".." title="cQASM specification" class="md-header__button md-logo" aria-label="cQASM specification" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Wait instruction
+              Language specification
             
           </span>
         </div>
@@ -237,7 +242,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../index.html" class="md-tabs__link">
+        <a href="../index.html" class="md-tabs__link">
           
   
   
@@ -261,7 +266,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../../index.html" class="md-tabs__link">
+        <a href="index.html" class="md-tabs__link">
           
   
   
@@ -283,7 +288,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../standard_gate_set/index.html" class="md-tabs__link">
+        <a href="../standard_gate_set/index.html" class="md-tabs__link">
           
   
   
@@ -305,7 +310,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../appendices/spin_2plus.html" class="md-tabs__link">
+        <a href="../appendices/spin_2plus.html" class="md-tabs__link">
           
   
   
@@ -341,7 +346,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../.." title="cQASM specification" class="md-nav__button md-logo" aria-label="cQASM specification" data-md-component="logo">
+    <a href=".." title="cQASM specification" class="md-nav__button md-logo" aria-label="cQASM specification" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -398,7 +403,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../index.html" class="md-nav__link ">
+            <a href="../index.html" class="md-nav__link ">
               
   
   
@@ -433,7 +438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../introduction/history.html" class="md-nav__link">
+      <a href="../introduction/history.html" class="md-nav__link">
         
   
   
@@ -456,7 +461,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../introduction/context.html" class="md-nav__link">
+      <a href="../introduction/context.html" class="md-nav__link">
         
   
   
@@ -479,7 +484,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../introduction/acknowledgements.html" class="md-nav__link">
+      <a href="../introduction/acknowledgements.html" class="md-nav__link">
         
   
   
@@ -543,7 +548,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../index.html" class="md-nav__link ">
+            <a href="index.html" class="md-nav__link md-nav__link--active">
               
   
   
@@ -556,7 +561,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+              <label class="md-nav__link md-nav__link--active" for="__nav_2" id="__nav_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -635,7 +640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tokens/newlines.html" class="md-nav__link">
+      <a href="tokens/newlines.html" class="md-nav__link">
         
   
   
@@ -658,7 +663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tokens/literals.html" class="md-nav__link">
+      <a href="tokens/literals.html" class="md-nav__link">
         
   
   
@@ -681,7 +686,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tokens/identifiers.html" class="md-nav__link">
+      <a href="tokens/identifiers.html" class="md-nav__link">
         
   
   
@@ -704,7 +709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tokens/keywords.html" class="md-nav__link">
+      <a href="tokens/keywords.html" class="md-nav__link">
         
   
   
@@ -727,7 +732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tokens/raw_text_string.html" class="md-nav__link">
+      <a href="tokens/raw_text_string.html" class="md-nav__link">
         
   
   
@@ -750,7 +755,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tokens/operators_and_punctuators.html" class="md-nav__link">
+      <a href="tokens/operators_and_punctuators.html" class="md-nav__link">
         
   
   
@@ -773,7 +778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tokens/whitespace_and_comments.html" class="md-nav__link">
+      <a href="tokens/whitespace_and_comments.html" class="md-nav__link">
         
   
   
@@ -801,10 +806,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -823,11 +826,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
@@ -843,7 +846,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             Statements
@@ -857,7 +860,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../version_statement.html" class="md-nav__link">
+      <a href="statements/version_statement.html" class="md-nav__link">
         
   
   
@@ -927,7 +930,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../variable_declarations/qubit_register_declaration.html" class="md-nav__link">
+      <a href="statements/variable_declarations/qubit_register_declaration.html" class="md-nav__link">
         
   
   
@@ -950,7 +953,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../variable_declarations/bit_register_declaration.html" class="md-nav__link">
+      <a href="statements/variable_declarations/bit_register_declaration.html" class="md-nav__link">
         
   
   
@@ -978,10 +981,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -1000,11 +1001,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3" >
         
           
           <label class="md-nav__link" for="__nav_2_3_3" id="__nav_2_3_3_label" tabindex="0">
@@ -1020,7 +1021,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_3_3">
             <span class="md-nav__icon md-icon"></span>
             Instructions
@@ -1034,7 +1035,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../unitary_instructions.html" class="md-nav__link">
+      <a href="statements/instructions/unitary_instructions.html" class="md-nav__link">
         
   
   
@@ -1106,7 +1107,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../non_unitary_instructions/init_instruction.html" class="md-nav__link">
+      <a href="statements/instructions/non_unitary_instructions/init_instruction.html" class="md-nav__link">
         
   
   
@@ -1129,7 +1130,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../non_unitary_instructions/measure_instruction.html" class="md-nav__link">
+      <a href="statements/instructions/non_unitary_instructions/measure_instruction.html" class="md-nav__link">
         
   
   
@@ -1152,7 +1153,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../non_unitary_instructions/reset_instruction.html" class="md-nav__link">
+      <a href="statements/instructions/non_unitary_instructions/reset_instruction.html" class="md-nav__link">
         
   
   
@@ -1180,10 +1181,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -1198,11 +1197,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3_3" >
         
           
           <label class="md-nav__link" for="__nav_2_3_3_3" id="__nav_2_3_3_3_label" tabindex="0">
@@ -1218,7 +1217,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_3_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_3_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_3_3_3">
             <span class="md-nav__icon md-icon"></span>
             Control instructions
@@ -1232,7 +1231,7 @@
   
   
     <li class="md-nav__item">
-      <a href="barrier_instruction.html" class="md-nav__link">
+      <a href="statements/instructions/control_instructions/barrier_instruction.html" class="md-nav__link">
         
   
   
@@ -1252,17 +1251,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="wait_instruction.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="statements/instructions/control_instructions/wait_instruction.html" class="md-nav__link">
         
   
   
@@ -1273,7 +1265,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1294,7 +1285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../single-gate-multiple-qubit-notation.html" class="md-nav__link">
+      <a href="statements/instructions/single-gate-multiple-qubit-notation.html" class="md-nav__link">
         
   
   
@@ -1325,7 +1316,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../assembly_declaration.html" class="md-nav__link">
+      <a href="statements/assembly_declaration.html" class="md-nav__link">
         
   
   
@@ -1356,7 +1347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../types.html" class="md-nav__link">
+      <a href="types.html" class="md-nav__link">
         
   
   
@@ -1428,7 +1419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../expressions/indices.html" class="md-nav__link">
+      <a href="expressions/indices.html" class="md-nav__link">
         
   
   
@@ -1451,7 +1442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../expressions/predefined_constants.html" class="md-nav__link">
+      <a href="expressions/predefined_constants.html" class="md-nav__link">
         
   
   
@@ -1474,7 +1465,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../expressions/builtin_functions.html" class="md-nav__link">
+      <a href="expressions/builtin_functions.html" class="md-nav__link">
         
   
   
@@ -1537,7 +1528,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../standard_gate_set/index.html" class="md-nav__link ">
+            <a href="../standard_gate_set/index.html" class="md-nav__link ">
               
   
   
@@ -1649,7 +1640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_H.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_H.html" class="md-nav__link">
         
   
   
@@ -1672,7 +1663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_I.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_I.html" class="md-nav__link">
         
   
   
@@ -1695,7 +1686,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_X.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_X.html" class="md-nav__link">
         
   
   
@@ -1718,7 +1709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_Y.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_Y.html" class="md-nav__link">
         
   
   
@@ -1741,7 +1732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_Z.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_Z.html" class="md-nav__link">
         
   
   
@@ -1764,7 +1755,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_X90.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_X90.html" class="md-nav__link">
         
   
   
@@ -1787,7 +1778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_mX90.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_mX90.html" class="md-nav__link">
         
   
   
@@ -1810,7 +1801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_Y90.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_Y90.html" class="md-nav__link">
         
   
   
@@ -1833,7 +1824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_mY90.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_mY90.html" class="md-nav__link">
         
   
   
@@ -1856,7 +1847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_S.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_S.html" class="md-nav__link">
         
   
   
@@ -1879,7 +1870,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_Sdag.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_Sdag.html" class="md-nav__link">
         
   
   
@@ -1902,7 +1893,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_T.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_T.html" class="md-nav__link">
         
   
   
@@ -1925,7 +1916,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_Tdag.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_Tdag.html" class="md-nav__link">
         
   
   
@@ -1948,7 +1939,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_Rx.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_Rx.html" class="md-nav__link">
         
   
   
@@ -1971,7 +1962,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_Ry.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_Ry.html" class="md-nav__link">
         
   
   
@@ -1994,7 +1985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_Rz.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_Rz.html" class="md-nav__link">
         
   
   
@@ -2017,7 +2008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/single_qubit/sq_Rn.html" class="md-nav__link">
+      <a href="../standard_gate_set/single_qubit/sq_Rn.html" class="md-nav__link">
         
   
   
@@ -2101,7 +2092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/multi_qubit/mq_CNOT.html" class="md-nav__link">
+      <a href="../standard_gate_set/multi_qubit/mq_CNOT.html" class="md-nav__link">
         
   
   
@@ -2124,7 +2115,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/multi_qubit/mq_CZ.html" class="md-nav__link">
+      <a href="../standard_gate_set/multi_qubit/mq_CZ.html" class="md-nav__link">
         
   
   
@@ -2147,7 +2138,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/multi_qubit/mq_CR.html" class="md-nav__link">
+      <a href="../standard_gate_set/multi_qubit/mq_CR.html" class="md-nav__link">
         
   
   
@@ -2170,7 +2161,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/multi_qubit/mq_CRk.html" class="md-nav__link">
+      <a href="../standard_gate_set/multi_qubit/mq_CRk.html" class="md-nav__link">
         
   
   
@@ -2193,7 +2184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../standard_gate_set/multi_qubit/mq_SWAP.html" class="md-nav__link">
+      <a href="../standard_gate_set/multi_qubit/mq_SWAP.html" class="md-nav__link">
         
   
   
@@ -2276,7 +2267,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../appendices/spin_2plus.html" class="md-nav__link">
+      <a href="../appendices/spin_2plus.html" class="md-nav__link">
         
   
   
@@ -2317,6 +2308,101 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tokens
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expressions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#case-sensitivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Case sensitivity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      File extension
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-read" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to read
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to read">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grammar-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grammar sections
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qubit-state-and-measurement-bit-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qubit state and measurement bit ordering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2334,122 +2420,211 @@
   
 
 
-  <h1>Wait instruction</h1>
+  <h1>Language specification</h1>
 
-<p>The <strong><code>wait</code></strong> instruction is a single-qubit control instruction that is used to constrain the optimization of a
-scheduler.
-It tells the scheduler to delay the subsequent instructions on the specified qubit(s) by a given time.
-The delay time is passed along with the instruction as a dimensionless parameter,
-the unit of which represents the duration of a single-qubit gate on the backend,
-<em>i.e.</em>, an execution cycle. 
-Moreover, the <strong><code>wait</code></strong> instruction will also function as a <a href="barrier_instruction.html"><em>barrier</em></a>,
-telling the scheduler that instructions on the specified qubit(s) cannot be scheduled across the position of the 
-<strong><code>wait</code></strong> instruction.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The <a href="barrier_instruction.html"><strong><code>barrier</code></strong> instruction</a> may be considered equal to the <strong><code>wait</code></strong> instruction with a
-time delay set to 0.
-Note however that for certain backends, groups of consecutive <strong><code>barrier</code></strong> instructions are linked together to
-form a <em>uniform</em> barrier, across which no instructions on the specified qubits can be scheduled.
-This is <strong>not</strong> the case for the <strong><code>wait</code></strong> instruction; consecutive <strong><code>wait</code></strong> instructions on different qubits
-are considered to be independent instructions.</p>
-<p>Multiple successive <strong><code>wait</code></strong> instructions on the <em>same</em> qubit,
-however, may be fused into a single <strong><code>wait</code></strong> instruction,
-where the delay time is set to the sum of the delay times of the separate instructions.
-For example,</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="hll">wait(3) q[0]
-</span><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>wait(4) q[1]
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="hll">wait(2) q[0]
-</span></code></pre></div>
-<p>could be optimized to:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="hll">wait(5) q[0]
-</span><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>wait(4) q[1]
-</code></pre></div>
-</div>
-<p>The general form of the <strong><code>wait</code></strong> instruction is as follows:</p>
-<div class="admonition info">
-<p>&emsp;<strong><code>wait(</code></strong> <em>parameter</em> <strong><code>)</code></strong> <em>qubit-argument</em></p>
-</div>
-<details class="info">
-<summary>Grammar for <strong><code>wait</code></strong> instruction</summary>
-<p><em>wait-instruction</em>:<br />
-&emsp;<strong><code>wait(</code></strong> <em>parameter</em> <strong><code>)</code></strong> <em>qubit-argument</em></p>
-<p><em>parameter</em>:<br />
-&emsp; <em>integer-literal</em> </p>
-<p><em>qubit-argument</em>:<br />
-&emsp; <em>qubit-variable</em><br />
-&emsp; <em>qubit-index</em></p>
-<p><em>qubit-variable</em>:<br />
-&emsp; <em>identifier</em></p>
-<p><em>qubit-index</em>:<br />
-&emsp; <em>index</em></p>
-</details>
+<p>The cQASM language specification consists of a description of its <a href="index#tokens">tokens</a>,
+<a href="index#statements">statements</a>, <a href="index#types">types</a>, and
+<a href="index#expressions">expressions</a>.
+Additional information is provided on the <a href="index#case-sensitivity">case sensitivity</a> of the language,
+the preferred <a href="index#file-extension">file extension</a> of a cQASM program,
+and a brief explanation on how to interpret the <a href="index#grammar-sections">grammar sections</a>
+of this specification.</p>
+<h2 id="tokens">Tokens</h2>
+<p>A cQASM program can contain the following types of tokens:</p>
+<ul>
+<li><a href="tokens/newlines.html">Newlines</a></li>
+<li><a href="tokens/literals.html">Literals</a></li>
+<li><a href="tokens/identifiers.html">Identifiers</a></li>
+<li><a href="tokens/keywords.html">Keywords</a></li>
+<li><a href="tokens/raw_text_string.html">Raw text string</a></li>
+<li><a href="tokens/operators_and_punctuators.html">Operators and punctuators</a>  </li>
+</ul>
+<p><a href="tokens/whitespace_and_comments.html">Whitespace and comments</a> are ignored except as they serve to separate tokens.</p>
+<h2 id="statements">Statements</h2>
+<p>A cQASM program consists of a list of <em>statements</em>, more concretely,
+a <em>version statement</em> followed by <em>variable declarations</em> and <em>instructions</em>. 
+In essence, a quantum algorithm is expressed via a sequence of unitary and non-unitary quantum operations
+applied to qubit arguments
+(<em>e.g.</em>, the <a href="statements/instructions/non_unitary_instructions/measure_instruction.html"><em>measure instruction</em></a>).
+The unitary operations, commonly know as gates, can be either
+<a href="statements/instructions/unitary_instructions.html#named-gates"><em>named gates</em></a> or compositions of
+<a href="statements/instructions/unitary_instructions.html#gate-modifiers"><em>gate modifiers</em></a> acting on a named gate.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <strong><code>wait</code></strong> instruction accepts
-<a href="../single-gate-multiple-qubit-notation.html">SGMQ notation</a>, similar to gates.</p>
+<p>For simplicity, throughout this documentation, we use the term <em>gate</em> to refer to a <em>named gate</em>.
+However, it is important to note that the result of applying a gate modifier is also a gate.
+When we need to refer explicitely to a named gate such as <code>H</code> or <code>Rz</code>,
+and not to a gate resulting from applying a gate modifier, we use the term <em>named gate</em>.</p>
 </div>
+<ul>
+<li><a href="statements/version_statement.html">Version statement</a> (<em>mandatory</em>)</li>
+<li>Variable declarations:<ul>
+<li><a href="statements/variable_declarations/qubit_register_declaration.html">Qubit (register) declaration</a></li>
+<li><a href="statements/variable_declarations/bit_register_declaration.html">Bit (register) declaration</a></li>
+</ul>
+</li>
+<li>Instructions:<ul>
+<li><a href="statements/instructions/unitary_instructions.html">Unitary instructions</a> (<em>i.e.</em>, gates)</li>
+<li>Non-unitary instructions:<ul>
+<li><a href="statements/instructions/non_unitary_instructions/init_instruction.html">Init instruction</a></li>
+<li><a href="statements/instructions/non_unitary_instructions/measure_instruction.html">Measure instruction</a></li>
+<li><a href="statements/instructions/non_unitary_instructions/reset_instruction.html">Reset instruction</a></li>
+</ul>
+</li>
+<li>Control instructions:<ul>
+<li><a href="statements/instructions/control_instructions/barrier_instruction.html">Barrier instruction</a></li>
+<li><a href="statements/instructions/control_instructions/wait_instruction.html">Wait instruction</a></li>
+</ul>
+</li>
+<li><a href="statements/instructions/single-gate-multiple-qubit-notation.html">Single-gate-multiple-qubit (SGMQ) notation</a></li>
+</ul>
+</li>
+<li><a href="statements/assembly_declaration.html">Assembly declaration</a></li>
+</ul>
 <div class="admonition example">
-<p class="admonition-title">Example</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Single qubit</label><label for="__tabbed_1_2">Multiple qubits</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Example cQASM program</label><label for="__tabbed_1_2">Smallest valid cQASM program</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
-<span class="normal"><a href="#__codelineno-2-2">2</a></span>
-<span class="normal"><a href="#__codelineno-2-3">3</a></span>
-<span class="normal"><a href="#__codelineno-2-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>qubit q
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a>X q
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="hll">wait(5) q  // time delay of 5 execution cycles
-</span><a id="__codelineno-2-4" name="__codelineno-2-4"></a>X q
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>// Example program according to the cQASM language specification
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>// Version statement
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>version 3.0
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>// Qubit register declaration
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>qubit[2] q
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>// Bit register declaration
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>bit[2] b
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>// Gate
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>H q[0]
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>// Gate modifier
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a>ctrl.X q[0], q[1]
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a>// Measure instruction
+<a id="__codelineno-0-19" name="__codelineno-0-19"></a>b[0, 1] = measure q[0, 1]
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
-<span class="normal"><a href="#__codelineno-3-2">2</a></span>
-<span class="normal"><a href="#__codelineno-3-3">3</a></span>
-<span class="normal"><a href="#__codelineno-3-4">4</a></span>
-<span class="normal"><a href="#__codelineno-3-5">5</a></span>
-<span class="normal"><a href="#__codelineno-3-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>qubit[3] q
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a>X q[0]
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="hll">wait(5) q[0, 1]  // time delay of 5 execution cycles
-</span><a id="__codelineno-3-4" name="__codelineno-3-4"></a>H q[0]
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a>X q[2]
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a>H q[1]
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>version 3
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 </div>
-<p>In the examples above it is shown how the <strong><code>wait</code></strong> instruction can be used with a single qubit and multiple qubits.
-In the case of the single qubit, the <strong><code>wait</code></strong> instruction tells the scheduler to schedule a delay of 5 execution
-cycles between the successive <strong><code>X</code></strong> gates.
-Note that it also implicitly places a <a href="barrier_instruction.html">barrier</a> between the two <strong><code>X</code></strong> gates,
-such that they cannot be fused into a single identity gate, <strong><code>I</code></strong>.
-In the second example, using SGMQ notation, the <strong><code>wait</code></strong> instruction is applied to qubits <strong><code>q[0]</code></strong> and <strong><code>q[1]</code></strong>.
-Enforcing a delay of 5 execution cycles on any following instructions involving those qubits,
-<em>e.g.</em>, here <strong><code>H q[0]</code></strong> and <strong><code>H q[1]</code></strong>.
-Qubit <strong><code>q[2]</code></strong> can be optimized freely across this circuit,
-<em>i.e.</em>, be scheduled before or after <strong><code>wait</code></strong> instruction, regardless of any specified time delay. </p>
-<p>The following code snippet illustrates how the <strong><code>wait</code></strong> instruction might be used in context.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
-<span class="normal"><a href="#__codelineno-4-2">2</a></span>
-<span class="normal"><a href="#__codelineno-4-3">3</a></span>
-<span class="normal"><a href="#__codelineno-4-4">4</a></span>
-<span class="normal"><a href="#__codelineno-4-5">5</a></span>
-<span class="normal"><a href="#__codelineno-4-6">6</a></span>
-<span class="normal"><a href="#__codelineno-4-7">7</a></span>
-<span class="normal"><a href="#__codelineno-4-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>version 3.0
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a>qubit[2] q
-<a id="__codelineno-4-4" name="__codelineno-4-4"></a>bit[2] b
-<a id="__codelineno-4-5" name="__codelineno-4-5"></a>init q
-<a id="__codelineno-4-6" name="__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="hll">wait(100) q[0]
-</span><a id="__codelineno-4-8" name="__codelineno-4-8"></a>b[0] = measure q[0]
-</code></pre></div></td></tr></table></div>
-<p>Here, the <a href="../non_unitary_instructions/measure_instruction.html">measurement</a> of <strong><code>q[0]</code></strong> is forced to be scheduled at
-least 100 execution cycles after the <a href="../non_unitary_instructions/init_instruction.html">initialization</a>
-of the qubit is complete.</p>
+<h2 id="types">Types</h2>
+<p>The set of types supported by cQASM can be found in the section <a href="types.html">Types</a>. </p>
+<h2 id="expressions">Expressions</h2>
+<p>The following expressions can appear in a statement:</p>
+<ul>
+<li><a href="expressions/indices.html">Indices</a></li>
+<li><a href="expressions/predefined_constants.html">Predefined constants</a></li>
+<li><a href="expressions/builtin_functions.html">Built-in functions</a></li>
+</ul>
+<h2 id="case-sensitivity">Case sensitivity</h2>
+<p>cQASM is now a case-sensitive language, in contrast to previous versions. 
+The following lines of code are all semantically distinct</p>
+<div class="admonition example">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>H q[0]
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>h Q[0]
+</code></pre></div>
+</div>
+<p>In the first line of the example above,
+the Hadamard gate <strong><code>H</code></strong> is applied to the qubit at index <strong><code>0</code></strong> of the qubit register <strong><code>q</code></strong>.
+The next line starts with an undefined gate <strong><code>h</code></strong> 
+that operates on the qubit at index <strong><code>0</code></strong> of the qubit register <strong><code>Q</code></strong>,
+which in turn does <em>not</em> refer to the qubit register <strong><code>q</code></strong>.</p>
+<p>Take care that case sensitivity not only applies to <a href="tokens/identifiers.html">identifiers</a>,
+but also to all other lexical components of the language,
+like <a href="tokens/keywords.html">keywords</a>, <a href="types.html">types</a>,
+<a href="expressions/predefined_constants.html">predefined constants</a>,
+and <a href="expressions/builtin_functions.html">built-in functions</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Gate names are identifiers and are therefore case-sensitive.
+The syntax of the gates defined in cQASM are listed in the
+<a href="statements/instructions/unitary_instructions.html#standard-gate-set">cQASM standard gate set</a>.
+Even though it is common practice to write variable names or function identifiers in lowercase,
+we choose to define the gate names in the predefined cQASM standard gate set in UPPERCASE or CamelCase,
+as this is more in line with how these gates are represented in the field of quantum information processing (QIP). </p>
+</div>
+<h2 id="file-extension">File extension</h2>
+<p>The preferred file extension for a cQASM file is <code>*.cq</code>.</p>
+<h2 id="how-to-read"><em>How to read</em></h2>
+<h3 id="grammar-sections"><em>Grammar sections</em></h3>
+<p>In the notation and grammar descriptions appearing throughout this language specification, 
+syntactic categories are indicated by <em>italic</em> type,
+and literal words and characters in <strong><code>bold constant width</code></strong> type.
+Alternatives are listed on separate lines except in a few cases
+where a long set of alternatives is presented on one line, with the quantifiers 'one of', 'through', or 'or'.
+For example,</p>
+<div class="admonition info">
+<p>&emsp;one of <strong><code>a</code></strong> through <strong><code>z</code></strong> or <strong><code>A</code></strong> through <strong><code>Z</code></strong></p>
+</div>
+<p>indicates any lowercase or uppercase alphabetic character.</p>
+<p>An optional terminal or non-terminal symbol is indicated by the subscript <sub>opt</sub>, so</p>
+<div class="admonition info">
+<p>&emsp;<strong><code>{</code></strong> <em>expression</em><sub>opt</sub><strong><code>}</code></strong></p>
+</div>
+<p>indicates an optional expression enclosed in curly braces.</p>
+<p>Names for syntactic categories have generally been chosen according to the following rules:</p>
+<ul>
+<li><em>X-sequence</em> is one or more <em>X</em>’s without intervening delimiters, <em>e.g.</em>, <em>digit-sequence</em> is a sequence of digits.</li>
+<li><em>X-list</em> is one or more <em>X</em>’s separated by intervening commas, <em>e.g.</em>, <em>index-list</em> is a sequence of 
+indices separated by commas.</li>
+</ul>
+<h3 id="qubit-state-and-measurement-bit-ordering"><em>Qubit state and measurement bit ordering</em></h3>
+<p>In this specification, qubit states are represented using the ket-vector notation <span class="arithmatex">\(|\Psi\rangle\)</span>
+and measurement outcomes are represented as bit strings.</p>
+<p>Qubits in a ket-vector are ordered with qubit indices decreasing from left to right, <em>i.e.</em>,
+<span class="arithmatex">\(|\Psi\rangle = \sum c_i~(|q_n\rangle\otimes |q_{n-1}\rangle\otimes~...\otimes~|q_1\rangle\otimes |q_0\rangle)_i\)</span>
+<span class="arithmatex">\(=\sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i\)</span>.
+For example, given the state <span class="arithmatex">\(|01\rangle\)</span>, <span class="arithmatex">\(q_0\)</span> is in state <span class="arithmatex">\(|1\rangle\)</span>
+and <span class="arithmatex">\(q_1\)</span> is in state <span class="arithmatex">\(|0\rangle\)</span>. </p>
+<p>Measurement outcomes are represented by a bit string,
+which adheres to the same ordering convention as qubit states,
+<em>i.e.</em> with the (qu)bit indices decreasing from left to right.    </p>
+<p>Consider a qubit register of size 3, <code>qubit[3] q</code>,
+where each individual qubit can be referred to by its index as <code>q[0]</code>, <code>q[1]</code>, and <code>q[2]</code>.
+If the state of this qubit register is <span class="arithmatex">\(|110\rangle\)</span>,
+then measuring it will result in the following bit string:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><code>q[2]</code></th>
+<th style="text-align: center;"><code>q[1]</code></th>
+<th style="text-align: center;"><code>q[0]</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: center;"><code>0</code></td>
+</tr>
+</tbody>
+</table>
+<p>The same ordering applies to bit registers, <em>i.e.</em>, for a bit register <code>b</code>,
+the ordering is given by <code>b[n-1]b[n]...b[1]b[0]</code>.</p>
 
 
 
@@ -2479,7 +2654,7 @@ of the qubit is complete.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="barrier_instruction.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Barrier instruction">
+          <a href="../introduction/acknowledgements.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Acknowledgements">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2489,20 +2664,20 @@ of the qubit is complete.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Barrier instruction
+                Acknowledgements
               </div>
             </div>
           </a>
         
         
           
-          <a href="../single-gate-multiple-qubit-notation.html" class="md-footer__link md-footer__link--next" aria-label="Next: Single-gate-multiple-qubit (SGMQ) notation">
+          <a href="tokens/newlines.html" class="md-footer__link md-footer__link--next" aria-label="Next: Newlines">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Single-gate-multiple-qubit (SGMQ) notation
+                Newlines
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2538,12 +2713,12 @@ of the qubit is complete.</p>
     
     
       
-      <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.indexes", "navigation.tabs", "navigation.tracking", "navigation.footer"], "search": "../../../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.tabs", "navigation.tracking", "navigation.footer"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
       
-        <script src="../../../../javascripts/mathjax.js"></script>
+        <script src="../javascripts/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
