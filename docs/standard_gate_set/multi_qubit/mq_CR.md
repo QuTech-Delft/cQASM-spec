@@ -6,18 +6,10 @@
 
 ## Description
 
-Controlled phase shift or CR gate
+The Controlled phase shift, or CR, gate is a two-qubit gate.
+It is the controlled version of the phase shift gate, with angle $\theta$ (radians). 
 
-$CR(\theta) = I \otimes |0\rangle\langle 0| + R(\theta) \otimes |1\rangle\langle 1|,$
-
-with
-
-$$R(\theta) = \left(\begin{matrix}
-1 & 0  \\
-0 & e^{i\theta}  
-\end{matrix}\right).$$
-
-The CR gate is a generalization of the [CZ gate](../multi_qubit/mq_CZ.md): $CZ = CR(\pi)$ 
+The CR gate is a generalization of the [CZ gate](mq_CZ.md): $CZ = CR(\pi)$ 
 
 ## Representation
 
@@ -29,6 +21,17 @@ CR(\theta) &= \left(\begin{matrix}
 0 & 0 & 0 & e^{i\theta} 
 \end{matrix}\right)
 \end{align}$$
+
+which is equal to:
+
+$$CR(\theta) = I \otimes |0\rangle\langle 0| + R(\theta) \otimes |1\rangle\langle 1|,$$
+
+with
+
+$$R(\theta) = \left(\begin{matrix}
+1 & 0  \\
+0 & e^{i\theta}  
+\end{matrix}\right).$$
 
 ## Operation examples
 

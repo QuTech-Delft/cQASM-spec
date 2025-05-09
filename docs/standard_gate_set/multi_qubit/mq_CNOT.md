@@ -6,11 +6,30 @@
 
 ## Description
 
-Controlled-NOT, CNOT, Controlled-X, or CX gate
+The controlled-NOT, or CNOT, gate is a two-qubit gate.
+It performs an X gate on the second qubit, conditional on the state of the first qubit.
+The first qubit is usually referred to as the control qubit and the second qubit as the target qubit.
 
-$CNOT = CX = I \otimes |0\rangle\langle 0| + X \otimes |1\rangle\langle 1|$
+In the standard computational basis $\{|0\rangle ,|1\rangle \}$ , the CNOT gate:
 
-Clifford gate
+- leaves the control qubit unchanged,
+- performs an X gate on the target qubit, when the control qubit is in state $|1\rangle$,
+- leaves the target qubit unchanged, when the control qubit is in state $|0\rangle$.
+
+!!! note
+
+    The notion of a control qubit and a target qubit (for any controlled operation) only holds for the
+    standard computational basis. Generally, in another basis, both the 'control' and 'target' qubit change.
+
+### Aliases
+
+Also known as _controlled-X_, _CX_, or _controlled bit-flip_ gate.
+
+### Properties
+
+- [Clifford](https://en.wikipedia.org/wiki/Clifford_gates) gate; 
+- [Involutory](https://en.wikipedia.org/wiki/Involutory_matrix) operation (its own inverse);
+- [Controlled](https://en.wikipedia.org/wiki/Quantum_logic_gate#Controlled_gates) gate.
 
 ## Representation
 
@@ -22,6 +41,10 @@ CNOT &= \left(\begin{matrix}
 0 & 1 & 0 & 0 
 \end{matrix}\right)
 \end{align}$$
+
+which is equal to:
+
+$$CNOT = CX = I \otimes |0\rangle\langle 0| + X \otimes |1\rangle\langle 1|.$$
 
 ## Operation examples
 

@@ -1,4 +1,4 @@
-# Minus Y90 gate
+# minus-Y90 gate
 
 | Identifier | Operator   | Example statement |
 |------------|------------|-------------------|
@@ -6,16 +6,26 @@
 
 ## Description
 
-Minus Y90 gate
+The minus-Y90 gate or mY90 gate, _i.e._, the complex conjugate (inverse) of the [Y90 gate](sq_Y90.md),
+is an anti-clockwise rotation of $-\pi/2$ [rad] about the $\hat{\mathbf{y}}$-axis and a global phase of $-\pi/4$ [rad].
 
-Rotation of $-\pi/2$ [rad] about the _y_-axis and a global phase of $-\pi/4$ [rad].
+It is equal to _half_ the inverse of the $Y$ rotation: $Y^{-1/2}$.
 
-Clifford gate
+### Properties
+
+- [Clifford gate](https://en.wikipedia.org/wiki/Clifford_gates)
 
 ## Representation
 
-Any single-qubit operation in $U(2)$ (including global phase) can be described with 5 parameters by the following
-[$R_\hat{\mathbf{n}}$ operation](../single_qubit/sq_Rn.md):
+$$\begin{align}
+Y^{-1/2} &= \frac{1}{2}\left(\begin{matrix}
+1 - i  & 1 - i \\
+-1 + i & 1 - i 
+\end{matrix}\right)
+\end{align}$$
+
+Any single-qubit operation in $U(2)$ (including global phase) can be expressed by 5 parameters in the
+[canonical representation $R_\hat{\mathbf{n}}$](sq_Rn.md)
 
 $$R_\hat{\mathbf{n}}\left([n_x, n_y, n_z]^T, \theta, \phi\right) = e^{i\phi} \cdot e^{-i\frac{\theta}{2}\left(n_x\cdot\sigma_x + n_y\cdot\sigma_y + n_z\cdot\sigma_z\right)},$$
 
@@ -32,7 +42,7 @@ Y^{-1/2} &= \frac{1}{2}\left(\begin{matrix}
 \end{matrix}\right).
 \end{align}$$
 
-In the [Hadamard](../single_qubit/sq_H.md) basis $\{|+\rangle, |-\rangle\}$, the minus Y90 gate $Y^{-1/2}_H$ is given by:
+In the [Hadamard](sq_H.md) basis $\{|+\rangle, |-\rangle\}$, the minus Y90 gate $Y^{-1/2}_H$ is given by:
 
 $$Y^{-1/2}_H = HY^{-1/2}H = \frac{1}{2}\left(\begin{matrix}
 1 - i & -1 + i \\

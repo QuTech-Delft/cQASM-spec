@@ -6,22 +6,17 @@
 
 ## Description
 
-Parametrized controlled phase shift or CRk gate
+The parametrized controlled phase shift, or CRk, gate is a two-qubit gate. 
+It is the parametrized version of the [controlled phase shift gate](mq_CRk.md), with angle $\theta$,
+parametrized by an integer $k$: $\theta(k) = \frac{2\pi}{2^k}$.
 
-$CR_k(k) = I \otimes |0\rangle\langle 0| + R_k(k) \otimes |1\rangle\langle 1|,$
+The CRk gate is especially useful for calculating the Quantum Fourier Transform.
 
-with
+Special cases of the CRk gate include:
 
-$$R_k(k) = \left(\begin{matrix}
-1 & 0  \\
-0 & e^{i\frac{2\pi}{2^k}}  
-\end{matrix}\right).$$
-
-$CR_k(k) = CR(2\pi/2^k)$
-
-$I = CR_k(0)$
-
-$CZ = CR_k(1)$
+- $I = CR_k(0)$,
+- $CZ = CR_k(1)$,
+- $CR(2\pi/2^k) = CR_k(k)$.
 
 ## Representation
 
@@ -33,6 +28,17 @@ CR_k(k) &= \left(\begin{matrix}
 0 & 0 & 0 & e^{i\frac{2\pi}{2^k}} 
 \end{matrix}\right)
 \end{align}$$
+
+which is equal to:
+
+$$CR_k(k) = I \otimes |0\rangle\langle 0| + R_k(k) \otimes |1\rangle\langle 1|,$$
+
+with
+
+$$R_k(k) = \left(\begin{matrix}
+1 & 0  \\
+0 & e^{i\frac{2\pi}{2^k}}  
+\end{matrix}\right).$$
 
 ## Operation examples
 

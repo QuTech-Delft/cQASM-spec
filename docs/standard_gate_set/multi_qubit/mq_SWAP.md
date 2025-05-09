@@ -6,9 +6,13 @@
 
 ## Description
 
-SWAP gate
+The SWAP gate is a two-qubit gate.
+It _swaps_ the state of the two qubits.
 
-Clifford gate
+### Properties
+
+- [Clifford](https://en.wikipedia.org/wiki/Clifford_gates) gate; 
+- [Involutory](https://en.wikipedia.org/wiki/Involutory_matrix) operation (its own inverse).
 
 ## Representation
 

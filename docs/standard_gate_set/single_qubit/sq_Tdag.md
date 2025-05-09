@@ -6,16 +6,24 @@
 
 ## Description
 
-T-dagger gate
+The T-dagger gate, _i.e._, the complex conjugate (inverse) of the [T gate](sq_T.md),
+is an anti-clockwise rotation of $-\pi / 4$ [rad] about the $\hat{\mathbf{z}}$-axis and
+a global phase of $-\pi / 8$ [rad]. 
 
-$T= Z^{-1/4}$
-
-Rotation of $-\pi/4$ [rad] about the _z_-axis and a global phase of $-\pi/8$ [rad].
+It is equal to _half_ the $S^{\dagger}$ rotation and a _quarter_ of the inverse of the $Z$ rotation:
+$T = (S^{\dagger})^{1/2} = S^{-1/2} = Z^{-1/4}$.
 
 ## Representation
 
-Any single-qubit operation in $U(2)$ (including global phase) can be described with 5 parameters by the following
-[$R_\hat{\mathbf{n}}$ operation](../single_qubit/sq_Rn.md):
+$$\begin{align}
+T^\dagger &= \left(\begin{matrix}
+1 & 0 \\
+0 & \frac{1 - i}{\sqrt{2}} 
+\end{matrix}\right)
+\end{align}$$
+
+Any single-qubit operation in $U(2)$ (including global phase) can be expressed by 5 parameters in the
+[canonical representation $R_\hat{\mathbf{n}}$](sq_Rn.md)
 
 $$R_\hat{\mathbf{n}}\left([n_x, n_y, n_z]^T, \theta, \phi\right) = e^{i\phi} \cdot e^{-i\frac{\theta}{2}\left(n_x\cdot\sigma_x + n_y\cdot\sigma_y + n_z\cdot\sigma_z\right)},$$
 
@@ -32,7 +40,7 @@ T^\dagger &= \left(\begin{matrix}
 \end{matrix}\right).
 \end{align}$$
 
-In the [Hadamard](../single_qubit/sq_H.md) basis $\{|+\rangle, |-\rangle\}$, the T-dagger gate $T^\dagger_H$ is given by:
+In the [Hadamard](sq_H.md) basis $\{|+\rangle, |-\rangle\}$, the T-dagger gate $T^\dagger_H$ is given by:
 
 $$T^\dagger_H = HT^\dagger H = \frac{1}{2\sqrt{2}}\left(\begin{matrix}
 \sqrt{2} + 1 - i & \sqrt{2} - 1 + i \\ 

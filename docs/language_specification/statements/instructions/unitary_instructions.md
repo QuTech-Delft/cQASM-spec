@@ -63,7 +63,7 @@ Named gates comprise particular unitary operations that have been given their ow
 _e.g._, the [Hadamard gate](../../../standard_gate_set/single_qubit/sq_H.md) **`H`**
 or the [controlled-NOT gate](../../../standard_gate_set/multi_qubit/mq_CNOT.md) **`CNOT`**.
 In general, we simply refer to them as gates.
-All recognized (named) gates are listed in the [standard gate set](../../../standard_gate_set/overview.md).
+All recognized (named) gates are listed in the [standard gate set](../../../standard_gate_set/index).
 Moreover, we use the term _named gate_ to distinguish them from unitary operations consisting of
 compositions of gate modifiers acting on a named gate, _i.e._, modified gates.
 Named gates are, thus, unmodified gates and can simply be used on their own

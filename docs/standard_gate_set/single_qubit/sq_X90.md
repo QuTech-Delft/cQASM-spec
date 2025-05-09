@@ -6,18 +6,30 @@
 
 ## Description
 
-X90 gate
+The X90 gate is an anti-clockwise rotation of $\pi/2$ [rad] about the $\hat{\mathbf{x}}$-axis and a global phase of
+$\pi/4$ [rad].
 
-$V = X^{1/2}$
+It is equal to _half_ the $X$ rotation: $X^{1/2}$
 
-Rotation of $\pi/2$ [rad] about the _x_-axis and a global phase of $\pi/4$ [rad].
+### Aliases
 
-Clifford gate
+Also known as the _V_ gate.
+
+### Properties
+
+- [Clifford gate](https://en.wikipedia.org/wiki/Clifford_gates)
 
 ## Representation
 
-Any single-qubit operation in $U(2)$ (including global phase) can be described with 5 parameters by the following
-[$R_\hat{\mathbf{n}}$ operation](../single_qubit/sq_Rn.md):
+$$\begin{align}
+X^{1/2} &= V = \frac{1}{2}\left(\begin{matrix}
+1 + i & 1 - i \\
+1 - i & 1 + i 
+\end{matrix}\right).
+\end{align}$$
+
+Any single-qubit operation in $U(2)$ (including global phase) can be expressed by 5 parameters in the
+[canonical representation $R_\hat{\mathbf{n}}$](sq_Rn.md)
 
 $$R_\hat{\mathbf{n}}\left([n_x, n_y, n_z]^T, \theta, \phi\right) = e^{i\phi} \cdot e^{-i\frac{\theta}{2}\left(n_x\cdot\sigma_x + n_y\cdot\sigma_y + n_z\cdot\sigma_z\right)},$$
 
@@ -34,7 +46,7 @@ X^{1/2} &= \frac{1}{2}\left(\begin{matrix}
 \end{matrix}\right).
 \end{align}$$
 
-In the [Hadamard](../single_qubit/sq_H.md) basis $\{|+\rangle, |-\rangle\}$, the X90 gate $X^{1/2}_H$ is given by:
+In the [Hadamard](sq_H.md) basis $\{|+\rangle, |-\rangle\}$, the X90 gate $X^{1/2}_H$ is given by:
 
 $$X^{1/2}_H = HX^{1/2}H = \left(\begin{matrix}
 1 & 0 \\

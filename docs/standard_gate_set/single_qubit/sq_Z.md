@@ -6,23 +6,28 @@
 
 ## Description
 
-Pauli-Z gate
+The Pauli-Z, or Z, gate is an anti-clockwise rotation of $\pi$ [rad] about the $\hat{\mathbf{z}}$-axis and a global
+phase of $\pi/2$ [rad].
 
-Phase-flip
+### Aliases
 
-$Z = \sigma_z = \sigma_3 \left(\begin{matrix}
-1 & 0 \\
-0 & -1 
-\end{matrix}\right)$
+Also known as the _phase-flip_ gate.
 
-Rotation of $\pi$ [rad] about the _z_-axis and a global phase of $\pi/2$ [rad].
+### Properties
 
-Clifford gate
+- [Clifford gate](https://en.wikipedia.org/wiki/Clifford_gates)
 
 ## Representation
 
-Any single-qubit operation in $U(2)$ (including global phase) can be described with 5 parameters by the following
-[$R_\hat{\mathbf{n}}$ operation](../single_qubit/sq_Rn.md):
+$$\begin{align}
+Z = \sigma_z = \sigma_3 = \left(\begin{matrix}
+1 & 0 \\
+0 & -1 
+\end{matrix}\right)
+\end{align}$$
+
+Any single-qubit operation in $U(2)$ (including global phase) can be expressed by 5 parameters in the
+[canonical representation $R_\hat{\mathbf{n}}$](sq_Rn.md)
 
 $$R_\hat{\mathbf{n}}\left([n_x, n_y, n_z]^T, \theta, \phi\right) = e^{i\phi} \cdot e^{-i\frac{\theta}{2}\left(n_x\cdot\sigma_x + n_y\cdot\sigma_y + n_z\cdot\sigma_z\right)},$$
 
@@ -39,7 +44,7 @@ Z &= \left(\begin{matrix}
 \end{matrix}\right).
 \end{align}$$
 
-In the [Hadamard](../single_qubit/sq_H.md) basis $\{|+\rangle, |-\rangle\}$, the Pauli-Z gate $Z_H$ is given by:
+In the [Hadamard](sq_H.md) basis $\{|+\rangle, |-\rangle\}$, the Pauli-Z gate $Z_H$ is given by:
 
 $$Z_H = HZH = \left(\begin{matrix}
 0 & 1 \\

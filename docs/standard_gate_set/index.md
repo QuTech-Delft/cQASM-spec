@@ -7,15 +7,15 @@ Click on the _Name_ of the gate for a more detailed description.
 
 | Name                                     | Identifier | Operator                                             | Example statement            |
 |------------------------------------------|------------|------------------------------------------------------|------------------------------|
-| [Identity](single_qubit/sq_I.md)         | I          | $I$                                                  | **`I q[0]`**                 |
 | [Hadamard](single_qubit/sq_H.md)         | H          | $H$                                                  | **`H q[0]`**                 |
+| [Identity](single_qubit/sq_I.md)         | I          | $I$                                                  | **`I q[0]`**                 |
 | [Pauli-X](single_qubit/sq_X.md)          | X          | $X$                                                  | **`X q[0]`**                 |
-| [X90](single_qubit/sq_X90.md)            | X90        | $X^{1/2}$                                            | **`X90 q[0]`**               |
-| [Minus X90](single_qubit/sq_mX90.md)     | mX90       | $X^{-1/2}$                                           | **`mX90 q[0]`**              |
 | [Pauli-Y](single_qubit/sq_Y.md)          | Y          | $Y$                                                  | **`Y q[0]`**                 |
-| [Y90](single_qubit/sq_X90.md)            | Y90        | $Y^{1/2}$                                            | **`Y90 q[0]`**               |
-| [Minus Y90](single_qubit/sq_mX90.md)     | mY90       | $Y^{-1/2}$                                           | **`mY90 q[0]`**              |
 | [Pauli-Z](single_qubit/sq_Z.md)          | Z          | $Z$                                                  | **`Z q[0]`**                 |
+| [X90](single_qubit/sq_X90.md)            | X90        | $X^{1/2}$                                            | **`X90 q[0]`**               |
+| [minus-X90](single_qubit/sq_mX90.md)     | mX90       | $X^{-1/2}$                                           | **`mX90 q[0]`**              |
+| [Y90](single_qubit/sq_X90.md)            | Y90        | $Y^{1/2}$                                            | **`Y90 q[0]`**               |
+| [minus-Y90](single_qubit/sq_mX90.md)     | mY90       | $Y^{-1/2}$                                           | **`mY90 q[0]`**              |
 | [S](single_qubit/sq_S.md)                | S          | $S$                                                  | **`S q[0]`**                 |
 | [S-dagger](single_qubit/sq_Sdag.md)      | Sdag       | $S^\dagger$                                          | **`Sdag q[0]`**              |
 | [T](single_qubit/sq_T.md)                | T          | $T$                                                  | **`T q[0]`**                 |
