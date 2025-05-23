@@ -16,5 +16,10 @@ The Spin-2+ system developed by QuTech supports the following subset of the cQAS
 * All other libqasm 1.x language structures are not supported.
 * No `prep_X` and `measure_X` instructions are allowed, the lls will init all supported qubits before circuit execution
   and measure all in the z-basis at the end of the circuit and only return the subset as defined in the qubit register.
-* Bit register declaration statements, _e.g._, `bit[<number-of-bits:INT>] <bit-register-name:ID>` or `bit <bit-name:ID>`, are accepted and subsequently ignored.
-* Measure instruction statements assign outcomes to bit variables, _e.g._ `<bit-name:BIT> = measure <qubit-argument:QUBIT>`. These statements are accepted and subsequently ignored.
+* Bit register declaration statements, _e.g._,
+`bit[<number-of-bits:INT>] <bit-register-name:ID>` or `bit <bit-name:ID>`, are accepted and subsequently ignored.
+* Measure instruction statements assign outcomes to bit variables,
+_e.g._ `<bit-name:BIT> = measure <qubit-argument:QUBIT>`. These statements are accepted and subsequently ignored.
+* Assembly declaration statements, e.g., `asm(<backend-name>) ''' <backend-code> '''`,
+are accepted and subsequently ignored.
+
