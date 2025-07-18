@@ -1,9 +1,9 @@
-The cQASM language specification consists of a description of its [tokens](index#tokens),
-[statements](index#statements), [types](index#types), and
-[expressions](index#expressions).
-Additional information is provided on the [case sensitivity](index#case-sensitivity) of the language,
-the preferred [file extension](index#file-extension) of a cQASM program,
-and a brief explanation on how to interpret the [grammar sections](index#grammar-sections)
+The cQASM language specification consists of a description of its [tokens](index.md#tokens),
+[statements](index.md#statements), [types](index.md#types), and
+[expressions](index.md#expressions).
+Additional information is provided on the [case sensitivity](index.md#case-sensitivity) of the language,
+the preferred [file extension](index.md#file-extension) of a cQASM program,
+and a brief explanation on how to interpret the [grammar sections](index.md#grammar-sections)
 of this specification.
 
 ## Tokens

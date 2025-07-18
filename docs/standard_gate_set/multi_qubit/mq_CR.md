@@ -49,7 +49,7 @@ CR(\theta)\,|11\rangle &= e^{i\theta}|11\rangle \\
 
 !!! Note "Qubit state ordering"
 
-    Note that [qubits in a ket are ordered](../../language_specification/general_overview.md/#qubit-state-and-measurement-bit-ordering)
+    Note that [qubits in a ket are ordered](../../language_specification/index.md#qubit-state-and-measurement-bit-ordering)
     with qubit indices decreasing from left to right, _i.e._,
 
     $$|\psi\rangle = \sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i$$
