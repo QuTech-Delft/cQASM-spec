@@ -3,7 +3,7 @@ The following built-in functions can either be used individually or in more comp
 
 !!! info "The value of _x_"
     
-    The value _x_ is either a complex expression, a [predefined constant](predefined_constants.md), or a _integer-_ or
+    The value _x_ is either a (composite) expression, a [predefined constant](predefined_constants.md), or a _integer-_ or
     _float-literal_. Note that _x_ is real-valued, it cannot be a complex number.
 
 | Function name            | Operation       | Grammar                  |
