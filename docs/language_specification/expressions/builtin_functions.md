@@ -1,5 +1,5 @@
 The following built-in functions can either be used individually or in more complex expressions using
-[arithmatic operators](../tokens/operators_and_punctuators.md). 
+[arithmetic operators](../tokens/operators_and_punctuators.md). 
 
 !!! info "The value of _x_"
     
