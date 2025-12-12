@@ -52,6 +52,8 @@ nav:
         - minus-X90: ./standard_gate_set/single_qubit/sq_mX90.md
         - Y90: ./standard_gate_set/single_qubit/sq_Y90.md
         - minus-Y90: ./standard_gate_set/single_qubit/sq_mY90.md
+        - Z90: ./standard_gate_set/single_qubit/sq_Z90.md
+        - minus-Z90: ./standard_gate_set/single_qubit/sq_mZ90.md
         - S: ./standard_gate_set/single_qubit/sq_S.md
         - S-dagger: ./standard_gate_set/single_qubit/sq_Sdag.md
         - T: ./standard_gate_set/single_qubit/sq_T.md
@@ -60,6 +62,7 @@ nav:
         - Ry: ./standard_gate_set/single_qubit/sq_Ry.md
         - Rz: ./standard_gate_set/single_qubit/sq_Rz.md
         - Rn: ./standard_gate_set/single_qubit/sq_Rn.md
+        - U: ./standard_gate_set/single_qubit/sq_U.md
       - Multi-qubit:
         - Controlled-NOT: ./standard_gate_set/multi_qubit/mq_CNOT.md
         - C-Phase: ./standard_gate_set/multi_qubit/mq_CZ.md

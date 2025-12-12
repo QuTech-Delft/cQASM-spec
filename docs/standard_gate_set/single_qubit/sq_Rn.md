@@ -54,9 +54,9 @@ n_y \sin\left(\theta / 2\right) - i n_x \sin\left(\theta / 2\right) &  \cos\left
 \end{matrix}\right).
 $$
 
-In the [Hadamard](sq_H.md) basis $\{|+\rangle, |-\rangle\}$, the Rn gate $R_{\hat{\mathbf{n}},H}(...)$ is given by:
+In the [Hadamard](sq_H.md) basis $\{|+\rangle, |-\rangle\}$, the Rn gate $R_{\hat{\mathbf{n}},H}$ is given by:
 
-$$R_{\hat{\mathbf{n}},H}\left(\hat{\mathbf{n}}, \theta, \phi\right) = H R_\hat{\mathbf{n}}(\theta) H = e^{i\phi} \cdot \left(\begin{matrix}
+$$R_{\hat{\mathbf{n}},H}\left(\hat{\mathbf{n}}, \theta, \phi\right) = H R_\hat{\mathbf{n}}\left(\hat{\mathbf{n}}, \theta, \phi\right) H = e^{i\phi} \cdot \left(\begin{matrix}
 \cos\left(\theta / 2\right) - i n_x \sin\left(\theta / 2\right) & n_y \sin\left(\theta / 2\right) - i n_z \sin\left(\theta / 2\right) \\
 -n_y \sin\left(\theta / 2\right) - i n_z \sin\left(\theta / 2\right) &  \cos\left(\theta / 2\right) + i n_x \sin\left(\theta / 2\right)
 \end{matrix}\right)$$

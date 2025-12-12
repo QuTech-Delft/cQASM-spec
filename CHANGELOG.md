@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- `Rn` single-qubit unitary instruction
+- `Rn`, `U`, `Z90`, and `mZ90` single-qubit unitary instructions 
 - Assembly declaration statement
 - Raw text string token
 - Built-in functions
