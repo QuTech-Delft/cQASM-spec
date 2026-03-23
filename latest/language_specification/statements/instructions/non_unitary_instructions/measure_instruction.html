@@ -2785,22 +2785,40 @@
   <h1>Measure instruction</h1>
 
 <p>A <strong><code>measure</code></strong> instruction performs a measurement to its qubit argument and
-assigns the outcome to a bit variable.
-The general form of a <strong><code>measure</code></strong> instruction is as follows:</p>
+assigns the outcome to a bit variable.</p>
+<p>The <code>measure</code> instruction can either</p>
+<ul>
+<li>have no parameters <code>measure</code>, which corresponds to a measurement in the Z-basis, or</li>
+<li>accept 3 floating-point parameters <code>measure(0,0,1)</code>, which define the axis of the basis along which the measurement is to be performed.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>measure(0,0,1)</code> is equal to the non-parameterized <code>measure</code> as <span class="arithmatex">\((0,0,1)\)</span> defines the positive <span class="arithmatex">\(z\)</span>-axis.</p>
+</div>
+<p>The general form of a <strong><code>measure</code></strong> instruction is as follows:</p>
 <div class="admonition info">
-<p> <em>bit-argument</em> <strong><code>=</code></strong> <strong><code>measure</code></strong> <em>qubit-argument</em></p>
+<p> <em>bit-argument</em> <strong><code>=</code></strong> <strong><code>measure</code></strong> <em>qubit-argument</em><br>
+ <em>bit-argument</em> <strong><code>=</code></strong> <strong><code>measure(</code></strong><em>parameter-list</em><strong><code>)</code></strong> <em>qubit-argument</em></p>
 </div>
 <details class="info">
 <summary>Grammar for <strong><code>measure</code></strong> instruction</summary>
 <p><em>measure-instruction</em>:<br>
-  <em>bit-argument</em> <strong><code>=</code></strong> <strong><code>measure</code></strong> <em>qubit-argument</em></p>
+  <em>bit-argument</em> <strong><code>=</code></strong> <strong><code>measure</code></strong> <em>qubit-argument</em><br>
+  <em>bit-argument</em> <strong><code>=</code></strong> <strong><code>measure</code></strong> <em>parameters</em> <em>qubit-argument</em></p>
 <p><em>bit-argument</em>:<br>
   <em>bit-variable</em><br>
   <em>bit-index</em></p>
 <p><em>bit-variable</em>:<br>
   <em>identifier</em></p>
 <p><em>bit-index</em>:<br>
-  <em>index</em></p>
+  <em>index</em>  </p>
+<p><em>parameters</em>:<br>
+  <strong><code>(</code></strong> <em>parameter-list</em> <strong><code>)</code></strong></p>
+<p><em>parameter-list</em>:<br>
+  <em>parameter</em><br>
+  <em>parameter-list</em> <strong><code>,</code></strong> <em>parameter</em></p>
+<p><em>parameter</em>:<br>
+  <em>floating-literal</em></p>
 <p><em>qubit-argument</em>:<br>
   <em>qubit-variable</em><br>
   <em>qubit-index</em></p>
@@ -2816,17 +2834,21 @@ The general form of a <strong><code>measure</code></strong> instruction is as fo
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
-<span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>qubit q
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>qubit q
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a>bit b
 <a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="hll">b = measure q
+</span><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="hll">b = measure(1,0,0) q
 </span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
-<span class="normal"><a href="#__codelineno-1-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>qubit[5] q
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>qubit[5] q
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a>bit[2] b
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="hll">b[0, 1] = measure q[2, 4]
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="hll">b[0, 1] = measure q[2, 3]
+</span><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="hll">b[1, 0] = measure(1,0,0) q[4, 3]
 </span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
@@ -2858,6 +2880,26 @@ The general form of a <strong><code>measure</code></strong> instruction is as fo
 </span></code></pre></div></td></tr></tbody></table></div>
 <p>On the last line of this simple cQASM program,
 the respective states of both qubits in the qubit register are measured along the standard/computational basis.</p>
+<p>To measure in the Hadamard basis (or X-basis) you can use the parameterized <code>measure</code> instruction to measure along the 
+<span class="arithmatex">\(x\)</span>-axis, defined by <span class="arithmatex">\((1,0,0)\)</span>.</p>
+<div class="highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span>
+<span class="normal"><a href="#__codelineno-3-5">5</a></span>
+<span class="normal"><a href="#__codelineno-3-6">6</a></span>
+<span class="normal"><a href="#__codelineno-3-7">7</a></span>
+<span class="normal"><a href="#__codelineno-3-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>version 3.0
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>qubit q
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>bit b
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>X q
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a>H q
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="hll">b = measure(1,0,0) q // Measurement in the Hadamard basis.
+</span></code></pre></div></td></tr></tbody></table></div>
+<p>On the last line of the latter cQASM program the qubit is measured along the <span class="arithmatex">\(x\)</span>-axis;
+the measurement outcome will (always) be 1, due to measuring the <span class="arithmatex">\(|1\rangle\)</span> state in the X-basis.  </p>
 
 
 
