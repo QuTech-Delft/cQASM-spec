@@ -6,15 +6,15 @@ The table below lists the reserved keywords in cQASM:
 
 | Keyword       | Use                         |
 |:--------------|:----------------------------|
-| __`version`__ | Version statement           |
-| __`qubit`__   | Qubit type                  |
-| __`bit`__     | Bit type                    |
-| __`init`__    | Init instruction            |
-| __`reset`__   | Reset instruction           | 
-| __`measure`__ | Measure instruction         |
-| __`wait`__    | Wait control instruction    |
-| __`barrier`__ | Barrier control instruction |
-| __`ctrl`__    | Control gate modifier       |    
-| __`inv`__     | Inverse gate modifier       |    
-| __`pow`__     | Power gate modifier         |
 | __`asm`__     | Assembly declaration        |
+| __`barrier`__ | Barrier control instruction |
+| __`bit`__     | Bit type                    |
+| __`ctrl`__    | Control gate modifier       |    
+| __`init`__    | Init instruction            |
+| __`inv`__     | Inverse gate modifier       |    
+| __`measure`__ | Measure instruction         |
+| __`pow`__     | Power gate modifier         |
+| __`qubit`__   | Qubit type                  |
+| __`reset`__   | Reset instruction           | 
+| __`version`__ | Version statement           |
+| __`wait`__    | Wait control instruction    |

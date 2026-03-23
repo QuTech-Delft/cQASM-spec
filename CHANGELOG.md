@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - Assembly declaration statement
 - Raw text string token
 - Built-in functions
+- Parameterized `measure` instruction
 
 ## [3.0-beta2] - [ 2025-02-18 ]
 

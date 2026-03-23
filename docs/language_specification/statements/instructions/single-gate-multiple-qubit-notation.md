@@ -11,7 +11,7 @@ The single-qubit gate will then be applied to each qubit, respectively.
     **`X q[0,1]`** means **`X q[0]; X q[1]`**,
     and does not represent the 2-qubit gate **`XX q[0], q[1]`**.
     Note that the latter 2-qubit gate **`XX`** is currently not supported by the cQASM language,
-    see the [standard gate set](unitary_instructions.md#standard-gate-set) below.
+    see the [standard gate set](../../../standard_gate_set/index.md) below.
 
 If the name of the qubit register is **`q`**,
 then the following can be passed as an argument to the single-qubit gate:
