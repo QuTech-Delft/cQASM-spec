@@ -85,7 +85,7 @@ Below are examples of (valid) SGMQ notation for multi-qubit gates:
         CNOT q0[0], q1[0]; CNOT q0[1], q1[1]; CNOT q0[2], q1[2]
         ```
 
-    === "Regsiter slice"
+    === "Register slice"
         
         ```
         qubit[6] q
