@@ -77,6 +77,17 @@ The general form of a **`measure`** instruction is as follows:
 
     The **`measure`** instruction accepts
     [SGMQ notation](../single-gate-multiple-qubit-notation.md), similar to gates.
+    Note that when using SGMQ notation with the **`measure`** instruction,
+    that the number of bit operands is equal to the number of qubit operands.
+    For example, it is valid to write `b[0, 2, 1] = measure q[3:5]` because that unpacks to
+    ```
+    b[0] = measure q[3]
+    b[2] = measure q[4]
+    b[1] = measure q[5]
+    ```
+    However, it is invalid to write `b[0:1] = measure q[2]` or `b[2] = measure q[0:1]`,
+    because in both cases the number of bit and qubit operands is unequal.
+
 
 The following code snippet shows how the **`measure`** instruction might be used in context.
 
