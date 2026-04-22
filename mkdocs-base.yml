@@ -68,6 +68,16 @@ nav:
         - C-Phase: ./standard_gate_set/multi_qubit/mq_CZ.md
         - CR: ./standard_gate_set/multi_qubit/mq_CR.md
         - CRk: ./standard_gate_set/multi_qubit/mq_CRk.md
+        - CV: ./standard_gate_set/multi_qubit/mq_CV.md
+        - CY: ./standard_gate_set/multi_qubit/mq_CY.md
+        - Dynamic-CNOT: ./standard_gate_set/multi_qubit/mq_DCNOT.md
+        - Echoed Cross-Resonance: ./standard_gate_set/multi_qubit/mq_ECR.md
+        - Inverse-square-root-SWAP: ./standard_gate_set/multi_qubit/mq_InvSqrtSWAP.md
+        - iSWAP: ./standard_gate_set/multi_qubit/mq_ISWAP.md
+        - M: ./standard_gate_set/multi_qubit/mq_M.md
+        - Mølmer-Sørensen: ./standard_gate_set/multi_qubit/mq_MS.md
+        - Square-root-iSWAP: ./standard_gate_set/multi_qubit/mq_SqrtISWAP.md
+        - Square-root-SWAP: ./standard_gate_set/multi_qubit/mq_SqrtSWAP.md
         - SWAP: ./standard_gate_set/multi_qubit/mq_SWAP.md
   - Appendices:
       - Spin-2+: appendices/spin_2plus.md
