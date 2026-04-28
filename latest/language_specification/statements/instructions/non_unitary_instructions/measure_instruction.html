@@ -2857,31 +2857,18 @@ assigns the outcome to a bit variable.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The <strong><code>measure</code></strong> instruction accepts
-<a href="../single-gate-multiple-qubit-notation.html">SGMQ notation</a>, similar to gates.</p>
+<a href="../single-gate-multiple-qubit-notation.html">SGMQ notation</a>, similar to gates.
+Note that when using SGMQ notation with the <strong><code>measure</code></strong> instruction,
+that the number of bit operands is equal to the number of qubit operands.
+For example, it is valid to write <code>b[0, 2, 1] = measure q[3:5]</code> because that unpacks to
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>b[0] = measure q[3]
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>b[2] = measure q[4]
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>b[1] = measure q[5]
+</code></pre></div>
+However, it is invalid to write <code>b[0:1] = measure q[2]</code> or <code>b[2] = measure q[0:1]</code>,
+because in both cases the number of bit and qubit operands is unequal.<p></p>
 </div>
 <p>The following code snippet shows how the <strong><code>measure</code></strong> instruction might be used in context.</p>
-<div class="highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
-<span class="normal"><a href="#__codelineno-2-2">2</a></span>
-<span class="normal"><a href="#__codelineno-2-3">3</a></span>
-<span class="normal"><a href="#__codelineno-2-4">4</a></span>
-<span class="normal"><a href="#__codelineno-2-5">5</a></span>
-<span class="normal"><a href="#__codelineno-2-6">6</a></span>
-<span class="normal"><a href="#__codelineno-2-7">7</a></span>
-<span class="normal"><a href="#__codelineno-2-8">8</a></span>
-<span class="normal"><a href="#__codelineno-2-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>version 3.0
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a>qubit[2] q
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a>bit[2] b
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a>H q[0]
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a>CNOT q[0], q[1]
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="hll">b = measure q  // Measurement in the standard basis.
-</span></code></pre></div></td></tr></tbody></table></div>
-<p>On the last line of this simple cQASM program,
-the respective states of both qubits in the qubit register are measured along the standard/computational basis.</p>
-<p>To measure in the Hadamard basis (or X-basis) you can use the parameterized <code>measure</code> instruction to measure along the 
-<span class="arithmatex">\(x\)</span>-axis, defined by <span class="arithmatex">\((1,0,0)\)</span>.</p>
 <div class="highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
 <span class="normal"><a href="#__codelineno-3-3">3</a></span>
@@ -2889,14 +2876,36 @@ the respective states of both qubits in the qubit register are measured along th
 <span class="normal"><a href="#__codelineno-3-5">5</a></span>
 <span class="normal"><a href="#__codelineno-3-6">6</a></span>
 <span class="normal"><a href="#__codelineno-3-7">7</a></span>
-<span class="normal"><a href="#__codelineno-3-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>version 3.0
+<span class="normal"><a href="#__codelineno-3-8">8</a></span>
+<span class="normal"><a href="#__codelineno-3-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>version 3.0
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a>qubit q
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a>bit b
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>qubit[2] q
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>bit[2] b
 <a id="__codelineno-3-5" name="__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a>X q
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a>H q
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="hll">b = measure(1,0,0) q // Measurement in the Hadamard basis.
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>H q[0]
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a>CNOT q[0], q[1]
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="hll">b = measure q  // Measurement in the standard basis.
+</span></code></pre></div></td></tr></tbody></table></div>
+<p>On the last line of this simple cQASM program,
+the respective states of both qubits in the qubit register are measured along the standard/computational basis.</p>
+<p>To measure in the Hadamard basis (or X-basis) you can use the parameterized <code>measure</code> instruction to measure along the 
+<span class="arithmatex">\(x\)</span>-axis, defined by <span class="arithmatex">\((1,0,0)\)</span>.</p>
+<div class="highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span>
+<span class="normal"><a href="#__codelineno-4-6">6</a></span>
+<span class="normal"><a href="#__codelineno-4-7">7</a></span>
+<span class="normal"><a href="#__codelineno-4-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>version 3.0
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>qubit q
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>bit b
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a>X q
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a>H q
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="hll">b = measure(1,0,0) q // Measurement in the Hadamard basis.
 </span></code></pre></div></td></tr></tbody></table></div>
 <p>On the last line of the latter cQASM program the qubit is measured along the <span class="arithmatex">\(x\)</span>-axis;
 the measurement outcome will (always) be 1, due to measuring the <span class="arithmatex">\(|1\rangle\)</span> state in the X-basis.  </p>
