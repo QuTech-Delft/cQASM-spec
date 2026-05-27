@@ -10,6 +10,9 @@ The CY gate is a two-qubit gate.
 
 ### Properties
 
+- [Clifford](https://en.wikipedia.org/wiki/Clifford_gates) gate; 
+- [Controlled](https://en.wikipedia.org/wiki/Quantum_logic_gate#Controlled_gates) gate;
+- Ising gate.
 
 ## Representation
 

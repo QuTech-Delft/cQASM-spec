@@ -18,6 +18,10 @@ Special cases of the CRk gate include:
 - $CZ = CR_k(1)$,
 - $CR(2\pi/2^k) = CR_k(k)$.
 
+## Properties
+
+- Ising gate.
+
 ## Representation
 
 $$\begin{align}

@@ -32,7 +32,8 @@ Also known as _C-Phase_ , _controlled-Z_ , or _controlled phase-flip_ gate.
 
 - [Clifford](https://en.wikipedia.org/wiki/Clifford_gates) gate; 
 - [Involutory](https://en.wikipedia.org/wiki/Involutory_matrix) operation (its own inverse);
-- [Controlled](https://en.wikipedia.org/wiki/Quantum_logic_gate#Controlled_gates) gate.
+- [Controlled](https://en.wikipedia.org/wiki/Quantum_logic_gate#Controlled_gates) gate;
+- Ising gate.
 
 ## Representation
 

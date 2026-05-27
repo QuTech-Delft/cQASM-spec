@@ -8,10 +8,6 @@
 
 The square-root-SWAP gate is a two-qubit gate.
 
-
-### Properties
-
-
 ## Representation
 
 $$\begin{align}

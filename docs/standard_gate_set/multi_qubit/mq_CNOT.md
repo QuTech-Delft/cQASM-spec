@@ -29,7 +29,8 @@ Also known as _controlled-X_, _CX_, or _controlled bit-flip_ gate.
 
 - [Clifford](https://en.wikipedia.org/wiki/Clifford_gates) gate; 
 - [Involutory](https://en.wikipedia.org/wiki/Involutory_matrix) operation (its own inverse);
-- [Controlled](https://en.wikipedia.org/wiki/Quantum_logic_gate#Controlled_gates) gate.
+- [Controlled](https://en.wikipedia.org/wiki/Quantum_logic_gate#Controlled_gates) gate;
+- Ising gate.
 
 ## Representation
 

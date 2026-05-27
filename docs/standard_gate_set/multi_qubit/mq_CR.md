@@ -9,7 +9,11 @@
 The Controlled phase shift, or CR, gate is a two-qubit gate.
 It is the controlled version of the phase shift gate, with angle $\theta$ (radians). 
 
-The CR gate is a generalization of the [CZ gate](mq_CZ.md): $CZ = CR(\pi)$ 
+The CR gate is a generalization of the [CZ gate](mq_CZ.md): $CZ = CR(\pi)$
+
+## Properties
+
+- Ising gate.
 
 ## Representation
 

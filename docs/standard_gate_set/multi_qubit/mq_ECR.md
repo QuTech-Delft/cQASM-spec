@@ -8,10 +8,6 @@
 
 The echoed cross-resonance, or ECR, gate is a two-qubit gate.
 
-
-### Properties
-
-
 ## Representation
 
 $$\begin{align}

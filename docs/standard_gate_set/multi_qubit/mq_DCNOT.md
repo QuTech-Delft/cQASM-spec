@@ -8,10 +8,6 @@
 
 The dynamic-CNOT, or DCNOT, gate is a two-qubit gate.
 
-
-### Properties
-
-
 ## Representation
 
 $$\begin{align}

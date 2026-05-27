@@ -10,6 +10,8 @@ The CV gate is a two-qubit gate.
 
 ### Properties
 
+- [Controlled](https://en.wikipedia.org/wiki/Quantum_logic_gate#Controlled_gates) gate;
+- Ising gate.
 
 ## Representation
 

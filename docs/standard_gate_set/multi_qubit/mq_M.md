@@ -8,9 +8,9 @@
 
 The Magic, or M, gate is a two-qubit gate.
 
+## Properties
 
-### Properties
-
+- Ising gate
 
 ## Representation
 

@@ -10,6 +10,7 @@ The iSWAP gate is a two-qubit gate.
 
 ### Properties
 
+- [Clifford](https://en.wikipedia.org/wiki/Clifford_gates) gate
 
 ## Representation
 
