@@ -15,7 +15,7 @@ The Mølmer-Sørensen, or MS, gate is a two-qubit gate.
 ## Representation
 
 $$\begin{align}
-MS &= \left(\begin{matrix}
+MS &= \frac{1}{\sqrt{2}} \left(\begin{matrix}
  1 & 0 & 0 & i \\
  0 & 1 & i & 0 \\
  0 & i & 1 & 0 \\
@@ -28,13 +28,13 @@ MS &= \left(\begin{matrix}
 ### Standard basis
 
 $$\begin{align}
-MS\,|00\rangle &= |00\rangle + i\,|11\rangle \\
+MS\,|00\rangle &= \tfrac{1}{\sqrt{2}}|00\rangle + \tfrac{i}{\sqrt{2}}|11\rangle \\
 \\
-MS\,|01\rangle &= |01\rangle + i\,|10\rangle \\
+MS\,|01\rangle &= \tfrac{1}{\sqrt{2}}|01\rangle + \tfrac{i}{\sqrt{2}}|10\rangle \\
 \\
-MS\,|10\rangle &= i\,|01\rangle + |10\rangle \\
+MS\,|10\rangle &= \tfrac{i}{\sqrt{2}}|01\rangle + \tfrac{1}{\sqrt{2}}|10\rangle \\
 \\
-MS\,|11\rangle &= i\,|00\rangle + |11\rangle \\
+MS\,|11\rangle &= \tfrac{i}{\sqrt{2}}|00\rangle + \tfrac{1}{\sqrt{2}}|11\rangle \\
 \end{align}$$
 
 !!! Note "Qubit state ordering"
