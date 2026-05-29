@@ -30,11 +30,11 @@ M &= \left(\begin{matrix}
 $$\begin{align}
 M\,|00\rangle &= |00\rangle + |11\rangle \\
 \\
-M\,|01\rangle &= i\,|00\rangle - i\,|11\rangle \\
+M\,|01\rangle &= i\,|10\rangle + i\,|01\rangle \\
 \\
-M\,|10\rangle &= i\,|01\rangle + i\,|10\rangle \\
+M\,|10\rangle &= i\,|00\rangle - i\,|11\rangle \\
 \\
-M\,|11\rangle &= |01\rangle - |10\rangle \\
+M\,|11\rangle &= |10\rangle - |01\rangle \\
 \end{align}$$
 
 !!! Note "Qubit state ordering"

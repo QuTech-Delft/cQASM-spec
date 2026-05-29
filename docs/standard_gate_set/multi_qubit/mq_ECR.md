@@ -24,13 +24,13 @@ ECR &= \left(\begin{matrix}
 ### Standard basis
 
 $$\begin{align}
-ECR\,|00\rangle &= |10\rangle - i\,|11\rangle \\
+ECR\,|00\rangle &= |01\rangle - i\,|11\rangle \\
 \\
-ECR\,|01\rangle &= -i\,|10\rangle + |11\rangle \\
+ECR\,|01\rangle &= |00\rangle + i\,|10\rangle \\
 \\
-ECR\,|10\rangle &= |00\rangle + i\,|01\rangle \\
+ECR\,|10\rangle &= -i\,|01\rangle + |11\rangle \\
 \\
-ECR\,|11\rangle &= i\,|00\rangle + |01\rangle \\
+ECR\,|11\rangle &= i\,|00\rangle + |10\rangle \\
 \end{align}$$
 
 !!! Note "Qubit state ordering"

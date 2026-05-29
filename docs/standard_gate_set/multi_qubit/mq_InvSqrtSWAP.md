@@ -26,9 +26,9 @@ $$\begin{align}
 $$\begin{align}
 \sqrt{SWAP}^\dagger\,|00\rangle &= |00\rangle \\
 \\
-\sqrt{SWAP}^\dagger\,|01\rangle &= \frac{1}{2} \left ( i-1 \right )\,|01\rangle + \frac{1}{2} \left ( i+1 \right )\,|10\rangle \\
+\sqrt{SWAP}^\dagger\,|01\rangle &= \frac{1}{2} \left ( i+1 \right )\,|10\rangle + \frac{1}{2} \left ( i-1 \right )\,|01\rangle \\
 \\
-\sqrt{SWAP}^\dagger\,|10\rangle &= \frac{1}{2} \left ( i+1 \right )\,|01\rangle + \frac{1}{2} \left ( i-1 \right )\,|10\rangle \\
+\sqrt{SWAP}^\dagger\,|10\rangle &= \frac{1}{2} \left ( i-1 \right )\,|10\rangle + \frac{1}{2} \left ( i+1 \right )\,|01\rangle \\
 \\
 \sqrt{SWAP}^\dagger\,|11\rangle &= |11\rangle \\
 \end{align}$$

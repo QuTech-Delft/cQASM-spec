@@ -19,10 +19,14 @@ $$\begin{align}
 CV &= \left(\begin{matrix}
  1 & 0 & 0 & 0\\
  0 & 1 & 0 & 0\\
- 0 & 0 & e^{\frac{i \pi }{4}} \sqrt{2} & e^{- \frac{i \pi }{4}} \sqrt{2}\\
- 0 & 0 & e^{- \frac{i \pi }{4}} \sqrt{2} & e^{\frac{i \pi }{4}} \sqrt{2}
+ 0 & 0 & 1 + i & 1 - i\\
+ 0 & 0 & 1 - i & 1 + i
 \end{matrix}\right)
 \end{align}$$
+
+which is equal to:
+
+$$CNOT = CX = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes 2V.$$
 
 ## Operation examples
 
@@ -31,11 +35,11 @@ CV &= \left(\begin{matrix}
 $$\begin{align}
 CV\,|00\rangle &= |00\rangle \\
 \\
-CV\,|01\rangle &= |01\rangle \\
+CV\,|01\rangle &= (1 + i)\,|01\rangle + (1 - i)\,|11\rangle \\
 \\
-CV\,|10\rangle &= e^{\frac{i \pi }{4}} \sqrt{2}\,|10\rangle + e^{- \frac{i \pi }{4}} \sqrt{2}\,|11\rangle \\
+CV\,|10\rangle &= |10\rangle \\
 \\
-CV\,|11\rangle &= e^{- \frac{i \pi }{4}} \sqrt{2}\,|10\rangle + e^{\frac{i \pi }{4}} \sqrt{2}\,|11\rangle \\
+CV\,|11\rangle &= (1 - i)\,|01\rangle + (1 + i)\,|11\rangle \\
 \end{align}$$
 
 !!! Note "Qubit state ordering"

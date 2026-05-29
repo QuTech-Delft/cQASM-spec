@@ -48,7 +48,7 @@ CZ &= \left(\begin{matrix}
 
 which is equal to:
 
-$$CZ = I \otimes |0\rangle\langle 0| + Z \otimes |1\rangle\langle 1|.$$
+$$CZ = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes Z.$$
 
 ## Operation examples
 

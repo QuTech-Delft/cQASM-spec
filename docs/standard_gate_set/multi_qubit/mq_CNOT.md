@@ -37,15 +37,15 @@ Also known as _controlled-X_, _CX_, or _controlled bit-flip_ gate.
 $$\begin{align}
 CNOT &= \left(\begin{matrix}
 1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
 0 & 0 & 0 & 1 \\
-0 & 0 & 1 & 0 \\
-0 & 1 & 0 & 0 
+0 & 0 & 1 & 0 
 \end{matrix}\right)
 \end{align}$$
 
 which is equal to:
 
-$$CNOT = CX = I \otimes |0\rangle\langle 0| + X \otimes |1\rangle\langle 1|.$$
+$$CNOT = CX = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes X.$$
 
 ## Operation examples
 

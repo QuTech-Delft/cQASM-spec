@@ -35,7 +35,7 @@ CR_k(k) &= \left(\begin{matrix}
 
 which is equal to:
 
-$$CR_k(k) = I \otimes |0\rangle\langle 0| + R_k(k) \otimes |1\rangle\langle 1|,$$
+$$CR_k(k) = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes R_k(k),$$
 
 with
 

@@ -26,11 +26,11 @@ DCNOT &= \left(\begin{matrix}
 $$\begin{align}
 DCNOT\,|00\rangle &= |00\rangle \\
 \\
-DCNOT\,|01\rangle &= |11\rangle \\
+DCNOT\,|01\rangle &= |10\rangle \\
 \\
-DCNOT\,|10\rangle &= |01\rangle \\
+DCNOT\,|10\rangle &= |11\rangle \\
 \\
-DCNOT\,|11\rangle &= |10\rangle \\
+DCNOT\,|11\rangle &= |01\rangle \\
 \end{align}$$
 
 !!! Note "Qubit state ordering"

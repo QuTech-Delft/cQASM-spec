@@ -28,7 +28,7 @@ CR(\theta) &= \left(\begin{matrix}
 
 which is equal to:
 
-$$CR(\theta) = I \otimes |0\rangle\langle 0| + R(\theta) \otimes |1\rangle\langle 1|,$$
+$$CR(\theta) = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes R(\theta),$$
 
 with
 

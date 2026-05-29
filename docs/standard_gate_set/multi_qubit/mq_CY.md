@@ -25,6 +25,10 @@ CY &= \left(\begin{matrix}
 \end{matrix}\right)
 \end{align}$$
 
+which is equal to:
+
+$$CNOT = CX = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes Y.$$
+
 ## Operation examples
 
 ### Standard basis
@@ -32,11 +36,11 @@ CY &= \left(\begin{matrix}
 $$\begin{align}
 CY\,|00\rangle &= |00\rangle \\
 \\
-CY\,|01\rangle &= |01\rangle \\
+CY\,|01\rangle &= i\,|11\rangle \\
 \\
-CY\,|10\rangle &= i\,|11\rangle \\
+CY\,|10\rangle &= |10\rangle \\
 \\
-CY\,|11\rangle &= -i\,|10\rangle \\
+CY\,|11\rangle &= -i\,|01\rangle \\
 \end{align}$$
 
 !!! Note "Qubit state ordering"
