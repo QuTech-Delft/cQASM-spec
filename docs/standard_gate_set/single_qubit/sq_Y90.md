@@ -54,15 +54,15 @@ $$Y^{1/2}_H = HY^{1/2}H = \frac{1}{2}\left(\begin{matrix}
 ### Standard basis
 
 $$\begin{align}
-Y^{1/2}\,|0\rangle &= \frac{1 + i}{2}|0\rangle + \frac{1 + i}{2}|1\rangle \\
+Y^{1/2}\,|0\rangle &= \tfrac{1}{2}(1 + i)|0\rangle + \tfrac{1}{2}(1 + i)|1\rangle \\
 \\
-Y^{1/2}\,|1\rangle &= \frac{-1 - i}{2}|0\rangle + \frac{1 + i}{2}|1\rangle \\
+Y^{1/2}\,|1\rangle &= \tfrac{1}{2}(-1 - i)|0\rangle + \tfrac{1}{2}(1 + i)|1\rangle \\
 \end{align}$$
 
 ### Hadamard basis
 
 $$\begin{align}
-Y^{1/2}\,|+\rangle &= \frac{1 + i}{2}|+\rangle + \frac{-1 - i}{2}|-\rangle \\
+Y^{1/2}\,|+\rangle &= \tfrac{1}{2}(1 + i)|+\rangle + \tfrac{1}{2}(-1 - i)|-\rangle \\
 \\
-Y^{1/2}\,|-\rangle &= \frac{1 + i}{2}|+\rangle + \frac{1 + i}{2}|-\rangle \\
+Y^{1/2}\,|-\rangle &= \tfrac{1}{2}(1 + i)|+\rangle + \tfrac{1}{2}(1 + i)|-\rangle \\
 \end{align}$$

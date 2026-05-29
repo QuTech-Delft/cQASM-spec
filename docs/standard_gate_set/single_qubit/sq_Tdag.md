@@ -18,7 +18,7 @@ $T = (S^{\dagger})^{1/2} = S^{-1/2} = Z^{-1/4}$.
 $$\begin{align}
 T^\dagger &= \left(\begin{matrix}
 1 & 0 \\
-0 & \frac{1 - i}{\sqrt{2}} 
+0 & \tfrac{1}{\sqrt{2}}(1 - i) 
 \end{matrix}\right)
 \end{align}$$
 
@@ -54,14 +54,14 @@ $$T^\dagger_H = HT^\dagger H = \frac{1}{2\sqrt{2}}\left(\begin{matrix}
 $$\begin{align}
 T^\dagger\,|0\rangle &= |0\rangle \\
 \\
-T^\dagger\,|1\rangle &= \frac{1 - i}{\sqrt{2}} |1\rangle \\
+T^\dagger\,|1\rangle &= \frac{1}{\sqrt{2}}(1 - i) |1\rangle \\
 \end{align}$$
 
 ### Hadamard basis
 
 $$\begin{align}
-T^\dagger\,|+\rangle &= \frac{\sqrt{2} + 1 - i}{2\sqrt{2}}|+\rangle + \frac{\sqrt{2} - 1 + i}{2\sqrt{2}}|-\rangle \\
+T^\dagger\,|+\rangle &= \tfrac{1}{2\sqrt{2}}(\sqrt{2} + 1 - i)|+\rangle + \tfrac{1}{2\sqrt{2}}(\sqrt{2} - 1 + i)|-\rangle \\
 \\
-T^\dagger\,|-\rangle &= \frac{\sqrt{2} - 1 + i}{2\sqrt{2}}|+\rangle + \frac{\sqrt{2} + 1 - i}{2\sqrt{2}}|-\rangle \\
+T^\dagger\,|-\rangle &= \tfrac{1}{2\sqrt{2}}(\sqrt{2} - 1 + i)|+\rangle + \tfrac{1}{2\sqrt{2}}(\sqrt{2} + 1 - i)|-\rangle \\
 \end{align}$$
 

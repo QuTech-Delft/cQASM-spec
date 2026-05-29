@@ -11,7 +11,7 @@ The echoed cross-resonance, or ECR, gate is a two-qubit gate.
 ## Representation
 
 $$\begin{align}
-ECR &= \left(\begin{matrix}
+ECR &= \frac{1}{\sqrt{2}} \left(\begin{matrix}
  0 & 0 & 1 & i \\
  0 & 0 & i & 1 \\
  1 & -i & 0 & 0 \\
@@ -24,13 +24,13 @@ ECR &= \left(\begin{matrix}
 ### Standard basis
 
 $$\begin{align}
-ECR\,|00\rangle &= |01\rangle - i\,|11\rangle \\
+ECR\,|00\rangle &= \tfrac{1}{\sqrt{2}} |01\rangle - \tfrac{i}{\sqrt{2}} \,|11\rangle \\
 \\
-ECR\,|01\rangle &= |00\rangle + i\,|10\rangle \\
+ECR\,|01\rangle &= \tfrac{1}{\sqrt{2}} |00\rangle + \tfrac{i}{\sqrt{2}} \,|10\rangle \\
 \\
-ECR\,|10\rangle &= -i\,|01\rangle + |11\rangle \\
+ECR\,|10\rangle &= -\tfrac{i}{\sqrt{2}} \,|01\rangle + \tfrac{1}{\sqrt{2}} |11\rangle \\
 \\
-ECR\,|11\rangle &= i\,|00\rangle + |10\rangle \\
+ECR\,|11\rangle &= \tfrac{i}{\sqrt{2}} \,|00\rangle + \tfrac{1}{\sqrt{2}} |10\rangle \\
 \end{align}$$
 
 !!! Note "Qubit state ordering"

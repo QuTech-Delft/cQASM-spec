@@ -26,9 +26,9 @@ $$\begin{align}
 $$\begin{align}
 \sqrt{iSWAP}\,|00\rangle &= |00\rangle \\
 \\
-\sqrt{iSWAP}\,|01\rangle &= \frac{1}{\sqrt{2}}\,|01\rangle + \frac{i}{\sqrt{2}}\,|10\rangle \\
+\sqrt{iSWAP}\,|01\rangle &= \tfrac{1}{\sqrt{2}}\,|01\rangle + \tfrac{i}{\sqrt{2}}\,|10\rangle \\
 \\
-\sqrt{iSWAP}\,|10\rangle &= \frac{i}{\sqrt{2}}\,|01\rangle + \frac{1}{\sqrt{2}}\,|10\rangle \\
+\sqrt{iSWAP}\,|10\rangle &= \tfrac{i}{\sqrt{2}}\,|01\rangle + \tfrac{1}{\sqrt{2}}\,|10\rangle \\
 \\
 \sqrt{iSWAP}\,|11\rangle &= |11\rangle \\
 \end{align}$$

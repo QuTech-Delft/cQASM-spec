@@ -58,9 +58,9 @@ $$X^{1/2}_H = HX^{1/2}H = \left(\begin{matrix}
 ### Standard basis
 
 $$\begin{align}
-X^{1/2}\,|0\rangle &= \frac{1 + i}{2}|0\rangle + \frac{1 - i}{2}|1\rangle \\
+X^{1/2}\,|0\rangle &= \tfrac{1}{2}(1 + i)|0\rangle + \tfrac{1}{2}(1 - i)|1\rangle \\
 \\
-X^{1/2}\,|1\rangle &= \frac{1 - i}{2}|0\rangle + \frac{1 + i}{2}|1\rangle \\
+X^{1/2}\,|1\rangle &= \tfrac{1}{2}(1 - i)|0\rangle + \tfrac{1}{2}(1 + i)|1\rangle \\
 \end{align}$$
 
 ### Hadamard basis

@@ -67,7 +67,7 @@ Z^{-1/2}\,|1\rangle &= -i|1\rangle \\
 ### Hadamard basis
 
 $$\begin{align}
-Z^{-1/2}\,|+\rangle &= \frac{1 - i}{2}|+\rangle + \frac{1 + i}{2}|-\rangle \\
+Z^{-1/2}\,|+\rangle &= \tfrac{1}{2}(1 - i)|+\rangle + \tfrac{1}{2}(1 + i)|-\rangle \\
 \\
-Z^{-1/2}\,|-\rangle &= \frac{1 + i}{2}|+\rangle + \frac{1 - i}{2}|-\rangle \\
+Z^{-1/2}\,|-\rangle &= \tfrac{1}{2}(1 + i)|+\rangle + \tfrac{1}{2}(1 - i)|-\rangle \\
 \end{align}$$

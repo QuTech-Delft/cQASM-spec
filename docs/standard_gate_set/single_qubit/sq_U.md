@@ -58,7 +58,7 @@ U(\theta, \phi, \lambda)\,|1\rangle &= -e^{i\lambda}\sin\left(\theta / 2\right)|
 ### Hadamard basis
 
 $$\begin{align}
-U(\theta, \phi, \lambda)\,|+\rangle &= \frac{[e^{i \phi} - e^{i \lambda}] \sin(\theta/2) + [1 + e^{i \lambda + i \phi}] \cos(\theta/2)}{2}|+\rangle - \frac{[e^{i \lambda} + e^{i \phi}] \sin(\theta/2) - [1 - e^{i \lambda + i \phi}] \cos(\theta/2)}{2}|-\rangle  \\
+U(\theta, \phi, \lambda)\,|+\rangle &= \tfrac{1}{2}\left\{[e^{i \phi} - e^{i \lambda}] \sin(\theta/2) + [1 + e^{i \lambda + i \phi}] \cos(\theta/2)\right\}|+\rangle - \tfrac{1}{2}\left\{[e^{i \lambda} + e^{i \phi}] \sin(\theta/2) - [1 - e^{i \lambda + i \phi}] \cos(\theta/2)\right\}|-\rangle  \\
 \\
-U(\theta, \phi, \lambda)\,|-\rangle &= \frac{[e^{i \lambda} + e^{i \phi}] \sin(\theta/2) + [1 - e^{i \lambda + i \phi}] \cos(\theta/2)}{2}|+\rangle  + \frac{[e^{i \lambda} - e^{i \phi}] \sin(\theta/2) + [1 + e^{i \lambda + i \phi}] \cos(\theta/2)}{2}|-\rangle 
+U(\theta, \phi, \lambda)\,|-\rangle &= \tfrac{1}{2}\left\{[e^{i \lambda} + e^{i \phi}] \sin(\theta/2) + [1 - e^{i \lambda + i \phi}] \cos(\theta/2)\right\}|+\rangle  + \tfrac{1}{2}\left\{[e^{i \lambda} - e^{i \phi}] \sin(\theta/2) + [1 + e^{i \lambda + i \phi}] \cos(\theta/2)\right\}|-\rangle 
 \end{align}$$

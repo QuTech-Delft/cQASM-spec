@@ -6,7 +6,12 @@
 
 ## Description
 
-The CV gate is a two-qubit gate.
+The CV gate is a two-qubit gate. Note that $V = X^{1/2}$, _i.e._, it is the controlled-square-root-of-X (CSX) gate.
+It performs an X90 gate on the second qubit, conditional on the state of the first qubit.
+
+### Aliases
+
+Also known as the, _controlled-V_, _controlled-X90_, or _controlled-square-root-of-X_ gate.
 
 ### Properties
 
@@ -19,14 +24,14 @@ $$\begin{align}
 CV &= \left(\begin{matrix}
  1 & 0 & 0 & 0\\
  0 & 1 & 0 & 0\\
- 0 & 0 & 1 + i & 1 - i\\
- 0 & 0 & 1 - i & 1 + i
+ 0 & 0 & \tfrac{1}{2} (1 + i) & \tfrac{1}{2} (1 - i)\\
+ 0 & 0 & \tfrac{1}{2} (1 - i) & \tfrac{1}{2} (1 + i)
 \end{matrix}\right)
 \end{align}$$
 
 which is equal to:
 
-$$CNOT = CX = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes 2V.$$
+$$CV = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes V.$$
 
 ## Operation examples
 
@@ -35,11 +40,11 @@ $$CNOT = CX = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes 2V.$$
 $$\begin{align}
 CV\,|00\rangle &= |00\rangle \\
 \\
-CV\,|01\rangle &= (1 + i)\,|01\rangle + (1 - i)\,|11\rangle \\
+CV\,|01\rangle &= \tfrac{1}{2} (1 + i)\,|01\rangle + \tfrac{1}{2} (1 - i)\,|11\rangle \\
 \\
 CV\,|10\rangle &= |10\rangle \\
 \\
-CV\,|11\rangle &= (1 - i)\,|01\rangle + (1 + i)\,|11\rangle \\
+CV\,|11\rangle &= \tfrac{1}{2} (1 - i)\,|01\rangle + \tfrac{1}{2} (1 + i)\,|11\rangle \\
 \end{align}$$
 
 !!! Note "Qubit state ordering"

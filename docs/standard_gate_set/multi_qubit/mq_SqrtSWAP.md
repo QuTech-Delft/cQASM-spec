@@ -26,9 +26,9 @@ $$\begin{align}
 $$\begin{align}
 \sqrt{SWAP}\,|00\rangle &= |00\rangle \\
 \\
-\sqrt{SWAP}\,|01\rangle &= \frac{1}{2} \left ( i+1 \right )\,|01\rangle + \frac{1}{2} \left ( i-1 \right )\,|10\rangle \\
+\sqrt{SWAP}\,|01\rangle &= \tfrac{1}{2} \left ( i+1 \right )\,|01\rangle + \tfrac{1}{2} \left ( i-1 \right )\,|10\rangle \\
 \\
-\sqrt{SWAP}\,|10\rangle &= \frac{1}{2} \left ( i-1 \right )\,|01\rangle + \frac{1}{2} \left ( i+1 \right )\,|10\rangle \\
+\sqrt{SWAP}\,|10\rangle &= \tfrac{1}{2} \left ( i-1 \right )\,|01\rangle + \tfrac{1}{2} \left ( i+1 \right )\,|10\rangle \\
 \\
 \sqrt{SWAP}\,|11\rangle &= |11\rangle \\
 \end{align}$$

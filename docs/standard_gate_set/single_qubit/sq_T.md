@@ -16,7 +16,7 @@ It is equal to _half_ the $S$ rotation and a _quarter_ of the $Z$ rotation: $T =
 $$\begin{align}
 T &= \left(\begin{matrix}
 1 & 0 \\
-0 & \frac{1 + i}{\sqrt{2}} 
+0 & \tfrac{1}{\sqrt{2}}(1 + i) 
 \end{matrix}\right)
 \end{align}$$
 
@@ -52,13 +52,13 @@ $$T_H = HT H = \frac{1}{2\sqrt{2}}\left(\begin{matrix}
 $$\begin{align}
 T\,|0\rangle &= |0\rangle \\
 \\
-T\,|1\rangle &= \frac{1 + i}{\sqrt{2}} |1\rangle \\
+T\,|1\rangle &= \tfrac{1}{\sqrt{2}}(1 + i) |1\rangle \\
 \end{align}$$
 
 ### Hadamard basis
 
 $$\begin{align}
-T\,|+\rangle &= \frac{\sqrt{2} + 1 + i}{2\sqrt{2}}|+\rangle + \frac{\sqrt{2} - 1 - i}{2\sqrt{2}}|-\rangle \\
+T\,|+\rangle &= \tfrac{1}{2\sqrt{2}}(\sqrt{2} + 1 + i)|+\rangle + \tfrac{1}{2\sqrt{2}}(\sqrt{2} - 1 - i)|-\rangle \\
 \\
-T\,|-\rangle &= \frac{\sqrt{2} - 1 - i}{2\sqrt{2}}|+\rangle + \frac{\sqrt{2} + 1 + i}{2\sqrt{2}}|-\rangle \\
+T\,|-\rangle &= \tfrac{1}{2\sqrt{2}}(\sqrt{2} - 1 - i)|+\rangle + \tfrac{1}{2\sqrt{2}}(\sqrt{2} + 1 + i)|-\rangle \\
 \end{align}$$

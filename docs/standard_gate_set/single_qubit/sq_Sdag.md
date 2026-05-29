@@ -67,7 +67,7 @@ S^\dagger\,|1\rangle &= -i|1\rangle \\
 ### Hadamard basis
 
 $$\begin{align}
-S^\dagger\,|+\rangle &= \frac{1 - i}{2}|+\rangle + \frac{1 + i}{2}|-\rangle \\
+S^\dagger\,|+\rangle &= \tfrac{1}{2}(1 - i)|+\rangle + \tfrac{1}{2}(1 + i)|-\rangle \\
 \\
-S^\dagger\,|-\rangle &= \frac{1 + i}{2}|+\rangle + \frac{1 - i}{2}|-\rangle \\
+S^\dagger\,|-\rangle &= \tfrac{1}{2}(1 + i)|+\rangle + \tfrac{1}{2}(1 - i)|-\rangle \\
 \end{align}$$

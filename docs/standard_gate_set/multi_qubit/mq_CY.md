@@ -6,7 +6,8 @@
 
 ## Description
 
-The CY gate is a two-qubit gate.
+The CY gate is a two-qubit gate. It is the controlled-Y gate.
+It performs a Y gate on the second qubit, conditional on the state of the first qubit.
 
 ### Properties
 
@@ -27,7 +28,7 @@ CY &= \left(\begin{matrix}
 
 which is equal to:
 
-$$CNOT = CX = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes Y.$$
+$$CY = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes Y.$$
 
 ## Operation examples
 
