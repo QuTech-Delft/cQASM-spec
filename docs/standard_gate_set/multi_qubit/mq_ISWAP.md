@@ -6,8 +6,12 @@
 
 ## Description
 
-The iSWAP gate is a two-qubit gate.
+The iSWAP gate is a two-qubit gate. It swaps the state of two qubits, while adding an $$i$$ phase factor to part of the state.
+### Properties
 
+- [Clifford](https://en.wikipedia.org/wiki/Clifford_gates) gate;
+- Perfect Entangler (maximally entangles specific product states);
+- Maximum Entangling Power over all uniformly random product states.
 ### Properties
 
 - [Clifford](https://en.wikipedia.org/wiki/Clifford_gates) gate

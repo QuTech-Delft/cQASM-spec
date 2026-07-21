@@ -8,9 +8,9 @@ The `measure` instruction can either
 
 The following aliases for the (parameterized) `measure` instruction also exist:
 
-- `measureX`: measurement in the X-basis, equivalent to `measure(1,0,0)`,
+- `measureX`: measurement in the X-basis (a.k.a. Hadamard basis), equivalent to `measure(1,0,0)`,
 - `measureY`: measurement in the Y-basis, equivalent to `measure(0,1,0)`,
-- `measureZ`: measurement in the Z-basis, equivalent to `measure(0,0,1)` and `measure`.
+- `measureZ`: measurement in the Z-basis (computational basis), equivalent to `measure(0,0,1)` and 'measure',
 
 !!! note
 

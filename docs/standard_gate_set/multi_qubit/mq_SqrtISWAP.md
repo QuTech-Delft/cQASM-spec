@@ -6,7 +6,7 @@
 
 ## Description
 
-The square-root-iSWAP gate is a two-qubit gate.
+The square-root-iSWAP gate is a two-qubit gate. Where as the iSWAP gate exchanges the state of two qubits while adding a phase factor, the square-root-iSWAP gate performs half of this exchange, putting pure separable states into a maximally entangled state.
 
 ## Representation
 

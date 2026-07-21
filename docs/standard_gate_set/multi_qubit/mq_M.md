@@ -6,11 +6,12 @@
 
 ## Description
 
-The Magic, or M, gate is a two-qubit gate.
+The Magic, or M, gate is a two-qubit gate. Its columns are the magic-basis vectors, which are equal to the four Bell states with specific phase factors.  The magic gate is an important component in KAK circuit decomposition and is used to transform any two-qubit unitary from the standard basis to the magic basis, which makes the extraction of canonical parameters much easier than working in the computational basis.
 
 ## Properties
 
-- Ising gate
+- Perfect Entangler (maximally entangles specific product states);
+- Ising gate.
 
 ## Representation
 

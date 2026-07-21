@@ -1,4 +1,4 @@
-# Dynamic-CNOT gate
+# Double-CNOT gate
 
 | Identifier | Operator | Example statement      |
 |------------|----------|------------------------|
@@ -6,8 +6,11 @@
 
 ## Description
 
-The dynamic-CNOT, or DCNOT, gate is a two-qubit gate.
+The double-CNOT, or DCNOT, gate is a two-qubit gate. It is defined as a sequence of two anti-parallel CNOT gates, where the first CNOT gate takes the first qubit as the control qubit and the second CNOT gate is anti-parallel and takes the second qubit as the control qubit.
+### Properties
 
+- [Involutory](https://en.wikipedia.org/wiki/Involutory_matrix) operation (its own inverse);
+- Perfect Entangler (maximally entangles specific product states).
 ## Representation
 
 $$\begin{align}

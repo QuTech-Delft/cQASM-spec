@@ -6,11 +6,13 @@
 
 ## Description
 
-The Mølmer-Sørensen, or MS, gate is a two-qubit gate.
+The Mølmer-Sørensen, or MS, gate is a two-qubit gate. It is a maximally entangling gate, most commonly used in ion-trap quantum computers.
 
 ## Properties
 
-- Ising gate
+- Perfect Entangler (maximally entangles specific product states);
+- Maximum Entangling Power over all uniformly random product states;
+- Ising gate.
 
 ## Representation
 

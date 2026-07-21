@@ -6,7 +6,7 @@
 
 ## Description
 
-The CV gate is a two-qubit gate. Note that $V = X^{1/2}$, _i.e._, it is the controlled-square-root-of-X (CSX) gate.
+The CV gate is a two-qubit gate. Note that $V = X^{1/2}$, _i.e._, CV is the controlled-square-root-of-X (CSX) gate.
 It performs an X90 gate on the second qubit, conditional on the state of the first qubit.
 
 ### Aliases

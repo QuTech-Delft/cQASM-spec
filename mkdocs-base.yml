@@ -70,7 +70,7 @@ nav:
         - CRk: ./standard_gate_set/multi_qubit/mq_CRk.md
         - CV: ./standard_gate_set/multi_qubit/mq_CV.md
         - CY: ./standard_gate_set/multi_qubit/mq_CY.md
-        - Dynamic-CNOT: ./standard_gate_set/multi_qubit/mq_DCNOT.md
+        - Double-CNOT: ./standard_gate_set/multi_qubit/mq_DCNOT.md
         - Echoed Cross-Resonance: ./standard_gate_set/multi_qubit/mq_ECR.md
         - Inverse-square-root-SWAP: ./standard_gate_set/multi_qubit/mq_InvSqrtSWAP.md
         - iSWAP: ./standard_gate_set/multi_qubit/mq_ISWAP.md

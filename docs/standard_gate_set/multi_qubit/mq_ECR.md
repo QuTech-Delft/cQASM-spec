@@ -7,7 +7,11 @@
 ## Description
 
 The echoed cross-resonance, or ECR, gate is a two-qubit gate.
+### Properties
 
+- Perfect Entangler (maximally entangles specific product states);
+- Maximum Entangling Power over all uniformly random product states;
+- Ising gate.
 ## Representation
 
 $$\begin{align}

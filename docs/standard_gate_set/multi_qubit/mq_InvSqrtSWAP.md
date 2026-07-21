@@ -6,7 +6,7 @@
 
 ## Description
 
-The inverse-square-root-SWAP gate is a two-qubit gate.
+The inverse-square-root-SWAP gate is a two-qubit gate. It reverses the action of the square-root-SWAP gate. 
 
 ## Representation
 
