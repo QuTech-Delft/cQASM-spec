@@ -2560,6 +2560,26 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2702,6 +2722,286 @@
     
   
     CRk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi_qubit/mq_CV.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi_qubit/mq_CY.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi_qubit/mq_DCNOT.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Double-CNOT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi_qubit/mq_ECR.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Echoed Cross-Resonance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi_qubit/mq_InvSqrtSWAP.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inverse-square-root-SWAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi_qubit/mq_ISWAP.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iSWAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi_qubit/mq_M.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi_qubit/mq_MS.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mølmer-Sørensen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi_qubit/mq_SqrtISWAP.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Square-root-iSWAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi_qubit/mq_SqrtSWAP.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Square-root-SWAP
   
 
     
@@ -2981,7 +3281,7 @@ a global phase of <span class="arithmatex">\(-\pi / 8\)</span> [rad]. </p>
 <div class="arithmatex">\[\begin{align}
 T^\dagger &amp;= \left(\begin{matrix}
 1 &amp; 0 \\
-0 &amp; \frac{1 - i}{\sqrt{2}} 
+0 &amp; \tfrac{1}{\sqrt{2}}(1 - i) 
 \end{matrix}\right)
 \end{align}\]</div>
 <p>Any single-qubit operation in <span class="arithmatex">\(U(2)\)</span> (including global phase) can be expressed by 5 parameters in the
@@ -3007,13 +3307,13 @@ T^\dagger &amp;= \left(\begin{matrix}
 <div class="arithmatex">\[\begin{align}
 T^\dagger\,|0\rangle &amp;= |0\rangle \\
 \\
-T^\dagger\,|1\rangle &amp;= \frac{1 - i}{\sqrt{2}} |1\rangle \\
+T^\dagger\,|1\rangle &amp;= \frac{1}{\sqrt{2}}(1 - i) |1\rangle \\
 \end{align}\]</div>
 <h3 id="hadamard-basis">Hadamard basis</h3>
 <div class="arithmatex">\[\begin{align}
-T^\dagger\,|+\rangle &amp;= \frac{\sqrt{2} + 1 - i}{2\sqrt{2}}|+\rangle + \frac{\sqrt{2} - 1 + i}{2\sqrt{2}}|-\rangle \\
+T^\dagger\,|+\rangle &amp;= \tfrac{1}{2\sqrt{2}}(\sqrt{2} + 1 - i)|+\rangle + \tfrac{1}{2\sqrt{2}}(\sqrt{2} - 1 + i)|-\rangle \\
 \\
-T^\dagger\,|-\rangle &amp;= \frac{\sqrt{2} - 1 + i}{2\sqrt{2}}|+\rangle + \frac{\sqrt{2} + 1 - i}{2\sqrt{2}}|-\rangle \\
+T^\dagger\,|-\rangle &amp;= \tfrac{1}{2\sqrt{2}}(\sqrt{2} - 1 + i)|+\rangle + \tfrac{1}{2\sqrt{2}}(\sqrt{2} + 1 - i)|-\rangle \\
 \end{align}\]</div>
 
 

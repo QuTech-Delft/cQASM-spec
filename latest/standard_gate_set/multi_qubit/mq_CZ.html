@@ -2452,6 +2452,26 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2719,6 +2739,286 @@
     
   
     CRk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_CV.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_CY.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_DCNOT.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Double-CNOT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_ECR.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Echoed Cross-Resonance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_InvSqrtSWAP.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inverse-square-root-SWAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_ISWAP.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iSWAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_M.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_MS.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mølmer-Sørensen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_SqrtISWAP.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Square-root-iSWAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_SqrtSWAP.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Square-root-SWAP
   
 
     
@@ -3009,7 +3309,7 @@
 <p>The C-Phase, or CZ, gate is a two-qubit gate.
 It performs a Z gate (negates the relative phase) on the second qubit, conditional on the state of the first qubit.
 The first qubit is usually referred to as the control qubit and the second qubit as the target qubit.</p>
-<p>In the standard computational basis <span class="arithmatex">\(\{ |0\rangle ,|1\rangle \}\)</span>, the CZ gate:</p>
+<p>In the standard computational basis for two qubits <span class="arithmatex">\(\{|00\rangle ,|01\rangle \,|10\rangle ,|11\rangle \}\)</span>, the CZ gate:</p>
 <ul>
 <li>leaves the control qubit unchanged,</li>
 <li>performs a Z gate on the target qubit, when the control qubit is in state <span class="arithmatex">\(|1\rangle\)</span>,</li>
@@ -3028,7 +3328,9 @@ computational basis. Generally, in another basis, both the 'control' and 'target
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Clifford_gates">Clifford</a> gate; </li>
 <li><a href="https://en.wikipedia.org/wiki/Involutory_matrix">Involutory</a> operation (its own inverse);</li>
-<li><a href="https://en.wikipedia.org/wiki/Quantum_logic_gate#Controlled_gates">Controlled</a> gate.</li>
+<li><a href="https://en.wikipedia.org/wiki/Quantum_logic_gate#Controlled_gates">Controlled</a> gate;</li>
+<li>Perfect Entangler (maximally entangles specific product states);</li>
+<li>Ising gate.</li>
 </ul>
 <h2 id="representation">Representation</h2>
 <div class="arithmatex">\[\begin{align}
@@ -3040,7 +3342,7 @@ CZ &amp;= \left(\begin{matrix}
 \end{matrix}\right)
 \end{align}\]</div>
 <p>which is equal to:</p>
-<div class="arithmatex">\[CZ = I \otimes |0\rangle\langle 0| + Z \otimes |1\rangle\langle 1|.\]</div>
+<div class="arithmatex">\[CZ = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes Z.\]</div>
 <h2 id="operation-examples">Operation examples</h2>
 <h3 id="standard-basis">Standard basis</h3>
 <div class="arithmatex">\[\begin{align}
@@ -3053,10 +3355,15 @@ CZ\,|10\rangle &amp;= |10\rangle \\
 CZ\,|11\rangle &amp;= -|11\rangle \\
 \end{align}\]</div>
 <div class="admonition note">
-<p class="admonition-title">Qubit state ordering</p>
+<p class="admonition-title">Qubit state ordering convention and matrix representation</p>
 <p>Note that <a href="../../language_specification/index.html#qubit-state-and-measurement-bit-ordering">qubits in a ket are ordered</a>
 with qubit indices decreasing from left to right, <em>i.e.</em>,</p>
 <div class="arithmatex">\[|\psi\rangle = \sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i\]</div>
+<p>Note that for matrices a <strong>reversed</strong> basis ordering convention is adopted, as is done in most textbooks.
+For instance, in the case of a two-qubit control gate, 
+the matrix is represented such that <span class="arithmatex">\(q_0\)</span> is the <em>control</em> qubit
+and <span class="arithmatex">\(q_1\)</span> is the <em>target</em> qubit;
+the state on which the matrix is applied should then effectively be written as <span class="arithmatex">\(|q_0\rangle \otimes |q_1\rangle\)</span>.</p>
 </div>
 
 

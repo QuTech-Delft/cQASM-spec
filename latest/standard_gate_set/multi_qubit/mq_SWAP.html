@@ -6,7 +6,7 @@
       
       
       
-        <link rel="prev" href="mq_CRk.html">
+        <link rel="prev" href="mq_SqrtSWAP.html">
       
       
         <link rel="next" href="../../appendices/spin_2plus.html">
@@ -2452,6 +2452,26 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2594,6 +2614,286 @@
     
   
     CRk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_CV.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_CY.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_DCNOT.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Double-CNOT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_ECR.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Echoed Cross-Resonance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_InvSqrtSWAP.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inverse-square-root-SWAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_ISWAP.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iSWAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_M.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_MS.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mølmer-Sørensen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_SqrtISWAP.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Square-root-iSWAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mq_SqrtSWAP.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Square-root-SWAP
   
 
     
@@ -3012,10 +3312,15 @@ SWAP\,|10\rangle &amp;= |01\rangle \\
 SWAP\,|11\rangle &amp;= |11\rangle \\
 \end{align}\]</div>
 <div class="admonition note">
-<p class="admonition-title">Qubit state ordering</p>
+<p class="admonition-title">Qubit state ordering convention and matrix representation</p>
 <p>Note that <a href="../../language_specification/index.html#qubit-state-and-measurement-bit-ordering">qubits in a ket are ordered</a>
 with qubit indices decreasing from left to right, <em>i.e.</em>,</p>
 <div class="arithmatex">\[|\psi\rangle = \sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i\]</div>
+<p>Note that for matrices a <strong>reversed</strong> basis ordering convention is adopted, as is done in most textbooks.
+For instance, in the case of a two-qubit control gate, 
+the matrix is represented such that <span class="arithmatex">\(q_0\)</span> is the <em>control</em> qubit
+and <span class="arithmatex">\(q_1\)</span> is the <em>target</em> qubit;
+the state on which the matrix is applied should then effectively be written as <span class="arithmatex">\(|q_0\rangle \otimes |q_1\rangle\)</span>.</p>
 </div>
 
 
@@ -3046,7 +3351,7 @@ with qubit indices decreasing from left to right, <em>i.e.</em>,</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer">
         
           
-          <a href="mq_CRk.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: CRk">
+          <a href="mq_SqrtSWAP.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Square-root-SWAP">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
@@ -3056,7 +3361,7 @@ with qubit indices decreasing from left to right, <em>i.e.</em>,</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                CRk
+                Square-root-SWAP
               </div>
             </div>
           </a>
