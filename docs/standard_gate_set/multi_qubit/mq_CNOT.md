@@ -66,6 +66,9 @@ CNOT\,|11\rangle &= |01\rangle \\
 !!! Note "Qubit state ordering"
 
     Note that [qubits in a ket are ordered](../../language_specification/index.md#qubit-state-and-measurement-bit-ordering)
-    with qubit indices decreasing from left to right, _i.e._,
+!!! Note "Qubit state ordering and matrix representation"
 
+Note that [qubits in a ket in OpenSquirrel are ordered](../../language_specification/index.md#qubit-state-and-measurement-bit-ordering)
+with qubit indices decreasing from left to right (little endian ordering), _i.e._,
+In most textbooks, two-qubit quantum circuits are drawn from top to bottom, with the first (control) qubit living at the top wire and the second qubit living on the bottom wire. In those textbooks, big endian ordering (the smallest index first / top wire first) is used, which yields a different two-qubit matrix compared with little endian ordered kets. Following textbook notation, we provide the two-qubit matrix representations based on big endian ordering (though in the OpenSquirrel code little endian ordering is used for matrix processing).
     $$|\psi\rangle = \sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i$$

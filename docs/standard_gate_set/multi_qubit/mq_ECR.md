@@ -6,7 +6,7 @@
 
 ## Description
 
-The echoed cross-resonance, or ECR, gate is a two-qubit gate.
+The echoed cross-resonance, or ECR, gate is a two-qubit gate. It is an entangling two-qubit gate commonly used in in superconducting QPU's. such as IBM quantum systems.
 ### Properties
 
 - Perfect Entangler (maximally entangles specific product states);
@@ -37,9 +37,11 @@ ECR\,|10\rangle &= -\tfrac{i}{\sqrt{2}} \,|01\rangle + \tfrac{1}{\sqrt{2}} |11\r
 ECR\,|11\rangle &= \tfrac{i}{\sqrt{2}} \,|00\rangle + \tfrac{1}{\sqrt{2}} |10\rangle \\
 \end{align}$$
 
-!!! Note "Qubit state ordering"
+!!! Note "Qubit state ordering and matrix representation"
 
-    Note that [qubits in a ket are ordered](../../language_specification/index.md#qubit-state-and-measurement-bit-ordering)
-    with qubit indices decreasing from left to right, _i.e._,
+Note that [qubits in a ket in OpenSquirrel are ordered](../../language_specification/index.md#qubit-state-and-measurement-bit-ordering)
+with qubit indices decreasing from left to right (little endian ordering), _i.e._,
 
-    $$|\psi\rangle = \sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i$$
+$$|\psi\rangle = \sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i$$
+
+For the matrix representation given above, we use the standard textbook _big endian ordering_ of qubits, see the [CNOT gate for a more detailed explanation](mq_CNOT.md). 

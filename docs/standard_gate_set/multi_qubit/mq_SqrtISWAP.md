@@ -33,9 +33,11 @@ $$\begin{align}
 \sqrt{iSWAP}\,|11\rangle &= |11\rangle \\
 \end{align}$$
 
-!!! Note "Qubit state ordering"
+!!! Note "Qubit state ordering and matrix representation"
 
-    Note that [qubits in a ket are ordered](../../language_specification/index.md#qubit-state-and-measurement-bit-ordering)
-    with qubit indices decreasing from left to right, _i.e._,
+Note that [qubits in a ket in OpenSquirrel are ordered](../../language_specification/index.md#qubit-state-and-measurement-bit-ordering)
+with qubit indices decreasing from left to right (little endian ordering), _i.e._,
 
-    $$|\psi\rangle = \sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i$$
+$$|\psi\rangle = \sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i$$
+
+For the matrix representation given above, we use the standard textbook _big endian ordering_ of qubits, see the [CNOT gate for a more detailed explanation](mq_CNOT.md). 
