@@ -6,6 +6,12 @@ The `measure` instruction can either
 - have no parameters `measure`, which corresponds to a measurement in the Z-basis, or
 - accept 3 floating-point parameters `measure(0,0,1)`, which define the axis of the basis along which the measurement is to be performed.
 
+The following aliases for the (parameterized) `measure` instruction also exist:
+
+- `measureX`: measurement in the X-basis (a.k.a. Hadamard basis), equivalent to `measure(1,0,0)`,
+- `measureY`: measurement in the Y-basis, equivalent to `measure(0,1,0)`,
+- `measureZ`: measurement in the Z-basis (computational basis), equivalent to `measure(0,0,1)` and 'measure',
+
 !!! note
 
     `measure(0,0,1)` is equal to the non-parameterized `measure` as $(0,0,1)$ defines the positive $z$-axis.
@@ -57,20 +63,22 @@ The general form of a **`measure`** instruction is as follows:
     
     === "Measurement of a single qubit"
     
-        ```linenums="1", hl_lines="3-4"
+        ```linenums="1", hl_lines="3-5"
         qubit q
         bit b
         b = measure q
         b = measure(1,0,0) q
+        b = measureY q
         ```
     
     === "Measurement of multiple qubits through their register index"
     
-        ```linenums="1", hl_lines="3-4"
+        ```linenums="1", hl_lines="3-5"
         qubit[5] q
         bit[2] b
         b[0, 1] = measure q[2, 3]
         b[1, 0] = measure(1,0,0) q[4, 3]
+        b[0, 1] = measureY q[0, 1]
         ```
 
 !!! note

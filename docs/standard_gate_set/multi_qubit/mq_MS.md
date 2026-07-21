@@ -1,54 +1,43 @@
-# Controlled phase shift gate
+# Mølmer-Sørensen gate
 
-| Identifier | Operator     | Example statement       |
-|------------|--------------|-------------------------|
-| CR         | $CR(\theta)$ | **`CR(pi) q[0], q[1]`** |
+| Identifier | Operator | Example statement   |
+|------------|----------|---------------------|
+| MS         | $MS$     | **`MS q[0], q[1]`** |
 
 ## Description
 
-The Controlled phase shift, or CR, gate is a two-qubit gate.
-It is the controlled version of the phase shift gate, with angle $\theta$ (radians). 
-
-The CR gate is a generalization of the [CZ gate](mq_CZ.md): $CZ = CR(\pi)$
+The Mølmer-Sørensen, or MS, gate is a two-qubit gate.
+It is a maximally entangling gate, most commonly used in ion-trap quantum computers.
 
 ## Properties
 
+- Perfect Entangler (maximally entangles specific product states);
+- Maximum Entangling Power over all uniformly random product states;
 - Ising gate.
 
 ## Representation
 
 $$\begin{align}
-CR(\theta) &= \left(\begin{matrix}
-1 & 0 & 0 &  0 \\
-0 & 1 & 0 &  0 \\
-0 & 0 & 1 &  0 \\
-0 & 0 & 0 & e^{i\theta} 
+MS &= \frac{1}{\sqrt{2}} \left(\begin{matrix}
+ 1 & 0 & 0 & i \\
+ 0 & 1 & i & 0 \\
+ 0 & i & 1 & 0 \\
+ i & 0 & 0 & 1 
 \end{matrix}\right)
 \end{align}$$
-
-which is equal to:
-
-$$CR(\theta) = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes R(\theta),$$
-
-with
-
-$$R(\theta) = \left(\begin{matrix}
-1 & 0  \\
-0 & e^{i\theta}  
-\end{matrix}\right).$$
 
 ## Operation examples
 
 ### Standard basis
 
 $$\begin{align}
-CR(\theta)\,|00\rangle &= |00\rangle \\
+MS\,|00\rangle &= \tfrac{1}{\sqrt{2}}|00\rangle + \tfrac{i}{\sqrt{2}}|11\rangle \\
 \\
-CR(\theta)\,|01\rangle &= |01\rangle \\
+MS\,|01\rangle &= \tfrac{1}{\sqrt{2}}|01\rangle + \tfrac{i}{\sqrt{2}}|10\rangle \\
 \\
-CR(\theta)\,|10\rangle &= |10\rangle \\
+MS\,|10\rangle &= \tfrac{i}{\sqrt{2}}|01\rangle + \tfrac{1}{\sqrt{2}}|10\rangle \\
 \\
-CR(\theta)\,|11\rangle &= e^{i\theta}|11\rangle \\
+MS\,|11\rangle &= \tfrac{i}{\sqrt{2}}|00\rangle + \tfrac{1}{\sqrt{2}}|11\rangle \\
 \end{align}$$
 
 !!! Note "Qubit state ordering convention and matrix representation"

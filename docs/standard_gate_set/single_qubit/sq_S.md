@@ -66,7 +66,7 @@ S\,|1\rangle &= i|1\rangle \\
 ### Hadamard basis
 
 $$\begin{align}
-S\,|+\rangle &= \frac{1 + i}{2}|+\rangle + \frac{1 - i}{2}|-\rangle \\
+S\,|+\rangle &= \tfrac{1}{2}(1 + i)|+\rangle + \tfrac{1}{2}(1 - i)|-\rangle \\
 \\
-S\,|-\rangle &= \frac{1 - i}{2}|+\rangle + \frac{1 + i}{2}|-\rangle \\
+S\,|-\rangle &= \tfrac{1}{2}(1 - i)|+\rangle + \tfrac{1}{2}(1 + i)|-\rangle \\
 \end{align}$$

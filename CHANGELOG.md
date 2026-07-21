@@ -18,6 +18,8 @@ All notable changes to this project will be documented in this file.
 - Raw text string token
 - Built-in functions
 - Parameterized `measure` instruction
+- Two-qubit gates: `CV`, `CY`, `DCNOT`, `ECR`, `InvSqrtSWAP`, `ISWAP`, `M`, `MS`, `SqrtISWAP`, and `SqrtSWAP`
+- Aliases for the (parameterized) measure instruction: `measureX`, `measureY`, and `measureZ`
 
 ## [3.0-beta2] - [ 2025-02-18 ]
 

@@ -1,27 +1,32 @@
-# SWAP gate
+# iSWAP gate
 
 | Identifier | Operator | Example statement     |
 |------------|----------|-----------------------|
-| SWAP       | $SWAP$   | **`SWAP q[0], q[1]`** |
+| ISWAP      | $iSWAP$  | **`ISWAP q[0], q[1]`** |
 
 ## Description
 
-The SWAP gate is a two-qubit gate.
-It _swaps_ the state of the two qubits.
+The iSWAP gate is a two-qubit gate.
+It swaps the state of two qubits, while adding an $i$ phase factor to part of the state.
 
 ### Properties
 
-- [Clifford](https://en.wikipedia.org/wiki/Clifford_gates) gate; 
-- [Involutory](https://en.wikipedia.org/wiki/Involutory_matrix) operation (its own inverse).
+- [Clifford](https://en.wikipedia.org/wiki/Clifford_gates) gate;
+- Perfect Entangler (maximally entangles specific product states);
+- Maximum Entangling Power over all uniformly random product states.
+
+### Properties
+
+- [Clifford](https://en.wikipedia.org/wiki/Clifford_gates) gate
 
 ## Representation
 
 $$\begin{align}
-SWAP &= \left(\begin{matrix}
-1 & 0 & 0 & 0 \\
-0 & 0 & 1 & 0 \\
-0 & 1 & 0 & 0 \\
-0 & 0 & 0 & 1 
+iSWAP &= \left(\begin{matrix}
+ 1 & 0 & 0 & 0 \\
+ 0 & 0 & i & 0 \\
+ 0 & i & 0 & 0 \\
+ 0 & 0 & 0 & 1
 \end{matrix}\right)
 \end{align}$$
 
@@ -30,13 +35,13 @@ SWAP &= \left(\begin{matrix}
 ### Standard basis
 
 $$\begin{align}
-SWAP\,|00\rangle &= |00\rangle \\
+iSWAP\,|00\rangle &= |00\rangle \\
 \\
-SWAP\,|01\rangle &= |10\rangle \\
+iSWAP\,|01\rangle &= i\,|10\rangle \\
 \\
-SWAP\,|10\rangle &= |01\rangle \\
+iSWAP\,|10\rangle &= i\,|01\rangle \\
 \\
-SWAP\,|11\rangle &= |11\rangle \\
+iSWAP\,|11\rangle &= |11\rangle \\
 \end{align}$$
 
 !!! Note "Qubit state ordering convention and matrix representation"

@@ -1,27 +1,29 @@
-# SWAP gate
+# Double-CNOT gate
 
-| Identifier | Operator | Example statement     |
-|------------|----------|-----------------------|
-| SWAP       | $SWAP$   | **`SWAP q[0], q[1]`** |
+| Identifier | Operator | Example statement      |
+|------------|----------|------------------------|
+| DCNOT      | $DCNOT$  | **`DCNOT q[0], q[1]`** |
 
 ## Description
 
-The SWAP gate is a two-qubit gate.
-It _swaps_ the state of the two qubits.
+The double-CNOT, or DCNOT, gate is a two-qubit gate. 
+It is defined as a sequence of two anti-parallel CNOT gates,
+where the first CNOT gate takes the first qubit as the control qubit and the second CNOT gate is anti-parallel and 
+takes the second qubit as the control qubit.
 
 ### Properties
 
-- [Clifford](https://en.wikipedia.org/wiki/Clifford_gates) gate; 
-- [Involutory](https://en.wikipedia.org/wiki/Involutory_matrix) operation (its own inverse).
+- [Involutory](https://en.wikipedia.org/wiki/Involutory_matrix) operation (its own inverse);
+- Perfect Entangler (maximally entangles specific product states).
 
 ## Representation
 
 $$\begin{align}
-SWAP &= \left(\begin{matrix}
-1 & 0 & 0 & 0 \\
-0 & 0 & 1 & 0 \\
-0 & 1 & 0 & 0 \\
-0 & 0 & 0 & 1 
+DCNOT &= \left(\begin{matrix}
+ 1 & 0 & 0 & 0 \\
+ 0 & 0 & 1 & 0 \\
+ 0 & 0 & 0 & 1 \\
+ 0 & 1 & 0 & 0
 \end{matrix}\right)
 \end{align}$$
 
@@ -30,13 +32,13 @@ SWAP &= \left(\begin{matrix}
 ### Standard basis
 
 $$\begin{align}
-SWAP\,|00\rangle &= |00\rangle \\
+DCNOT\,|00\rangle &= |00\rangle \\
 \\
-SWAP\,|01\rangle &= |10\rangle \\
+DCNOT\,|01\rangle &= |10\rangle \\
 \\
-SWAP\,|10\rangle &= |01\rangle \\
+DCNOT\,|10\rangle &= |11\rangle \\
 \\
-SWAP\,|11\rangle &= |11\rangle \\
+DCNOT\,|11\rangle &= |01\rangle \\
 \end{align}$$
 
 !!! Note "Qubit state ordering convention and matrix representation"

@@ -1,42 +1,47 @@
-# SWAP gate
+# CY gate
 
-| Identifier | Operator | Example statement     |
-|------------|----------|-----------------------|
-| SWAP       | $SWAP$   | **`SWAP q[0], q[1]`** |
+| Identifier | Operator | Example statement   |
+|------------|----------|---------------------|
+| CY         | $CY$     | **`CY q[0], q[1]`** |
 
 ## Description
 
-The SWAP gate is a two-qubit gate.
-It _swaps_ the state of the two qubits.
+The CY gate is a two-qubit gate. It is the controlled-Y gate.
+It performs a Y gate on the second qubit, conditional on the state of the first qubit.
 
 ### Properties
 
 - [Clifford](https://en.wikipedia.org/wiki/Clifford_gates) gate; 
-- [Involutory](https://en.wikipedia.org/wiki/Involutory_matrix) operation (its own inverse).
+- [Controlled](https://en.wikipedia.org/wiki/Quantum_logic_gate#Controlled_gates) gate;
+- Ising gate.
 
 ## Representation
 
 $$\begin{align}
-SWAP &= \left(\begin{matrix}
-1 & 0 & 0 & 0 \\
-0 & 0 & 1 & 0 \\
-0 & 1 & 0 & 0 \\
-0 & 0 & 0 & 1 
+CY &= \left(\begin{matrix}
+ 1 & 0 & 0 & 0\\
+ 0 & 1 & 0 & 0\\
+ 0 & 0 & 0 & -i\\
+ 0 & 0 & i & 0
 \end{matrix}\right)
 \end{align}$$
+
+which is equal to:
+
+$$CY = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes Y.$$
 
 ## Operation examples
 
 ### Standard basis
 
 $$\begin{align}
-SWAP\,|00\rangle &= |00\rangle \\
+CY\,|00\rangle &= |00\rangle \\
 \\
-SWAP\,|01\rangle &= |10\rangle \\
+CY\,|01\rangle &= i\,|11\rangle \\
 \\
-SWAP\,|10\rangle &= |01\rangle \\
+CY\,|10\rangle &= |10\rangle \\
 \\
-SWAP\,|11\rangle &= |11\rangle \\
+CY\,|11\rangle &= -i\,|01\rangle \\
 \end{align}$$
 
 !!! Note "Qubit state ordering convention and matrix representation"

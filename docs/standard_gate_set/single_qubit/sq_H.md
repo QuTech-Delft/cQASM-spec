@@ -92,15 +92,15 @@ $$H_H = HHH = \frac{1}{\sqrt{2}}\left(\begin{matrix}
 ### Standard basis
 
 $$\begin{align}
-H\,|0\rangle &= \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle = |+\rangle \\
+H\,|0\rangle &= \tfrac{1}{\sqrt{2}}|0\rangle + \tfrac{1}{\sqrt{2}}|1\rangle = |+\rangle \\
 \\
-H\,|1\rangle &= \frac{1}{\sqrt{2}}|0\rangle - \frac{1}{\sqrt{2}}|1\rangle = |-\rangle \\
+H\,|1\rangle &= \tfrac{1}{\sqrt{2}}|0\rangle - \tfrac{1}{\sqrt{2}}|1\rangle = |-\rangle \\
 \end{align}$$
 
 ### Hadamard basis
 
 $$\begin{align}
-H\,|+\rangle &=  \frac{1}{\sqrt{2}}|+\rangle + \frac{1}{\sqrt{2}}|-\rangle = |0\rangle \\
+H\,|+\rangle &=  \tfrac{1}{\sqrt{2}}|+\rangle + \tfrac{1}{\sqrt{2}}|-\rangle = |0\rangle \\
 \\
-H\,|-\rangle &=  \frac{1}{\sqrt{2}}|+\rangle - \frac{1}{\sqrt{2}}|-\rangle = |1\rangle 
+H\,|-\rangle &=  \tfrac{1}{\sqrt{2}}|+\rangle - \tfrac{1}{\sqrt{2}}|-\rangle = |1\rangle 
 \end{align}$$
