@@ -44,11 +44,15 @@ CY\,|10\rangle &= |10\rangle \\
 CY\,|11\rangle &= -i\,|01\rangle \\
 \end{align}$$
 
-!!! Note "Qubit state ordering and matrix representation"
+!!! Note "Qubit state ordering convention and matrix representation"
 
-Note that [qubits in a ket in OpenSquirrel are ordered](../../language_specification/index.md#qubit-state-and-measurement-bit-ordering)
-with qubit indices decreasing from left to right (little endian ordering), _i.e._,
+    Note that [qubits in a ket are ordered](../../language_specification/index.md#qubit-state-and-measurement-bit-ordering)
+    with qubit indices decreasing from left to right, _i.e._,
 
-$$|\psi\rangle = \sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i$$
+    $$|\psi\rangle = \sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i$$
 
-For the matrix representation given above, we use the standard textbook _big endian ordering_ of qubits, see the [CNOT gate for a more detailed explanation](mq_CNOT.md). 
+    Note that for matrices a **reversed** basis ordering convention is adopted, as is done in most textbooks.
+    For instance, in the case of a two-qubit control gate, 
+    the matrix is represented such that $q_0$ is the _control_ qubit
+    and $q_1$ is the _target_ qubit;
+    the state on which the matrix is applied should then effectively be written as $|q_0\rangle \otimes |q_1\rangle$.

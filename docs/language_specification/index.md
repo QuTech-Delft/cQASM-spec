@@ -165,7 +165,7 @@ Names for syntactic categories have generally been chosen according to the follo
 - _X-list_ is one or more _X_’s separated by intervening commas, _e.g._, _index-list_ is a sequence of 
 indices separated by commas.
 
-### *Qubit state and measurement bit ordering*
+### *Qubit state ordering, measurement bit ordering, and matrix representation*
 
 In this specification, qubit states are represented using the ket-vector notation $|\Psi\rangle$
 and measurement outcomes are represented as bit strings.
@@ -191,3 +191,8 @@ then measuring it will result in the following bit string:
 
 The same ordering applies to bit registers, _i.e._, for a bit register `b`,
 the ordering is given by `b[n-1]b[n]...b[1]b[0]`.
+
+Note that for matrices a **reversed** basis ordering convention is adopted, as is done in most textbooks.
+For instance, in the case of a two-qubit control gate, the matrix is represented such that $q_0$ is the _control_ qubit
+and $q_1$ is the _target_ qubit;
+the state on which the matrix is applied should then effectively be written as $|q_0\rangle \otimes |q_1\rangle$.
