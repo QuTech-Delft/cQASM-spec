@@ -33,7 +33,7 @@ Click on the _Name_ of the gate for a more detailed description.
 | [CRk](multi_qubit/mq_CRk.md)                              | CRk         | $CR_k(k)$                                          | **`CRk(2) q[0], q[1]`**      |
 | [CV](multi_qubit/mq_CV.md)                                | CV          | $CV$                                               | **`CV q[0], q[1]`**          |
 | [CY](multi_qubit/mq_CY.md)                                | CY          | $CY$                                               | **`CY q[0], q[1]`**          |
-| [Double-CNOT](multi_qubit/mq_DCNOT.md)                   | DCNOT       | $DCNOT$                                            | **`DCNOT q[0], q[1]`**       |
+| [Double-CNOT](multi_qubit/mq_DCNOT.md)                    | DCNOT       | $DCNOT$                                            | **`DCNOT q[0], q[1]`**       |
 | [Echoed Cross-Resonance](multi_qubit/mq_ECR.md)           | ECR         | $ECR$                                              | **`ECR q[0], q[1]`**         |
 | [Inverse-square-root-SWAP](multi_qubit/mq_InvSqrtSWAP.md) | InvSqrtSWAP | $\sqrt{SWAP}^\dagger$                              | **`InvSqrtSWAP q[0], q[1]`** |
 | [iSWAP](multi_qubit/mq_ISWAP.md)                          | ISWAP       | $iSWAP$                                            | **`ISWAP q[0], q[1]`**       |
@@ -42,3 +42,5 @@ Click on the _Name_ of the gate for a more detailed description.
 | [Square-root-iSWAP](multi_qubit/mq_SqrtISWAP.md)          | SqrtISWAP   | $\sqrt{iSWAP}$                                     | **`SqrtISWAP q[0], q[1]`**   |
 | [Square-root-SWAP](multi_qubit/mq_InvSqrtSWAP.md)         | SqrtSWAP    | $\sqrt{SWAP}$                                      | **`SqrtSWAP q[0], q[1]`**    |
 | [SWAP](multi_qubit/mq_SWAP.md)                            | SWAP        | $SWAP$                                             | **`SWAP q[0], q[1]`**        |
+| [Toffoli](multi_qubit/mq_CCX.md)                          | CCX         | $CCX$                                              | **`CCX q[0], q[1], q[2]`**   |
+| [Fredkin](multi_qubit/mq_CSWAP.md)                        | CSWAP       | $CSWAP$                                            | **`CSWAP q[0], q[1], q[2]`** |
