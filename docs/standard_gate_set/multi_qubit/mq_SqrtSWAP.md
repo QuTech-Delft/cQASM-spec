@@ -15,8 +15,8 @@ putting pure separable states into a maximally entangled state.
 $$\begin{align}
 \sqrt{SWAP} &= \left(\begin{matrix}
  1 & 0 & 0 & 0 \\
- 0 & \frac{1}{2} \left ( i+1 \right ) & \frac{1}{2} \left ( i-1 \right ) & 0 \\
- 0 & \frac{1}{2} \left ( i-1 \right ) & \frac{1}{2} \left ( i+1 \right ) & 0 \\
+ 0 & \frac{1}{2} \left ( i+1 \right ) & \frac{1}{2} \left ( 1-i \right ) & 0 \\
+ 0 & \frac{1}{2} \left ( 1-i \right ) & \frac{1}{2} \left ( i+1 \right ) & 0 \\
  0 & 0 & 0 & 1 
 \end{matrix}\right)
 \end{align}$$
@@ -28,9 +28,9 @@ $$\begin{align}
 $$\begin{align}
 \sqrt{SWAP}\,|00\rangle &= |00\rangle \\
 \\
-\sqrt{SWAP}\,|01\rangle &= \tfrac{1}{2} \left ( i+1 \right )\,|01\rangle + \tfrac{1}{2} \left ( i-1 \right )\,|10\rangle \\
+\sqrt{SWAP}\,|01\rangle &= \tfrac{1}{2} \left ( i+1 \right )\,|01\rangle + \tfrac{1}{2} \left ( 1-i \right )\,|10\rangle \\
 \\
-\sqrt{SWAP}\,|10\rangle &= \tfrac{1}{2} \left ( i-1 \right )\,|01\rangle + \tfrac{1}{2} \left ( i+1 \right )\,|10\rangle \\
+\sqrt{SWAP}\,|10\rangle &= \tfrac{1}{2} \left ( 1-i \right )\,|01\rangle + \tfrac{1}{2} \left ( i+1 \right )\,|10\rangle \\
 \\
 \sqrt{SWAP}\,|11\rangle &= |11\rangle \\
 \end{align}$$
