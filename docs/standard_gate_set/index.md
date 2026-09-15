@@ -42,3 +42,5 @@ Click on the _Name_ of the gate for a more detailed description.
 | [Square-root-iSWAP](multi_qubit/mq_SqrtISWAP.md)          | SqrtISWAP   | $\sqrt{iSWAP}$                                     | **`SqrtISWAP q[0], q[1]`**   |
 | [Square-root-SWAP](multi_qubit/mq_SqrtSWAP.md)            | SqrtSWAP    | $\sqrt{SWAP}$                                      | **`SqrtSWAP q[0], q[1]`**    |
 | [SWAP](multi_qubit/mq_SWAP.md)                            | SWAP        | $SWAP$                                             | **`SWAP q[0], q[1]`**        |
+| [Toffoli](multi_qubit/mq_CCX.md)                          | CCX         | $CCX$                                              | **`CCX q[0], q[1], q[2]`**   |
+| [Fredkin](multi_qubit/mq_CSWAP.md)                        | CSWAP       | $CSWAP$                                            | **`CSWAP q[0], q[1], q[2]`** |

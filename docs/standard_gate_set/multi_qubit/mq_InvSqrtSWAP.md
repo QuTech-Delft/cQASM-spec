@@ -36,7 +36,7 @@ $$\begin{align}
 
 !!! Note "Qubit state ordering convention and matrix representation"
 
-    Note that [qubits in a ket are ordered](../../language_specification/index.md#qubit-state-and-measurement-bit-ordering)
+    Note that [qubits in a ket are ordered](../../language_specification/index.md#qubit-state-ordering-measurement-bit-ordering-and-matrix-representation)
     with qubit indices decreasing from left to right, _i.e._,
 
     $$|\psi\rangle = \sum c_i~|q_nq_{n-1}~...q_1q_0\rangle_i$$
