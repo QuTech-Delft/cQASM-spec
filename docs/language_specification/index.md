@@ -64,16 +64,30 @@ The unitary operations, commonly know as gates, can be either
         version 3.0
         
         // Qubit register declaration
-        qubit[2] q
+        qubit[3] q
 
         // Bit register declaration
         bit[2] b
+
+        // Initialization instruction
+        init q
         
-        // Gate
+        // Gates
         H q[0]
+        CNOT q[0], q[1]
+        CSWAP q[0], q[1], q[2]
+
+        // Reset instruction
+        reset q[1]
 
         // Gate modifier
         ctrl.X q[0], q[1]
+
+        // Control instruction: Barrier
+        barrier q[0, 1]
+
+        // Control instruction: Wait
+        wait(5) q[0]
         
         // Measure instruction
         b[0, 1] = measure q[0, 1]

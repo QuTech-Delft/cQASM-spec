@@ -79,6 +79,8 @@ nav:
         - Square-root-iSWAP: ./standard_gate_set/multi_qubit/mq_SqrtISWAP.md
         - Square-root-SWAP: ./standard_gate_set/multi_qubit/mq_SqrtSWAP.md
         - SWAP: ./standard_gate_set/multi_qubit/mq_SWAP.md
+        - Toffoli: ./standard_gate_set/multi_qubit/mq_CCX.md
+        - Fredkin: ./standard_gate_set/multi_qubit/mq_CSWAP.md
   - Appendices:
       - Spin-2+: appendices/spin_2plus.md
 
