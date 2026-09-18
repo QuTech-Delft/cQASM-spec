@@ -2470,6 +2470,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -2933,6 +2937,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../standard_gate_set/multi_qubit/mq_CCX.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Toffoli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../standard_gate_set/multi_qubit/mq_CSWAP.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fredkin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3269,25 +3329,53 @@ and not to a gate resulting from applying a gate modifier, we use the term <em>n
 <span class="normal"><a href="#__codelineno-0-16">16</a></span>
 <span class="normal"><a href="#__codelineno-0-17">17</a></span>
 <span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>// Example program according to the cQASM language specification
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>// Example program according to the cQASM language specification
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3"></a>// Version statement
 <a id="__codelineno-0-4" name="__codelineno-0-4"></a>version 3.0
 <a id="__codelineno-0-5" name="__codelineno-0-5"></a>
 <a id="__codelineno-0-6" name="__codelineno-0-6"></a>// Qubit register declaration
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a>qubit[2] q
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>qubit[3] q
 <a id="__codelineno-0-8" name="__codelineno-0-8"></a>
 <a id="__codelineno-0-9" name="__codelineno-0-9"></a>// Bit register declaration
 <a id="__codelineno-0-10" name="__codelineno-0-10"></a>bit[2] b
 <a id="__codelineno-0-11" name="__codelineno-0-11"></a>
-<a id="__codelineno-0-12" name="__codelineno-0-12"></a>// Gate
-<a id="__codelineno-0-13" name="__codelineno-0-13"></a>H q[0]
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>// Initialization instruction
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>init q
 <a id="__codelineno-0-14" name="__codelineno-0-14"></a>
-<a id="__codelineno-0-15" name="__codelineno-0-15"></a>// Gate modifier
-<a id="__codelineno-0-16" name="__codelineno-0-16"></a>ctrl.X q[0], q[1]
-<a id="__codelineno-0-17" name="__codelineno-0-17"></a>
-<a id="__codelineno-0-18" name="__codelineno-0-18"></a>// Measure instruction
-<a id="__codelineno-0-19" name="__codelineno-0-19"></a>b[0, 1] = measure q[0, 1]
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>// Gates
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a>H q[0]
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a>CNOT q[0], q[1]
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a>CSWAP q[0], q[1], q[2]
+<a id="__codelineno-0-19" name="__codelineno-0-19"></a>
+<a id="__codelineno-0-20" name="__codelineno-0-20"></a>// Reset instruction
+<a id="__codelineno-0-21" name="__codelineno-0-21"></a>reset q[1]
+<a id="__codelineno-0-22" name="__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23"></a>// Gate modifier
+<a id="__codelineno-0-24" name="__codelineno-0-24"></a>ctrl.X q[0], q[1]
+<a id="__codelineno-0-25" name="__codelineno-0-25"></a>
+<a id="__codelineno-0-26" name="__codelineno-0-26"></a>// Control instruction: Barrier
+<a id="__codelineno-0-27" name="__codelineno-0-27"></a>barrier q[0, 1]
+<a id="__codelineno-0-28" name="__codelineno-0-28"></a>
+<a id="__codelineno-0-29" name="__codelineno-0-29"></a>// Control instruction: Wait
+<a id="__codelineno-0-30" name="__codelineno-0-30"></a>wait(5) q[0]
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a>
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a>// Measure instruction
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a>b[0, 1] = measure q[0, 1]
 </code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
