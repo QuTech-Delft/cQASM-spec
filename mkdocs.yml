@@ -1,4 +1,150 @@
-INHERIT: ./mkdocs-base.yml
+site_name: cQASM specification
+site_dir: public
+repo_url: https://github.com/qutech-delft/cqasm-spec
+use_directory_urls: false
+
+nav:
+  - Introduction:
+    - Home: ./index.md
+    - Context: ./introduction/context.md
+    - Acknowledgements: ./introduction/acknowledgements.md
+  - Language specification:
+    - Language specification: ./language_specification/index.md
+    - Tokens:
+      - Newlines: ./language_specification/tokens/newlines.md
+      - Literals: ./language_specification/tokens/literals.md
+      - Identifiers: ./language_specification/tokens/identifiers.md
+      - Keywords: ./language_specification/tokens/keywords.md
+      - Raw text string: ./language_specification/tokens/raw_text_string.md
+      - Operators and punctuators: ./language_specification/tokens/operators_and_punctuators.md
+      - Whitespace and comments: ./language_specification/tokens/whitespace_and_comments.md
+    - Statements:
+      - Version statement: ./language_specification/statements/version_statement.md
+      - Variable declarations:
+        - Qubit (register) declaration: ./language_specification/statements/variable_declarations/qubit_register_declaration.md
+        - Bit (register) declaration: ./language_specification/statements/variable_declarations/bit_register_declaration.md
+      - Instructions:
+        - Unitary instructions: ./language_specification/statements/instructions/unitary_instructions.md
+        - Non-unitary instructions:
+          - Init instruction: ./language_specification/statements/instructions/non_unitary_instructions/init_instruction.md
+          - Measure instruction: ./language_specification/statements/instructions/non_unitary_instructions/measure_instruction.md
+          - Reset instruction: ./language_specification/statements/instructions/non_unitary_instructions/reset_instruction.md
+        - Control instructions:
+          - Barrier instruction: ./language_specification/statements/instructions/control_instructions/barrier_instruction.md
+          - Wait instruction: ./language_specification/statements/instructions/control_instructions/wait_instruction.md
+        - Single-gate-multiple-qubit (SGMQ) notation: ./language_specification/statements/instructions/single-gate-multiple-qubit-notation.md
+      - Assembly declaration: ./language_specification/statements/assembly_declaration.md
+    - Types: ./language_specification/types.md
+    - Expressions:
+      - Indices: ./language_specification/expressions/indices.md
+      - Predefined constants: ./language_specification/expressions/predefined_constants.md
+      - Built-in functions: ./language_specification/expressions/builtin_functions.md
+  - Standard gate set:
+      - Standard gate set: ./standard_gate_set/index.md
+      - Single-qubit:
+        - Hadamard: ./standard_gate_set/single_qubit/sq_H.md
+        - Identity: ./standard_gate_set/single_qubit/sq_I.md
+        - Pauli-X: ./standard_gate_set/single_qubit/sq_X.md
+        - Pauli-Y: ./standard_gate_set/single_qubit/sq_Y.md
+        - Pauli-Z: ./standard_gate_set/single_qubit/sq_Z.md
+        - X90: ./standard_gate_set/single_qubit/sq_X90.md
+        - minus-X90: ./standard_gate_set/single_qubit/sq_mX90.md
+        - Y90: ./standard_gate_set/single_qubit/sq_Y90.md
+        - minus-Y90: ./standard_gate_set/single_qubit/sq_mY90.md
+        - Z90: ./standard_gate_set/single_qubit/sq_Z90.md
+        - minus-Z90: ./standard_gate_set/single_qubit/sq_mZ90.md
+        - S: ./standard_gate_set/single_qubit/sq_S.md
+        - S-dagger: ./standard_gate_set/single_qubit/sq_Sdag.md
+        - T: ./standard_gate_set/single_qubit/sq_T.md
+        - T-dagger: ./standard_gate_set/single_qubit/sq_Tdag.md
+        - Rx: ./standard_gate_set/single_qubit/sq_Rx.md
+        - Ry: ./standard_gate_set/single_qubit/sq_Ry.md
+        - Rz: ./standard_gate_set/single_qubit/sq_Rz.md
+        - Rn: ./standard_gate_set/single_qubit/sq_Rn.md
+        - U: ./standard_gate_set/single_qubit/sq_U.md
+      - Multi-qubit:
+        - Controlled-NOT: ./standard_gate_set/multi_qubit/mq_CNOT.md
+        - C-Phase: ./standard_gate_set/multi_qubit/mq_CZ.md
+        - CR: ./standard_gate_set/multi_qubit/mq_CR.md
+        - CRk: ./standard_gate_set/multi_qubit/mq_CRk.md
+        - CV: ./standard_gate_set/multi_qubit/mq_CV.md
+        - CY: ./standard_gate_set/multi_qubit/mq_CY.md
+        - Double-CNOT: ./standard_gate_set/multi_qubit/mq_DCNOT.md
+        - Echoed Cross-Resonance: ./standard_gate_set/multi_qubit/mq_ECR.md
+        - Inverse-square-root-SWAP: ./standard_gate_set/multi_qubit/mq_InvSqrtSWAP.md
+        - iSWAP: ./standard_gate_set/multi_qubit/mq_ISWAP.md
+        - M: ./standard_gate_set/multi_qubit/mq_M.md
+        - Mølmer-Sørensen: ./standard_gate_set/multi_qubit/mq_MS.md
+        - Square-root-iSWAP: ./standard_gate_set/multi_qubit/mq_SqrtISWAP.md
+        - Square-root-SWAP: ./standard_gate_set/multi_qubit/mq_SqrtSWAP.md
+        - SWAP: ./standard_gate_set/multi_qubit/mq_SWAP.md
+        - Toffoli: ./standard_gate_set/multi_qubit/mq_CCX.md
+        - Fredkin: ./standard_gate_set/multi_qubit/mq_CSWAP.md
+  - Appendices:
+      - Spin-2+: appendices/spin_2plus.md
+
+theme:
+  name: material
+  features:
+    - navigation.indexes
+    - navigation.tabs
+    - navigation.tracking
+    - navigation.footer
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - def_list
+  - footnotes
+  - md_in_html
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - tables
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+plugins:
+  - glightbox
+  - search
 
 extra:
   version:
