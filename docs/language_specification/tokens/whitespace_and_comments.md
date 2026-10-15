@@ -14,9 +14,9 @@ The general form of single-line comments is as follows
 
 !!! info ""
 
-    &emsp;**`//`** _single-line-comment_  
+    &emsp;`//` _single-line-comment_  
     &emsp;_statement_  
-    &emsp;_statement_  **`//`** _single-line-comment_
+    &emsp;_statement_  `//` _single-line-comment_
 
 
 !!! example
@@ -36,11 +36,11 @@ The general structure of a multi-line comment is given by
 
 !!! info ""
 
-    &emsp;**`/*`** _multi-line_  
-    &emsp;_comment-block_ **`*/`**  
+    &emsp;`/*` _multi-line_  
+    &emsp;_comment-block_ `*/`  
 
-    &emsp;_statement_  **`/*`** _multi-line_  
-    &emsp;_comment-block_ **`*/`** _statement_
+    &emsp;_statement_  `/*` _multi-line_  
+    &emsp;_comment-block_ `*/` _statement_
 
 
 An example of multi-line commenting is given by the following:

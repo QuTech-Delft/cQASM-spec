@@ -2,7 +2,7 @@
 
 | Identifier | Operator | Example statement |
 |------------|----------|-------------------|
-| CSWAP      | $CSWAP$  | **`CSWAP q[0], q[1], q[2]`** |
+| CSWAP      | $CSWAP$  | `CSWAP q[0], q[1], q[2]` |
 
 ## Description
 

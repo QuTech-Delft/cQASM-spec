@@ -2,7 +2,7 @@
 
 | Identifier | Operator | Example statement     |
 |------------|----------|-----------------------|
-| SWAP       | $SWAP$   | **`SWAP q[0], q[1]`** |
+| SWAP       | $SWAP$   | `SWAP q[0], q[1]` |
 
 ## Description
 

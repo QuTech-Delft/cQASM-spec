@@ -8,22 +8,22 @@ The single-qubit gate will then be applied to each qubit, respectively.
     SGMQ notation is nothing other than _syntactic sugar_,
     whereby a series of instruction statements can be written as one.
     Moreover, SGMQ notation should not be confused with multiple-qubit gates, _e.g._, 
-    **`X q[0,1]`** means **`X q[0]; X q[1]`**,
-    and does not represent the 2-qubit gate **`XX q[0], q[1]`**.
-    Note that the latter 2-qubit gate **`XX`** is currently not supported by the cQASM language,
+    `X q[0,1]` means `X q[0]; X q[1]`,
+    and does not represent the 2-qubit gate `XX q[0], q[1]`.
+    Note that the latter 2-qubit gate `XX` is currently not supported by the cQASM language,
     see the [standard gate set](../../../standard_gate_set/index.md).
 
-If the name of the qubit register is **`q`**,
+If the name of the qubit register is `q`,
 then the following can be passed as an argument to the single-qubit gate:
 
-- the whole qubit register **`q`**;
+- the whole qubit register `q`;
 
-- a slice thereof **`q[i:j]`**, where $0 \leq i < j < N$;
+- a slice thereof `q[i:j]`, where $0 \leq i < j < N$;
 
-- or a list of indices can be passed **`q[i,]`**, where $0 \leq i < N$,
+- or a list of indices can be passed `q[i,]`, where $0 \leq i < N$,
 
 with $N$ the size of the qubit register.
-The following slicing convention is adopted: a slice **`q[i:j]`** includes qubits **`q[i]`**, **`q[j]`**,
+The following slicing convention is adopted: a slice `q[i:j]` includes qubits `q[i]`, `q[j]`,
 and all qubits in between. The code block below demonstrates some examples.
 
 !!! example "SGMQ notation for single-qubit gates"
@@ -55,7 +55,7 @@ and all qubits in between. The code block below demonstrates some examples.
         X q[0]; X q[2]; X q[4] 
         ```
 
-In the above examples we have used the semicolon **`;`** to separate statements occurring on the same line.
+In the above examples we have used the semicolon `;` to separate statements occurring on the same line.
 
 Multi-qubit gates also support SGMQ notation.
 Note that the arguments that are passed for the qubit operands, _i.e._, a register, slice, or list of indices,

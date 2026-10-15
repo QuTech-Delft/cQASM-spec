@@ -2,7 +2,7 @@
 
 | Identifier | Operator | Example statement    |
 |------------|----------|----------------------|
-| ECR        | $ECR$    | **`ECR q[0], q[1]`** |
+| ECR        | $ECR$    | `ECR q[0], q[1]` |
 
 ## Description
 

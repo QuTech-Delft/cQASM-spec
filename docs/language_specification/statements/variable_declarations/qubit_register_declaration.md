@@ -3,22 +3,22 @@ The general form is given as follows:
 
 !!! info "" 
     
-    &emsp;**`qubit[`**_size_**`] `**_identifier_
+    &emsp;`qubit[`_size_`] `_identifier_
 
 ??? info "Grammar for bit (register) declaration"
     
     _qubit-declaration_:  
-    &emsp; __`qubit`__ _array-size-declaration_~opt~ _identifier_
+    &emsp; `qubit` _array-size-declaration_~opt~ _identifier_
 
     _array-size-declaration_:  
-    &emsp; __`[`__ _integer-literal_ __`]`__  
+    &emsp; `[`_integer-literal_`]`  
 
 Its form is similar to the declaration of an arbitrary variable,
 whereby the type of the variable is specified first, _i.e._ 
-**`qubit`** denotes that the declared variable is of type [Qubit](../../types.md).
-and **`qubit[`**_size_**`]`**
+`qubit` denotes that the declared variable is of type [Qubit](../../types.md).
+and `qubit[`_size_`]`
 denotes that the declared variable is of type [QubitArray](../../types.md).
-The size of a qubit register is declared by an integer value between square brackets **`[`**_size_**`]`**.
+The size of a qubit register is declared by an integer value between square brackets `[`_size_`]`.
 The name of the qubit (register) is defined through an [identifier](../../tokens/identifiers.md). 
 
 The declaration of a qubit (register) is _optional_. 
@@ -27,7 +27,7 @@ The declaration of a qubit (register) is _optional_.
 
     The qubit (register) declaration replaces the qubit statement, _i.e._, 
     
-    &emsp;**`qubits`** _size_
+    &emsp;`qubits` _size_
     
     of previous versions of the cQASM language.
 
@@ -64,8 +64,8 @@ Find below examples, respectively, of a single qubit declaration and qubit regis
 
 The individual qubits of a qubit register can be referred to by their register index,
 _e.g._, in the example of the _Qubit register declaration_,
-the statement **`H q[0]`** indicates the application of a Hadamard gate **`H`** on the qubit located at index **`0`**
-of the qubit register **`q`**. 
+the statement `H q[0]` indicates the application of a Hadamard gate `H` on the qubit located at index `0`
+of the qubit register `q`. 
 Note that in the case of a single qubit, 
 the qubit is referred to through its identifier, not through a register index.
 

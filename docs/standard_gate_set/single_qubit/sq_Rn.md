@@ -2,7 +2,7 @@
 
 | Identifier | Operator                                             | Example statement            |
 |------------|------------------------------------------------------|------------------------------|
-| Rn         | $R_\hat{\mathbf{n}}(\hat{\mathbf{n}}, \theta, \phi)$ | **`Rn(1,0,0,pi,pi/2) q[0]`** |
+| Rn         | $R_\hat{\mathbf{n}}(\hat{\mathbf{n}}, \theta, \phi)$ | `Rn(1,0,0,pi,pi/2) q[0]` |
 
 ## Description
 
@@ -11,10 +11,10 @@ $\hat{\mathbf{n}}=[n_x, n_y, n_z]^T$ and a global phase of $\phi$.
 
 !!! note
     
-    The **`Rn`** instruction expects the separate components of the axis $\hat{\mathbf{n}}$,
+    The `Rn` instruction expects the separate components of the axis $\hat{\mathbf{n}}$,
     _i.e._ $n_x$, $n_y$, and $n_z$, as input arguments: 
 
-    **`Rn(`**$n_x$**`,`** $n_y$**`,`** $n_z$**`,`** $\theta$**`,`** $\phi$**`)`** _qubit-argument_
+    `Rn(`$n_x$`,` $n_y$`,` $n_z$`,` $\theta$`,` $\phi$`)` _qubit-argument_
 
     as shown in the _**Example statement**_ in the table above.
 
@@ -31,7 +31,7 @@ As an example, when a spin-qubit is operated on by an Rx gate it does not return
 after a $2\pi$ rotation, but only after a $4\pi$ rotation.
 
 The difference is a global phase of $\pi$, which is insignificant by itself,
-but will be relevant when using it in combination with the _control_ modifier **`ctrl`**,
+but will be relevant when using it in combination with the _control_ modifier `ctrl`,
 which changes the gate $U$ into the controlled- $U$ gate.
 
 - [Special Unitary $SU$](https://en.wikipedia.org/wiki/Special_unitary_group)

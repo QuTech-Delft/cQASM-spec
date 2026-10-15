@@ -2,7 +2,7 @@
 
 | Identifier | Operator    | Example statement |
 |------------|-------------|-------------------|
-| Tdag       | $T^\dagger$ | **`Tdag q[0]`**   |
+| Tdag       | $T^\dagger$ | `Tdag q[0]`   |
 
 ## Description
 

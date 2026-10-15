@@ -2,18 +2,20 @@
 
 | Identifier | Operator | Example statement   |
 |------------|----------|---------------------|
-| CZ         | $CZ$     | **`CZ q[0], q[1]`** |
+| CZ         | $CZ$     | `CZ q[0], q[1]` |
 
 ## Description
 
 The C-Phase, or CZ, gate is a two-qubit gate.
-It performs a Z gate (negates the relative phase) on the second qubit, conditional on the state of the first qubit.
+It performs a [Pauli-Z gate](../single_qubit/sq_Z.md) (negates the relative phase) on the second qubit,
+conditional on the state of the first qubit.
 The first qubit is usually referred to as the control qubit and the second qubit as the target qubit.
 
 In the standard computational basis for two qubits $\{|00\rangle ,|01\rangle \,|10\rangle ,|11\rangle \}$, the CZ gate:
 
 - leaves the control qubit unchanged,
-- performs a Z gate on the target qubit, when the control qubit is in state $|1\rangle$,
+- performs a [Pauli-Z gate](../single_qubit/sq_Z.md) on the target qubit,
+when the control qubit is in state $|1\rangle$,
 - leaves the target qubit unchanged, when the control qubit is in state $|0\rangle$.
 
 !!! note

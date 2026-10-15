@@ -8,7 +8,7 @@ and predefine the names of useful [mathematical constants](../expressions/predef
 and [named gates](../statements/instructions/unitary_instructions.md#named-gates).
 Note that identifiers are not protected, _i.e._ they can be reused. 
 For example, it is permissible, however discouraged,
-to name a (qu)bit (register) **`pi`**, **`cos`**, or **`Rx`**.
+to name a (qu)bit (register) `pi`, `cos`, or `Rx`.
 
 Reserved [keywords](keywords.md) cannot be used as an identifier.
 
@@ -20,7 +20,7 @@ Reserved [keywords](keywords.md) cannot be used as an identifier.
     &emsp; _identifier_ _digit_
 
     _letter_:  one of  
-    &emsp; __`a`__ through __`z`__ or __`A`__ through __`Z`__ or __`_`__  
+    &emsp; `a` through `z` or `A` through `Z` or `_`  
 
 !!! example "Examples"
 

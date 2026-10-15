@@ -2,7 +2,7 @@
 
 | Identifier | Operator                   | Example statement           |
 |------------|----------------------------|-----------------------------|
-| U          | $U(\theta, \phi, \lambda)$ | **`U(pi/2,0,pi) q[0]`** |
+| U          | $U(\theta, \phi, \lambda)$ | `U(pi/2,0,pi) q[0]` |
 
 ## Description
 

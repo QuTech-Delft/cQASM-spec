@@ -1,4 +1,4 @@
-A **`measure`** instruction performs a measurement to its qubit argument and
+A `measure` instruction performs a measurement to its qubit argument and
 assigns the outcome to a bit variable.
 
 The `measure` instruction can either
@@ -16,18 +16,18 @@ The following aliases for the (parameterized) `measure` instruction also exist:
 
     `measure(0,0,1)` is equal to the non-parameterized `measure` as $(0,0,1)$ defines the positive $z$-axis.
 
-The general form of a **`measure`** instruction is as follows:
+The general form of a `measure` instruction is as follows:
 
 !!! info ""
 
-    &emsp;_bit-argument_ **`=`** **`measure`** _qubit-argument_  
-    &emsp;_bit-argument_ **`=`** **`measure(`**_parameter-list_**`)`** _qubit-argument_
+    &emsp;_bit-argument_ `=` `measure` _qubit-argument_  
+    &emsp;_bit-argument_ `=` `measure(`_parameter-list_`)` _qubit-argument_
 
-??? info "Grammar for **`measure`** instruction"
+??? info "Grammar for `measure` instruction"
     
     _measure-instruction_:  
-    &emsp; _bit-argument_ __`=`__ __`measure`__ _qubit-argument_  
-    &emsp; _bit-argument_ __`=`__ __`measure`__ _parameters_ _qubit-argument_
+    &emsp; _bit-argument_ `=` `measure` _qubit-argument_  
+    &emsp; _bit-argument_ `=` `measure` _parameters_ _qubit-argument_
 
     _bit-argument_:  
     &emsp; _bit-variable_  
@@ -40,11 +40,11 @@ The general form of a **`measure`** instruction is as follows:
     &emsp; _index_  
 
     _parameters_:  
-    &emsp; __`(`__ _parameter-list_ __`)`__
+    &emsp; `(`_parameter-list_`)`
 
     _parameter-list_:  
     &emsp; _parameter_  
-    &emsp; _parameter-list_ __`,`__ _parameter_
+    &emsp; _parameter-list_ `,` _parameter_
 
     _parameter_:  
     &emsp; _floating-literal_
@@ -83,9 +83,9 @@ The general form of a **`measure`** instruction is as follows:
 
 !!! note
 
-    The **`measure`** instruction accepts
+    The `measure` instruction accepts
     [SGMQ notation](../single-gate-multiple-qubit-notation.md), similar to gates.
-    Note that when using SGMQ notation with the **`measure`** instruction,
+    Note that when using SGMQ notation with the `measure` instruction,
     that the number of bit operands is equal to the number of qubit operands.
     For example, it is valid to write `b[0, 2, 1] = measure q[3:5]` because that unpacks to
     ```
@@ -97,7 +97,7 @@ The general form of a **`measure`** instruction is as follows:
     because in both cases the number of bit and qubit operands is unequal.
 
 
-The following code snippet shows how the **`measure`** instruction might be used in context.
+The following code snippet shows how the `measure` instruction might be used in context.
 
 ```linenums="1" hl_lines="9"
 version 3.0

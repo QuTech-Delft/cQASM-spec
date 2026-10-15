@@ -22,4 +22,3 @@ The Spin-2+ system developed by QuTech supports the following subset of the cQAS
 _e.g._ `<bit-name:BIT> = measure <qubit-argument:QUBIT>`. These statements are accepted and subsequently ignored.
 * Assembly declaration statements, e.g., `asm(<backend-name>) ''' <backend-code> '''`,
 are accepted and subsequently ignored.
-

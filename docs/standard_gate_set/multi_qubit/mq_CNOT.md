@@ -2,19 +2,19 @@
 
 | Identifier | Operator | Example statement     |
 |------------|----------|-----------------------|
-| CNOT       | $CNOT$   | **`CNOT q[0], q[1]`** |
+| CNOT       | $CNOT$   | `CNOT q[0], q[1]` |
 
 ## Description
 
 The controlled-NOT, or CNOT, gate is a two-qubit gate.
-It performs an X gate on the second qubit, conditional on the state of the first qubit.
+It performs a [Pauli-X gate](../single_qubit/sq_X.md) on the second qubit, conditional on the state of the first qubit.
 The first qubit is usually referred to as the control qubit and the second qubit as the target qubit.
 
 In the standard computational basis for two qubits 
 $\{|00\rangle ,|01\rangle \,|10\rangle ,|11\rangle \}$ , the CNOT gate:
 
 - leaves the control qubit unchanged,
-- performs an X gate on the target qubit, when the control qubit is in state $|1\rangle$,
+- performs a [Pauli-X gate](../single_qubit/sq_X.md) on the target qubit, when the control qubit is in state $|1\rangle$,
 - leaves the target qubit unchanged, when the control qubit is in state $|0\rangle$.
 
 !!! note

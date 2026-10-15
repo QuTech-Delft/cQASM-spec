@@ -2,7 +2,7 @@
 
 | Identifier | Operator      | Example statement |
 |------------|---------------|-------------------|
-| Rx         | $R_x(\theta)$ | **`Rx(pi) q[0]`** |
+| Rx         | $R_x(\theta)$ | `Rx(pi) q[0]` |
 
 ## Description
 

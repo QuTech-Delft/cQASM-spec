@@ -2,12 +2,13 @@
 
 | Identifier | Operator      | Example statement         |
 |------------|---------------|---------------------------|
-| SqrtSWAP   | $\sqrt{SWAP}$ | **`SqrtSWAP q[0], q[1]`** |
+| SqrtSWAP   | $\sqrt{SWAP}$ | `SqrtSWAP q[0], q[1]` |
 
 ## Description
 
 The square-root-SWAP gate is a two-qubit gate. 
-Whereas the SWAP gate exchanges the state of two qubits, the square-root-SWAP gate performs half of this exchange,
+Whereas the [SWAP](mq_SWAP.md) gate exchanges the state of two qubits,
+the square-root-SWAP gate performs half of this exchange,
 putting pure separable states into a maximally entangled state.
 
 ## Representation
