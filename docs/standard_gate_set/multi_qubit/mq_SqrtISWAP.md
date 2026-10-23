@@ -2,12 +2,12 @@
 
 | Identifier | Operator       | Example statement          |
 |------------|----------------|----------------------------|
-| SqrtISWAP  | $\sqrt{iSWAP}$ | **`SqrtISWAP q[0], q[1]`** |
+| SqrtISWAP  | $\sqrt{iSWAP}$ | `SqrtISWAP q[0], q[1]` |
 
 ## Description
 
 The square-root-iSWAP gate is a two-qubit gate. 
-Whereas the iSWAP gate exchanges the state of two qubits while adding a phase factor, 
+Whereas the [iSWAP](mq_ISWAP.md) gate exchanges the state of two qubits while adding a phase factor, 
 the square-root-iSWAP gate performs half of this exchange, 
 putting pure separable states into a maximally entangled state.
 

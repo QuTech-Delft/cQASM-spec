@@ -4,7 +4,7 @@ Any character, including whitespaces, comments, and newlines, can be part of a r
 ??? info "Grammar for raw text string"
 
     _raw-text-string_:  
-    &emsp; **`'''`** raw-text~opt~ **`'''`**
+    &emsp; `'''` raw-text~opt~ `'''`
 
     _raw-text_:  
     &emsp; raw-char  
@@ -16,5 +16,5 @@ Any character, including whitespaces, comments, and newlines, can be part of a r
 !!! warning
 
     Even though any sequence of characters could be raw text,
-    one should avoid using triple qoutes (**`'''`**)
+    one should avoid using triple qoutes (`'''`)
     as they will be interpreted as the delimiters of the raw text string.

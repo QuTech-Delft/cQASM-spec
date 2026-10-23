@@ -2,7 +2,7 @@
 
 | Identifier | Operator  | Example statement |
 |------------|-----------|-------------------|
-| X90        | $X^{1/2}$ | **`X90 q[0]`**    |
+| X90        | $X^{1/2}$ | `X90 q[0]`    |
 
 ## Description
 

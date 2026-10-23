@@ -8,19 +8,19 @@ The following built-in functions can either be used individually or in more comp
 
 | Function name            | Operation       | Grammar                  |
 |--------------------------|-----------------|--------------------------|
-| Square root              | $\sqrt{x}$      | **`sqrt(`** _x_ **`)`**  |
-| Natural exponential      | $\text{e}^x$    | **`exp(`** _x_ **`)`**   |
-| Natural logarithm        | $\log(x)$       | **`log(`** _x_ **`)`**   |
-| Absolute value           | $\|x\|$         | **`abs(`** _x_ **`)`**   |
-| Sine                     | $\sin(x)$       | **`sin(`** _x_ **`)`**   |
-| Cosine                   | $\cos(x)$       | **`cos(`** _x_ **`)`**   |
-| Tangent                  | $\tan(x)$       | **`tan(`** _x_ **`)`**   |
-| Arcsine                  | $\sin^{-1}(x)$  | **`asin(`** _x_ **`)`**  |
-| Arccosine                | $\cos^{-1}(x)$  | **`acos(`** _x_ **`)`**  |
-| Arctangent               | $\tan^{-1}(x)$  | **`atan(`** _x_ **`)`**  |
-| Hyperbolic of sine       | $\sinh(x)$      | **`sinh(`** _x_ **`)`**  |
-| Hyperbolic of cosine     | $\cosh(x)$      | **`cosh(`** _x_ **`)`**  |
-| Hyperbolic of tangent    | $\tanh(x)$      | **`tanh(`** _x_ **`)`**  |
-| Hyperbolic of arcsine    | $\sinh^{-1}(x)$ | **`asinh(`** _x_ **`)`** |
-| Hyperbolic of arccosine  | $\cosh^{-1}(x)$ | **`acosh(`** _x_ **`)`** |
-| Hyperbolic of arctangent | $\tanh^{-1}(x)$ | **`atanh(`** _x_ **`)`** |
+| Square root              | $\sqrt{x}$      | `sqrt(`_x_`)`  |
+| Natural exponential      | $\text{e}^x$    | `exp(`_x_`)`   |
+| Natural logarithm        | $\log(x)$       | `log(`_x_`)`   |
+| Absolute value           | $\|x\|$         | `abs(`_x_`)`   |
+| Sine                     | $\sin(x)$       | `sin(`_x_`)`   |
+| Cosine                   | $\cos(x)$       | `cos(`_x_`)`   |
+| Tangent                  | $\tan(x)$       | `tan(`_x_`)`   |
+| Arcsine                  | $\sin^{-1}(x)$  | `asin(`_x_`)`  |
+| Arccosine                | $\cos^{-1}(x)$  | `acos(`_x_`)`  |
+| Arctangent               | $\tan^{-1}(x)$  | `atan(`_x_`)`  |
+| Hyperbolic of sine       | $\sinh(x)$      | `sinh(`_x_`)`  |
+| Hyperbolic of cosine     | $\cosh(x)$      | `cosh(`_x_`)`  |
+| Hyperbolic of tangent    | $\tanh(x)$      | `tanh(`_x_`)`  |
+| Hyperbolic of arcsine    | $\sinh^{-1}(x)$ | `asinh(`_x_`)` |
+| Hyperbolic of arccosine  | $\cosh^{-1}(x)$ | `acosh(`_x_`)` |
+| Hyperbolic of arctangent | $\tanh^{-1}(x)$ | `atanh(`_x_`)` |

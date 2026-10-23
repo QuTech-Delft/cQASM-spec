@@ -2,7 +2,7 @@
 
 | Identifier | Operator     | Example statement       |
 |------------|--------------|-------------------------|
-| CR         | $CR(\theta)$ | **`CR(pi) q[0], q[1]`** |
+| CR         | $CR(\theta)$ | `CR(pi) q[0], q[1]` |
 
 ## Description
 

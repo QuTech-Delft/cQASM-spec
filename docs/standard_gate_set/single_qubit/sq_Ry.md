@@ -2,7 +2,7 @@
 
 | Identifier | Operator      | Example statement |
 |------------|---------------|-------------------|
-| Ry         | $R_y(\theta)$ | **`Ry(pi) q[0]`** |
+| Ry         | $R_y(\theta)$ | `Ry(pi) q[0]` |
 
 ## Description
 

@@ -2,7 +2,7 @@
 
 | Identifier | Operator      | Example statement |
 |------------|---------------|-------------------|
-| Rz         | $R_z(\theta)$ | **`Rz(pi) q[0]`** |
+| Rz         | $R_z(\theta)$ | `Rz(pi) q[0]` |
 
 ## Description
 

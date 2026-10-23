@@ -2,7 +2,7 @@
 
 | Identifier | Operator  | Example statement |
 |------------|-----------|-------------------|
-| Y90        | $Y^{1/2}$ | **`Y90 q[0]`**    |
+| Y90        | $Y^{1/2}$ | `Y90 q[0]`    |
 
 ## Description
 

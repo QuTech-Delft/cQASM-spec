@@ -1,16 +1,16 @@
 In general, qubits are initialized in the $|0\rangle$ state.
 Nonetheless, to explicitly initialize (particular) qubits in the $|0\rangle$ state
-one can use the **`init`** instruction.
-The general form of an **`init`** instruction is as follows:
+one can use the `init` instruction.
+The general form of an `init` instruction is as follows:
 
 !!! info ""
 
-    &emsp;**`init`** _qubit-argument_
+    &emsp;`init` _qubit-argument_
 
-??? info "Grammar for **`init`** instruction"
+??? info "Grammar for `init` instruction"
     
     _init-instruction_:  
-    &emsp; __`init`__ _qubit-argument_
+    &emsp; `init` _qubit-argument_
 
     _qubit-argument_:  
     &emsp; _qubit-variable_  
@@ -40,10 +40,10 @@ The general form of an **`init`** instruction is as follows:
 
 !!! note
 
-    The **`init`** instruction accepts
+    The `init` instruction accepts
     [SGMQ notation](../single-gate-multiple-qubit-notation.md), similar to gates.
 
-The following code snippet shows how the **`init`** instruction might be used in context.
+The following code snippet shows how the `init` instruction might be used in context.
 
 ```linenums="1" hl_lines="6"
 version 3.0
@@ -64,7 +64,7 @@ Note that the initialization of qubits needs to be done before any instruction
 (excluding a control instruction)
 is applied to them (see warning below).
 If one wishes to _reset_ the state of the qubit to $|0\rangle$ mid-circuit,
-one should use the [**`reset`**](../non_unitary_instructions/reset_instruction.md) instruction.
+one should use the [`reset`](../non_unitary_instructions/reset_instruction.md) instruction.
 
 
 !!! warning

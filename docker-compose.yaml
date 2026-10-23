@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: serve -f mkdocs-base.yml -a 0.0.0.0:8000
+    command: serve -f mkdocs.yml -a 0.0.0.0:8000
     volumes:
       - .:/docs
     ports:

@@ -2,7 +2,7 @@
 
 | Identifier | Operator    | Example statement |
 |------------|-------------|-------------------|
-| Sdag       | $S^\dagger$ | **`Sdag q[0]`**   |
+| Sdag       | $S^\dagger$ | `Sdag q[0]`   |
 
 ## Description
 

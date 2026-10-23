@@ -2,12 +2,12 @@
 
 | Identifier  | Operator              | Example statement            |
 |-------------|-----------------------|------------------------------|
-| InvSqrtSWAP | $\sqrt{SWAP}^\dagger$ | **`InvSqrtSWAP q[0], q[1]`** |
+| InvSqrtSWAP | $\sqrt{SWAP}^\dagger$ | `InvSqrtSWAP q[0], q[1]` |
 
 ## Description
 
-The inverse-square-root-SWAP gate is a two-qubit gate. 
-It reverses the action of the square-root-SWAP gate. 
+The inverse-square-root-[SWAP](mq_SWAP.md) gate is a two-qubit gate. 
+It reverses the action of the [square-root-SWAP](mq_SqrtSWAP.md) gate. 
 
 ## Representation
 

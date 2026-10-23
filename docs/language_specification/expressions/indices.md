@@ -6,18 +6,18 @@ The last position is also part of the range, _i.e._, it does not point to the fi
 !!! info "Grammar for indices"
 
     _index_:  
-    &emsp; _identifier_ __`[`__ _index-list_ __`]`__
+    &emsp; _identifier_ `[`_index-list_`]`
     
     _index-list_:  
     &emsp; _index-entry_  
-    &emsp; _index-list_ __`,`__ _index-entry_
+    &emsp; _index-list_`,`_index-entry_
 
     _index-entry_:  
     &emsp; _integer-literal_  
     &emsp; _index-range_
 
     _index-range_:  
-    &emsp; _index-entry_ __`:`__ _index-entry_
+    &emsp; _index-entry_`:`_index-entry_
 
 !!! example "Indices, index entries, and index ranges"
 

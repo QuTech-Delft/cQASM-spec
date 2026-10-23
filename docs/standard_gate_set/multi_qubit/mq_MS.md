@@ -2,7 +2,7 @@
 
 | Identifier | Operator | Example statement   |
 |------------|----------|---------------------|
-| MS         | $MS$     | **`MS q[0], q[1]`** |
+| MS         | $MS$     | `MS q[0], q[1]` |
 
 ## Description
 

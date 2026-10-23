@@ -30,11 +30,11 @@ Note that a composition of gate modifiers acting on a named gate is itself a gat
     &emsp; _identifier_ _parameters_~opt~  
 
     _parameters_:  
-    &emsp; __`(`__ _parameter-list_ __`)`__
+    &emsp; `(`_parameter-list_`)`
 
     _parameter-list_:  
     &emsp; _parameter_  
-    &emsp; _parameter-list_ __`,`__ _parameter_
+    &emsp; _parameter-list_ `,` _parameter_
 
     _parameter_:  
     &emsp; _integer-literal_  
@@ -45,7 +45,7 @@ Note that a composition of gate modifiers acting on a named gate is itself a gat
 
     _qubit-argument-list_:  
     &emsp; _qubit-argument_  
-    &emsp; _qubit-argument-list_ __`,`__ _qubit-argument_
+    &emsp; _qubit-argument-list_ `,` _qubit-argument_
 
     _qubit-argument_:  
     &emsp; _qubit-variable_  
@@ -60,8 +60,8 @@ Note that a composition of gate modifiers acting on a named gate is itself a gat
 ## Named gates
 
 Named gates comprise particular unitary operations that have been given their own unique label,
-_e.g._, the [Hadamard gate](../../../standard_gate_set/single_qubit/sq_H.md) **`H`**
-or the [controlled-NOT gate](../../../standard_gate_set/multi_qubit/mq_CNOT.md) **`CNOT`**.
+_e.g._, the [Hadamard gate](../../../standard_gate_set/single_qubit/sq_H.md) `H`
+or the [controlled-NOT gate](../../../standard_gate_set/multi_qubit/mq_CNOT.md) `CNOT`.
 In general, we simply refer to them as gates.
 All recognized (named) gates are listed in the [standard gate set](../../../standard_gate_set/index.md).
 Moreover, we use the term _named gate_ to distinguish them from unitary operations consisting of
@@ -71,7 +71,7 @@ or modified (multiple times) through gate modifiers.
 
 The general form of a named gate is given by the gate name
 followed by the (comma-separated list of) qubit operand(s), _e.g._,
-[**`X q[0]`**](../../../standard_gate_set/single_qubit/sq_X.md):
+[`X q[0]`](../../../standard_gate_set/single_qubit/sq_X.md):
 
 !!! info ""
     
@@ -81,11 +81,11 @@ A named gate can be parameterized.
 The general form of a parameterized gate is given by the gate name
 followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses,
 which in turn is followed by the (comma-separated list of) qubit operand(s), _e.g._,
-[**`CRk(2) q[0], q[1]`**](../../../standard_gate_set/multi_qubit/mq_CRk.md):
+[`CRk(2) q[0], q[1]`](../../../standard_gate_set/multi_qubit/mq_CRk.md):
 
 !!! info ""
     
-    &emsp;_gate_**`(`**_parameters_**`)`** _qubit-arguments_
+    &emsp;_gate_`(`_parameters_`)` _qubit-arguments_
 
 Note that the parameters, either single or a list of multiple parameters,
 appear within parentheses directly following the gate name.
@@ -117,23 +117,23 @@ A gate modifier is an operator _Q_ that takes a gate as input and returns a modi
 _i.e._, it transforms an arbitrary unitary $U$ into $U'$, based on the particular modifier that is applied.
 We consider the following gate modifiers:
 
-- The _inverse_ modifier **`inv`**, which modifies the gate $U$ into $U^\dagger$, _e.g._, **`inv.X q[0]`**.
-- The _power_ modifier **`pow`**, which raises the gate $U$ to the specified power $a$, _i.e._, $U^a$,
-  where $a$ is a float, _e.g._, **`pow(pi/2).X q[0]`**.
-- The _control_ modifier **`ctrl`**, which changes the gate $U$ into the controlled-$U$ gate, _e.g._,
-  **`ctrl.X q[0], q[1]`**, where the control qubit is prepended to the list of qubit operands. 
+- The _inverse_ modifier `inv`, which modifies the gate $U$ into $U^\dagger$, _e.g._, `inv.X q[0]`.
+- The _power_ modifier `pow`, which raises the gate $U$ to the specified power $a$, _i.e._, $U^a$,
+  where $a$ is a float, _e.g._, `pow(pi/2).X q[0]`.
+- The _control_ modifier `ctrl`, which changes the gate $U$ into the controlled-$U$ gate, _e.g._,
+  `ctrl.X q[0], q[1]`, where the control qubit is prepended to the list of qubit operands. 
 
 Since gate modifiers return gates, they can be applied in a nested manner,
-_e.g._, **`inv.pow(2).X`**, where a gate modifier **`inv`** is applied to the modified gate **`pow(2).X`**,
-which in turn resulted from applying the gate modifier **`pow(2)`** on the (named) gate **`X`**.
+_e.g._, `inv.pow(2).X`, where a gate modifier `inv` is applied to the modified gate `pow(2).X`,
+which in turn resulted from applying the gate modifier `pow(2)` on the (named) gate `X`.
 
 The current version of the language only allows gate modifiers to act on single-qubit gates.
 
 !!! info ""
 
-    &emsp;**`inv.`**_gate_ _qubit-argument_  
-    &emsp;**`pow(`**_exponent_**`).`**_gate_ _qubit-argument_  
-    &emsp;**`ctrl.`**_gate_ _qubit-arguments_
+    &emsp;`inv.`_gate_ _qubit-argument_  
+    &emsp;`pow(`_exponent_`).`_gate_ _qubit-argument_  
+    &emsp;`ctrl.`_gate_ _qubit-arguments_
 
 A few examples of gates are shown below.
 
@@ -153,21 +153,21 @@ A few examples of gates are shown below.
     ctrl.pow(1/2).inv.X q[0], q[1]
     ```
 
-Notice that, **`inv`** and **`pow`** map an _n_-qubit gate to an _n_-qubit gate,
-and **`ctrl`** maps an _n_-qubit gate to a (_n_+1)-qubit gate.
+Notice that, `inv` and `pow` map an _n_-qubit gate to an _n_-qubit gate,
+and `ctrl` maps an _n_-qubit gate to a (_n_+1)-qubit gate.
 
 !!! warning
 
     The current version of the language does not support the use of gate modifiers on multi-qubit gates.
     For example, the following instructions are _not_ supported:
 
-    - **`inv.CRk(2) q[0], q[1]`**, where the _inverse_ modifier is applied to a two-qubit
+    - `inv.CRk(2) q[0], q[1]`, where the _inverse_ modifier is applied to a two-qubit
       [named gate](unitary_instructions.md#named-gates).
-    - **`inv.ctrl.X q[0], q[1]`**, where the _inverse_ modifier is applied to a two-qubit
+    - `inv.ctrl.X q[0], q[1]`, where the _inverse_ modifier is applied to a two-qubit
       [modified gate](unitary_instructions.md#gate-modifiers).
 
     Considering the latter example, note that the following use of gate modifiers _is_ permitted:
 
-    - **`ctrl.inv.X q[0], q[1]`**, since the _inverse_ modifier is first applied to the single-qubit named gate **`X`**,
+    - `ctrl.inv.X q[0], q[1]`, since the _inverse_ modifier is first applied to the single-qubit named gate `X`,
     resulting in a single-qubit modified gate, which only then is modified through the _control_ modifier
     into a two-qubit modified gate.

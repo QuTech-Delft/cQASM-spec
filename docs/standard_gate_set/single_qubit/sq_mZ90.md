@@ -2,7 +2,7 @@
 
 | Identifier | Operator   | Example statement |
 |------------|------------|-------------------|
-| mZ90       | $Z^{-1/2}$ | **`mZ90 q[0]`**   |
+| mZ90       | $Z^{-1/2}$ | `mZ90 q[0]`   |
 
 ## Description
 

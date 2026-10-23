@@ -2,7 +2,7 @@
 
 | Identifier | Operator | Example statement      |
 |------------|----------|------------------------|
-| DCNOT      | $DCNOT$  | **`DCNOT q[0], q[1]`** |
+| DCNOT      | $DCNOT$  | `DCNOT q[0], q[1]` |
 
 ## Description
 

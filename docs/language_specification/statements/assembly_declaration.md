@@ -1,19 +1,19 @@
 Assembly declarations can be used to add backend-specific (assembly) code to a cQASM circuit.
-They are realized through an **`asm`** _declaration_ statement.
-An **`asm`** declaration statement consists of the keyword **`asm`** with the
+They are realized through an `asm` _declaration_ statement.
+An `asm` declaration statement consists of the keyword `asm` with the
 [identifier](../tokens/identifiers.md) of the backend in parentheses,
 followed by the backend code.
 The latter is to be provided as a [_raw text string_](../tokens/raw_text_string.md),
-which consists of a _raw text_ delimited by opening and closing triple quotes (**`'''`**):
+which consists of a _raw text_ delimited by opening and closing triple quotes (`'''`):
 
 !!! info "" 
     
-    &emsp; **`asm(`**_backend-identifier_**`)`** _backend-code_
+    &emsp; `asm(`_backend-identifier_`)` _backend-code_
 
 ??? info "Grammar for assembly declaration"
     
     _assembly-declaration_:  
-    &emsp; **`asm(`**_backend-identifier_**`)`** _backend-code_
+    &emsp; `asm(`_backend-identifier_`)` _backend-code_
 
     _backend-identifier_:  
     &emsp; _identifier_
@@ -24,7 +24,7 @@ which consists of a _raw text_ delimited by opening and closing triple quotes (*
 As part of a cQASM circuit, the contents of the raw text string will be passed verbatim to the backend
 and ignored by all other consumers of the circuit.
 
-The location of the **`asm`** declaration in the cQASM circuit is preserved,
+The location of the `asm` declaration in the cQASM circuit is preserved,
 _i.e._, no cQASM statements can be moved across it by any subsequent processing of the cQASM circuit.
 This allows for the ability to embed backend code into cQASM 
 with the guarantee that the relative order between cQASM and backend code remains the same.

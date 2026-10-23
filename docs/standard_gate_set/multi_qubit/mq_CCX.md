@@ -2,12 +2,12 @@
 
 | Identifier | Operator | Example statement |
 |------------|----------|-------------------|
-| CCX        | $CCX$    | **`CCX q[0], q[1], q[2]`** |
+| CCX        | $CCX$    | `CCX q[0], q[1], q[2]` |
 
 ## Description
 
 The Toffoli gate, also known as the controlled-[CNOT](mq_CNOT.md) or CCX, gate is a three-qubit gate.
-It performs an [X gate](../single_qubit/sq_X.md) on the third qubit,
+It performs a [Pauli-X gate](../single_qubit/sq_X.md) on the third qubit,
 conditional on both the first and second qubits being in state $|1\rangle$.
 The first two qubits are referred to as the control qubits and the third qubit as the target qubit.
 
@@ -15,7 +15,8 @@ In the standard computational basis for three qubits
 $\{|000\rangle, |001\rangle, |010\rangle, |011\rangle, |100\rangle, |101\rangle, |110\rangle, |111\rangle\}$, the CCX gate:
 
 - leaves both control qubits unchanged;
-- performs an X gate on the target qubit when both control qubits are in state $|1\rangle$;
+- performs a [Pauli-X gate](../single_qubit/sq_X.md) on the target qubit when both control qubits are in state
+$|1\rangle$;
 - leaves the target qubit unchanged otherwise.
 
 !!! note

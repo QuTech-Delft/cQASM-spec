@@ -2,7 +2,7 @@
 
 | Identifier | Operator      | Example statement       |
 |------------|---------------|-------------------------|
-| CRk        | $CRk(\theta)$ | **`CRk(2) q[0], q[1]`** |
+| CRk        | $CRk(\theta)$ | `CRk(2) q[0], q[1]` |
 
 ## Description
 

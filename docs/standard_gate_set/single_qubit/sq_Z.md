@@ -2,7 +2,7 @@
 
 | Identifier | Operator | Example statement |
 |------------|----------|-------------------|
-| Z          | $Z$      | **`Z q[0]`**      |
+| Z          | $Z$      | `Z q[0]`      |
 
 ## Description
 

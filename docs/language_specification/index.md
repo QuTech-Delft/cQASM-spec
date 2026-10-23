@@ -34,7 +34,9 @@ The unitary operations, commonly know as gates, can be either
 
     For simplicity, throughout this documentation, we use the term *gate* to refer to a *named gate*.
     However, it is important to note that the result of applying a gate modifier is also a gate.
-    When we need to refer explicitely to a named gate such as `H` or `Rz`,
+    When we need to refer explicitely to a named gate such as
+    [`H`](../standard_gate_set/single_qubit/sq_H.md) or
+    [`Rz`](../standard_gate_set/single_qubit/sq_Rz.md),
     and not to a gate resulting from applying a gate modifier, we use the term *named gate*.
 
 - [Version statement](statements/version_statement.md) (_mandatory_)
@@ -124,10 +126,11 @@ The following lines of code are all semantically distinct
     ```
 
 In the first line of the example above,
-the Hadamard gate **`H`** is applied to the qubit at index **`0`** of the qubit register **`q`**.
-The next line starts with an undefined gate **`h`** 
-that operates on the qubit at index **`0`** of the qubit register **`Q`**,
-which in turn does _not_ refer to the qubit register **`q`**.
+the [Hadamard gate](../standard_gate_set/single_qubit/sq_H.md) `H` is applied to the qubit at index `0` of the
+qubit register `q`.
+The next line starts with an undefined gate `h` 
+that operates on the qubit at index `0` of the qubit register `Q`,
+which in turn does _not_ refer to the qubit register `q`.
 
 Take care that case sensitivity not only applies to [identifiers](tokens/identifiers.md),
 but also to all other lexical components of the language,

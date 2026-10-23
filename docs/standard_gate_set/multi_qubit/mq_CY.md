@@ -2,12 +2,12 @@
 
 | Identifier | Operator | Example statement   |
 |------------|----------|---------------------|
-| CY         | $CY$     | **`CY q[0], q[1]`** |
+| CY         | $CY$     | `CY q[0], q[1]` |
 
 ## Description
 
 The CY gate is a two-qubit gate. It is the controlled-Y gate.
-It performs a Y gate on the second qubit, conditional on the state of the first qubit.
+It performs a [Pauli-Y gate](../single_qubit/sq_Y.md) on the second qubit, conditional on the state of the first qubit.
 
 ### Properties
 
