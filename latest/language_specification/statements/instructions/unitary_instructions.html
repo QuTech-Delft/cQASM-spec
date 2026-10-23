@@ -386,8 +386,6 @@
       
         
       
-        
-      
     
     
     
@@ -438,34 +436,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
             
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../introduction/history.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    History
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -3259,10 +3229,10 @@ that change the state of a qubit register in a reversible and deterministic fash
 <p><em>named-gate</em>:<br>
   <em>identifier</em> <em>parameters</em><sub>opt</sub>  </p>
 <p><em>parameters</em>:<br>
-  <strong><code>(</code></strong> <em>parameter-list</em> <strong><code>)</code></strong></p>
+  <code>(</code><em>parameter-list</em><code>)</code></p>
 <p><em>parameter-list</em>:<br>
   <em>parameter</em><br>
-  <em>parameter-list</em> <strong><code>,</code></strong> <em>parameter</em></p>
+  <em>parameter-list</em> <code>,</code> <em>parameter</em></p>
 <p><em>parameter</em>:<br>
   <em>integer-literal</em><br>
   <em>floating-literal</em></p>
@@ -3270,7 +3240,7 @@ that change the state of a qubit register in a reversible and deterministic fash
   <em>qubit-argument-list</em></p>
 <p><em>qubit-argument-list</em>:<br>
   <em>qubit-argument</em><br>
-  <em>qubit-argument-list</em> <strong><code>,</code></strong> <em>qubit-argument</em></p>
+  <em>qubit-argument-list</em> <code>,</code> <em>qubit-argument</em></p>
 <p><em>qubit-argument</em>:<br>
   <em>qubit-variable</em><br>
   <em>qubit-index</em></p>
@@ -3281,8 +3251,8 @@ that change the state of a qubit register in a reversible and deterministic fash
 </details>
 <h2 id="named-gates">Named gates</h2>
 <p>Named gates comprise particular unitary operations that have been given their own unique label,
-<em>e.g.</em>, the <a href="../../../standard_gate_set/single_qubit/sq_H.html">Hadamard gate</a> <strong><code>H</code></strong>
-or the <a href="../../../standard_gate_set/multi_qubit/mq_CNOT.html">controlled-NOT gate</a> <strong><code>CNOT</code></strong>.
+<em>e.g.</em>, the <a href="../../../standard_gate_set/single_qubit/sq_H.html">Hadamard gate</a> <code>H</code>
+or the <a href="../../../standard_gate_set/multi_qubit/mq_CNOT.html">controlled-NOT gate</a> <code>CNOT</code>.
 In general, we simply refer to them as gates.
 All recognized (named) gates are listed in the <a href="../../../standard_gate_set/index.html">standard gate set</a>.
 Moreover, we use the term <em>named gate</em> to distinguish them from unitary operations consisting of
@@ -3291,7 +3261,7 @@ Named gates are, thus, unmodified gates and can simply be used on their own
 or modified (multiple times) through gate modifiers. </p>
 <p>The general form of a named gate is given by the gate name
 followed by the (comma-separated list of) qubit operand(s), <em>e.g.</em>,
-<a href="../../../standard_gate_set/single_qubit/sq_X.html"><strong><code>X q[0]</code></strong></a>:</p>
+<a href="../../../standard_gate_set/single_qubit/sq_X.html"><code>X q[0]</code></a>:</p>
 <div class="admonition info">
 <p> <em>gate</em> <em>qubit-arguments</em></p>
 </div>
@@ -3299,9 +3269,9 @@ followed by the (comma-separated list of) qubit operand(s), <em>e.g.</em>,
 The general form of a parameterized gate is given by the gate name
 followed by its (comma-separated list of) parameter(s) that is enclosed in parentheses,
 which in turn is followed by the (comma-separated list of) qubit operand(s), <em>e.g.</em>,
-<a href="../../../standard_gate_set/multi_qubit/mq_CRk.html"><strong><code>CRk(2) q[0], q[1]</code></strong></a>:</p>
+<a href="../../../standard_gate_set/multi_qubit/mq_CRk.html"><code>CRk(2) q[0], q[1]</code></a>:</p>
 <div class="admonition info">
-<p> <em>gate</em><strong><code>(</code></strong><em>parameters</em><strong><code>)</code></strong> <em>qubit-arguments</em></p>
+<p> <em>gate</em><code>(</code><em>parameters</em><code>)</code> <em>qubit-arguments</em></p>
 </div>
 <p>Note that the parameters, either single or a list of multiple parameters,
 appear within parentheses directly following the gate name.
@@ -3328,20 +3298,20 @@ and the <em>qubit arguments</em> that a (parameterized) gate acts on.</p>
 <em>i.e.</em>, it transforms an arbitrary unitary <span class="arithmatex">\(U\)</span> into <span class="arithmatex">\(U'\)</span>, based on the particular modifier that is applied.
 We consider the following gate modifiers:</p>
 <ul>
-<li>The <em>inverse</em> modifier <strong><code>inv</code></strong>, which modifies the gate <span class="arithmatex">\(U\)</span> into <span class="arithmatex">\(U^\dagger\)</span>, <em>e.g.</em>, <strong><code>inv.X q[0]</code></strong>.</li>
-<li>The <em>power</em> modifier <strong><code>pow</code></strong>, which raises the gate <span class="arithmatex">\(U\)</span> to the specified power <span class="arithmatex">\(a\)</span>, <em>i.e.</em>, <span class="arithmatex">\(U^a\)</span>,
-  where <span class="arithmatex">\(a\)</span> is a float, <em>e.g.</em>, <strong><code>pow(pi/2).X q[0]</code></strong>.</li>
-<li>The <em>control</em> modifier <strong><code>ctrl</code></strong>, which changes the gate <span class="arithmatex">\(U\)</span> into the controlled-<span class="arithmatex">\(U\)</span> gate, <em>e.g.</em>,
-  <strong><code>ctrl.X q[0], q[1]</code></strong>, where the control qubit is prepended to the list of qubit operands. </li>
+<li>The <em>inverse</em> modifier <code>inv</code>, which modifies the gate <span class="arithmatex">\(U\)</span> into <span class="arithmatex">\(U^\dagger\)</span>, <em>e.g.</em>, <code>inv.X q[0]</code>.</li>
+<li>The <em>power</em> modifier <code>pow</code>, which raises the gate <span class="arithmatex">\(U\)</span> to the specified power <span class="arithmatex">\(a\)</span>, <em>i.e.</em>, <span class="arithmatex">\(U^a\)</span>,
+  where <span class="arithmatex">\(a\)</span> is a float, <em>e.g.</em>, <code>pow(pi/2).X q[0]</code>.</li>
+<li>The <em>control</em> modifier <code>ctrl</code>, which changes the gate <span class="arithmatex">\(U\)</span> into the controlled-<span class="arithmatex">\(U\)</span> gate, <em>e.g.</em>,
+  <code>ctrl.X q[0], q[1]</code>, where the control qubit is prepended to the list of qubit operands. </li>
 </ul>
 <p>Since gate modifiers return gates, they can be applied in a nested manner,
-<em>e.g.</em>, <strong><code>inv.pow(2).X</code></strong>, where a gate modifier <strong><code>inv</code></strong> is applied to the modified gate <strong><code>pow(2).X</code></strong>,
-which in turn resulted from applying the gate modifier <strong><code>pow(2)</code></strong> on the (named) gate <strong><code>X</code></strong>.</p>
+<em>e.g.</em>, <code>inv.pow(2).X</code>, where a gate modifier <code>inv</code> is applied to the modified gate <code>pow(2).X</code>,
+which in turn resulted from applying the gate modifier <code>pow(2)</code> on the (named) gate <code>X</code>.</p>
 <p>The current version of the language only allows gate modifiers to act on single-qubit gates.</p>
 <div class="admonition info">
-<p> <strong><code>inv.</code></strong><em>gate</em> <em>qubit-argument</em><br>
- <strong><code>pow(</code></strong><em>exponent</em><strong><code>).</code></strong><em>gate</em> <em>qubit-argument</em><br>
- <strong><code>ctrl.</code></strong><em>gate</em> <em>qubit-arguments</em></p>
+<p> <code>inv.</code><em>gate</em> <em>qubit-argument</em><br>
+ <code>pow(</code><em>exponent</em><code>).</code><em>gate</em> <em>qubit-argument</em><br>
+ <code>ctrl.</code><em>gate</em> <em>qubit-arguments</em></p>
 </div>
 <p>A few examples of gates are shown below.</p>
 <div class="admonition example">
@@ -3358,21 +3328,21 @@ which in turn resulted from applying the gate modifier <strong><code>pow(2)</cod
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>ctrl.pow(1/2).inv.X q[0], q[1]
 </code></pre></div>
 </div>
-<p>Notice that, <strong><code>inv</code></strong> and <strong><code>pow</code></strong> map an <em>n</em>-qubit gate to an <em>n</em>-qubit gate,
-and <strong><code>ctrl</code></strong> maps an <em>n</em>-qubit gate to a (<em>n</em>+1)-qubit gate.</p>
+<p>Notice that, <code>inv</code> and <code>pow</code> map an <em>n</em>-qubit gate to an <em>n</em>-qubit gate,
+and <code>ctrl</code> maps an <em>n</em>-qubit gate to a (<em>n</em>+1)-qubit gate.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The current version of the language does not support the use of gate modifiers on multi-qubit gates.
 For example, the following instructions are <em>not</em> supported:</p>
 <ul>
-<li><strong><code>inv.CRk(2) q[0], q[1]</code></strong>, where the <em>inverse</em> modifier is applied to a two-qubit
+<li><code>inv.CRk(2) q[0], q[1]</code>, where the <em>inverse</em> modifier is applied to a two-qubit
   <a href="unitary_instructions.html#named-gates">named gate</a>.</li>
-<li><strong><code>inv.ctrl.X q[0], q[1]</code></strong>, where the <em>inverse</em> modifier is applied to a two-qubit
+<li><code>inv.ctrl.X q[0], q[1]</code>, where the <em>inverse</em> modifier is applied to a two-qubit
   <a href="unitary_instructions.html#gate-modifiers">modified gate</a>.</li>
 </ul>
 <p>Considering the latter example, note that the following use of gate modifiers <em>is</em> permitted:</p>
 <ul>
-<li><strong><code>ctrl.inv.X q[0], q[1]</code></strong>, since the <em>inverse</em> modifier is first applied to the single-qubit named gate <strong><code>X</code></strong>,
+<li><code>ctrl.inv.X q[0], q[1]</code>, since the <em>inverse</em> modifier is first applied to the single-qubit named gate <code>X</code>,
 resulting in a single-qubit modified gate, which only then is modified through the <em>control</em> modifier
 into a two-qubit modified gate.</li>
 </ul>

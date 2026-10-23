@@ -381,8 +381,6 @@
       
         
       
-        
-      
     
     
     
@@ -433,34 +431,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
             
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../../introduction/history.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    History
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -3146,15 +3116,15 @@
 
 <p>In general, qubits are initialized in the <span class="arithmatex">\(|0\rangle\)</span> state.
 Nonetheless, to explicitly initialize (particular) qubits in the <span class="arithmatex">\(|0\rangle\)</span> state
-one can use the <strong><code>init</code></strong> instruction.
-The general form of an <strong><code>init</code></strong> instruction is as follows:</p>
+one can use the <code>init</code> instruction.
+The general form of an <code>init</code> instruction is as follows:</p>
 <div class="admonition info">
-<p> <strong><code>init</code></strong> <em>qubit-argument</em></p>
+<p> <code>init</code> <em>qubit-argument</em></p>
 </div>
 <details class="info">
-<summary>Grammar for <strong><code>init</code></strong> instruction</summary>
+<summary>Grammar for <code>init</code> instruction</summary>
 <p><em>init-instruction</em>:<br>
-  <strong><code>init</code></strong> <em>qubit-argument</em></p>
+  <code>init</code> <em>qubit-argument</em></p>
 <p><em>qubit-argument</em>:<br>
   <em>qubit-variable</em><br>
   <em>qubit-index</em></p>
@@ -3184,10 +3154,10 @@ The general form of an <strong><code>init</code></strong> instruction is as foll
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <strong><code>init</code></strong> instruction accepts
+<p>The <code>init</code> instruction accepts
 <a href="../single-gate-multiple-qubit-notation.html">SGMQ notation</a>, similar to gates.</p>
 </div>
-<p>The following code snippet shows how the <strong><code>init</code></strong> instruction might be used in context.</p>
+<p>The following code snippet shows how the <code>init</code> instruction might be used in context.</p>
 <div class="highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -3215,7 +3185,7 @@ Note that the initialization of qubits needs to be done before any instruction
 (excluding a control instruction)
 is applied to them (see warning below).
 If one wishes to <em>reset</em> the state of the qubit to <span class="arithmatex">\(|0\rangle\)</span> mid-circuit,
-one should use the <a href="reset_instruction.html"><strong><code>reset</code></strong></a> instruction.</p>
+one should use the <a href="reset_instruction.html"><code>reset</code></a> instruction.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Initialization of a qubit can only be done immediately after declaration of the qubit, <em>i.e.</em>, 

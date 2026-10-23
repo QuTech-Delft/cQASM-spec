@@ -386,8 +386,6 @@
       
         
       
-        
-      
     
     
     
@@ -438,34 +436,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
             
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../introduction/history.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    History
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -3361,19 +3331,19 @@
 <tr>
 <td>CNOT</td>
 <td><span class="arithmatex">\(CNOT\)</span></td>
-<td><strong><code>CNOT q[0], q[1]</code></strong></td>
+<td><code>CNOT q[0], q[1]</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="description">Description</h2>
 <p>The controlled-NOT, or CNOT, gate is a two-qubit gate.
-It performs an X gate on the second qubit, conditional on the state of the first qubit.
+It performs a <a href="../single_qubit/sq_X.html">Pauli-X gate</a> on the second qubit, conditional on the state of the first qubit.
 The first qubit is usually referred to as the control qubit and the second qubit as the target qubit.</p>
 <p>In the standard computational basis for two qubits 
 <span class="arithmatex">\(\{|00\rangle ,|01\rangle \,|10\rangle ,|11\rangle \}\)</span> , the CNOT gate:</p>
 <ul>
 <li>leaves the control qubit unchanged,</li>
-<li>performs an X gate on the target qubit, when the control qubit is in state <span class="arithmatex">\(|1\rangle\)</span>,</li>
+<li>performs a <a href="../single_qubit/sq_X.html">Pauli-X gate</a> on the target qubit, when the control qubit is in state <span class="arithmatex">\(|1\rangle\)</span>,</li>
 <li>leaves the target qubit unchanged, when the control qubit is in state <span class="arithmatex">\(|0\rangle\)</span>.</li>
 </ul>
 <div class="admonition note">

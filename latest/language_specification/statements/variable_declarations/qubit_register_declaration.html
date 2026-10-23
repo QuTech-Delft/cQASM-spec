@@ -381,8 +381,6 @@
       
         
       
-        
-      
     
     
     
@@ -433,34 +431,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
             
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../introduction/history.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    History
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -3145,27 +3115,27 @@
 <p>A qubit (register) must be declared before it can be used.
 The general form is given as follows:</p>
 <div class="admonition info">
-<p> <strong><code>qubit[</code></strong><em>size</em><strong><code>]</code></strong><em>identifier</em></p>
+<p> <code>qubit[</code><em>size</em><code>]</code><em>identifier</em></p>
 </div>
 <details class="info">
 <summary>Grammar for bit (register) declaration</summary>
 <p><em>qubit-declaration</em>:<br>
-  <strong><code>qubit</code></strong> <em>array-size-declaration</em><sub>opt</sub> <em>identifier</em></p>
+  <code>qubit</code> <em>array-size-declaration</em><sub>opt</sub> <em>identifier</em></p>
 <p><em>array-size-declaration</em>:<br>
-  <strong><code>[</code></strong> <em>integer-literal</em> <strong><code>]</code></strong>  </p>
+  <code>[</code><em>integer-literal</em><code>]</code>  </p>
 </details>
 <p>Its form is similar to the declaration of an arbitrary variable,
 whereby the type of the variable is specified first, <em>i.e.</em> 
-<strong><code>qubit</code></strong> denotes that the declared variable is of type <a href="../../types.html">Qubit</a>.
-and <strong><code>qubit[</code></strong><em>size</em><strong><code>]</code></strong>
+<code>qubit</code> denotes that the declared variable is of type <a href="../../types.html">Qubit</a>.
+and <code>qubit[</code><em>size</em><code>]</code>
 denotes that the declared variable is of type <a href="../../types.html">QubitArray</a>.
-The size of a qubit register is declared by an integer value between square brackets <strong><code>[</code></strong><em>size</em><strong><code>]</code></strong>.
+The size of a qubit register is declared by an integer value between square brackets <code>[</code><em>size</em><code>]</code>.
 The name of the qubit (register) is defined through an <a href="../../tokens/identifiers.html">identifier</a>. </p>
 <p>The declaration of a qubit (register) is <em>optional</em>. </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The qubit (register) declaration replaces the qubit statement, <em>i.e.</em>, </p>
-<p> <strong><code>qubits</code></strong> <em>size</em></p>
+<p> <code>qubits</code> <em>size</em></p>
 <p>of previous versions of the cQASM language.</p>
 </div>
 <p>Find below examples, respectively, of a single qubit declaration and qubit register declaration.</p>
@@ -3216,8 +3186,8 @@ The name of the qubit (register) is defined through an <a href="../../tokens/ide
 </div>
 <p>The individual qubits of a qubit register can be referred to by their register index,
 <em>e.g.</em>, in the example of the <em>Qubit register declaration</em>,
-the statement <strong><code>H q[0]</code></strong> indicates the application of a Hadamard gate <strong><code>H</code></strong> on the qubit located at index <strong><code>0</code></strong>
-of the qubit register <strong><code>q</code></strong>. 
+the statement <code>H q[0]</code> indicates the application of a Hadamard gate <code>H</code> on the qubit located at index <code>0</code>
+of the qubit register <code>q</code>. 
 Note that in the case of a single qubit, 
 the qubit is referred to through its identifier, not through a register index.</p>
 <p>Qubits, either declared as a single qubit or as elements of a register,

@@ -386,8 +386,6 @@
       
         
       
-        
-      
     
     
     
@@ -438,34 +436,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
             
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../introduction/history.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    History
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -3361,7 +3331,7 @@
 <tr>
 <td>Rn</td>
 <td><span class="arithmatex">\(R_\hat{\mathbf{n}}(\hat{\mathbf{n}}, \theta, \phi)\)</span></td>
-<td><strong><code>Rn(1,0,0,pi,pi/2) q[0]</code></strong></td>
+<td><code>Rn(1,0,0,pi,pi/2) q[0]</code></td>
 </tr>
 </tbody>
 </table>
@@ -3370,9 +3340,9 @@
 <span class="arithmatex">\(\hat{\mathbf{n}}=[n_x, n_y, n_z]^T\)</span> and a global phase of <span class="arithmatex">\(\phi\)</span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <strong><code>Rn</code></strong> instruction expects the separate components of the axis <span class="arithmatex">\(\hat{\mathbf{n}}\)</span>,
+<p>The <code>Rn</code> instruction expects the separate components of the axis <span class="arithmatex">\(\hat{\mathbf{n}}\)</span>,
 <em>i.e.</em> <span class="arithmatex">\(n_x\)</span>, <span class="arithmatex">\(n_y\)</span>, and <span class="arithmatex">\(n_z\)</span>, as input arguments: </p>
-<p><strong><code>Rn(</code></strong><span class="arithmatex">\(n_x\)</span><strong><code>,</code></strong> <span class="arithmatex">\(n_y\)</span><strong><code>,</code></strong> <span class="arithmatex">\(n_z\)</span><strong><code>,</code></strong> <span class="arithmatex">\(\theta\)</span><strong><code>,</code></strong> <span class="arithmatex">\(\phi\)</span><strong><code>)</code></strong> <em>qubit-argument</em></p>
+<p><code>Rn(</code><span class="arithmatex">\(n_x\)</span><code>,</code> <span class="arithmatex">\(n_y\)</span><code>,</code> <span class="arithmatex">\(n_z\)</span><code>,</code> <span class="arithmatex">\(\theta\)</span><code>,</code> <span class="arithmatex">\(\phi\)</span><code>)</code> <em>qubit-argument</em></p>
 <p>as shown in the <em><strong>Example statement</strong></em> in the table above.</p>
 </div>
 <h3 id="properties">Properties</h3>
@@ -3385,7 +3355,7 @@ This means that each element in <span class="arithmatex">\(SO(3)\)</span> corres
 As an example, when a spin-qubit is operated on by an Rx gate it does not return to the same state
 after a <span class="arithmatex">\(2\pi\)</span> rotation, but only after a <span class="arithmatex">\(4\pi\)</span> rotation.</p>
 <p>The difference is a global phase of <span class="arithmatex">\(\pi\)</span>, which is insignificant by itself,
-but will be relevant when using it in combination with the <em>control</em> modifier <strong><code>ctrl</code></strong>,
+but will be relevant when using it in combination with the <em>control</em> modifier <code>ctrl</code>,
 which changes the gate <span class="arithmatex">\(U\)</span> into the controlled- <span class="arithmatex">\(U\)</span> gate.</p>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Special_unitary_group">Special Unitary <span class="arithmatex">\(SU\)</span></a></li>

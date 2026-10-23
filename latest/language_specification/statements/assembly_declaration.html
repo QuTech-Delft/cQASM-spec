@@ -381,8 +381,6 @@
       
         
       
-        
-      
     
     
     
@@ -433,34 +431,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
             
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../introduction/history.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    History
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -3141,19 +3111,19 @@
   <h1>Assembly declaration</h1>
 
 <p>Assembly declarations can be used to add backend-specific (assembly) code to a cQASM circuit.
-They are realized through an <strong><code>asm</code></strong> <em>declaration</em> statement.
-An <strong><code>asm</code></strong> declaration statement consists of the keyword <strong><code>asm</code></strong> with the
+They are realized through an <code>asm</code> <em>declaration</em> statement.
+An <code>asm</code> declaration statement consists of the keyword <code>asm</code> with the
 <a href="../tokens/identifiers.html">identifier</a> of the backend in parentheses,
 followed by the backend code.
 The latter is to be provided as a <a href="../tokens/raw_text_string.html"><em>raw text string</em></a>,
-which consists of a <em>raw text</em> delimited by opening and closing triple quotes (<strong><code>'''</code></strong>):</p>
+which consists of a <em>raw text</em> delimited by opening and closing triple quotes (<code>'''</code>):</p>
 <div class="admonition info">
-<p>  <strong><code>asm(</code></strong><em>backend-identifier</em><strong><code>)</code></strong> <em>backend-code</em></p>
+<p>  <code>asm(</code><em>backend-identifier</em><code>)</code> <em>backend-code</em></p>
 </div>
 <details class="info">
 <summary>Grammar for assembly declaration</summary>
 <p><em>assembly-declaration</em>:<br>
-  <strong><code>asm(</code></strong><em>backend-identifier</em><strong><code>)</code></strong> <em>backend-code</em></p>
+  <code>asm(</code><em>backend-identifier</em><code>)</code> <em>backend-code</em></p>
 <p><em>backend-identifier</em>:<br>
   <em>identifier</em></p>
 <p><em>backend-code</em>:<br>
@@ -3161,7 +3131,7 @@ which consists of a <em>raw text</em> delimited by opening and closing triple qu
 </details>
 <p>As part of a cQASM circuit, the contents of the raw text string will be passed verbatim to the backend
 and ignored by all other consumers of the circuit.</p>
-<p>The location of the <strong><code>asm</code></strong> declaration in the cQASM circuit is preserved,
+<p>The location of the <code>asm</code> declaration in the cQASM circuit is preserved,
 <em>i.e.</em>, no cQASM statements can be moved across it by any subsequent processing of the cQASM circuit.
 This allows for the ability to embed backend code into cQASM 
 with the guarantee that the relative order between cQASM and backend code remains the same.</p>

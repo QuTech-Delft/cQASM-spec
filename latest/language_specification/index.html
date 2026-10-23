@@ -386,8 +386,6 @@
       
         
       
-        
-      
     
     
     
@@ -438,34 +436,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
             
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../introduction/history.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    History
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -3279,7 +3249,9 @@ The unitary operations, commonly know as gates, can be either
 <p class="admonition-title">Note</p>
 <p>For simplicity, throughout this documentation, we use the term <em>gate</em> to refer to a <em>named gate</em>.
 However, it is important to note that the result of applying a gate modifier is also a gate.
-When we need to refer explicitely to a named gate such as <code>H</code> or <code>Rz</code>,
+When we need to refer explicitely to a named gate such as
+<a href="../standard_gate_set/single_qubit/sq_H.html"><code>H</code></a> or
+<a href="../standard_gate_set/single_qubit/sq_Rz.html"><code>Rz</code></a>,
 and not to a gate resulting from applying a gate modifier, we use the term <em>named gate</em>.</p>
 </div>
 <ul>
@@ -3403,10 +3375,11 @@ The following lines of code are all semantically distinct</p>
 </code></pre></div>
 </div>
 <p>In the first line of the example above,
-the Hadamard gate <strong><code>H</code></strong> is applied to the qubit at index <strong><code>0</code></strong> of the qubit register <strong><code>q</code></strong>.
-The next line starts with an undefined gate <strong><code>h</code></strong> 
-that operates on the qubit at index <strong><code>0</code></strong> of the qubit register <strong><code>Q</code></strong>,
-which in turn does <em>not</em> refer to the qubit register <strong><code>q</code></strong>.</p>
+the <a href="../standard_gate_set/single_qubit/sq_H.html">Hadamard gate</a> <code>H</code> is applied to the qubit at index <code>0</code> of the
+qubit register <code>q</code>.
+The next line starts with an undefined gate <code>h</code> 
+that operates on the qubit at index <code>0</code> of the qubit register <code>Q</code>,
+which in turn does <em>not</em> refer to the qubit register <code>q</code>.</p>
 <p>Take care that case sensitivity not only applies to <a href="tokens/identifiers.html">identifiers</a>,
 but also to all other lexical components of the language,
 like <a href="tokens/keywords.html">keywords</a>, <a href="types.html">types</a>,

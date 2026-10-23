@@ -381,8 +381,6 @@
       
         
       
-        
-      
     
     
     
@@ -433,34 +431,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
             
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../introduction/history.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    History
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -3145,21 +3115,21 @@
 <p>A bit or bit register must be declared before they can be used.
 The general form is given as follows:</p>
 <div class="admonition info">
-<p> <strong><code>bit[</code></strong><em>size</em><strong><code>]</code></strong><em>identifier</em></p>
+<p> <code>bit[</code><em>size</em><code>]</code><em>identifier</em></p>
 </div>
 <details class="info">
 <summary>Grammar for bit (register) declaration</summary>
 <p><em>bit-declaration</em>:<br>
-  <strong><code>bit</code></strong> <em>array-size-declaration<sub>opt</sub></em> <em>identifier</em></p>
+  <code>bit</code> <em>array-size-declaration<sub>opt</sub></em> <em>identifier</em></p>
 <p><em>array-size-declaration</em>:<br>
-  <strong><code>[</code></strong><em>integer-literal</em><strong><code>]</code></strong>  </p>
+  <code>[</code><em>integer-literal</em><code>]</code>  </p>
 </details>
 <p>Its form is similar to the declaration of an arbitrary variable,
 whereby the type of the variable is specified first, <em>i.e.</em> 
-<strong><code>bit</code></strong> denotes that the declared variable is of type <a href="../../types.html">Bit</a>.
-and <strong><code>bit[</code></strong><em>size</em><strong><code>]</code></strong>
+<code>bit</code> denotes that the declared variable is of type <a href="../../types.html">Bit</a>.
+and <code>bit[</code><em>size</em><code>]</code>
 denotes that the declared variable is of type <a href="../../types.html">BitArray</a>.
-The size of a bit register is declared by an integer value between square brackets <strong><code>[</code></strong><em>size</em><strong><code>]</code></strong>.
+The size of a bit register is declared by an integer value between square brackets <code>[</code><em>size</em><code>]</code>.
 The name of the bit (register) is defined through an <a href="../../tokens/identifiers.html">identifier</a>. </p>
 <p>The declaration of a bit (register) is <em>optional</em>,
 Nevertheless, since measurement outcomes are stored as bits,
@@ -3214,8 +3184,8 @@ Nevertheless, since measurement outcomes are stored as bits,
 </div>
 <p>The individual bits of a bit register can be referred to by their register index,
 <em>e.g.</em> in the example of the <em>Bit register declaration</em>,
-the statement <strong><code>b[0] = measure q[0]</code></strong> indicates that the measurement outcome is stored at the bit
-located at index <strong><code>0</code></strong> of the bit register <strong><code>b</code></strong>. 
+the statement <code>b[0] = measure q[0]</code> indicates that the measurement outcome is stored at the bit
+located at index <code>0</code> of the bit register <code>b</code>. 
 Note that in the case of a single bit, the bit is referred to through its identifier,
 not through a register index.</p>
 

@@ -381,8 +381,6 @@
       
         
       
-        
-      
     
     
     
@@ -433,34 +431,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
             
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../../introduction/history.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    History
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -3144,25 +3114,26 @@
 
   <h1>Reset instruction</h1>
 
-<p>A <strong><code>reset</code></strong> instruction resets the state of the qubit to <span class="arithmatex">\(|0\rangle\)</span>.
-It does this by first measuring the qubit and then, conditioned on the outcome being 1, applying a Pauli X gate.</p>
+<p>A <code>reset</code> instruction resets the state of the qubit to <span class="arithmatex">\(|0\rangle\)</span>.
+It does this by first measuring the qubit and then, conditioned on the outcome being 1, applying a
+<a href="../../../../standard_gate_set/single_qubit/sq_X.html">Pauli-X gate</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Even though the <strong><code>reset</code></strong> instruction internally measures the qubit state,
+<p>Even though the <code>reset</code> instruction internally measures the qubit state,
 it does not store the measurement outcome in the measurement register,
-<em>i.e.</em>, the measurement register is unaffected by the <strong><code>reset</code></strong> instruction.
+<em>i.e.</em>, the measurement register is unaffected by the <code>reset</code> instruction.
 The measurement outcome is only used to determine whether or not
-a Pauli X gate needs to be performed, in order to bring the qubit
-into the state <span class="arithmatex">\(|0\rangle\)</span>.</p>
+a <a href="../../../../standard_gate_set/single_qubit/sq_X.html">Pauli-X gate</a> needs to be performed,
+in order to bring the qubit into the state <span class="arithmatex">\(|0\rangle\)</span>.</p>
 </div>
-<p>The general form of a <strong><code>reset</code></strong> instruction is as follows:</p>
+<p>The general form of a <code>reset</code> instruction is as follows:</p>
 <div class="admonition info">
-<p> <strong><code>reset</code></strong> <em>qubit-argument</em></p>
+<p> <code>reset</code> <em>qubit-argument</em></p>
 </div>
 <details class="info">
-<summary>Grammar for <strong><code>reset</code></strong> instruction</summary>
+<summary>Grammar for <code>reset</code> instruction</summary>
 <p><em>reset-instruction</em>:<br>
-  <strong><code>reset</code></strong> <em>qubit-argument</em></p>
+  <code>reset</code> <em>qubit-argument</em></p>
 <p><em>qubit-argument</em>:<br>
   <em>qubit-variable</em><br>
   <em>qubit-index</em></p>
@@ -3192,10 +3163,10 @@ into the state <span class="arithmatex">\(|0\rangle\)</span>.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <strong><code>reset</code></strong> instruction accepts
+<p>The <code>reset</code> instruction accepts
 <a href="../single-gate-multiple-qubit-notation.html">SGMQ notation</a>, similar to gates.</p>
 </div>
-<p>The following code snippet shows how the <strong><code>reset</code></strong> instruction might be used in context.</p>
+<p>The following code snippet shows how the <code>reset</code> instruction might be used in context.</p>
 <div class="highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -3218,17 +3189,17 @@ into the state <span class="arithmatex">\(|0\rangle\)</span>.</p>
 </span><a id="__codelineno-2-10" name="__codelineno-2-10"></a>
 <a id="__codelineno-2-11" name="__codelineno-2-11"></a>b = measure q
 </code></pre></div></td></tr></tbody></table></div>
-<p>The <strong><code>reset</code></strong> instruction is performed by measuring <strong><code>q[0]</code></strong> along the computational basis.
+<p>The <code>reset</code> instruction is performed by measuring <code>q[0]</code> along the computational basis.
 Based on the measurement outcome, either no operation is performed (in case the outcome is 0) or
-a Pauli X gate is applied (in case the outcome is 1).
-The result of the subsequent <strong><code>measure</code></strong> instruction will be <strong><code>00</code></strong> in roughly half of the cases
-and <strong><code>10</code></strong> in the remaining cases,
-with the qubit register indices decreasing from left to right, <em>i.e.</em>, <strong><code>q[n]...q[0]</code></strong>.</p>
+a <a href="../../../../standard_gate_set/single_qubit/sq_X.html">Pauli-X gate</a> gate is applied (in case the outcome is 1).
+The result of the subsequent <code>measure</code> instruction will be <code>00</code> in roughly half of the cases
+and <code>10</code> in the remaining cases,
+with the qubit register indices decreasing from left to right, <em>i.e.</em>, <code>q[n]...q[0]</code>.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>Qubits that are part of an entangled state,
 are disentangled from that state,
-when the <strong><code>reset</code></strong> instruction is applied to them.</p>
+when the <code>reset</code> instruction is applied to them.</p>
 </div>
 
 

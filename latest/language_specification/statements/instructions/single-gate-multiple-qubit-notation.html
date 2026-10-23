@@ -381,8 +381,6 @@
       
         
       
-        
-      
     
     
     
@@ -433,34 +431,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
             
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../introduction/history.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    History
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -3151,26 +3121,26 @@ The single-qubit gate will then be applied to each qubit, respectively.</p>
 SGMQ notation is nothing other than <em>syntactic sugar</em>,
 whereby a series of instruction statements can be written as one.
 Moreover, SGMQ notation should not be confused with multiple-qubit gates, <em>e.g.</em>, 
-<strong><code>X q[0,1]</code></strong> means <strong><code>X q[0]; X q[1]</code></strong>,
-and does not represent the 2-qubit gate <strong><code>XX q[0], q[1]</code></strong>.
-Note that the latter 2-qubit gate <strong><code>XX</code></strong> is currently not supported by the cQASM language,
+<code>X q[0,1]</code> means <code>X q[0]; X q[1]</code>,
+and does not represent the 2-qubit gate <code>XX q[0], q[1]</code>.
+Note that the latter 2-qubit gate <code>XX</code> is currently not supported by the cQASM language,
 see the <a href="../../../standard_gate_set/index.html">standard gate set</a>.</p>
 </div>
-<p>If the name of the qubit register is <strong><code>q</code></strong>,
+<p>If the name of the qubit register is <code>q</code>,
 then the following can be passed as an argument to the single-qubit gate:</p>
 <ul>
 <li>
-<p>the whole qubit register <strong><code>q</code></strong>;</p>
+<p>the whole qubit register <code>q</code>;</p>
 </li>
 <li>
-<p>a slice thereof <strong><code>q[i:j]</code></strong>, where <span class="arithmatex">\(0 \leq i &lt; j &lt; N\)</span>;</p>
+<p>a slice thereof <code>q[i:j]</code>, where <span class="arithmatex">\(0 \leq i &lt; j &lt; N\)</span>;</p>
 </li>
 <li>
-<p>or a list of indices can be passed <strong><code>q[i,]</code></strong>, where <span class="arithmatex">\(0 \leq i &lt; N\)</span>,</p>
+<p>or a list of indices can be passed <code>q[i,]</code>, where <span class="arithmatex">\(0 \leq i &lt; N\)</span>,</p>
 </li>
 </ul>
 <p>with <span class="arithmatex">\(N\)</span> the size of the qubit register.
-The following slicing convention is adopted: a slice <strong><code>q[i:j]</code></strong> includes qubits <strong><code>q[i]</code></strong>, <strong><code>q[j]</code></strong>,
+The following slicing convention is adopted: a slice <code>q[i:j]</code> includes qubits <code>q[i]</code>, <code>q[j]</code>,
 and all qubits in between. The code block below demonstrates some examples.</p>
 <div class="admonition example">
 <p class="admonition-title">SGMQ notation for single-qubit gates</p>
@@ -3200,7 +3170,7 @@ and all qubits in between. The code block below demonstrates some examples.</p>
 </div>
 </div>
 </div>
-<p>In the above examples we have used the semicolon <strong><code>;</code></strong> to separate statements occurring on the same line.</p>
+<p>In the above examples we have used the semicolon <code>;</code> to separate statements occurring on the same line.</p>
 <p>Multi-qubit gates also support SGMQ notation.
 Note that the arguments that are passed for the qubit operands, <em>i.e.</em>, a register, slice, or list of indices,
 need to be of equal size.

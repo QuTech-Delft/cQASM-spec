@@ -381,8 +381,6 @@
       
         
       
-        
-      
     
     
     
@@ -433,34 +431,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
             
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../introduction/history.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    History
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -3144,16 +3114,16 @@
 Apart from comments, it must be the first statement of the program and occur only once.
 It has the following general form:</p>
 <div class="admonition info">
-<p> <strong><code>version</code></strong> <em>major-version</em><strong><code>.</code></strong><em>minor-version</em></p>
+<p> <code>version</code> <em>major-version</em><code>.</code><em>minor-version</em></p>
 </div>
 <details class="info">
 <summary>Grammar for version statement</summary>
 <p><em>version</em>:<br>
- <strong><code>version</code></strong> <em>major-version</em> <em>minor-version-suffix</em><sub>opt</sub></p>
+ <code>version</code> <em>major-version</em> <em>minor-version-suffix</em><sub>opt</sub></p>
 <p><em>major-version</em>:<br>
   <em>digit-sequence</em></p>
 <p><em>minor-version-suffix</em>:<br>
-  <strong><code>.</code></strong> <em>minor-version</em></p>
+  <code>.</code><em>minor-version</em></p>
 <p><em>minor-version</em>:<br>
   <em>digit-sequence</em></p>
 </details>
@@ -3161,7 +3131,7 @@ It has the following general form:</p>
 respectively indicating the major and minor version of the cQASM language.
 It is permitted to only specify the major version number, <em>i.e.</em>,
 the specification of the minor version number is optional.
-In that case, the <em>minor-version</em> will be interpreted as <strong><code>0</code></strong>.</p>
+In that case, the <em>minor-version</em> will be interpreted as <code>0</code>.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <div class="highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>

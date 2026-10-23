@@ -381,8 +381,6 @@
       
         
       
-        
-      
     
     
     
@@ -433,34 +431,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
             
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../../introduction/history.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    History
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -3144,7 +3114,7 @@
 
   <h1>Measure instruction</h1>
 
-<p>A <strong><code>measure</code></strong> instruction performs a measurement to its qubit argument and
+<p>A <code>measure</code> instruction performs a measurement to its qubit argument and
 assigns the outcome to a bit variable.</p>
 <p>The <code>measure</code> instruction can either</p>
 <ul>
@@ -3161,16 +3131,16 @@ assigns the outcome to a bit variable.</p>
 <p class="admonition-title">Note</p>
 <p><code>measure(0,0,1)</code> is equal to the non-parameterized <code>measure</code> as <span class="arithmatex">\((0,0,1)\)</span> defines the positive <span class="arithmatex">\(z\)</span>-axis.</p>
 </div>
-<p>The general form of a <strong><code>measure</code></strong> instruction is as follows:</p>
+<p>The general form of a <code>measure</code> instruction is as follows:</p>
 <div class="admonition info">
-<p> <em>bit-argument</em> <strong><code>=</code></strong> <strong><code>measure</code></strong> <em>qubit-argument</em><br>
- <em>bit-argument</em> <strong><code>=</code></strong> <strong><code>measure(</code></strong><em>parameter-list</em><strong><code>)</code></strong> <em>qubit-argument</em></p>
+<p> <em>bit-argument</em> <code>=</code> <code>measure</code> <em>qubit-argument</em><br>
+ <em>bit-argument</em> <code>=</code> <code>measure(</code><em>parameter-list</em><code>)</code> <em>qubit-argument</em></p>
 </div>
 <details class="info">
-<summary>Grammar for <strong><code>measure</code></strong> instruction</summary>
+<summary>Grammar for <code>measure</code> instruction</summary>
 <p><em>measure-instruction</em>:<br>
-  <em>bit-argument</em> <strong><code>=</code></strong> <strong><code>measure</code></strong> <em>qubit-argument</em><br>
-  <em>bit-argument</em> <strong><code>=</code></strong> <strong><code>measure</code></strong> <em>parameters</em> <em>qubit-argument</em></p>
+  <em>bit-argument</em> <code>=</code> <code>measure</code> <em>qubit-argument</em><br>
+  <em>bit-argument</em> <code>=</code> <code>measure</code> <em>parameters</em> <em>qubit-argument</em></p>
 <p><em>bit-argument</em>:<br>
   <em>bit-variable</em><br>
   <em>bit-index</em></p>
@@ -3179,10 +3149,10 @@ assigns the outcome to a bit variable.</p>
 <p><em>bit-index</em>:<br>
   <em>index</em>  </p>
 <p><em>parameters</em>:<br>
-  <strong><code>(</code></strong> <em>parameter-list</em> <strong><code>)</code></strong></p>
+  <code>(</code><em>parameter-list</em><code>)</code></p>
 <p><em>parameter-list</em>:<br>
   <em>parameter</em><br>
-  <em>parameter-list</em> <strong><code>,</code></strong> <em>parameter</em></p>
+  <em>parameter-list</em> <code>,</code> <em>parameter</em></p>
 <p><em>parameter</em>:<br>
   <em>floating-literal</em></p>
 <p><em>qubit-argument</em>:<br>
@@ -3226,9 +3196,9 @@ assigns the outcome to a bit variable.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <strong><code>measure</code></strong> instruction accepts
+<p>The <code>measure</code> instruction accepts
 <a href="../single-gate-multiple-qubit-notation.html">SGMQ notation</a>, similar to gates.
-Note that when using SGMQ notation with the <strong><code>measure</code></strong> instruction,
+Note that when using SGMQ notation with the <code>measure</code> instruction,
 that the number of bit operands is equal to the number of qubit operands.
 For example, it is valid to write <code>b[0, 2, 1] = measure q[3:5]</code> because that unpacks to
 </p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>b[0] = measure q[3]
@@ -3238,7 +3208,7 @@ For example, it is valid to write <code>b[0, 2, 1] = measure q[3:5]</code> becau
 However, it is invalid to write <code>b[0:1] = measure q[2]</code> or <code>b[2] = measure q[0:1]</code>,
 because in both cases the number of bit and qubit operands is unequal.<p></p>
 </div>
-<p>The following code snippet shows how the <strong><code>measure</code></strong> instruction might be used in context.</p>
+<p>The following code snippet shows how the <code>measure</code> instruction might be used in context.</p>
 <div class="highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
 <span class="normal"><a href="#__codelineno-3-3">3</a></span>
